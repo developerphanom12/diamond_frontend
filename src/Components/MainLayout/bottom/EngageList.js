@@ -221,7 +221,7 @@ export default function EngageList() {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                padding: "0px 20px",
+                padding: "0px 30px",
               }}
             >
               <ul>
