@@ -22,14 +22,15 @@ export default function Section1() {
             style={{
               padding: "0px",
               border: "1px solid #dee2e6",
-              borderRadius: "10px 100px 100px 10px",
+              borderRadius: "10px",
               zIndex: "11",
+               
             }}
           >
             <div
               className="column bord"
               style={{
-                borderRadius: "10px 100px 100px 10px",
+                borderRadius: "10px",
               }}
             >
               <div className="d-flex ">
@@ -63,16 +64,15 @@ export default function Section1() {
             style={{
               padding: "0px",
               border: "1px solid #dee2e6",
-              borderRadius: "10px 100px 100px 10px",
-              position: "absolute",
-              left: " 410px",
+              borderRadius: "10px",
               zIndex: "9",
-            }}onClick={() => setmodal(true)}
+            }}
+            onClick={() => setmodal(true)}
           >
             <div
               className="column"
               style={{
-                borderRadius: "10px 100px 100px 10px",
+                borderRadius: "10px",
               }}
             >
               <div className="d-flex" style={{ marginLeft: "20px" }}>
@@ -103,9 +103,7 @@ export default function Section1() {
             style={{
               padding: "0px",
               border: "1px solid #dee2e6",
-              borderRadius: "10px 100px 100px 10px",
-              position: "absolute",
-              right: "55px",
+              borderRadius: "10px",
             }}
           >
             <div
@@ -175,9 +173,12 @@ export default function Section1() {
               <span>Lab Diamond</span>
             </div>
 
-            <div className="ring_pandet" onClick={() => {
+            <div
+              className="ring_pandet"
+              onClick={() => {
                 navigate("/gemstone");
-              }}>
+              }}
+            >
               <svg
                 viewBox="0 0 20 20"
                 fill="none"

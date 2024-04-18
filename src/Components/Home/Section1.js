@@ -35,7 +35,7 @@ const Root = styled.section`
   background-image: url(${bgg});
   background-size: 100% 100%;
   object-fit: contain;
-  height: 70vh;
+  height: 450px;
   padding: 20px;
   position: relative;
   color: #000;
@@ -61,7 +61,6 @@ const Root = styled.section`
   }
   .main_content {
     padding: 40px 20px;
-
     width: 50vw;
     text-transform: uppercase;
     text-align: center;

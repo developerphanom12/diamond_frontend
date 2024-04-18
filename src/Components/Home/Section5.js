@@ -52,7 +52,7 @@ export default function Section5() {
   );
 }
 const Root = styled.section`
-  margin: 20px 0px;
+  margin: 20px 0px 0px;
   color: #000;
   .col-lg-2 {
     text-align: center;
@@ -61,10 +61,10 @@ const Root = styled.section`
     background-image: url(${Gbgimg});
     background-size: 100% 100%;
     object-fit: contain;
-    height: 70vh;
+    height: 400px;
   }
   .col-lg-6.col {
-    padding: 70px;
+    padding: 60px;
     height: 100%;
     display: inline-block;
     h1 {

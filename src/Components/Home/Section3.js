@@ -97,7 +97,7 @@ const Root = styled.section`
   .col-lg-3.col3,
   .col-lg-3.col2,
   .col-lg-3.col1 {
-    height: 60vh;
+    height:420px;
     background-size: 100% 100%;
     object-fit: contain;
     border-radius: 20px;
