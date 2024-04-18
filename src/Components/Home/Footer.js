@@ -57,7 +57,6 @@ const Root = styled.section`
   color: #fff;
   padding: 40px 0px;
   .col-lg-4 {
-    /* margin: 20px; */
     padding: 20px;
     border-bottom: 1px solid #fff;
     h2 {
@@ -70,7 +69,6 @@ const Root = styled.section`
   .col-lg-2,
   .col-lg-3 {
     padding: 20px 50px;
-    /* margin: 20px; */
     p {
       font-size: 15px;
     }

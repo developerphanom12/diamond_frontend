@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import ContainerFluid from "react-bootstrap/Container";
 import styled from "styled-components";
+import EngageList from "./EngageList";
 
 function BottomBar() {
   const [isListOpen1, setIsListOpen1] = useState(false);
@@ -91,7 +92,7 @@ function BottomBar() {
               {isListOpen2 && (
                 <div className="option_list_list">
                   {/* <ProgrammingTech /> */}
-                  fdghdfghfd
+                  <EngageList/>
                 </div>
               )}
             </div>
