@@ -10,7 +10,8 @@ export default function AnnouncementBar() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3000,
+    waitForAnimate: false
   };
   return (
     <Root>
@@ -40,7 +41,7 @@ const Root = styled.section`
     font-size: 16px;
     font-family: "proximaNova", "sans-serif";
     opacity: 0;
-    animation: rotateIn 0.5s forwards, vibrate 2s infinite; // Apply animation
+    animation: rotateIn 0.5s forwards, vibrate 2s infinite; 
     text-transform: uppercase;
   }
 

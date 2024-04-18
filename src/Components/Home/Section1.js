@@ -35,8 +35,8 @@ const Root = styled.section`
   background-image: url(${bgg});
   background-size: 100% 100%;
   object-fit: contain;
-  padding: 20px;
   height: 70vh;
+  padding: 20px;
   position: relative;
   color: #000;
   .contain_tag {

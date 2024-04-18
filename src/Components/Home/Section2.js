@@ -1,6 +1,6 @@
 import React from "react";
-import Slider from "react-slick";
 import styled from "styled-components";
+import Slider from "react-slick";
 import s1 from "../Images/sliderimg1.svg";
 import s2 from "../Images/sliderimg2.svg";
 import s3 from "../Images/sliderimg3.svg";
@@ -15,9 +15,9 @@ export default function Section2() {
     infinite: true,
     speed: 2000,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     autoplay: true,
-    autoplaySpeed: 500,
+    autoplaySpeed: 200,
   };
   return (
     <Root>
@@ -34,7 +34,7 @@ export default function Section2() {
 }
 
 const Root = styled.section`
-  background-color: #fff;
+  background-color: #f7f7f7;
   font-weight: 600;
   padding: 20px  0px;
 
