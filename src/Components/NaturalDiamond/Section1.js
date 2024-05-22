@@ -458,7 +458,7 @@ const CustomModalBody = styled(ModalBody)`
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      svg {
+      svg {      
         width: 56px;
         height: 56px;
       }
