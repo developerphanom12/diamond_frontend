@@ -36,7 +36,7 @@ export default function Section8() {
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
-  };
+  };   
   return (
     <Root>
       <div className="container-fluid">
