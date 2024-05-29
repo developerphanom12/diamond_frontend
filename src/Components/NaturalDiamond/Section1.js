@@ -163,7 +163,7 @@ export default function Section1() {
             <div
               className="ring_pandet"
               onClick={() => {
-                navigate("/EngagementRing");
+                navigate("/engagementring");
               }}
             >
               <svg

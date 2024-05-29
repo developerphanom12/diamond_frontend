@@ -82,7 +82,7 @@ function BottomBar() {
               onMouseLeave={handleMouseLeave2}
               id="graphic"
             >
-              <Nav.Link href="/EngagementRing">Engagement rings</Nav.Link>
+              <Nav.Link href="/engagementring">Engagement rings</Nav.Link>
               {isListOpen2 && (
                 <div className="option_list_list">
                   {/* <ProgrammingTech /> */}

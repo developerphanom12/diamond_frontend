@@ -41,8 +41,8 @@ export default function Section4() {
   return (
     <Root>
       <div className="main_div">
-        {products.map((i) => (
-          <div className="subdiv">
+        {products.map((i, index) => (
+          <div key={index} className="subdiv">
             <div className="slider-container">
               <Slider {...settings}>
                 <div style={{ width: "283px", height: "283px" }}>
@@ -65,12 +65,12 @@ export default function Section4() {
                   </div>
                 </div>
                 <>
-                <p className="prd_price pt-1 pb-1">
-                  max- {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                  {i?.priceRange?.maxVariantPrice?.amount} min-{" "}
-                  {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                  {i?.priceRange?.minVariantPrice?.amount}{" "}
-                </p>
+                  <p className="prd_price pt-1 pb-1">
+                    max- {i?.priceRange?.maxVariantPrice?.currencyCode}:
+                    {i?.priceRange?.maxVariantPrice?.amount} min-{" "}
+                    {i?.priceRange?.maxVariantPrice?.currencyCode}:
+                    {i?.priceRange?.minVariantPrice?.amount}{" "}
+                  </p>
                 </>
               </div>
 
@@ -165,6 +165,17 @@ export default function Section4() {
 
 const Root = styled.section`
   padding: 0 20px;
+  .slider-container {
+    position: relative;
+    perspective: 1000px; 
+  }
+
+  &:hover .slider-container {
+    .slick-slide img {
+      transform: rotate3d(0, 1, 0.5, 3.142rad);
+      transition: transform 2.5s ease; /* Add transition for smooth animation */
+    }
+  }
   .main_div {
     display: flex;
     flex-wrap: wrap;
@@ -187,7 +198,7 @@ const Root = styled.section`
       .hov_content {
         display: flex;
         flex-wrap: wrap;
-        .flex-column{
+        .flex-column {
           display: flex;
           width: 100%;
         }

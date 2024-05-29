@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <>
           <Route path="/" element={<Home />} />
-          <Route path="/EngagementRing" element={<EngagementRing />} />
+          <Route path="/engagementring" element={<EngagementRing />} />
           <Route path="/poduct" element={<Poduct />} />
           <Route path="/pendats" element={<Pendats />} />
           <Route path="/naturaldiamond" element={<NaturalDiamond />} />

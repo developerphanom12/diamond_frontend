@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import bgg from "../Images/bannerimggg.webp";
+import { useNavigate } from "react-router-dom";
 
 export default function Section1() {
- 
+ const navigate = useNavigate();
 
   return (
     <Root>
@@ -23,7 +24,7 @@ export default function Section1() {
           <h4>lab diamonds</h4>
         </div>
         <div>
-          <button>shop engagement rings</button>
+          <button onClick={()=>{navigate("/engagementring")}}>shop engagement rings</button>
           <button>shop lab diamonds</button>
           <h6>
             apply code <b>earth</b> at checkout

@@ -1,40 +1,20 @@
-import React from "react";
-import Slider from "react-slick";
-import styled from "styled-components";
+import React, { useRef, useEffect } from 'react';
 
-function LazyLoad({ images }) {
-  const settings = {
-    // dots: true,
-    lazyLoad: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    initialSlide: 2,
-  };
-  return (
-    <Root>
-      <div className="slider-container">
-        <Slider {...settings}>
-          <div>
-            <img src={images} alt="img" />
-          </div>
-        </Slider>
-      </div>
-    </Root>
-  );
-}
+const CanvasImage = ({ src, width, height }) => {
+  const canvasRef = useRef(null);
 
-export default LazyLoad;
-const Root = styled.section`
-  .slick-slide img {
-    width: 100%;
-  }
-  .slick-next {
-    right: 0px !important;
-  }
-  .slick-prev {
-    left: 0px !important;
-    z-index: 1;
-  }
-`;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const image = new Image();
+
+    image.src = src;
+    image.onload = () => {
+      context.drawImage(image, 0, 0, width, height);
+    };
+  }, [src, width, height]);
+
+  return <canvas ref={canvasRef} width={width} height={height} className="absolute w-full h-full inset-0 object-cover" style={{ opacity: 1 }} />;
+};
+
+export default CanvasImage;

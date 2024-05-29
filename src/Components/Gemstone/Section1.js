@@ -120,7 +120,7 @@ export default function Section1() {
           <h5>Before we continue</h5>
           <h2>CHOOSE YOUR SETTING</h2>
           <div className="choose_option">
-            <div className="ring_pandet" onClick={()=>{navigate("/EngagementRing")}}>
+            <div className="ring_pandet" onClick={()=>{navigate("/engagementring")}}>
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
