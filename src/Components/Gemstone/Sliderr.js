@@ -15,13 +15,7 @@ export default function Sliderr() {
 
   let sliderRef = useRef(null);
 
-  const next = () => {
-    sliderRef.slickNext();
-  };
-  const previous = () => {
-    sliderRef.slickPrev();
-  };
-
+   
   const settings = {
     dots: false,
     infinite: false,

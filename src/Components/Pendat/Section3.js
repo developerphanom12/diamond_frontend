@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -12,7 +11,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 export default function Pendats() {
   const [show, setShow] = useState(false);
   const [shape, setshape] = useState(false);
-  const navigate = useNavigate();
   function toggleShowName() {
     setShow((prevState) => !prevState);
   }

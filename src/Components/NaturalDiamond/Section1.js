@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
@@ -10,7 +10,6 @@ export default function Section1() {
   };
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
-
   const navigate = useNavigate();
 
   return (
@@ -68,7 +67,6 @@ export default function Section1() {
                   <h6>Stone</h6>
                 </div>
               </div>
-
               <svg
                 viewBox="0 0 18 13"
                 fill="none"
@@ -429,9 +427,7 @@ const Root = styled.section`
       padding-top: 7px;
     }
   }
-
 `;
-
 
 const CustomModalBody = styled(ModalBody)`
   padding: 30px 85px 50px;
@@ -458,17 +454,16 @@ const CustomModalBody = styled(ModalBody)`
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      svg {          
+      svg {
         width: 56px;
         height: 56px;
       }
-      span {         
+      span {
         font-size: 14px;
-      }   
+      }
     }
   }
   .modal-dialog {
     margin-top: 82px !important;
   }
-  `;
-
+`;

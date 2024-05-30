@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { IoDiamondSharp } from "react-icons/io5";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { GiPearlNecklace } from "react-icons/gi";
 import { GiHeartNecklace } from "react-icons/gi";
 

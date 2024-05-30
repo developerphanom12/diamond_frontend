@@ -59,7 +59,7 @@ export default function Section3() {
                         className={selectedButton === 1 ? "selected" : ""}
                         onClick={() => handleButtonClick(1)}
                       >
-                        <img src={ringone} />
+                        <img src={ringone} alt="img" />
 
                         <span>White Gold</span>
                       </button>
@@ -68,7 +68,7 @@ export default function Section3() {
                         className={selectedButton === 2 ? "selected" : ""}
                         onClick={() => handleButtonClick(2)}
                       >
-                        <img src={ringtwo} />
+                        <img src={ringtwo} alt="img" />
                         <span>Yellow Gold</span>
                       </button>
 
@@ -76,7 +76,7 @@ export default function Section3() {
                         className={selectedButton === 3 ? "selected" : ""}
                         onClick={() => handleButtonClick(3)}
                       >
-                        <img src={ringthree} />
+                        <img src={ringthree}  alt="img"/>
                         <span>Rose Gold</span>
                       </button>
 
@@ -84,7 +84,7 @@ export default function Section3() {
                         className={selectedButton === 4 ? "selected" : ""}
                         onClick={() => handleButtonClick(4)}
                       >
-                        <img src={ringfour} />
+                        <img src={ringfour}  alt="img" />
                         <span>White Gold</span>
                       </button>
 
@@ -92,7 +92,7 @@ export default function Section3() {
                         className={selectedButton === 5 ? "selected" : ""}
                         onClick={() => handleButtonClick(5)}
                       >
-                        <img src={ringfive} />
+                        <img src={ringfive}  alt="img"/>
                         <span>Yellow Gold</span>
                       </button>
 
@@ -100,7 +100,7 @@ export default function Section3() {
                         className={selectedButton === 6 ? "selected" : ""}
                         onClick={() => handleButtonClick(6)}
                       >
-                        <img src={ringsix} />
+                        <img src={ringsix}  alt="img" />
                         <span>Rose Gold</span>
                       </button>
 
@@ -108,7 +108,7 @@ export default function Section3() {
                         className={selectedButton === 7 ? "selected" : ""}
                         onClick={() => handleButtonClick(7)}
                       >
-                        <img src={ringseven} />
+                        <img src={ringseven}  alt="img" />
                         <span>Platinum</span>
                       </button>
                     </div>

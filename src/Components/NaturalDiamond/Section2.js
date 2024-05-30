@@ -1,16 +1,57 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Section3 from "./Section3";
+import Section4 from "./Section4";
+import test from "../Images/test_img.jpg";
 
-export default function Section2(){
-  const [selectedButton, setSelectedButton] = useState(1); // Initialize with 1
+ const shapesList = ['ROUND','EMERALD','HEART','MARQUISE','OVAL','PEAR','PRINCESS','RADIANT','CUSHION','E.CUSHION']
+export default function Section2() {
+  const [selectedShapes, setSelectedShapes] = useState([]);
+  const [selectedButton, setSelectedButton] = useState(1); 
+  const [value, setValue] = useState([]);
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
   };
 
-  return(
+  useEffect(() => {
+    const diamondApi = async () => {
+      try {
+        const shapesParam = selectedShapes.join(',');
+        const resp = await axios.get( `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}`);
+        if (resp?.status === 200) {
+          setValue(resp?.data?.items);
+          console.log("resp", resp?.data?.items);
+        }
+      } catch (err) {
+        console.error("err", err);
+      }
+    };
+    diamondApi();
+  }, [selectedShapes]);
+
+  const handleShapeClick = (shape) => {
+    setSelectedShapes((prevShapes) =>
+      prevShapes.includes(shape)
+        ? prevShapes.filter((s) => s !== shape)
+        : [...prevShapes, shape]
+    );
+  };
+
+  return (
     <Root>
       <div className="ring_types mt-4">
+      {shapesList.map((shape) => (
+          <button
+            key={shape}
+            className={selectedShapes.includes(shape) ? 'selected' : ''}
+            onClick={() => handleShapeClick(shape)}
+          >
+            {shape}
+            <img src={test} alt="img"/>
+          </button>
+        ))}
         <button
           className={selectedButton === 1 ? "selected" : ""}
           onClick={() => handleButtonClick(1)}
@@ -51,8 +92,8 @@ export default function Section2(){
         </button>
 
         <button
-         className={selectedButton === 3 ? "selected" : ""}
-         onClick={() => handleButtonClick(3)}
+          className={selectedButton === 3 ? "selected" : ""}
+          onClick={() => handleButtonClick(3)}
         >
           <svg
             viewBox="0 0 40 40"
@@ -85,8 +126,8 @@ export default function Section2(){
         </button>
 
         <button
-         className={selectedButton === 5 ? "selected" : ""}
-         onClick={() => handleButtonClick(5)}
+          className={selectedButton === 5 ? "selected" : ""}
+          onClick={() => handleButtonClick(5)}
         >
           <svg
             viewBox="0 0 40 40"
@@ -102,8 +143,8 @@ export default function Section2(){
         </button>
 
         <button
-         className={selectedButton === 6 ? "selected" : ""}
-         onClick={() => handleButtonClick(6)}
+          className={selectedButton === 6 ? "selected" : ""}
+          onClick={() => handleButtonClick(6)}
         >
           <svg
             viewBox="0 0 40 40"
@@ -186,6 +227,8 @@ export default function Section2(){
           <span>E.Cushion</span>
         </button>
       </div>
+      <Section3 />
+      <Section4 value={value} />
     </Root>
   );
 }
@@ -207,15 +250,13 @@ const Root = styled.section`
       padding: 12px 0;
 
       &.selected {
-      border: 2px solid black;
-      border-radius: 10px;
-        }
+        border: 2px solid black;
+        border-radius: 10px;
+      }
 
       &:hover {
         background-color: rgba(247, 247, 247);
       }
-
-
 
       img,
       svg {

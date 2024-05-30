@@ -5,12 +5,9 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosArrowUp } from "react-icons/io";
-import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
 function valuetext(value) {
@@ -425,38 +422,6 @@ export default function Section3() {
                   </section>
                 </div>
               </div>
-              {/* 
-              <div className="symmetry_polish_div">
-                <div className=" symmetry_var_kind">
-                  <div className="symmetry_head_icon">
-                    <h5>Cut</h5>
-                    <BsQuestionCircleFill />
-                  </div>
-
-                  <section>
-                    <button
-                      className={selectedCut === 1 ? "selected" : ""}
-                      onClick={() => handleButtonCut(1)}
-                    >
-                      GOOD
-                    </button>
-
-                    <button
-                      className={selectedCut === 2 ? "selected" : ""}
-                      onClick={() => handleButtonCut(2)}
-                    >
-                      VERY GOOD
-                    </button>
-
-                    <button
-                      className={selectedCut === 3 ? "selected" : ""}
-                      onClick={() => handleButtonCut(3)}
-                    >
-                      EXCELLENT
-                    </button>
-                  </section>
-                </div>
-              </div> */}
             </Typography>
           </AccordionDetails>
         </Accordion>

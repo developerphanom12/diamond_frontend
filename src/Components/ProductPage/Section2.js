@@ -1,32 +1,22 @@
-// import React from "react";
 import styled from "styled-components";
-// import Prev from "./Prev";
 import Section3 from "./Section3";
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
-import d from "../Images/d.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function Section2() {
-  const [selectedButton, setSelectedButton] = useState(1); //Initialize with 1
+  const [selectedButton, setSelectedButton] = useState(1); 
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
-    // Move the slider to the selected image index
     sliderRef.slickGoTo(buttonIndex - 1);
   };
 
   const navigate = useNavigate();
   let sliderRef = useRef(null);
 
-  const next = () => {
-    sliderRef.slickNext();
-  };
-  const previous = () => {
-    sliderRef.slickPrev();
-  };
-
+   
   const settings = {
     dots: false,
     infinite: true,

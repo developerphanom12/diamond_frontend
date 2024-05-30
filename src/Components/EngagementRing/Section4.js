@@ -1,33 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
-import axios from "axios";
 import Slider from "react-slick";
 
-export default function Section4() {
+export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
-  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3200/api/admin/productFetch"
-        );
-        if (response.status === 200) {
-          setProducts(response?.data?.data);
-          console.log("response", response?.data?.data);
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   const settings = {
     // dots: true,
     lazyLoad: true,
@@ -41,55 +21,74 @@ export default function Section4() {
   return (
     <Root>
       <div className="main_div">
-        {products.map((i, index) => (
-          <div key={index} className="subdiv">
-            <div className="slider-container">
-              <Slider {...settings}>
-                <div style={{ width: "283px", height: "283px" }}>
-                  <img
-                    src={i.images.edges[0].node.src}
-                    alt="img"
-                    style={{ width: "283px", height: "283px" }}
-                  />
+        {products &&
+          products.map((i, index) => {
+            return (
+              <div key={index} className="subdiv">
+                <div className="slider-container">
+                  <Slider {...settings}>
+                    <div style={{ width: "283px", height: "283px" }}>
+                      {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
+                        <img
+                          src={i.node.images.edges[0].node.originalSrc}
+                          alt={i.node.images.edges[0].node.altText || "img"}
+                          style={{ width: "283px", height: "283px" }}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://via.placeholder.com/283";
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "283px",
+                            height: "283px",
+                            backgroundColor: "#ccc",
+                          }}
+                        >
+                          Image not available
+                        </div>
+                      )}
+                    </div>
+                  </Slider>
                 </div>
-              </Slider>
-            </div>
-            <div className="hov_content">
-              <div className="d-flex   flex-column">
-                <div className="d-flex flex justify-content-between">
-                  <h5 className="prd_name">{i?.title}</h5>
-                  <div className="d-flex">
-                    <span className="white_color"></span>
-                    <span className="golden_color"></span>
-                    <span className="red_color"></span>
+                <div className="hov_content">
+                  <div className="d-flex   flex-column">
+                    <div className="d-flex flex justify-content-between">
+                      <h5 className="prd_name">{i?.node.title}</h5>
+                      <div className="d-flex">
+                        <span className="white_color"></span>
+                        <span className="golden_color"></span>
+                        <span className="red_color"></span>
+                      </div>
+                    </div>
+                    <>
+                      <p className="prd_price pt-1 pb-1">
+                        max- {i?.priceRange?.maxVariantPrice?.currencyCode}:
+                        {i?.priceRange?.maxVariantPrice?.amount} min-{" "}
+                        {i?.priceRange?.maxVariantPrice?.currencyCode}:
+                        {i?.priceRange?.minVariantPrice?.amount}{" "}
+                      </p>
+                    </>
+                  </div>
+
+                  <div className="btn">
+                    <button className="info_btn">More Info</button>
+                    <button className="add_btn" onClick={() => setModal(true)}>
+                      Add Diamond
+                    </button>
+                  </div>
+
+                  <div className="note">
+                    <p className="note">
+                      Pay in 12 interest-free installments of $
+                      <span>Learn more</span>
+                    </p>
                   </div>
                 </div>
-                <>
-                  <p className="prd_price pt-1 pb-1">
-                    max- {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                    {i?.priceRange?.maxVariantPrice?.amount} min-{" "}
-                    {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                    {i?.priceRange?.minVariantPrice?.amount}{" "}
-                  </p>
-                </>
               </div>
-
-              <div className="btn">
-                <button className="info_btn">More Info</button>
-                <button className="add_btn" onClick={() => setModal(true)}>
-                  Add Diamond
-                </button>
-              </div>
-
-              <div className="note">
-                <p className="note">
-                  Pay in 12 interest-free installments of $
-                  <span>Learn more</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
       </div>
       <Modal isOpen={modal} toggle={() => setModal(!modal)}>
         <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
@@ -167,7 +166,7 @@ const Root = styled.section`
   padding: 0 20px;
   .slider-container {
     position: relative;
-    perspective: 1000px; 
+    perspective: 1000px;
   }
 
   &:hover .slider-container {
@@ -180,7 +179,7 @@ const Root = styled.section`
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
-    gap: 17px;
+    gap: 4px;
     .subdiv {
       width: 300px;
       height: 325px;

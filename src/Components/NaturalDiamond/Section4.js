@@ -1,49 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 import dia from "../Images/dia.webp";
-import{ useNavigate } from "react-router-dom"
-export default function Section4() {
+import { useNavigate } from "react-router-dom";
+
+export default function Section4({ value }) {
   const navigate = useNavigate();
   return (
     <Root>
       <div className="main_div">
-        <div className="subdiv">
-          <img src={dia} alt="img" />
-          <div className="hov_content">
-            <div className="heading">
-              <h5>Round</h5>
-              <p>$26,192</p>
-            </div>
+        {value &&
+          value.map((i, index) => {
+            return (
+              <div key={index} className="subdiv">
+                <video
+                  src={i?.diamond?.video}
+                  controls
+                  alt="diamond video"
+                  style={{ width: "100%", maxWidth: "500px",height:"250px"}}
+                ></video>
+                <div className="hov_content">
+                  <div className="heading">
+                    <h5>{i?.diamond?.certificate?.shape}</h5>
+                    <p>${i?.price}</p>
+                  </div>
 
-            <div className="var">
-              <div className="var_types">
-                <h5>0.5</h5>
-                <p>carat</p>
+                  <div className="var">
+                    <div className="var_types">
+                      <h5>{i?.diamond?.certificate?.carats}</h5>
+                      <p>carats</p>
+                    </div>
+                    <div className="var_types">
+                      <h5>{i?.diamond?.certificate?.color}</h5>
+                      <p>color</p>
+                    </div>
+                    <div className="var_types">
+                      <h5>{i?.diamond?.certificate?.clarity}</h5>
+                      <p>Clarity</p>
+                    </div>
+                    <div className="var_types">
+                      <h5>{i?.diamond?.certificate?.cut}</h5>
+                      <p>Cut</p>
+                    </div>
+                  </div>
+                  <div className="btn">
+                    <button className="info_btn">More Info</button>
+                    <button
+                      className="add_btn"
+                      onClick={() => {
+                        navigate("/productpage");
+                      }}
+                    >
+                      Complete your ring
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="var_types">
-                <h5>J</h5>
-                <p>color</p>
-              </div>
-
-              <div className="var_types">
-                <h5>Sl1</h5>
-                <p>Clarity</p>
-              </div>
-
-              <div className="var_types">
-                <h5>Excellent</h5>
-                <p>Cut</p>
-              </div>
-            </div>
-
-            <div className="btn">
-              <button className="info_btn">More Info</button>
-              <button className="add_btn" onClick={ ()=> {navigate("/productpage")} }>Complete your ring</button>
-            </div>
-          </div>
-        </div>
-
-
+            );
+          })}
       </div>
     </Root>
   );
@@ -52,14 +65,15 @@ export default function Section4() {
 const Root = styled.section`
   padding: 0 20px;
   .main_div {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
     margin-bottom: 100px;
 
     .subdiv {
-      width: 327px;
-      height: 400px;
+      width: 300px;
+      height: 380px;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
       padding: 20px;
@@ -84,7 +98,7 @@ const Root = styled.section`
         padding: 0 20px 0;
         left: -3px;
         overflow: hidden;
-        width: 327px;
+        width: 300px;
         border-top: none;
         border-radius: 0 0 20px 20px;
       }

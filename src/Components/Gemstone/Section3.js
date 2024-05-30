@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { BsQuestionCircleFill } from "react-icons/bs";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { IoIosArrowDown } from "react-icons/io";
-import { FaPlus } from "react-icons/fa6";
 import { IoIosArrowUp } from "react-icons/io";
-import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Sliderr from "./Sliderr";
 
@@ -21,45 +12,9 @@ function valuetext(value) {
 const minDistance = 10;
 
 export default function Section3() {
-  const [selectedButton, setSelectedButton] = useState(1);
-  const [selectedClarity, setSelectedClarity] = useState(1);
-  const [selectedCut, setSelectedCut] = useState(1);
-  const [selectedSymmetry, setSelectedSymmetry] = useState(1);
-  const [selectedPolish, setSelectedPolish] = useState(1);
-  const [selectedCertificate, setSelectedCertificate] = useState({
-    1: false,
-    2: false,
-  });
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(2086918);
   const [value1, setValue1] = React.useState([0.5, 100]);
-
-  const handleButtonClick = (buttonIndex) => {
-    setSelectedButton(buttonIndex);
-  };
-
-  const handleButtonClarity = (buttonIndex) => {
-    setSelectedClarity(buttonIndex);
-  };
-
-  const handleButtonCut = (buttonIndex) => {
-    setSelectedCut(buttonIndex);
-  };
-
-  const handleButtonSymmetry = (buttonIndex) => {
-    setSelectedSymmetry(buttonIndex);
-  };
-
-  const handleButtonPolish = (buttonIndex) => {
-    setSelectedPolish(buttonIndex);
-  };
-
-  const handleButtonCertificate = (index) => {
-    setSelectedCertificate((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
 
   const minincrement = () => {
     setminCount(mincount + 2100);

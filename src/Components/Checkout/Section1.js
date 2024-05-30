@@ -14,7 +14,7 @@ export default function Section1() {
         <div className="product_checkout">
           <div className="desc_div">
             <div className="image_content">
-              <img src={ww} />
+              <img src={ww}  alt="img"/>
               <div className="ring_content">
                 <h2>
                   The Katelyn With A 0.51 Carat J SI1 Round Natural Diamond

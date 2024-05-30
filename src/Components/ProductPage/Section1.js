@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { GiDoorRingHandle } from "react-icons/gi";
-import { GiDiamondRing } from "react-icons/gi";
-import { BsQuestionCircleFill } from "react-icons/bs";
+ 
 
 export default function Section1() {
-  const [selectedButton, setSelectedButton] = useState(null);
-  const handleButtonClick = (buttonName) => {
-    setSelectedButton(buttonName === selectedButton ? null : buttonName);
-  };
+  
 
   return (
     <Root>
