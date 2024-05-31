@@ -44,8 +44,9 @@ export default function Section2() {
           if (res.status === 200) {
             setProducts(res.data.products);
             console.log("res", res);
-            const productIds = res.data.products.map(product => product.id);
+            const productIds = res.data.products.map(product => product);
             dispatch(setProductIds(productIds));
+               console.log("sdfsdfsdf", productIds);
           }
         } catch (error) {
           console.error("Error fetching products:", error);

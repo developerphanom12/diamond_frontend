@@ -1,4 +1,4 @@
-import { HIDE_LOADER, SET_PRODUCT_IDS, SHOW_LOADER } from "./action";
+import { HIDE_LOADER, SET_DIAMOND_IDS, SET_PRODUCT_IDS, SHOW_LOADER } from "./action";
 
 const initialState = {
   user: {},
@@ -7,10 +7,16 @@ const initialState = {
   appDetails: {},
   isLoading: false,
   productIds: [],
+  diamondIds: [],
    
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_DIAMOND_IDS:
+      return {
+        ...state,
+        diamondIds: action.payload,
+      };
     case SET_PRODUCT_IDS:
       return {
         ...state,

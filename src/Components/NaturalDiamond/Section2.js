@@ -1,18 +1,26 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Section3 from "./Section3";
 import Section4 from "./Section4";
 import test from "../Images/test_img.jpg";
+import { useDispatch } from "react-redux";
+import { setDiamondIds } from "../../redux/users/action";
 
  const shapesList = ['ROUND','EMERALD','HEART','MARQUISE','OVAL','PEAR','PRINCESS','RADIANT','CUSHION','E.CUSHION']
 export default function Section2() {
+   
+
+  const [selectedButton, setSelectedButton] = useState(1);
   const [selectedShapes, setSelectedShapes] = useState([]);
-  const [selectedButton, setSelectedButton] = useState(1); 
   const [value, setValue] = useState([]);
+ 
+  const dispatch = useDispatch();
+  let sliderRef = useRef(null);
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
+    sliderRef.slickGoTo(buttonIndex - 1);
   };
 
   useEffect(() => {
@@ -23,13 +31,17 @@ export default function Section2() {
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
           console.log("resp", resp?.data?.items);
+
+          const diamondIds = resp.data.items.map(item => (item));
+          dispatch(setDiamondIds(diamondIds));
+          console.log("sdfsdfsdf", diamondIds);
         }
       } catch (err) {
         console.error("err", err);
       }
     };
     diamondApi();
-  }, [selectedShapes]);
+  }, [selectedShapes,dispatch]);
 
   const handleShapeClick = (shape) => {
     setSelectedShapes((prevShapes) =>

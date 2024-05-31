@@ -3,7 +3,7 @@ import Section3 from "./Section3";
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
-import { useNavigate } from "react-router-dom";
+import {   useNavigate } from "react-router-dom";
 
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1); 
@@ -24,6 +24,7 @@ export default function Section2() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+ 
 
   return (
     <Root>
@@ -124,7 +125,9 @@ export default function Section2() {
                 </div>
 
                 <div className="prod_price">
-                  <h2>$450</h2>
+                  <h2>$450 
+                     {/* {selectedProduct.priceRange.maxVariantPrice.amount} */}
+                  </h2>
                   <p>Change</p>
                 </div>
               </div>

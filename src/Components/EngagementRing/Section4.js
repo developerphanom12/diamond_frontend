@@ -7,6 +7,7 @@ import Slider from "react-slick";
 
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const navigate = useNavigate();
   const settings = {
     // dots: true,
@@ -16,6 +17,15 @@ export default function Section4({ products }) {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 2,
+  };
+
+  const handleAddDiamondClick = (productId) => {
+    setSelectedProductId(productId);
+    setModal(true);
+  };
+
+  const handleModalNavigate = () => {
+    navigate('/naturaldiamond', { state: { product: selectedProductId } });
   };
 
   return (
@@ -74,7 +84,7 @@ export default function Section4({ products }) {
 
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button className="add_btn" onClick={() => setModal(true)}>
+                    <button className="add_btn" onClick={() => handleAddDiamondClick(products?.node)}>
                       Add Diamond
                     </button>
                   </div>
@@ -99,9 +109,7 @@ export default function Section4({ products }) {
           <div className="choose_option">
             <div
               className="ring_pandet"
-              onClick={() => {
-                navigate("/naturaldiamond");
-              }}
+              onClick={handleModalNavigate}
             >
               <svg
                 viewBox="0 0 20 20"

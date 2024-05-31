@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import dia from "../Images/dia.webp";
 import { useNavigate } from "react-router-dom";
+import noimg from "../Images/s6.png";
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
+
+  const handleNavigate = (product) => {
+    const productIds = product.id;
+    const diamondIds = product.diamond ? product.diamond.id : "";
+    navigate(`/productpage?productIds=${productIds}&diamondIds=${diamondIds}`);
+  };
   return (
     <Root>
       <div className="main_div">
@@ -12,12 +18,28 @@ export default function Section4({ value }) {
           value.map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                <video
-                  src={i?.diamond?.video}
-                  controls
-                  alt="diamond video"
-                  style={{ width: "100%", maxWidth: "500px",height:"250px"}}
-                ></video>
+                {i?.diamond?.image ? (
+                  <img
+                    src={i?.diamond?.image}
+                    alt="diamond images"
+                    style={{
+                      width: "100%",
+                      maxWidth: "500px",
+                      height: "250px",
+                    }}
+                  />
+                ) : (
+                  <img
+                    style={{
+                      width: "100%",
+                      maxWidth: "500px",
+                      height: "250px",
+                    }}
+                    src={noimg}
+                    alt="no img available"
+                  />
+                )}
+
                 <div className="hov_content">
                   <div className="heading">
                     <h5>{i?.diamond?.certificate?.shape}</h5>
@@ -44,12 +66,7 @@ export default function Section4({ value }) {
                   </div>
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button
-                      className="add_btn"
-                      onClick={() => {
-                        navigate("/productpage");
-                      }}
-                    >
+                    <button className="add_btn"onClick={() => handleNavigate(i)}>
                       Complete your ring
                     </button>
                   </div>

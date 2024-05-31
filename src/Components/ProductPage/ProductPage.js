@@ -5,6 +5,7 @@ import Section2 from './Section2'
 
 
 export default function ProductPage(){
+ 
   return (
     <div>
         <Section1/>

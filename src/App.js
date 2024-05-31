@@ -26,7 +26,9 @@ function App() {
           <Route path="/poduct" element={<Poduct />} />
           <Route path="/pendats" element={<Pendats />} />
           <Route path="/naturaldiamond" element={<NaturalDiamond />} />
+          <Route path="/naturaldiamond/productIds" element={<NaturalDiamond />} />
           <Route path="/productpage" element={<ProductPage />} />
+          <Route path="/productpage/productIds&diamondIds" element={<ProductPage />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/test" element={<Test />} />
           <Route path="/gemstone" element={<Gemstone />} />
