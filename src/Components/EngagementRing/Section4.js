@@ -88,7 +88,7 @@ export default function Section4({ products }) {
 
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button className="add_btn" onClick={() =>  handleAddDiamondClick(i?.node?.id)}>
+                    <button className="add_btn" onClick={() =>  handleAddDiamondClick(i?.node)}>
                       Add Diamond
                     </button>
                   </div>

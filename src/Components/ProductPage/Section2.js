@@ -21,6 +21,8 @@ export default function Section2(value) {
   const { diamond } = location.state || {};
   console.log("yyyy", diamond);
 
+
+
   const settings = {
     dots: false,
     infinite: true,
@@ -100,7 +102,7 @@ export default function Section2(value) {
 
         <div className="des_div">
           <div className="title">
-            <h2>The Riley with a 0.54 Carat J VS2 Round Natural Diamond{productIds?.title}</h2>
+            <h2>The Riley with a 0.54 Carat J VS2 Round Natural Diamond</h2>
           </div>
 
           <div className="complete_info_container">
@@ -123,7 +125,7 @@ export default function Section2(value) {
                 </svg>
 
                 <div className="prod_name">
-                  <h2>The Riley</h2>
+                  <h2>{productIds?.title}</h2>
                   <p>14K White Gold</p>
                 </div>
 
@@ -159,7 +161,7 @@ export default function Section2(value) {
                   ></path>
                 </svg>
                 <div className="prod_name">
-                  <h2>Round</h2>
+                  <h2> {diamond?.diamond?.certificate?.shape}</h2>
                   <p>0.54ct J VS2</p>
                 </div>
                 <div className="prod_price">

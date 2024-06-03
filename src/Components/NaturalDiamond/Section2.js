@@ -46,7 +46,7 @@ export default function Section2() {
           console.log('diaaa', resp?.data?.items);
           const diamondIds = resp.data.items.map((item) => item);
           dispatch(setDiamondIds(diamondIds));
-          console.error('diamondids', diamondIds);
+          console.log('diamondids', diamondIds);
         }
       } catch (err) {
         console.error('err', err);
