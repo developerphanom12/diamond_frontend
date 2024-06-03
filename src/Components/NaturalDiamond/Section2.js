@@ -37,19 +37,19 @@ export default function Section2() {
   useEffect(() => {
     const diamondApi = async () => {
       try {
-        const shapesParam = selectedShapes.join(",");
+        const shapesParam = selectedShapes.join(',');
         const resp = await axios.get(
           `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}`
         );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
-          console.log("diaaa", resp?.data?.items);
+          console.log('diaaa', resp?.data?.items);
           const diamondIds = resp.data.items.map((item) => item);
           dispatch(setDiamondIds(diamondIds));
-          console.error("diamondids", diamondIds);
+          console.error('diamondids', diamondIds);
         }
       } catch (err) {
-        console.error("err", err);
+        console.error('err', err);
       }
     };
 
@@ -63,7 +63,7 @@ export default function Section2() {
         : [...prevShapes, shape]
     );
   };
- 
+
   return (
     <Root>
       <div className="ring_types mt-4">

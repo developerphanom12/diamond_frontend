@@ -5,9 +5,11 @@ import noimg from "../Images/s6.png";
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate(`/productpage`);
+
+  const handleNavigate = (diamond) => {
+    navigate('/productpage', { state: { diamond } });
   };
+
   return (
     <Root>
       <div className="main_div">
@@ -65,7 +67,7 @@ export default function Section4({ value }) {
                     <button className="info_btn">More Info</button>
                     <button
                       className="add_btn"
-                      onClick={(i) => handleNavigate(i)}
+                      onClick={() => handleNavigate(i)}
                     >
                       Complete your ring
                     </button>
@@ -78,7 +80,6 @@ export default function Section4({ value }) {
     </Root>
   );
 }
-
 const Root = styled.section`
   padding: 0 20px;
   .main_div {

@@ -3,10 +3,10 @@ import Section3 from "./Section3";
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Section2() {
+export default function Section2(value) {
   const [selectedButton, setSelectedButton] = useState(1);
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
@@ -16,10 +16,10 @@ export default function Section2() {
   const navigate = useNavigate();
   let sliderRef = useRef(null);
   const productIds = useSelector(state => state.users.productIds);
-  const diamondIds = useSelector((state) => state.users.diamondIds);
   console.log("xxxx", productIds);
-  console.log("yyyy", diamondIds);
-
+  const location = useLocation();
+  const { diamond } = location.state || {};
+  console.log("yyyy", diamond);
 
   const settings = {
     dots: false,
