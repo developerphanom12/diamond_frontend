@@ -2,20 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import noimg from "../Images/s6.png";
-import { useDispatch } from "react-redux";
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const handleNavigate = (value) => {
-    const productIds = value.id;
-    const diamondIds =  value.id;
-    navigate(`/productpage?productIds=${productIds}&diamondIds=${diamondIds}`);
-    // dispatch(setProductIds(productIds));  
-
+  const handleNavigate = () => {
+    navigate(`/productpage`);
   };
- 
-
   return (
     <Root>
       <div className="main_div">
@@ -71,7 +63,10 @@ export default function Section4({ value }) {
                   </div>
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button className="add_btn"onClick={(i) => handleNavigate(i)}>
+                    <button
+                      className="add_btn"
+                      onClick={(i) => handleNavigate(i)}
+                    >
                       Complete your ring
                     </button>
                   </div>

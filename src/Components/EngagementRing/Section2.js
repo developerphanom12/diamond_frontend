@@ -4,18 +4,17 @@ import axios from "axios";
 import Section3 from "./Section3";
 import { useDispatch } from "react-redux";
 import Section4 from "./Section4";
+import {  setProductIds } from "../../redux/users/action";
 
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
   const [collection, setCollection] = useState([]);
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
   };
-  const dispatch = useDispatch();
-
-
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -45,10 +44,9 @@ export default function Section2() {
           );
           if (res.status === 200) {
             setProducts(res.data.products);
-            
-            // const productIds = res.data.products.map((product) => product);
-            // dispatch(setProductIds(productIds));
-         
+            const productIds = res.data.products.map((product) => product.node);
+            dispatch(setProductIds(productIds));
+            console.log("productid",productIds)
           }
         } catch (error) {
           console.error("Error fetching products:", error);
@@ -58,6 +56,8 @@ export default function Section2() {
 
     fetchProductsDetails();
   }, [collection, selectedButton, dispatch]);
+
+ 
 
   return (
     <Root>
@@ -90,7 +90,6 @@ export default function Section2() {
             </svg>
             <span>{collection[0]?.title}</span>
           </button>
-
           <button
             className={selectedButton === 2 ? "selected" : ""}
             onClick={() => handleButtonClick(2)}

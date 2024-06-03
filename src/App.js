@@ -13,7 +13,6 @@ import EngagementRing from "./Components/EngagementRing/EngagementRing";
 import Gemstone from "./Components/Gemstone/Gemstone";
 import Layout from "./Components/MainLayout/Layout";
 import Home from "./Components/Home/Home";
-// import LazyLoad from "./Components/LazyLoad";
 
 function App() {
   return (
@@ -26,9 +25,7 @@ function App() {
           <Route path="/poduct" element={<Poduct />} />
           <Route path="/pendats" element={<Pendats />} />
           <Route path="/naturaldiamond" element={<NaturalDiamond />} />
-          <Route path="/naturaldiamond/productIds" element={<NaturalDiamond />} />
           <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/productpage/productIds&diamondIds" element={<ProductPage />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/test" element={<Test />} />
           <Route path="/gemstone" element={<Gemstone />} />

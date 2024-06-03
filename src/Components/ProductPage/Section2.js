@@ -3,11 +3,11 @@ import Section3 from "./Section3";
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
-import {   useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Section2() {
-  const [selectedButton, setSelectedButton] = useState(1); 
-
+  const [selectedButton, setSelectedButton] = useState(1);
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
     sliderRef.slickGoTo(buttonIndex - 1);
@@ -15,8 +15,12 @@ export default function Section2() {
 
   const navigate = useNavigate();
   let sliderRef = useRef(null);
+  const productIds = useSelector(state => state.users.productIds);
+  const diamondIds = useSelector((state) => state.users.diamondIds);
+  console.log("xxxx", productIds);
+  console.log("yyyy", diamondIds);
 
-   
+
   const settings = {
     dots: false,
     infinite: true,
@@ -24,7 +28,6 @@ export default function Section2() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
- 
 
   return (
     <Root>
@@ -97,7 +100,7 @@ export default function Section2() {
 
         <div className="des_div">
           <div className="title">
-            <h2>The Riley with a 0.54 Carat J VS2 Round Natural Diamond</h2>
+            <h2>The Riley with a 0.54 Carat J VS2 Round Natural Diamond{productIds?.title}</h2>
           </div>
 
           <div className="complete_info_container">
@@ -125,8 +128,9 @@ export default function Section2() {
                 </div>
 
                 <div className="prod_price">
-                  <h2>$450 
-                     {/* {selectedProduct.priceRange.maxVariantPrice.amount} */}
+                  <h2>
+                    $450
+                    {/* {selectedProduct.priceRange.maxVariantPrice.amount} */}
                   </h2>
                   <p>Change</p>
                 </div>

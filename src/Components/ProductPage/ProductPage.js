@@ -5,12 +5,12 @@ import Section2 from './Section2'
 
 
 export default function ProductPage(){
- 
+   
   return (
     <div>
         <Section1/>
-        <Section2/>
-        {/* <Section3/> */}
+        <Section2    />
+        
     </div>
   )
 }

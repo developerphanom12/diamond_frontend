@@ -1,9 +1,4 @@
-import {
-  HIDE_LOADER,
-  // SET_DIAMOND_IDS,
-  // SET_PRODUCT_IDS,
-  SHOW_LOADER,
-} from "./action";
+import { SET_DIAMOND_IDS, SET_PRODUCT_IDS } from "./action";
 
 const initialState = {
   user: {},
@@ -11,30 +6,22 @@ const initialState = {
   role: "",
   appDetails: {},
   isLoading: false,
-  // productIds: [],
-  // diamondIds: [],
-  productID: null,
-  diamondID: null,
+  productIds: [],
+  diamondIds: [],
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case SET_DIAMOND_IDS:
-    //   return {
-    //     ...state,
-    //     diamondIds: action.payload,
-    //   };
-    // case SET_PRODUCT_IDS:
-    //   return {
-    //     ...state,
-    //     productIds: action.payload,
-    //   };
-    case 'SET_PRODUCT_AND_DIAMOND_IDS':
+    case SET_DIAMOND_IDS:
       return {
         ...state,
-        productID: action.payload.productID,
-        diamondID: action.payload.diamondID,
+        diamondIds: action.payload,
       };
-       
+    case SET_PRODUCT_IDS:
+      return {
+        ...state,
+        productIds: action.payload,
+      };
+
     case "USER_DATA":
       return {
         ...state,
@@ -55,16 +42,7 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         appDetails: action.payload,
       };
-    case SHOW_LOADER:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case HIDE_LOADER:
-      return {
-        ...state,
-        isLoading: false,
-      };
+
     default:
       return state;
   }

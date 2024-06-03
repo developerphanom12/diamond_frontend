@@ -7,39 +7,54 @@ import test from "../Images/test_img.jpg";
 import { useDispatch } from "react-redux";
 import { setDiamondIds } from "../../redux/users/action";
 
- const shapesList = ['ROUND','EMERALD','HEART','MARQUISE','OVAL','PEAR','PRINCESS','RADIANT','CUSHION','E.CUSHION']
+const shapesList = [
+  "ROUND",
+  "EMERALD",
+  "HEART",
+  "MARQUISE",
+  "OVAL",
+  "PEAR",
+  "PRINCESS",
+  "RADIANT",
+  "CUSHION",
+  "E.CUSHION",
+];
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
   const [selectedShapes, setSelectedShapes] = useState([]);
   const [value, setValue] = useState([]);
- 
+
   const dispatch = useDispatch();
   let sliderRef = useRef(null);
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
-    sliderRef.slickGoTo(buttonIndex - 1);
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(buttonIndex - 1);
+    }
   };
 
   useEffect(() => {
     const diamondApi = async () => {
       try {
-        const shapesParam = selectedShapes.join(',');
-        const resp = await axios.get( `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}`);
+        const shapesParam = selectedShapes.join(",");
+        const resp = await axios.get(
+          `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}`
+        );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
-   
-
-          // const diamondIds = resp.data.items.map(item => (item));
-          // dispatch(setDiamondIds(diamondIds));
-        
+          console.log("diaaa", resp?.data?.items);
+          const diamondIds = resp.data.items.map((item) => item);
+          dispatch(setDiamondIds(diamondIds));
+          console.error("diamondids", diamondIds);
         }
       } catch (err) {
         console.error("err", err);
       }
     };
+
     diamondApi();
-  }, [selectedShapes,dispatch]);
+  }, [selectedShapes, dispatch]);
 
   const handleShapeClick = (shape) => {
     setSelectedShapes((prevShapes) =>
@@ -48,18 +63,18 @@ export default function Section2() {
         : [...prevShapes, shape]
     );
   };
-
+ 
   return (
     <Root>
       <div className="ring_types mt-4">
-      {shapesList.map((shape) => (
+        {shapesList.map((shape) => (
           <button
             key={shape}
-            className={selectedShapes.includes(shape) ? 'selected' : ''}
+            className={selectedShapes.includes(shape) ? "selected" : ""}
             onClick={() => handleShapeClick(shape)}
           >
             {shape}
-            <img src={test} alt="img"/>
+            <img src={test} alt="img" />
           </button>
         ))}
         <button
@@ -238,7 +253,7 @@ export default function Section2() {
         </button>
       </div>
       <Section3 />
-      <Section4 value={value} />
+      <Section4 value={value}  />
     </Root>
   );
 }

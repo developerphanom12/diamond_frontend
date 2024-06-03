@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
 import Slider from "react-slick";
+import { useDispatch } from "react-redux";
+import { setProductIds } from "../../redux/users/action";
 
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const settings = {
     // dots: true,
     lazyLoad: true,
@@ -18,14 +22,14 @@ export default function Section4({ products }) {
     slidesToScroll: 1,
     initialSlide: 2,
   };
-
-  const handleAddDiamondClick = (productId) => {
-    setSelectedProductId(productId);
+  const handleAddDiamondClick = (productIds) => {
+    setSelectedProductId(productIds);
     setModal(true);
-  };
+    dispatch(setProductIds(productIds)); 
+};
 
   const handleModalNavigate = () => {
-    navigate('/naturaldiamond', { state: { product: selectedProductId } });
+    navigate('/naturaldiamond', { state: { products: selectedProductId } });
   };
 
   return (
@@ -84,7 +88,7 @@ export default function Section4({ products }) {
 
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button className="add_btn" onClick={() => handleAddDiamondClick(products?.node?.id)}>
+                    <button className="add_btn" onClick={() =>  handleAddDiamondClick(i?.node?.id)}>
                       Add Diamond
                     </button>
                   </div>
