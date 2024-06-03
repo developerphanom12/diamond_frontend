@@ -4,7 +4,6 @@ import axios from "axios";
 import Section3 from "./Section3";
 import { useDispatch } from "react-redux";
 import Section4 from "./Section4";
-import { setProductIds } from "../../redux/users/action";
 
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
@@ -15,6 +14,9 @@ export default function Section2() {
     setSelectedButton(buttonIndex);
   };
   const dispatch = useDispatch();
+
+
+
   useEffect(() => {
     const fetchCollections = async () => {
       try {
@@ -43,10 +45,10 @@ export default function Section2() {
           );
           if (res.status === 200) {
             setProducts(res.data.products);
-            console.log("res", res);
-            const productIds = res.data.products.map(product => product);
-            dispatch(setProductIds(productIds));
-               console.log("sdfsdfsdf", productIds);
+            
+            // const productIds = res.data.products.map((product) => product);
+            // dispatch(setProductIds(productIds));
+         
           }
         } catch (error) {
           console.error("Error fetching products:", error);
@@ -72,7 +74,6 @@ export default function Section2() {
           </div>
         </div>
         <div className="ring_types mt-4">
-
           <button
             className={selectedButton === 1 ? "selected" : ""}
             onClick={() => handleButtonClick(1)}

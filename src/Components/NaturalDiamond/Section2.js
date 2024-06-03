@@ -9,8 +9,6 @@ import { setDiamondIds } from "../../redux/users/action";
 
  const shapesList = ['ROUND','EMERALD','HEART','MARQUISE','OVAL','PEAR','PRINCESS','RADIANT','CUSHION','E.CUSHION']
 export default function Section2() {
-   
-
   const [selectedButton, setSelectedButton] = useState(1);
   const [selectedShapes, setSelectedShapes] = useState([]);
   const [value, setValue] = useState([]);
@@ -30,11 +28,11 @@ export default function Section2() {
         const resp = await axios.get( `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}`);
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
-          console.log("resp", resp?.data?.items);
+   
 
-          const diamondIds = resp.data.items.map(item => (item));
-          dispatch(setDiamondIds(diamondIds));
-          console.log("sdfsdfsdf", diamondIds);
+          // const diamondIds = resp.data.items.map(item => (item));
+          // dispatch(setDiamondIds(diamondIds));
+        
         }
       } catch (err) {
         console.error("err", err);
