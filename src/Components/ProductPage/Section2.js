@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import Section3 from "./Section3";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import VideoPlayer from "react-video-js-player";
+import axios from "axios";
 
-export default function Section2(value) {
+export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
+  const [object, setObject] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedVariantId, setSelectedVariantId] = useState("");
+
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
     sliderRef.slickGoTo(buttonIndex - 1);
@@ -22,8 +26,6 @@ export default function Section2(value) {
   const { diamond } = location.state || {};
   console.log("stone", diamond);
 
-  const playerRef = useRef(null);
-
   const settings = {
     dots: false,
     infinite: true,
@@ -31,6 +33,27 @@ export default function Section2(value) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  const totalPrice =
+    parseFloat(productIds?.priceRange?.maxVariantPrice?.amount || 0) +
+    parseFloat(diamond?.price || 0);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3200/api/rings/prodtcs?productId=${productIds.id}`
+        );
+        if (response.status === 200) {
+          setObject(response.data.data);
+          console.log("respe", response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      }
+    };
+    fetchCollections();
+  }, [productIds.id, selectedSize]);
   return (
     <Root>
       <div className="main_div">
@@ -56,11 +79,7 @@ export default function Section2(value) {
               <div key={2}>
                 {diamond?.diamond?.video ? (
                   <div>
-                    <VideoPlayer
-                      ref={playerRef}
-                      src={diamond?.diamond?.video}
-                      muted
-                    />
+                    <img src={diamond?.diamond?.image} alt="img" />
                   </div>
                 ) : (
                   <img src={ring} alt="img" />
@@ -198,48 +217,30 @@ export default function Section2(value) {
               </div>
             </button>
           </div>
-
+          <div className="ring_size">
+            <select
+              value={selectedSize}
+              onChange={(e) => {
+                setSelectedSize(e.target.value);
+                const selectedIndex = e.target.selectedIndex;
+                const selectedVariantId =
+                  object?.variants?.edges[selectedIndex]?.node?.id;
+                setSelectedVariantId(selectedVariantId);
+                console.log("Selected Variant ID:", selectedVariantId);
+              }}
+            >
+              <option value="">Select Ring Size</option>
+              {object?.variants?.edges?.map((variant, index) => (
+                <option key={variant.node.id} value={variant.node.title}>
+                  {variant.node.title}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="total_price">
             <h5>Total Price</h5>
-            <h2>$1,150      {productIds?.priceRange?.maxVariantPrice?.amount}*{diamond?.price}</h2>
+            <h2>${totalPrice.toFixed(2)}</h2>
             <p>Ships in 2-3 weeks</p>
-          </div>
-          <div className="ring_size">
-            <select>
-              <option value="volvo">Select Ring Size</option>
-              <option value="saab">3</option>
-              <option value="fiat">3.25</option>
-              <option value="audi">3.5</option>
-              <option value="saab">3.75</option>
-              <option value="fiat">4</option>
-              <option value="audi">4.25</option>
-              <option value="saab">4.5</option>
-              <option value="fiat">4.75</option>
-              <option value="audi">5</option>
-              <option value="saab">5.25</option>
-              <option value="fiat">5.5</option>
-              <option value="audi">5.75</option>
-              <option value="saab">6</option>
-              <option value="fiat">6.25</option>
-              <option value="audi">6.5</option>
-              <option value="saab">6.75</option>
-              <option value="fiat">7</option>
-              <option value="audi">7.25</option>
-              <option value="saab">7.5</option>
-              <option value="fiat">7.75</option>
-              <option value="audi">8</option>
-              <option value="audi">8.25</option>
-              <option value="saab">8.5</option>
-              <option value="fiat">8.75</option>
-              <option value="audi">9</option>
-              <option value="audi">9.25</option>
-              <option value="saab">9.5</option>
-              <option value="fiat">9.75</option>
-              <option value="audi">10</option>
-              <option value="audi">10.25</option>
-              <option value="saab">10.5</option>
-              <option value="fiat">10.75</option>
-            </select>
           </div>
 
           <div className="product_btn">
@@ -325,7 +326,8 @@ export default function Section2(value) {
                 ></path>
               </svg>
               <p>
-                Overnight <br></br>Shipping
+                Overnight <br />
+                Shipping
               </p>
             </div>
 
@@ -792,5 +794,12 @@ const Root = styled.section`
         color: #000000;
       }
     }
+  }
+  img {
+    transition: transform 1s ease-in-out;
+  }
+  img:hover {
+    transform: rotate3d(360deg);
+    /* transform: rotate3d(0, 1, 0, 60deg); */
   }
 `;
