@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import VideoPlayer from "react-video-js-player";
 
 export default function Section2(value) {
   const [selectedButton, setSelectedButton] = useState(1);
@@ -15,13 +16,13 @@ export default function Section2(value) {
 
   const navigate = useNavigate();
   let sliderRef = useRef(null);
-  const productIds = useSelector(state => state.users.productIds);
-  console.log("xxxx", productIds);
+  const productIds = useSelector((state) => state.users.productIds);
+  console.log("ring", productIds);
   const location = useLocation();
   const { diamond } = location.state || {};
-  console.log("yyyy", diamond);
+  console.log("stone", diamond);
 
-
+  const playerRef = useRef(null);
 
   const settings = {
     dots: false,
@@ -30,7 +31,6 @@ export default function Section2(value) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
   return (
     <Root>
       <div className="main_div">
@@ -43,10 +43,28 @@ export default function Section2(value) {
               {...settings}
             >
               <div key={1}>
-                <img src={ring} alt="text" />
+                {productIds?.images?.edges?.length > 0 && (
+                  <img
+                    src={productIds.images.edges[0].node.originalSrc}
+                    alt={
+                      productIds.images.edges[0].node.altText || "Product Image"
+                    }
+                  />
+                )}
               </div>
+
               <div key={2}>
-                <img src={ring} alt="text" />
+                {diamond?.diamond?.video ? (
+                  <div>
+                    <VideoPlayer
+                      ref={playerRef}
+                      src={diamond?.diamond?.video}
+                      muted
+                    />
+                  </div>
+                ) : (
+                  <img src={ring} alt="img" />
+                )}
               </div>
             </Slider>
             <div
@@ -102,7 +120,12 @@ export default function Section2(value) {
 
         <div className="des_div">
           <div className="title">
-            <h2>The Riley with a 0.54 Carat J VS2 Round Natural Diamond</h2>
+            <h2>
+              {productIds?.title} with a {diamond?.diamond?.certificate?.carats}
+              carat {diamond?.diamond?.certificate?.color}{" "}
+              {diamond?.diamond?.certificate?.clarity}{" "}
+              {diamond?.diamond?.certificate?.shape} Natural Diamond
+            </h2>
           </div>
 
           <div className="complete_info_container">
@@ -131,8 +154,8 @@ export default function Section2(value) {
 
                 <div className="prod_price">
                   <h2>
-                    $450
-                    {/* {selectedProduct.priceRange.maxVariantPrice.amount} */}
+                    {productIds?.priceRange?.maxVariantPrice?.currencyCode}:
+                    {productIds?.priceRange?.maxVariantPrice?.amount}
                   </h2>
                   <p>Change</p>
                 </div>
@@ -162,16 +185,25 @@ export default function Section2(value) {
                 </svg>
                 <div className="prod_name">
                   <h2> {diamond?.diamond?.certificate?.shape}</h2>
-                  <p>0.54ct J VS2</p>
+                  <p>
+                    {diamond?.diamond?.certificate?.carats}ct{" "}
+                    {diamond?.diamond?.certificate?.color}{" "}
+                    {diamond?.diamond?.certificate?.clarity}{" "}
+                  </p>
                 </div>
                 <div className="prod_price">
-                  <h2>$700</h2>
+                  <h2>${diamond?.price}</h2>
                   <p>Change</p>
                 </div>
               </div>
             </button>
           </div>
 
+          <div className="total_price">
+            <h5>Total Price</h5>
+            <h2>$1,150      {productIds?.priceRange?.maxVariantPrice?.amount}*{diamond?.price}</h2>
+            <p>Ships in 2-3 weeks</p>
+          </div>
           <div className="ring_size">
             <select>
               <option value="volvo">Select Ring Size</option>
@@ -208,12 +240,6 @@ export default function Section2(value) {
               <option value="saab">10.5</option>
               <option value="fiat">10.75</option>
             </select>
-          </div>
-
-          <div className="total_price">
-            <h5>Total Price</h5>
-            <h2>$1,150</h2>
-            <p>Ships in 2-3 weeks</p>
           </div>
 
           <div className="product_btn">

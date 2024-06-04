@@ -1,4 +1,6 @@
+
 import { SET_DIAMOND_IDS, SET_PRODUCT_IDS } from "./action";
+
 
 const initialState = {
   user: {},

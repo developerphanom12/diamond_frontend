@@ -12,7 +12,7 @@ export default function Section4({ products }) {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const settings = {
     // dots: true,
     lazyLoad: true,
@@ -25,11 +25,11 @@ export default function Section4({ products }) {
   const handleAddDiamondClick = (productIds) => {
     setSelectedProductId(productIds);
     setModal(true);
-    dispatch(setProductIds(productIds)); 
-};
+    dispatch(setProductIds(productIds));
+  };
 
   const handleModalNavigate = () => {
-    navigate('/naturaldiamond', { state: { products: selectedProductId } });
+    navigate("/naturaldiamond", { state: { products: selectedProductId } });
   };
 
   return (
@@ -78,17 +78,20 @@ export default function Section4({ products }) {
                     </div>
                     <>
                       <p className="prd_price pt-1 pb-1">
-                        max- {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                        {i?.priceRange?.maxVariantPrice?.amount} min-{" "}
-                        {i?.priceRange?.maxVariantPrice?.currencyCode}:
-                        {i?.priceRange?.minVariantPrice?.amount}{" "}
+                        max- {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
+                        {i?.node?.priceRange?.maxVariantPrice?.amount} min-{" "}
+                        {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
+                        {i?.node?.priceRange?.minVariantPrice?.amount}{" "}
                       </p>
                     </>
                   </div>
 
                   <div className="btn">
                     <button className="info_btn">More Info</button>
-                    <button className="add_btn" onClick={() =>  handleAddDiamondClick(i?.node)}>
+                    <button
+                      className="add_btn"
+                      onClick={() => handleAddDiamondClick(i?.node)}
+                    >
                       Add Diamond
                     </button>
                   </div>
@@ -111,10 +114,7 @@ export default function Section4({ products }) {
           <h5>Before we continue</h5>
           <h2>CHOOSE YOUR CENTER STONE</h2>
           <div className="choose_option">
-            <div
-              className="ring_pandet"
-              onClick={handleModalNavigate}
-            >
+            <div className="ring_pandet" onClick={handleModalNavigate}>
               <svg
                 viewBox="0 0 20 20"
                 fill="none"

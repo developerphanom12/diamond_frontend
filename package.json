@@ -24,6 +24,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
+    "react-video-js-player": "^1.1.1",
     "reactstrap": "^9.2.2",
     "reduce-reducers": "^1.0.4",
     "redux": "^5.0.1",
