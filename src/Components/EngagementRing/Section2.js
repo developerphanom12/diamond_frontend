@@ -228,7 +228,7 @@ export default function Section2() {
         </div>
       </div>
       <Section3 />
-      <Section4 products={products} />
+      <Section4 products={products} /> 
     </Root>
   );
 }
