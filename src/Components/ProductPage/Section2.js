@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import axios from "axios";
 
 export default function Section2() {
@@ -12,13 +12,13 @@ export default function Section2() {
   const [object, setObject] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedVariantId, setSelectedVariantId] = useState("");
+  const navigate = useNavigate();
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
     sliderRef.slickGoTo(buttonIndex - 1);
   };
 
-  const navigate = useNavigate();
   let sliderRef = useRef(null);
   const productIds = useSelector((state) => state.users.productIds);
   console.log("ring", productIds);
@@ -47,6 +47,9 @@ export default function Section2() {
         if (response.status === 200) {
           setObject(response.data.data);
           console.log("respe", response.data.data);
+          const selectedVariantId =
+            response.data.data?.variants?.edges[0]?.node?.id || "";
+          setSelectedVariantId(selectedVariantId);
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
@@ -54,6 +57,7 @@ export default function Section2() {
     };
     fetchCollections();
   }, [productIds.id, selectedSize]);
+
   return (
     <Root>
       <div className="main_div">
@@ -221,16 +225,14 @@ export default function Section2() {
             <select
               value={selectedSize}
               onChange={(e) => {
-                setSelectedSize(e.target.value);
                 const selectedIndex = e.target.selectedIndex;
                 const selectedVariantId =
                   object?.variants?.edges[selectedIndex]?.node?.id;
-                setSelectedVariantId(selectedVariantId);
-                console.log("Selected Variant ID:", selectedVariantId);
+                setSelectedSize(e.target.value);
               }}
             >
               <option value="">Select Ring Size</option>
-              {object?.variants?.edges?.map((variant, index) => (
+              {object?.variants?.edges?.map((variant) => (
                 <option key={variant.node.id} value={variant.node.title}>
                   {variant.node.title}
                 </option>
@@ -246,9 +248,16 @@ export default function Section2() {
           <div className="product_btn">
             <button
               className="secure_btn"
-              onClick={() => {
-                navigate("/checkout");
-              }}
+              onClick={() =>
+                navigate("/checkout", {
+                  state: {
+                    selectedVariantId: selectedVariantId,
+                    productId: productIds.id,
+                    diamondId: diamond?.id,
+                    totalPrice: totalPrice.toFixed(2),
+                  },
+                })
+              }
             >
               Secure Checkout
             </button>

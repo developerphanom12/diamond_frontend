@@ -3,13 +3,19 @@ import styled from "styled-components";
 import backgroundImage from "../Images/girl.webp";
 import ww from "../Images/ww.webp";
 import verify from "../Images/verify.svg";
+import { useLocation } from "react-router-dom";
+import Section2 from "./Section2";
 
 export default function Section1() {
+   const location = useLocation();
+  const { selectedVariantId, productId, diamondId } = location.state || {};
+
+  console.log('Checkout state:', selectedVariantId, productId, diamondId);
   return (
     <Root>
       <div className="main_div">
         <div className="form_div">
-          <h5>contact</h5>
+          <h5><Section2/></h5>
         </div>
         <div className="product_checkout">
           <div className="desc_div">

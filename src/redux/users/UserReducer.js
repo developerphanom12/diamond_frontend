@@ -1,5 +1,5 @@
 
-import { SET_DIAMOND_IDS, SET_PRODUCT_IDS } from "./action";
+import { SET_DIAMOND_IDS, SET_PRODUCT_IDS, SET_SELECTED_VARIANT_ID } from "./action";
 
 
 const initialState = {
@@ -10,9 +10,15 @@ const initialState = {
   isLoading: false,
   productIds: [],
   diamondIds: [],
+  selectedVariantId: [],
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SELECTED_VARIANT_ID:
+      return {
+        ...state,
+        selectedVariantId: action.payload,
+      };
     case SET_DIAMOND_IDS:
       return {
         ...state,
