@@ -1,6 +1,11 @@
-
-import { SET_DIAMOND_IDS, SET_PRODUCT_IDS, SET_SELECTED_VARIANT_ID } from "./action";
-
+import {
+  SET_DIAMOND_IDS,
+  SET_DIAMOND_TYPE,
+  SET_PRODUCT_IDS,
+  SET_SELECTED_RING_SVG,
+  SET_SELECTED_SHAPE_IMAGE,
+  SET_SELECTED_VARIANT_ID,
+} from "./action";
 
 const initialState = {
   user: {},
@@ -11,9 +16,27 @@ const initialState = {
   productIds: [],
   diamondIds: [],
   selectedVariantId: [],
+  diamondType: "",
+  selectedShapeImage: null,
+  selectedRingSvg:null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SELECTED_RING_SVG:
+      return {
+        ...state,
+        selectedRingSvg: action.payload,
+      };
+    case SET_SELECTED_SHAPE_IMAGE:
+      return {
+        ...state,
+        selectedShapeImage: action.payload,
+      };
+    case SET_DIAMOND_TYPE:
+      return {
+        ...state,
+        diamondType: action.payload,
+      };
     case SET_SELECTED_VARIANT_ID:
       return {
         ...state,

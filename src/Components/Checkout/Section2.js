@@ -17,13 +17,17 @@ export default function Section2() {
   const [postValue, setPostValue] = useState({
     variant_id: selectedVariantId,
     price: totalPrice,
-    customerId: "1",
+    customerId: "7335570178266",
     diamondid: diamondId,
     address: {
-      street: "",
+      first_name: "",
+      last_name: "",
+      address1: "",
+      phone: "",
+      province: "",
       city: "",
       state: "",
-      postalCode: "",
+      zip: "",
       country: "",
     },
   });
@@ -44,6 +48,10 @@ export default function Section2() {
           name: country.name.common,
           code: country.cca2,
         }));
+
+        // Sort countries alphabetically by name
+        countryList.sort((a, b) => a.name.localeCompare(b.name));
+
         setCountries(countryList);
       } catch (error) {
         console.error("Error fetching countries:", error);
@@ -166,18 +174,42 @@ export default function Section2() {
               ))}
             </select>
           </div>
+          <div style={{ display: "flex", padding: "10px 0px" }}>
+            <input
+              type="text"
+              placeholder="Province"
+              className="input1"
+              name="province"
+              onChange={handleAddressChange}
+              value={postValue.address.province}
+            />
+          </div>
           <div style={{ display: "flex", padding: "10px 0px", gap: "10px" }}>
-            <input type="name" placeholder="First name" className="input1" />
-            <input type="name" placeholder="Last name" className="input1" />
+            <input
+              type="name"
+              placeholder="First name"
+              className="input1"
+              name="first_name"
+              onChange={handleAddressChange}
+              value={postValue.address.first_name}
+            />
+            <input
+              type="name"
+              placeholder="Last name"
+              className="input1"
+              name="last_name"
+              onChange={handleAddressChange}
+              value={postValue.address.last_name}
+            />
           </div>
           <div style={{ display: "flex", padding: "10px 0px" }}>
             <input
               type="text"
               placeholder="Address"
               className="input1"
-              name="street"
+              name="address1"
               onChange={handleAddressChange}
-              value={postValue.address.street}
+              value={postValue.address.address1}
             />
           </div>
           <div style={{ display: "flex", padding: "10px 0px" }}>
@@ -203,13 +235,20 @@ export default function Section2() {
               type="number"
               placeholder="Postal code (optional)"
               className="input1"
-              name="postalCode"
+              name="zip"
               onChange={handleAddressChange}
-              value={postValue.address.postalCode}
+              value={postValue.address.zip}
             />
           </div>
           <div style={{ display: "flex", padding: "10px 0px" }}>
-            <input type="name" placeholder="Phone" className="input1" />
+            <input
+              type="number"
+              placeholder="Phone"
+              className="input1"
+              name="phone"
+              onChange={handleAddressChange}
+              value={postValue.address.phone}
+            />
           </div>
           <span style={{ display: "flex", gap: "5px" }}>
             <input

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function Section2() {
@@ -20,11 +20,16 @@ export default function Section2() {
   };
 
   let sliderRef = useRef(null);
+
+  const selectedShapeImage = useSelector(
+    (state) => state.users.selectedShapeImage
+  );
+  const selectedRingSvg = useSelector((state) => state.users.selectedRingSvg);
   const productIds = useSelector((state) => state.users.productIds);
-  console.log("ring", productIds);
+  const diamondType = useSelector((state) => state.users.diamondType);
   const location = useLocation();
   const { diamond } = location.state || {};
-  console.log("stone", diamond);
+  console.log("ring", productIds);
 
   const settings = {
     dots: false,
@@ -58,6 +63,7 @@ export default function Section2() {
     fetchCollections();
   }, [productIds.id, selectedSize]);
 
+  const { state } = useLocation();
   return (
     <Root>
       <div className="main_div">
@@ -147,7 +153,8 @@ export default function Section2() {
               {productIds?.title} with a {diamond?.diamond?.certificate?.carats}
               carat {diamond?.diamond?.certificate?.color}{" "}
               {diamond?.diamond?.certificate?.clarity}{" "}
-              {diamond?.diamond?.certificate?.shape} Natural Diamond
+              {diamond?.diamond?.certificate?.shape}{" "}
+              {diamondType === true ? "Lab Grown" : "Natural"} Diamond
             </h2>
           </div>
 
@@ -159,16 +166,11 @@ export default function Section2() {
               }}
             >
               <div>
-                <svg
-                  viewBox="0 0 14 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M13.0176 10.4175C13.0176 14.0396 10.0977 16.9869 6.50879 16.9869C2.91992 16.9869 0 14.0396 0 10.4175C0 7.49785 1.89844 5.01995 4.51404 4.16765L5.17725 4.7625C2.64258 5.372 0.75 7.67314 0.75 10.4175C0.75 13.6265 3.33301 16.2369 6.50879 16.2369C9.68457 16.2369 12.2676 13.6265 12.2676 10.4175C12.2676 7.67278 10.3745 5.37127 7.83911 4.76213L8.50293 4.1674C11.1188 5.01945 13.0176 7.49761 13.0176 10.4175ZM9.77808 1.68169L9.77271 1.68657L6.73926 4.40508L6.73242 4.42144L6.72461 4.41827L6.50769 4.61261L6.505 4.61017L6.50231 4.61261L3.23473 1.6817L4.88585 0.0131226H8.12157L9.77282 1.6817L9.76855 1.68561L9.77808 1.68169ZM7.91297 0.513113H7.17005L7.90333 1.62944L7.48951 2.61626L8.3921 2.24761L9.04786 1.65996L7.91297 0.513113ZM3.95948 1.66008L4.60499 2.23906L6.50904 3.01665L6.83521 2.88335L7.33887 1.68218L6.57105 0.513113H5.09449L3.95948 1.66008Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                <img
+                  src={selectedRingSvg}
+                  alt="img of stone"
+                  style={{ width: "50px", height: "50px" }}
+                />
 
                 <div className="prod_name">
                   <h2>{productIds?.title}</h2>
@@ -196,16 +198,12 @@ export default function Section2() {
               }}
             >
               <div>
-                <svg
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M23.6106 16.6207L24.9478 19.8792L22.9533 17.3525L20.1205 15.1672L23.6106 16.6207ZM15.08 19.2144L16.434 23.5455L20.447 25.1138L17.2612 22.3985L15.08 19.2144V19.2144ZM31.458 19.9999C31.458 26.3182 26.3184 31.4584 20 31.4584C13.6816 31.4584 8.54199 26.3182 8.54199 19.9999C8.54199 13.6815 13.6816 8.54138 20 8.54138C26.3184 8.54138 31.458 13.6815 31.458 19.9999ZM26.8402 22.4269L29.8658 23.6801C30.2957 22.5323 30.542 21.2958 30.542 19.9999C30.542 18.704 30.2957 17.4674 29.8658 16.3196L26.8444 17.5711L26.8402 22.4269V22.4269ZM24.3744 10.4208L23.1221 13.4433L26.5526 16.8796L29.5796 15.6259C28.5256 13.3275 26.6729 11.4747 24.3744 10.4208ZM26.0898 22.5292L26.0947 17.4818L22.5293 13.9105L17.4824 13.9052L13.9101 17.4711L13.9053 22.518L17.4707 26.0897L22.5176 26.0946L26.0898 22.5292V22.5292ZM20 9.45838C18.704 9.45838 17.4673 9.70478 16.3193 10.1346L17.5711 13.1555L22.4271 13.1602L23.6807 10.1345C22.5327 9.70473 21.296 9.45839 20 9.45839L20 9.45838ZM10.4204 15.6259L13.4426 16.8777L16.8794 13.447L15.6256 10.4208C13.3272 11.4747 11.4744 13.3276 10.4204 15.6259H10.4204ZM9.45801 19.9999C9.45801 21.2958 9.70435 22.5324 10.1342 23.6801L13.1556 22.4287L13.1598 17.5728L10.1342 16.3197C9.70435 17.4674 9.45801 18.704 9.45801 19.9999V19.9999ZM15.6257 29.579L16.8779 26.5569L13.4473 23.1201L10.4204 24.3738C11.4744 26.6722 13.3272 28.525 15.6257 29.579ZM20 30.5414C21.2959 30.5414 22.5327 30.295 23.6807 29.8652L22.4288 26.8442L17.5729 26.8401L16.3193 29.8652C17.4673 30.295 18.704 30.5414 20 30.5414H20ZM29.5796 24.3738L26.5577 23.1223L23.1204 26.5529L24.3743 29.579C26.6729 28.525 28.5256 26.6722 29.5796 24.3738V24.3738Z"
-                    fill="black"
-                  ></path>
-                </svg>
+                <img
+                  src={selectedShapeImage}
+                  alt="img of stone"
+                  style={{ width: "40px", height: "40px" }}
+                />
+
                 <div className="prod_name">
                   <h2> {diamond?.diamond?.certificate?.shape}</h2>
                   <p>
@@ -251,10 +249,13 @@ export default function Section2() {
               onClick={() =>
                 navigate("/checkout", {
                   state: {
+                    diamond:diamond?.diamond,
+                    price: diamond?.price,
                     selectedVariantId: selectedVariantId,
                     productId: productIds.id,
                     diamondId: diamond?.id,
                     totalPrice: totalPrice.toFixed(2),
+                    selectedSize: selectedSize,
                   },
                 })
               }

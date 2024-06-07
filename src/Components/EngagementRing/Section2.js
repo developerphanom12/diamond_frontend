@@ -4,16 +4,28 @@ import axios from "axios";
 import Section3 from "./Section3";
 import { useDispatch } from "react-redux";
 import Section4 from "./Section4";
-import { setProductIds } from "../../redux/users/action";
-import solitaire from "../Images/Solitaire.png";
-import pave from "../Images/Pave.png";
-import halo from "../Images/Halo.png";
-import nature from "../Images/Nature.png";
-import hiddenhalo from "../Images/HiddenHalo.png";
-import sidestone from "../Images/SideStone.png";
-import threestone from "../Images/ThreeStones.png";
-import vintage from "../Images/Vintage.png";
-import tension from "../Images/Tension.png";
+import { setProductIds, setSelectedRingSvg } from "../../redux/users/action";
+import solitaire from "../Images/Solitaire-removebg-preview.png";
+import pave from "../Images/Pave-removebg-preview.png";
+import halo from "../Images/Halo-removebg-preview.png";
+import nature from "../Images/Nature-removebg-preview.png";
+import hiddenhalo from "../Images/HiddenHalo-removebg-preview.png";
+import sidestone from "../Images/SideStone-removebg-preview.png";
+import threestone from "../Images/ThreeStones-removebg-preview.png";
+import vintage from "../Images/Vintage-removebg-preview.png";
+import tension from "../Images/Tension-removebg-preview.png";
+
+const shapesList = [
+  { title: "Solitaire", imgUrl: solitaire },
+  { title: "Pave", imgUrl: pave },
+  { title: "Halo", imgUrl: halo },
+  { title: "Nature", imgUrl: nature },
+  { title: "Hidden Halo", imgUrl: hiddenhalo },
+  { title: "Sidestone", imgUrl: sidestone },
+  { title: "Three Stone", imgUrl: threestone },
+  { title: "Vintage", imgUrl: vintage },
+  { title: "Tension", imgUrl: tension },
+];
 
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
@@ -21,8 +33,9 @@ export default function Section2() {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
-  const handleButtonClick = (buttonIndex) => {
+  const handleButtonClick = (buttonIndex, selectedRingSvg) => {
     setSelectedButton(buttonIndex);
+    dispatch(setSelectedRingSvg(selectedRingSvg));  
   };
 
   useEffect(() => {
@@ -81,112 +94,20 @@ export default function Section2() {
           </div>
         </div>
         <div className="ring_types mt-4">
-          <button
-            className={selectedButton === 1 ? "selected" : ""}
-            onClick={() => handleButtonClick(1)}
-          >
-            <img
-              src={solitaire}
-              alt="img of solitaire ring"
-              style={{ width: "52px" }}
-            />
-            <span>{collection[0]?.title}</span>
-          </button>
-          <button
-            className={selectedButton === 2 ? "selected" : ""}
-            onClick={() => handleButtonClick(2)}
-          >
-            <img
-              src={pave}
-              alt="img of solitaire ring"
-              style={{ height: "62px" }}
-            />
-            <span>{collection[1]?.title}</span>
-          </button>
-
-          <button
-            className={selectedButton === 3 ? "selected" : ""}
-            onClick={() => handleButtonClick(3)}
-          >
-            <img
-              src={halo}
-              alt="img of solitaire ring"
-              style={{ height: "62px" }}
-            />
-            <span>{collection[2]?.title}</span>
-          </button>
-
-          <button
-            className={selectedButton === 4 ? "selected" : ""}
-            onClick={() => handleButtonClick(4)}
-          >
-            <img
-              src={nature}
-              alt="img of solitaire ring"
-              style={{ height: "62px" }}
-            />
-            <span>{collection[3]?.title}</span>
-          </button>
-
-          <button
-            className={selectedButton === 5 ? "selected" : ""}
-            onClick={() => handleButtonClick(5)}
-          >
-            <img
-              src={hiddenhalo}
-              alt="img of solitaire ring"
-              style={{ height: "62px" }}
-            />
-            <span>{collection[4]?.title} </span>
-          </button>
-
-          <button
-            className={selectedButton === 6 ? "selected" : ""}
-            onClick={() => handleButtonClick(6)}
-          >
-            <img
-              src={sidestone}
-              alt="img of solitaire ring"
-              style={{ width: "52px" }}
-            />
-            <span>{collection[5]?.title} </span>
-          </button>
-
-          <button
-            className={selectedButton === 7 ? "selected" : ""}
-            onClick={() => handleButtonClick(7)}
-          >
-            <img
-              src={threestone}
-              alt="img of solitaire ring"
-              style={{ width: "52px" }}
-            />
-            <span>{collection[6]?.title} </span>
-          </button>
-
-          <button
-            className={selectedButton === 8 ? "selected" : ""}
-            onClick={() => handleButtonClick(8)}
-          >
-            <img
-              src={vintage}
-              alt="img of solitaire ring"
-              style={{ width: "52px" }}
-            />
-            <span>{collection[7]?.title}</span>
-          </button>
-
-          <button
-            className={selectedButton === 9 ? "selected" : ""}
-            onClick={() => handleButtonClick(9)}
-          >
-            <img
-              src={tension}
-              alt="img of solitaire ring"
-              style={{ height: "62px" }}
-            />
-            <span>{collection[8]?.title}</span>
-          </button>
+          {shapesList.map((shape, index) => (
+            <button
+              key={index}
+              className={selectedButton === index + 1 ? "selected" : ""}
+              onClick={() => handleButtonClick(index + 1, shape.imgUrl)}
+            >
+              <img
+                src={shape.imgUrl}
+                alt={`img of ring ${index + 1}`}
+                style={{ width: "52px" }}
+              />
+              <span>{shape.title}</span>
+            </button>
+          ))}
         </div>
       </div>
       <Section3 />

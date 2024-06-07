@@ -11,7 +11,7 @@ export default function Section4({ value }) {
   };
 
   return (
-    <Root>
+    <Root>     
       <div className="main_div">
         {value &&
           value.map((i, index) => {
