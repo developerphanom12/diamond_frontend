@@ -36,8 +36,8 @@ export default function Section2() {
 const Root = styled.section`
   background-color: #f7f7f7;
   font-weight: 600;
-  padding: 20px  0px;
-
+  padding: 20px 0px;
+  height: 141px;
   .slick-slide {
     overflow: hidden; // Hide overflow
   }

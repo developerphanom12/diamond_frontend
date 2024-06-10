@@ -554,7 +554,9 @@ const Root = styled.section`
       flex-wrap: wrap;
 
       .carat_div {
-        width: 400px;
+        display: flex;
+       flex-direction: column;
+       flex: 1;
         h5 {
           font-size: 17px;
           margin-bottom: 0;
@@ -576,11 +578,11 @@ const Root = styled.section`
           .carat_min_max_div {
             border: 1px solid #ededed;
             height: 40px;
-            width: 45%;
+            /* width: 45%; */
             border-radius: 5px;
             display: flex;
             .value {
-              width: 80%;
+              /* width: 80%; */
               padding: 6px;
               display: flex;
               justify-content: space-between;
@@ -597,7 +599,7 @@ const Root = styled.section`
               }
             }
             .carat_btn_div {
-              width: 20%;
+              /* width: 20%; */
               display: flex;
               flex-direction: column;
               button {
@@ -621,22 +623,25 @@ const Root = styled.section`
       }
 
       .budget_div {
-        width: 40%;
+       display: flex;
+       flex-direction: column;
+       flex: 1;
+        
         h5 {
           font-size: 17px;
         }
         .budget_value_div {
           display: flex;
-          justify-content: center;
+          /* justify-content: center; */
           align-items: center;
           .min_max_div {
             border: 1px solid #ededed;
             height: 56px;
-            width: 45%;
+            /* width: 45%;/ */
             border-radius: 5px;
             display: flex;
             .value_div {
-              width: 80%;
+              /* width: 80%; */
               padding: 6px;
               h6 {
                 color: rgba(102, 102, 102);
@@ -650,7 +655,7 @@ const Root = styled.section`
               }
             }
             .btn_div {
-              width: 20%;
+              /* width: 20%; */
               display: flex;
               flex-direction: column;
               button {
@@ -670,8 +675,10 @@ const Root = styled.section`
       }
 
       .certificate_div {
-        width: 20%;
-
+        /* width: 20%;/ */
+        display: flex;
+       flex-direction: column;
+       flex: 1;
         h5 {
           font-size: 17px;
         }

@@ -10,24 +10,24 @@ export default function Section10() {
     <Root>
       <div className="container-fluid ">
         <div className="row">
-          <div className="col-lg-2"></div>
-          <div className="col-lg-8">
+          <div className="col-lg-2 col-md-2 col-0"></div>
+          <div className="col-lg-8  col-md-8 col-12">
             <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
             <div className="inputy_btn">
               <input placeholder="ENTER YOUR EMAIL" />
               <button>SUBSCRIBE</button>
             </div>
           </div>
-          <div className="col-lg-2"></div>
+          <div className="col-lg-2  col-md-2 col-0"></div>
         </div>
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-4  col-md-4 col-4">
             <img src={b1} alt="img"/>
             <h3 className="h3">Worldwide Delivery</h3>
             <p>Overnight Complimentary Shipping</p>
           </div>
           <div
-            className="col-lg-4"
+            className="col-lg-4   col-md-4 col-4"
             style={{
               borderLeft: "1px solid white",
               borderRight: "1px solid white",
@@ -38,7 +38,7 @@ export default function Section10() {
 
             <p>Satisfaction Guaranteed</p>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4   col-md-4 col-4">
           <img src={b3} alt="img"/>
             <h3 className="h3">Life Time Warranty</h3>
 

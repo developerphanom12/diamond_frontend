@@ -7,7 +7,7 @@ export default function Footer() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-md-4 col-4">
             <h2>RING-BUILDER</h2>
             <p>
               We’re A Team Of Creatives, Programmers, And Jewelry Experts. Our
@@ -19,7 +19,7 @@ export default function Footer() {
             <p>contact@RingBuilderjewelry.com</p>
             <img src={insta} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2 col-md-2 col-2">
             <p>About</p>
             <p>ABOUT US</p>
             <p>CONTACT US</p>
@@ -28,7 +28,7 @@ export default function Footer() {
             <p>REVIEWS</p>
             <p>EDUCATION</p>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-3 col-3">
             <p>Information</p>
             <p>SHIPPING INFO</p>
             <p>MONEY BACK GUARANTEE</p>
@@ -38,7 +38,7 @@ export default function Footer() {
             <p>PRIVACY POLICY</p>
             <p>ACCESSIBILITY</p>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-3 col-3">
             <p> Jewelry</p>
             <p>ENGAGEMENT RINGS</p>
             <p>WEDDING BANDS</p>
@@ -73,5 +73,14 @@ const Root = styled.section`
       font-size: 15px;
     }
     border-bottom: 1px solid #fff;
+  }
+  @media (max-width: 767px) {
+    .col-lg-2,
+    .col-lg-3 {
+      padding: 10px 0px;
+    }
+    .col-lg-4 {
+      padding: 10px;
+    }
   }
 `;

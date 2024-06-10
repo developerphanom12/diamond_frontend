@@ -172,7 +172,7 @@ const Root = styled.section`
     justify-content: center;
     gap: 10px;
     button {
-      width: 8%;
+      width: 100px;
       border: 2px solid transparent;
       background: #fff;
       display: flex;

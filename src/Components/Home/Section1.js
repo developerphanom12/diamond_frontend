@@ -4,13 +4,13 @@ import bgg from "../Images/bannerimggg.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function Section1() {
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Root>
       <div className="contain_tag">
         <div className="tag">
-          ENDS <b>APRIL 25</b>
+          ENDS <b>JULY 25</b>
         </div>
       </div>
       <div className="main_content">
@@ -24,10 +24,16 @@ export default function Section1() {
           <h4>lab diamonds</h4>
         </div>
         <div>
-          <button onClick={()=>{navigate("/engagementring")}}>shop engagement rings</button>
+          <button
+            onClick={() => {
+              navigate("/engagementring");
+            }}
+          >
+            shop engagement rings
+          </button>
           <button>shop lab diamonds</button>
           <h6>
-            apply code <b>earth</b> at checkout
+            apply code <b> earth </b> at checkout
           </h6>
         </div>
       </div>
@@ -107,9 +113,44 @@ const Root = styled.section`
       margin-top: 1.875rem;
       color: rgba(0, 0, 0, 0.8);
       font-size: 15px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
       b {
         font-weight: bolder;
         text-transform: uppercase;
+      }
+    }
+  }
+  @media (max-width: 999px) {
+    height: 350px;
+    .everyday {
+      > div {
+        text-align: justify;
+      }
+    }
+    .tag {
+      display: none;
+    }
+
+    .main_content {
+      width: 90vw;
+      padding: 0px 10px;
+      text-align: start;
+      b {
+        font-size: 18px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 40px;
+      }
+      h6{
+        justify-content: flex-start;
+      }
+      button {
+        padding: 5px 10px;
+        font-size: 12px;
       }
     }
   }

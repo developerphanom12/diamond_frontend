@@ -10,9 +10,9 @@ export default function NavBar() {
   const navigate = useNavigate();
   return (
     <Root>
-      <div className="container-fluid" style={{ padding: "20px" }}>
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-3 col-md-3 col-12">
             <div className="search">
               <input placeholder="SEARCH" />
               <button>
@@ -20,18 +20,20 @@ export default function NavBar() {
               </button>
             </div>
           </div>
-          <div className="col-lg-4">
-            <h1
+          <div className="col-lg-6 col-md-6 col-8">
+            <h2
               onClick={() => {
                 navigate("/");
               }}
             >
               Ring-Builder
-            </h1>
+            </h2>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-3 col-md-3 col-4">
             <div className="icon">
-              <LuUser2 />
+              <a href="/login">
+                <LuUser2 />
+              </a>
               <HiOutlineShoppingBag />
             </div>
           </div>
@@ -51,10 +53,10 @@ const Root = styled.section`
   font-family: "ProximaNova", "sans-serif";
   border-bottom: 1px solid #f2f2f2;
   z-index: 11110011;
-  position: relative;
-  h1 {
+  position: sticky;
+  h2 {
     text-transform: uppercase;
-    margin: 0px;
+    margin: 20px 0px;
     text-align: center;
     background: linear-gradient(to right, #000, #333, #000, #333);
     -webkit-background-clip: text;
@@ -64,13 +66,13 @@ const Root = styled.section`
   .search {
     display: flex;
     border-bottom: 1px solid black;
-    width: 52%;
-    flex: 1;
+    flex: 2;
+    margin: 20px 0px;
     align-items: center;
     input {
       border: transparent;
       outline: none;
-      width: 180px;
+      width: 100%;
       padding: 8px 4px;
       font-size: 1rem;
       line-height: 1.2;
@@ -92,8 +94,9 @@ const Root = styled.section`
     justify-content: end;
     align-items: center;
     width: 100%;
-    height: 100%;
     gap: 10px;
+    margin: 20px 0px;
+
     svg {
       width: 20px;
       height: 20px;
