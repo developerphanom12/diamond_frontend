@@ -640,7 +640,7 @@ const Root = styled.section`
             /* width: 45%;/ */
             border-radius: 5px;
             display: flex;
-            .value_div {
+            .value_div {   
               /* width: 80%; */
               padding: 6px;
               h6 {
