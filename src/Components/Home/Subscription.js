@@ -5,7 +5,7 @@ import b2 from "../Images/black2.png"
 import b3 from "../Images/black3.png"
 
 
-export default function Section10() {
+export default function Subscription() {
   return (
     <Root>
       <div className="container-fluid ">

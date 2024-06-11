@@ -6,8 +6,11 @@ import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { EXCHANGE_URLS } from "../URLS";
 
 export default function Section2() {
+  const userCheck = useSelector((state) => state?.users?.userCheck);
+  const token = localStorage.getItem("token");
   const [selectedButton, setSelectedButton] = useState(1);
   const [object, setObject] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -47,7 +50,7 @@ export default function Section2() {
     const fetchCollections = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3200/api/rings/prodtcs?productId=${productIds.id}`
+          `${EXCHANGE_URLS}/prodtcs?productId=${productIds.id}`
         );
         if (response.status === 200) {
           setObject(response.data.data);
@@ -63,6 +66,24 @@ export default function Section2() {
     fetchCollections();
   }, [productIds.id, selectedSize]);
 
+
+  const handleCheckout = () => {
+    if (userCheck && token) {
+      navigate("/checkout", {
+        state: {
+          diamond: diamond?.diamond,
+          price: diamond?.price,
+          selectedVariantId: selectedVariantId,
+          productId: productIds.id,
+          diamondId: diamond?.id,
+          totalPrice: totalPrice.toFixed(2),
+          selectedSize: selectedSize,
+        },
+      });
+    } else {
+      window.open('/login', '_blank'); // Opens the login page in a new tab
+    }
+  };
   return (
     <Root>
       <div className="main_div">
@@ -243,22 +264,7 @@ export default function Section2() {
           </div>
 
           <div className="product_btn">
-            <button
-              className="secure_btn"
-              onClick={() =>
-                navigate("/checkout", {
-                  state: {
-                    diamond:diamond?.diamond,
-                    price: diamond?.price,
-                    selectedVariantId: selectedVariantId,
-                    productId: productIds.id,
-                    diamondId: diamond?.id,
-                    totalPrice: totalPrice.toFixed(2),
-                    selectedSize: selectedSize,
-                  },
-                })
-              }
-            >
+            <button className="secure_btn" onClick={handleCheckout}>
               Secure Checkout
             </button>
             <button className="cart_btn">Add to Cart</button>
@@ -511,7 +517,8 @@ export default function Section2() {
                 ></path>
               </svg>
               <p>
-                Certificate<br></br>& Appraisal
+                Certificate
+                <br />& Appraisal
               </p>
             </div>
           </div>

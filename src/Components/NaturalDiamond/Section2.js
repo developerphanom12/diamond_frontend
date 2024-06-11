@@ -28,6 +28,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import { EXCHANGE_URLS } from "../URLS";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -96,7 +97,7 @@ export default function Section2() {
         const symmetry = selectedSymmetry.join(",");
         //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
-          `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
         );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);

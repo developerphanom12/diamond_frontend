@@ -73,7 +73,7 @@ const Root = styled.section`
     padding: 20px;
   }
   .col-lg-3 {
-    width: 318px;
+    width: 304px;
     margin: 0px 6px;
     .content_div {
       padding: 20px;

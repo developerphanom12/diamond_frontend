@@ -1,24 +1,14 @@
 import { useState } from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import ContainerFluid from "react-bootstrap/Container";
 import styled from "styled-components";
 import EngageList from "./EngageList";
-import FineJwelry from "./FineJwelry";
 
 function BottomBar() {
-  const [isListOpen1, setIsListOpen1] = useState(false);
   const [isListOpen2, setIsListOpen2] = useState(false);
   const [isListOpen4, setIsListOpen4] = useState(false);
-  const [isListOpen5, setIsListOpen5] = useState(false);
   const [isListOpen6, setIsListOpen6] = useState(false);
 
-  const handleMouseEnter1 = () => {
-    setIsListOpen1(true);
-  };
-
-  const handleMouseLeave1 = () => {
-    setIsListOpen1(false);
-  };
 
   const handleMouseEnter2 = () => {
     setIsListOpen2(true);
@@ -34,14 +24,6 @@ function BottomBar() {
 
   const handleMouseLeave4 = () => {
     setIsListOpen4(false);
-  };
-
-  const handleMouseEnter5 = () => {
-    setIsListOpen5(true);
-  };
-
-  const handleMouseLeave5 = () => {
-    setIsListOpen5(false);
   };
 
   const handleMouseEnter6 = () => {
@@ -62,18 +44,6 @@ function BottomBar() {
             justifyContent: "center",
           }}
         >
-          <div
-            onMouseEnter={handleMouseEnter1}
-            onMouseLeave={handleMouseLeave1}
-            id="graphic"
-          >
-            <Nav.Link href="/">Fine jewelry</Nav.Link>
-            {isListOpen1 && (
-              <div className="option_list_list">
-                <FineJwelry />
-              </div>
-            )}
-          </div>
 
           <div
             onMouseEnter={handleMouseEnter2}
@@ -98,24 +68,16 @@ function BottomBar() {
             {isListOpen4 && <div className="option_list_list">fdgdfgdfg</div>}
           </div>
 
-          <div
-            onMouseEnter={handleMouseEnter5}
-            onMouseLeave={handleMouseLeave5}
-            id="graphic"
-          >
-            <Nav.Link href="/gemstone">gemstones</Nav.Link>
-            {isListOpen5 && <div className="option_list_list">fghdfgd</div>}
-          </div>
+          
 
           <div
             onMouseEnter={handleMouseEnter6}
             onMouseLeave={handleMouseLeave6}
             id="graphic"
           >
-            <Nav.Link href="#pricing">education</Nav.Link>
+            <Nav.Link href="/education">education</Nav.Link>
             {isListOpen6 && (
               <div className="option_list_list">
-                {/* <Branding/> */}
                 cbhghgf
               </div>
             )}

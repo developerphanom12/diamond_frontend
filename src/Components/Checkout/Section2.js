@@ -9,15 +9,19 @@ import { IoIosArrowForward } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { EXCHANGE_URLS } from "../URLS";
+import { useSelector } from "react-redux";
 
 export default function Section2() {
+  const userDetails = useSelector((state) => state?.users.user);
+  console.log("userDetails",userDetails)
   const location = useLocation();
   const { selectedVariantId, productId, diamondId, totalPrice } =
     location.state || {};
   const [postValue, setPostValue] = useState({
     variant_id: selectedVariantId,
     price: totalPrice,
-    customerId: "7335570178266",
+    customerId: userDetails.id,
     diamondid: diamondId,
     address: {
       first_name: "",
@@ -43,7 +47,7 @@ export default function Section2() {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("https://restcountries.com/v3.1/all");
+        const response = await axios.get(`https://restcountries.com/v3.1/all`);
         const countryList = response.data.map((country) => ({
           name: country.name.common,
           code: country.cca2,
@@ -63,7 +67,7 @@ export default function Section2() {
   const appApi = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:3200/api/rings/ordercreate`,
+        `${EXCHANGE_URLS}/ordercreate`,
         postValue
       );
       if (res?.status === 201) {

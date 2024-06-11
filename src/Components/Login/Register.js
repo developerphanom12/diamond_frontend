@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import { EXCHANGE_URLS } from "../URLS";
 
 const schema = yup.object().shape({
   first_name: yup.string().required("first name is required."),
@@ -33,7 +34,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3200/api/rings/useregister",
+        `${EXCHANGE_URLS}/useregister`,
         data
       );
       console.log("resres", res?.data);

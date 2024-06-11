@@ -14,6 +14,7 @@ import sidestone from "../Images/SideStone-removebg-preview.png";
 import threestone from "../Images/ThreeStones-removebg-preview.png";
 import vintage from "../Images/Vintage-removebg-preview.png";
 import tension from "../Images/Tension-removebg-preview.png";
+import { EXCHANGE_URLS } from "../URLS";
 
 const shapesList = [
   { title: "Solitaire", imgUrl: solitaire },
@@ -42,7 +43,7 @@ export default function Section2() {
     const fetchCollections = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3200/api/rings/collection"
+          `${EXCHANGE_URLS}/collection`
         );
         if (response.status === 200) {
           setCollection(response.data.data);
@@ -62,7 +63,7 @@ export default function Section2() {
         const collectionId = collection[selectedButton]?.id;
         try {
           const res = await axios.get(
-            `http://localhost:3200/api/rings/collectionById?collectionId=${collectionId}`
+            `${EXCHANGE_URLS}/collectionById?collectionId=${collectionId}`
           );
           if (res.status === 200) {
             setProducts(res.data.products);

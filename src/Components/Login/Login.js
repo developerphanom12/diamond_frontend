@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userCheckAction, userDataAction } from "../../redux/users/action";
 import { toast } from "react-toastify";
+import { EXCHANGE_URLS } from "../URLS";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is required."),
@@ -23,12 +24,12 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3200/api/rings/userlogin",
+        `${EXCHANGE_URLS}/userlogin`,
         data
       );
       console.log("resres", res?.data?.customer);
       if (res?.status === 200) {
-        navigate("/home");
+        navigate("/checkout");
         localStorage.setItem("token", res?.data?.customer?.token);
         dispatch(userDataAction(res?.data?.customer));
         dispatch(userCheckAction(true));

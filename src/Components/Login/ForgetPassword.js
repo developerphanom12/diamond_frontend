@@ -1,45 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import { LuUser2 } from "react-icons/lu";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
-export default function Password() {
-
+export default function ForgetPassword() {
   return (
     <Root>
       <div className="main_div">
         <div className="sub_div">
-          <h1 className="main_heading">FORGOT PASSWORD</h1>
+          <h1 className="main_heading">FORGOT PASSWORD --Comming Soon...</h1>
           <h2 className="welcome_heading">Reset Your Password</h2>
           <p className="desc">
-          We will send you an email to reset your password.
+            We will send you an email to reset your password.
           </p>
           <form>
             <div className="form_div">
+              <TextField
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+            </div>
 
-            
-              
-
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-
-              </div>
-             
             <div className="btn">
               <a href="/">Reset Password</a>
             </div>
-
-
           </form>
         </div>
       </div>
@@ -77,8 +63,8 @@ const Root = styled.section`
         font-size: 13px;
       }
       .form_div {
-        border-radius:10px;
-        margin-top:20px;
+        border-radius: 10px;
+        margin-top: 20px;
 
         .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
           border: 1px solid rgb(224 224 224);
@@ -86,9 +72,6 @@ const Root = styled.section`
         .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
           color: #9e9e9e;
         }
-
-
-
       }
       .btn {
         width: 100%;
@@ -111,8 +94,6 @@ const Root = styled.section`
           }
         }
       }
-
-
     }
   }
 `;
