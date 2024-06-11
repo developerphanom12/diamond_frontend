@@ -13,6 +13,11 @@ import EngagementRing from "./Components/EngagementRing/EngagementRing";
 import Gemstone from "./Components/Gemstone/Gemstone";
 import Layout from "./Components/MainLayout/Layout";
 import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
+import Register from "./Components/Login/Register";
+import { Password } from "@mui/icons-material";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -30,9 +35,14 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/test" element={<Test />} />
           <Route path="/gemstone" element={<Gemstone />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/password" element={<Password />} />
+
         </>
       </Routes>
       </Layout>
+      <ToastContainer />
     </div>
   );
 }

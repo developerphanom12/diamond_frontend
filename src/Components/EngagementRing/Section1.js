@@ -262,6 +262,7 @@ const Root = styled.section`
     border: 1px solid rgba(247, 247, 247);
     background-color: rgba(247, 247, 247);
     display: flex;
+    margin: 10px 0px;
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;

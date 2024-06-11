@@ -23,6 +23,32 @@ export default function Section8() {
     slidesToScroll: 1,
     afterChange: () => setUpdateCount(updateCount + 1),
     beforeChange: (current, next) => setSlideIndex(next),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   const sliderRef = useRef(null);
 
@@ -36,12 +62,12 @@ export default function Section8() {
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
-  };   
+  };
   return (
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-12 pt-4" style={{textAlign:"center"}}>
+          <div className="col-lg-12 pt-4" style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>The Jewelry Blog</h2>{" "}
               <div>
@@ -56,66 +82,87 @@ export default function Section8() {
               </div>
             </div>
             <Slider ref={sliderRef} {...settings}>
-             
               <div className="col-lg-3 col5">
                 <div className="content_div">
-                  <h3>Customize Your Commitment: Personalized Add-Ons for <br/> Engagement Rings</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <h3>
+                    Customize Your Commitment: Personalized Add-Ons for <br />{" "}
+                    Engagement Rings
+                  </h3>
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col1">
                 <div className="content_div">
                   <h3>Engagement ring</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col2">
                 <div className="content_div">
                   <h3>Wedding bands</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col3">
                 <div className="content_div">
                   <h3>fine jewelry</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col5">
                 <div className="content_div">
-                  <h3>Ring Royalty: Exquisite $10K <br/>Engagement Rings</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <h3>
+                    Ring Royalty: Exquisite $10K <br />
+                    Engagement Rings
+                  </h3>
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col4">
                 <div className="content_div">
                   <h3>eternity rings</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
               <div className="col-lg-3 col1">
                 <div className="content_div">
-                  <h3>The Ultimate Guide to 'Love is Blind'<br/> Engagement Rings</h3>
-                 <div style={{color:"#fff"}}>Read More <IoIosArrowForward />
+                  <h3>
+                    The Ultimate Guide to 'Love is Blind'
+                    <br /> Engagement Rings
+                  </h3>
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
             </Slider>
             <input
-            style={{color:"#000 !important"}}
+              style={{ color: "#000 !important" }}
               onChange={(e) => sliderRef.slickGoTo(e.target.value)}
               value={slideIndex}
               type="range"
               min={0}
               max={4}
             />
-             <div style={{ width: "100%",textAlign:"center",marginBottom:"20px"}}>
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                marginBottom: "20px",
+              }}
+            >
               <button className="btn">Visit the Blog</button>
             </div>
           </div>
@@ -148,7 +195,8 @@ const Root = styled.section`
   .col-lg-3.col4,
   .col-lg-3.col3,
   .col-lg-3.col2,
-  .col-lg-3.col1,  .col-lg-3.col5{
+  .col-lg-3.col1,
+  .col-lg-3.col5 {
     width: 90% !important;
     height: 340px;
     background-size: 100% 100%;
@@ -189,9 +237,9 @@ const Root = styled.section`
     color: #000 !important;
     margin: 20px 0px;
     padding: 5px;
-}
+  }
 
-.btn {
+  .btn {
     margin-top: 10px;
     font-size: 18px;
     padding: 18px 34px;
@@ -207,5 +255,4 @@ const Root = styled.section`
       transition-duration: 0.5s;
     }
   }
-
 `;

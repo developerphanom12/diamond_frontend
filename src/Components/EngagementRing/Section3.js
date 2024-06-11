@@ -76,7 +76,7 @@ export default function Section3() {
                         className={selectedButton === 3 ? "selected" : ""}
                         onClick={() => handleButtonClick(3)}
                       >
-                        <img src={ringthree}  alt="img"/>
+                        <img src={ringthree} alt="img" />
                         <span>Rose Gold</span>
                       </button>
 
@@ -84,7 +84,7 @@ export default function Section3() {
                         className={selectedButton === 4 ? "selected" : ""}
                         onClick={() => handleButtonClick(4)}
                       >
-                        <img src={ringfour}  alt="img" />
+                        <img src={ringfour} alt="img" />
                         <span>White Gold</span>
                       </button>
 
@@ -92,7 +92,7 @@ export default function Section3() {
                         className={selectedButton === 5 ? "selected" : ""}
                         onClick={() => handleButtonClick(5)}
                       >
-                        <img src={ringfive}  alt="img"/>
+                        <img src={ringfive} alt="img" />
                         <span>Yellow Gold</span>
                       </button>
 
@@ -100,7 +100,7 @@ export default function Section3() {
                         className={selectedButton === 6 ? "selected" : ""}
                         onClick={() => handleButtonClick(6)}
                       >
-                        <img src={ringsix}  alt="img" />
+                        <img src={ringsix} alt="img" />
                         <span>Rose Gold</span>
                       </button>
 
@@ -108,7 +108,7 @@ export default function Section3() {
                         className={selectedButton === 7 ? "selected" : ""}
                         onClick={() => handleButtonClick(7)}
                       >
-                        <img src={ringseven}  alt="img" />
+                        <img src={ringseven} alt="img" />
                         <span>Platinum</span>
                       </button>
                     </div>
@@ -324,6 +324,10 @@ const Root = styled.section`
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
+    @media (max-width: 567px) {
+      overflow-x: scroll;
+      gap: 10px;
+    }
     .select_opt {
       display: flex;
       gap: 20px;
@@ -378,7 +382,7 @@ const Root = styled.section`
 
           button {
             border-radius: 10px;
-            padding:8px;
+            padding: 8px;
             background-color: #fff;
             border: 2px solid rgba(221, 211, 211);
             width: 82px;
@@ -454,9 +458,9 @@ const Root = styled.section`
             border: 2px solid rgba(221, 211, 211);
             width: 87px;
             display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
             &.selected {
               border: 2px solid black;
@@ -467,7 +471,7 @@ const Root = styled.section`
             }
             svg {
               height: 50px;
-              width:46px;
+              width: 46px;
             }
 
             h5 {

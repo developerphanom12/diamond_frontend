@@ -54,77 +54,74 @@ function BottomBar() {
 
   return (
     <Root>
-      <Navbar
-        expand="lg"
-        className="bg-body-tertiary"
-        style={{ backgroundColor: "#fff", padding: "0px" }}
-      >
-        <ContainerFluid
-          fluid
-          style={{ backgroundColor: "#fff", padding: "0px" }}
+      <ContainerFluid fluid style={{ backgroundColor: "#fff", padding: "0px",position:"relative" }}>
+        <Nav
+          style={{
+            backgroundColor: "#fff",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <Nav style={{ backgroundColor: "#fff" }}>
-            <div
-              onMouseEnter={handleMouseEnter1}
-              onMouseLeave={handleMouseLeave1}
-              id="graphic"
-            >
-              <Nav.Link href="/">Fine jewelry</Nav.Link>
-              {isListOpen1 && (
-                <div className="option_list_list">
-                  <FineJwelry />
-                </div>
-              )}
-            </div>
+          <div
+            onMouseEnter={handleMouseEnter1}
+            onMouseLeave={handleMouseLeave1}
+            id="graphic"
+          >
+            <Nav.Link href="/">Fine jewelry</Nav.Link>
+            {isListOpen1 && (
+              <div className="option_list_list">
+                <FineJwelry />
+              </div>
+            )}
+          </div>
 
-            <div
-              onMouseEnter={handleMouseEnter2}
-              onMouseLeave={handleMouseLeave2}
-              id="graphic"
-            >
-              <Nav.Link href="/engagementring">Engagement rings</Nav.Link>
-              {isListOpen2 && (
-                <div className="option_list_list">
-                  {/* <ProgrammingTech /> */}
-                  <EngageList />
-                </div>
-              )}
-            </div>
+          <div
+            onMouseEnter={handleMouseEnter2}
+            onMouseLeave={handleMouseLeave2}
+            id="graphic"
+          >
+            <Nav.Link href="/engagementring">Engagement rings</Nav.Link>
+            {isListOpen2 && (
+              <div className="option_list_list">
+                {/* <ProgrammingTech /> */}
+                <EngageList />
+              </div>
+            )}
+          </div>
 
-            <div
-              onMouseEnter={handleMouseEnter4}
-              onMouseLeave={handleMouseLeave4}
-              id="graphic"
-            >
-              <Nav.Link href="/naturaldiamond">diamonds</Nav.Link>
-              {isListOpen4 && <div className="option_list_list">fdgdfgdfg</div>}
-            </div>
+          <div
+            onMouseEnter={handleMouseEnter4}
+            onMouseLeave={handleMouseLeave4}
+            id="graphic"
+          >
+            <Nav.Link href="/naturaldiamond">diamonds</Nav.Link>
+            {isListOpen4 && <div className="option_list_list">fdgdfgdfg</div>}
+          </div>
 
-            <div
-              onMouseEnter={handleMouseEnter5}
-              onMouseLeave={handleMouseLeave5}
-              id="graphic"
-            >
-              <Nav.Link href="/gemstone">gemstones</Nav.Link>
-              {isListOpen5 && <div className="option_list_list">fghdfgd</div>}
-            </div>
+          <div
+            onMouseEnter={handleMouseEnter5}
+            onMouseLeave={handleMouseLeave5}
+            id="graphic"
+          >
+            <Nav.Link href="/gemstone">gemstones</Nav.Link>
+            {isListOpen5 && <div className="option_list_list">fghdfgd</div>}
+          </div>
 
-            <div
-              onMouseEnter={handleMouseEnter6}
-              onMouseLeave={handleMouseLeave6}
-              id="graphic"
-            >
-              <Nav.Link href="#pricing">education</Nav.Link>
-              {isListOpen6 && (
-                <div className="option_list_list">
-                  {/* <Branding/> */}
-                  cbhghgf
-                </div>
-              )}
-            </div>
-          </Nav>
-        </ContainerFluid>
-      </Navbar>
+          <div
+            onMouseEnter={handleMouseEnter6}
+            onMouseLeave={handleMouseLeave6}
+            id="graphic"
+          >
+            <Nav.Link href="#pricing">education</Nav.Link>
+            {isListOpen6 && (
+              <div className="option_list_list">
+                {/* <Branding/> */}
+                cbhghgf
+              </div>
+            )}
+          </div>
+        </Nav>
+      </ContainerFluid>
     </Root>
   );
 }
@@ -136,10 +133,11 @@ const Root = styled.section`
   background-color: #fff !important;
   z-index: 11;
   position: relative;
+  display: flex !important;
 
   nav.navbar.navbar-expand.navbar-light.bg-light {
     border: 1px solid #e4e5e7;
-    position: relative;
+ 
   }
   a.nav-link {
     font-family: "ProximaNova", "sans-serif";
@@ -161,10 +159,12 @@ const Root = styled.section`
   .option_list_list {
     position: absolute;
     top: 47px;
-    width: 100vw;
+    min-width: 100vw;
+    width: 100%;
     background-color: #fff;
-    z-index: 11111;
+    z-index: 11;
     left: 0;
+    /* right: -350px; */
     font-size: 14px;
   }
   nav.navbar.navbar-expand.navbar-light.bg-light {
@@ -181,7 +181,7 @@ const Root = styled.section`
     .navbar > .container-sm,
     .navbar > .container-xl,
     .navbar > .container-xxl {
-      justify-content: end;
+      /* justify-content: end; */
       padding-bottom: 8px;
     }
   }
@@ -194,7 +194,7 @@ const Root = styled.section`
     .navbar > .container-sm,
     .navbar > .container-xl,
     .navbar > .container-xxl {
-      justify-content: end;
+      /* justify-content: end; */
       padding-bottom: 8px;
     }
   }

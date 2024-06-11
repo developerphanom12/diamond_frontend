@@ -241,6 +241,7 @@ const Root = styled.section`
   }
 
   .column {
+    margin: 10px 0px;
     border: 1px solid rgba(247, 247, 247);
     background-color: rgba(247, 247, 247);
     display: flex;
@@ -248,6 +249,7 @@ const Root = styled.section`
     align-items: center;
     padding: 10px 15px;
     border-radius: 10px;
+     
     h2 {
       font-size: 40px;
       font-weight: 400;

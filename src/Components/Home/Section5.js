@@ -13,29 +13,29 @@ export default function Section5() {
     <Root>
       <div className="container-fluid" style={{ padding: "40px 24px" }}>
         <div className="row">
-          <div className="col-lg-2">
+          <div className="col-lg-2 col-md-2 col-2">
             <img src={ss1} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2  col-md-2 col-2">
             <img src={ss2} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2  col-md-2 col-2">
             <img src={ss3} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2  col-md-2 col-2">
             <img src={ss4} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2  col-md-2 col-2">
             <img src={ss5} alt="img" />
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-2  col-md-2 col-2">
             <img src={ss6} alt="img" />
           </div>
         </div>
       </div>
       <div className="container-fluid imgbanner ">
         <div className="row">
-          <div className="col-lg-6 col">
+          <div className="col-lg-6 col-12">
             <h1>
               CONSULT <br /> OUR EXPERTS
             </h1>
@@ -45,7 +45,7 @@ export default function Section5() {
             </p>
             <button>Set an Appointment</button>
           </div>
-          <div className="col-lg-6"></div>
+          <div className="col-lg-6 col-0"></div>
         </div>
       </div>
     </Root>
@@ -56,6 +56,10 @@ const Root = styled.section`
   color: #000;
   .col-lg-2 {
     text-align: center;
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
   .imgbanner {
     background-image: url(${Gbgimg});
@@ -63,10 +67,16 @@ const Root = styled.section`
     object-fit: contain;
     height: 400px;
   }
-  .col-lg-6.col {
+  .col-lg-6 {
     padding: 60px;
     height: 100%;
     display: inline-block;
+    @media (max-width:999px){
+      padding: 25px;
+      h1{
+        font-size: 24px;
+      }
+    }
     h1 {
       font-size: 3.75rem;
       line-height: 1;

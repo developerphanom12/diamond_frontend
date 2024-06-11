@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
@@ -10,7 +9,7 @@ import s5 from "../Images/rr5.webp";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function Section4() {
-  const images = [s3, s4, s5, s1, s4, s5, s2, s3, s4, s5, s1, s4,s1, s2, ];
+  const images = [s3, s4, s5, s1, s4, s5, s2, s3, s4, s5, s1, s4, s1, s2];
   const h2 = [
     "Halo",
     "Nature",
@@ -70,7 +69,6 @@ export default function Section4() {
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: "10px",
-    
   };
 
   const settings2 = {
@@ -97,9 +95,9 @@ export default function Section4() {
         </div>
       </div>
       <div className="container-fluid sliderrr">
-        <div className="row">
-          <div className="col-lg-1"></div>
-          <div className="col-lg-10">
+        <div className="row" style={{ flexWrap: "nowrap" }}>
+          <div className="col-lg-1 col-md-1 col-1"></div>
+          <div className="col-lg-10 col-md-10 col-10">
             <Slider ref={imageSliderRef} {...settings}>
               {images.map((image, index) => (
                 <div
@@ -112,15 +110,15 @@ export default function Section4() {
               ))}
             </Slider>
           </div>
-          <div className="col-lg-1"></div>
+          <div className="col-lg-1 col-md-1 col-1"></div>
         </div>
         <div className="row">
-          <div className="col-lg-4 pre">
+          <div className="col-lg-4  col-md-2 col-2 pre">
             <button onClick={goToPrevSlide}>
               <IoIosArrowBack />
             </button>
           </div>
-          <div className="col-lg-4 col4">
+          <div className="col-lg-4 col-md-8 col-8">
             <Slider ref={textSliderRef} {...settings2}>
               {h2.map((style, index) => (
                 <div key={index} style={{ textAlign: "center" }}>
@@ -132,7 +130,7 @@ export default function Section4() {
               ))}
             </Slider>
           </div>
-          <div className="col-lg-4 next">
+          <div className="col-lg-4  col-md-2 col-2 next">
             <button onClick={goToNextSlide}>
               <IoIosArrowForward />
             </button>
@@ -161,10 +159,10 @@ const Root = styled.section`
   outline: none;
   .sliderrr {
     padding: 40px 0px;
- 
+
     img {
       width: 100%;
-      outline: none;  
+      outline: none;
     }
   }
 
@@ -183,14 +181,15 @@ const Root = styled.section`
   .col-lg-4.pre {
     text-align: end;
   }
-  .col-lg-4.pre, .col-lg-4.next {
-   margin-top: 30px;
-   button{
-    background-color: #fff;
-    border: none;
-    svg{
+  .col-lg-4.pre,
+  .col-lg-4.next {
+    margin-top: 30px;
+    button {
+      background-color: #fff;
+      border: none;
+      svg {
         font-size: 25px;
+      }
     }
-   }
   }
 `;

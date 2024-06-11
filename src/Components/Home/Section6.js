@@ -103,8 +103,8 @@ export default function Section6() {
       </div>
       <div className="container-fluid sliderrr">
         <div className="row">
-          <div className="col-lg-1"></div>
-          <div className="col-lg-10">
+          <div className="col-lg-1 col-md-1 col-1"></div>
+          <div className="col-lg-10 col-md-10 col-10">
             <Slider ref={imageSliderRef} {...settings}>
               {images.map((image, index) => (
                 <div
@@ -117,15 +117,15 @@ export default function Section6() {
               ))}
             </Slider>
           </div>
-          <div className="col-lg-1"></div>
+          <div className="col-lg-1 col-md-1 col-1"></div>
         </div>
         <div className="row">
-          <div className="col-lg-4 pre">
+          <div className="col-lg-4 col-md-2 col-2 pre">
             <button onClick={goToPrevSlide}>
               <IoIosArrowBack />
             </button>
           </div>
-          <div className="col-lg-4 col4">
+          <div className="col-lg-4 col-md-8 col-8 col4">
             <Slider ref={textSliderRef} {...settings2}>
               {h2.map((style, index) => (
                 <div key={index} style={{ textAlign: "center" }}>
@@ -137,7 +137,7 @@ export default function Section6() {
               ))}
             </Slider>
           </div>
-          <div className="col-lg-4 next">
+          <div className="col-lg-4 col-md-2 col-2 next">
             <button onClick={goToNextSlide}>
               <IoIosArrowForward />
             </button>
