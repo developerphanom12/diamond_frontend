@@ -43,15 +43,16 @@ const shapesList = [
 ];
 
 const colorOptions = ["J", "I", "H", "G", "F", "E", "D"];
-const clarityOptions = ["SI1", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
-const cutOptions = ["GOOD", "VERY GOOD", "EXCELLENT"];
-const polishOptions = ["GOOD", "VERY GOOD", "EXCELLENT"];
-const symmetryOptions = ["GOOD", "VERY GOOD", "EXCELLENT"];
+const clarityOptions = ["SI1","I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
+const cutOptions = ["GD", "VG", "EX"];
+const polishOptions = ["GD", "VG", "EX"];
+const symmetryOptions = ["GD", "VG", "EX"];
+
 function valuetext(value) {
   return `${value}°C`;
 }
 
-const minDistance = 10;
+const minDistance = 0.5;
 
 export default function Section2() {
   const [selectedShapes, setSelectedShapes] = useState([]);
@@ -68,7 +69,7 @@ export default function Section2() {
   const [selectedSymmetry, setSelectedSymmetry] = useState([]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(2086918);
-  const [value1, setValue1] = React.useState([0.5, 100]);
+  const [value1, setValue1] = React.useState([0.5, 11.5]);
   const [value, setValue] = useState([]);
 
   const dispatch = useDispatch();
@@ -85,17 +86,17 @@ export default function Section2() {
         const shapesParam = selectedShapes.join(",");
         const colors = selectedColors.join(",");
         const clarity = selectedClarity.join(",");
-        // const cut = selectedCut.join(",");
+        const cut = selectedCut.join(",");
         // const carat = selectedCarat.join(",");
         // const Budget = selectedBudget.join(",");
         // const lab = Object.keys(selectedCertificate).filter(
         //   (key) => selectedCertificate[key]
         // ).join(",");
-        // const polish = selectedPolish.join(",");
-        // const symmetry = selectedSymmetry.join(",");
-        // &cut=${cut}&carat=${carat}&Budget=${Budget}&lab=${lab}&polish=${polish}&symmetry=${symmetry}
+        const polish = selectedPolish.join(",");
+        const symmetry = selectedSymmetry.join(",");
+        //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
-          `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}`
+          `http://localhost:3200/api/rings/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
         );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
@@ -115,9 +116,9 @@ export default function Section2() {
     selectedColors,
     selectedClarity,
     selectedCut,
-    selectedCarat,
-    selectedBudget,
-    selectedCertificate,
+    // selectedCarat,
+    // selectedBudget,
+    // selectedCertificate,
     selectedPolish,
     selectedSymmetry,
     dispatch,
@@ -445,17 +446,18 @@ export default function Section2() {
                     </div>
 
                     <section>
-                      {polishOptions.map((polish, index) => (
+                    {polishOptions.map((polish, index) => (
                         <button
                           key={index}
                           className={
-                            selectedPolish === index + 1 ? "selected" : ""
+                            selectedPolish.includes(polish) ? "selected" : ""
                           }
-                          onClick={() => handleButtonPolish(index + 1)}
+                          onClick={() => handleButtonPolish(polish)}
                         >
                           {polish}
                         </button>
                       ))}
+                     
                     </section>
                   </div>
                 </div>

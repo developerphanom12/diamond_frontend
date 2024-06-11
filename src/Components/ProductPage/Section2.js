@@ -63,7 +63,6 @@ export default function Section2() {
     fetchCollections();
   }, [productIds.id, selectedSize]);
 
-  const { state } = useLocation();
   return (
     <Root>
       <div className="main_div">
