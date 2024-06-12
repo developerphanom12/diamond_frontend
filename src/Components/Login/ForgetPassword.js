@@ -39,7 +39,7 @@ const Root = styled.section`
     justify-content: center;
     align-items: center;
     .sub_div {
-      width: 35%;
+      width: 40vw;
       display: flex;
       flex-direction: column;
       padding: 30px 0;
@@ -93,6 +93,20 @@ const Root = styled.section`
             color: black;
           }
         }
+      }
+    }
+  }
+  @media (max-width: 1030px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
+      }
+    }
+  }
+  @media (max-width: 830px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
       }
     }
   }

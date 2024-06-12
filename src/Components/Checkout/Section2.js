@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 export default function Section2() {
   const userDetails = useSelector((state) => state?.users.user);
-  console.log("userDetails",userDetails)
+  console.log("userDetails", userDetails);
   const location = useLocation();
   const { selectedVariantId, productId, diamondId, totalPrice } =
     location.state || {};
@@ -66,10 +66,7 @@ export default function Section2() {
   }, []);
   const appApi = async () => {
     try {
-      const res = await axios.post(
-        `${EXCHANGE_URLS}/ordercreate`,
-        postValue
-      );
+      const res = await axios.post(`${EXCHANGE_URLS}/ordercreate`, postValue);
       if (res?.status === 201) {
         navigate("/home");
         toast.success("Updated");
@@ -94,7 +91,14 @@ export default function Section2() {
   };
   return (
     <Check>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: "1",
+          alignItems: "center",
+        }}
+      >
         <header>Ring-Builder</header>
         <input type="range" style={{ width: "52%" }} />
         <p>
@@ -105,9 +109,13 @@ export default function Section2() {
       </div>
       <div
         style={{
-          padding: "20px 40px",
+          padding: "20px",
           border: "1px solid #f5f5f5",
           margin: "0px 40px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          flexDirection:"column"
         }}
       >
         <h6>Express check out</h6>
@@ -281,13 +289,16 @@ export default function Section2() {
 const Check = styled.section`
   display: flex;
   flex-direction: column;
+  /* width: 100vw; */
   header {
     padding: 20px 20px 40px;
+    font-size: 25px;
   }
 
   p {
     padding: 20px 40px;
     display: flex;
+    width: 100%;
     flex: 1;
     justify-content: space-evenly;
     span {
@@ -305,6 +316,8 @@ const Check = styled.section`
   }
   ul {
     display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
     list-style: none;
     padding: 0px;
     margin: 0px;
@@ -333,7 +346,7 @@ const Check = styled.section`
   .shipping_address {
     padding: 0px 20px;
     text-align: start;
-    margin: 0px 40px;
+    margin: 0px 20px;
     p {
       display: flex;
       padding: 0;
@@ -368,7 +381,6 @@ const Check = styled.section`
   .button_div {
     width: 80%;
     margin: 10px 0px 10px 40px;
-    text-align: end;
     button {
       padding: 16px 32px;
       color: #fff;

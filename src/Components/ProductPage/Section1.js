@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { CiCircleCheck } from "react-icons/ci";
 
 export default function Section1() {
   return (
@@ -24,27 +25,7 @@ export default function Section1() {
                 </div>
               </div>
 
-              <svg
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.3289 6.5L7.32894 10.5L4.67102 7.84208"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                  stroke-miterlimit="10"
-                ></path>
-                <rect
-                  x="0.375"
-                  y="0.875"
-                  width="15.25"
-                  height="15.25"
-                  rx="7.625"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                ></rect>
-              </svg>
+              <CiCircleCheck />
             </div>
           </div>
 
@@ -64,27 +45,8 @@ export default function Section1() {
                   <p>$450</p>
                 </div>
               </div>
-              <svg
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.3289 6.5L7.32894 10.5L4.67102 7.84208"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                  stroke-miterlimit="10"
-                ></path>
-                <rect
-                  x="0.375"
-                  y="0.875"
-                  width="15.25"
-                  height="15.25"
-                  rx="7.625"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                ></rect>
-              </svg>
+              <CiCircleCheck />
+
             </div>
           </div>
 
@@ -106,27 +68,8 @@ export default function Section1() {
                 </div>
               </div>
 
-              <svg
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.3289 6.5L7.32894 10.5L4.67102 7.84208"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                  stroke-miterlimit="10"
-                ></path>
-                <rect
-                  x="0.375"
-                  y="0.875"
-                  width="15.25"
-                  height="15.25"
-                  rx="7.625"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                ></rect>
-              </svg>
+              <CiCircleCheck />
+
             </div>
           </div>
         </div>

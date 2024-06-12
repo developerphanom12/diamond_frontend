@@ -3,12 +3,13 @@ import { Nav } from "react-bootstrap";
 import ContainerFluid from "react-bootstrap/Container";
 import styled from "styled-components";
 import EngageList from "./EngageList";
+import DiamondList from "./DiamondList";
+import EducationList from "./EducationList";
 
 function BottomBar() {
   const [isListOpen2, setIsListOpen2] = useState(false);
   const [isListOpen4, setIsListOpen4] = useState(false);
   const [isListOpen6, setIsListOpen6] = useState(false);
-
 
   const handleMouseEnter2 = () => {
     setIsListOpen2(true);
@@ -36,7 +37,14 @@ function BottomBar() {
 
   return (
     <Root>
-      <ContainerFluid fluid style={{ backgroundColor: "#fff", padding: "0px",position:"relative" }}>
+      <ContainerFluid
+        fluid
+        style={{
+          backgroundColor: "#fff",
+          padding: "0px",
+          position: "relative",
+        }}
+      >
         <Nav
           style={{
             backgroundColor: "#fff",
@@ -44,7 +52,6 @@ function BottomBar() {
             justifyContent: "center",
           }}
         >
-
           <div
             onMouseEnter={handleMouseEnter2}
             onMouseLeave={handleMouseLeave2}
@@ -62,13 +69,15 @@ function BottomBar() {
           <div
             onMouseEnter={handleMouseEnter4}
             onMouseLeave={handleMouseLeave4}
-            id="graphic"
+            id="diamond"
           >
             <Nav.Link href="/naturaldiamond">diamonds</Nav.Link>
-            {isListOpen4 && <div className="option_list_list">fdgdfgdfg</div>}
+            {isListOpen4 && (
+              <div className="option_list_list">
+                <DiamondList />
+              </div>
+            )}
           </div>
-
-          
 
           <div
             onMouseEnter={handleMouseEnter6}
@@ -76,11 +85,7 @@ function BottomBar() {
             id="graphic"
           >
             <Nav.Link href="/education">education</Nav.Link>
-            {isListOpen6 && (
-              <div className="option_list_list">
-                cbhghgf
-              </div>
-            )}
+            {isListOpen6 && <div className="option_list_list"><EducationList/></div>}
           </div>
         </Nav>
       </ContainerFluid>
@@ -99,7 +104,6 @@ const Root = styled.section`
 
   nav.navbar.navbar-expand.navbar-light.bg-light {
     border: 1px solid #e4e5e7;
- 
   }
   a.nav-link {
     font-family: "ProximaNova", "sans-serif";

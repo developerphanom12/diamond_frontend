@@ -5,6 +5,8 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
  import ring from "../Images/Solitaire-removebg-preview.png"
+import { CiCircleCheck } from "react-icons/ci";
+
 
 export default function Section1() {
   const [selectedButton, setSelectedButton] = useState(2);
@@ -37,27 +39,8 @@ export default function Section1() {
                   <p>$450</p>
                 </div>
               </div>
-              <svg
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.3289 6.5L7.32894 10.5L4.67102 7.84208"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                  stroke-miterlimit="10"
-                ></path>
-                <rect
-                  x="0.375"
-                  y="0.875"
-                  width="15.25"
-                  height="15.25"
-                  rx="7.625"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                ></rect>
-              </svg>
+              <CiCircleCheck />
+
             </div>
           </div>
 
@@ -70,22 +53,8 @@ export default function Section1() {
                   <h6>Stone</h6>
                 </div>
               </div>
-              <svg
-                viewBox="0 0 18 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.49173 2.78856L4.81532 4.81791L5.9079 6.59697L5.2688 6.98946L3.89566 4.75357L5.91351 2.3109L6.49173 2.78856Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12.9015 0.5H4.37073L0.0175781 4.85327L8.63245 12.5L17.2405 4.86609L17.2548 4.85327L12.9015 0.5ZM12.5908 1.25L16.1614 4.82055L9.93921 10.3386L13.3692 4.75356L10.4749 1.25H12.5908ZM12.4495 4.81791L8.4481 11.3335L1.11072 4.8208L4.6814 1.25H9.50212L12.4495 4.81791Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
+              <CiCircleCheck />
+
             </div>
           </div>
 
@@ -98,16 +67,8 @@ export default function Section1() {
                   <h6>Ring</h6>
                 </div>
               </div>
-              <svg
-                viewBox="0 0 14 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.0176 10.4175C13.0176 14.0396 10.0977 16.9869 6.50879 16.9869C2.91992 16.9869 0 14.0396 0 10.4175C0 7.49785 1.89844 5.01995 4.51404 4.16765L5.17725 4.7625C2.64258 5.372 0.75 7.67314 0.75 10.4175C0.75 13.6265 3.33301 16.2369 6.50879 16.2369C9.68457 16.2369 12.2676 13.6265 12.2676 10.4175C12.2676 7.67278 10.3745 5.37127 7.83911 4.76213L8.50293 4.1674C11.1188 5.01945 13.0176 7.49761 13.0176 10.4175ZM9.77808 1.68169L9.77271 1.68657L6.73926 4.40508L6.73242 4.42144L6.72461 4.41827L6.50769 4.61261L6.505 4.61017L6.50231 4.61261L3.23473 1.6817L4.88585 0.0131226H8.12157L9.77282 1.6817L9.76855 1.68561L9.77808 1.68169ZM7.91297 0.513113H7.17005L7.90333 1.62944L7.48951 2.61626L8.3921 2.24761L9.04786 1.65996L7.91297 0.513113ZM3.95948 1.66008L4.60499 2.23906L6.50904 3.01665L6.83521 2.88335L7.33887 1.68218L6.57105 0.513113H5.09449L3.95948 1.66008Z"
-                  fill="currentColor"
-                ></path>
-              </svg>{" "}
+              <CiCircleCheck />
+
             </div>
           </div>
         </div>

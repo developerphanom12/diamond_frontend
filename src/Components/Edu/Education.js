@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import edubanner from "../Images/EducationBanner.jpg";
-import eduDia from "../Images/eduDia.jpg";
+import eduDia from "../Images/Diamondweqw.jpg";
+import diamond from "../Images/Diamond-2.jpg";
 
 export default function Education() {
   return (
@@ -12,7 +13,7 @@ export default function Education() {
       </div>
       <div className="diamond_ring">
         <div className="sec1">
-          <img src={eduDia} alt="img" />
+          <img src={diamond} alt="img" />
 
           <h2>DIAMONDS</h2>
           <p>
@@ -58,6 +59,9 @@ export default function Education() {
 }
 const Edu = styled.section`
   margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   .banner_section {
     img {
       width: 100%;
@@ -70,8 +74,8 @@ const Edu = styled.section`
     justify-content: space-between;
     padding: 30px;
     /* margin: 0px 55px; */
+
     .sec1 {
-    
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -79,9 +83,11 @@ const Edu = styled.section`
       justify-content: space-between;
       border-radius: 20px;
       box-shadow: 1px 3px 6px 1px lightgray;
+      margin: 20px;
       img {
-      
         border-top-left-radius: 20px;
+        width: 100%;
+        height:50%;
         border-top-right-radius: 20px;
       }
       h2 {
@@ -117,9 +123,12 @@ const Edu = styled.section`
       p,
       span {
         padding: 0px 30px;
-         
-
       }
+    }
+  }
+  @media (max-width: 1024px) {
+    .diamond_ring {
+      padding: 5px;
     }
   }
 `;

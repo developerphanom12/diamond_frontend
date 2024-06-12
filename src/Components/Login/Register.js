@@ -23,9 +23,9 @@ const schema = yup.object().shape({
     .string()
     .required("Password is required.")
     .min(5, "Password should be at least 5 characters."),
-    password_confirmationdd: yup
+  password_confirmationdd: yup
     .string()
-    .oneOf([yup.ref('password'), null], "Passwords must match")
+    .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Password confirmation is required."),
 });
 
@@ -33,10 +33,7 @@ export default function Register() {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        `${EXCHANGE_URLS}/useregister`,
-        data
-      );
+      const res = await axios.post(`${EXCHANGE_URLS}/useregister`, data);
       console.log("resres", res?.data);
       if (res?.status === 201) {
         navigate("/login");
@@ -206,7 +203,7 @@ export default function Register() {
                     {errors.password.message}
                   </p>
                 )}
-                 <TextField
+                <TextField
                   fullWidth
                   name="password_confirmationdd"
                   label="Confirm Password"
@@ -259,7 +256,7 @@ const Root = styled.section`
     justify-content: center;
     align-items: center;
     .sub_div {
-      width: 35%;
+      width: 40vw;
       display: flex;
       flex-direction: column;
       padding: 30px 0;
@@ -375,6 +372,20 @@ const Root = styled.section`
           text-decoration: underline;
           font-weight: 600;
         }
+      }
+    }
+  }
+  @media (max-width: 1030px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
+      }
+    }
+  }
+  @media (max-width: 830px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
       }
     }
   }

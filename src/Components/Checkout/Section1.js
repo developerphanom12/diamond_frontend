@@ -79,7 +79,7 @@ export default function Section1() {
                   </p>
                 </div>
                 <div className="icon_content">
-                <div style={{ width: "25px", height: "25px" }}>
+                  <div style={{ width: "25px", height: "25px" }}>
                     <img
                       style={{ width: "25px", height: "25px" }}
                       src={selectedRingSvg}
@@ -145,8 +145,8 @@ const Root = styled.section`
   .main_div {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
-
+    margin: 20px 0px;
+    width: 100vw;
     .form_div {
       flex: 1;
       padding-top: 30px;
@@ -166,15 +166,18 @@ const Root = styled.section`
       display: flex;
       .desc_div {
         background-color: white;
-        width: 77%;
         background-color: #ffffffd9;
         backdrop-filter: blur(8px);
         margin: 60px;
         border-radius: 20px;
         padding: 32px;
+        @media (max-width:867px){
+          margin: 30px;
+        }
         .image_content {
           display: flex;
           gap: 20px;
+          flex-wrap: wrap;
           border-bottom: 1px solid rgba(143, 143, 143, 0.67);
           padding-bottom: 20px;
 

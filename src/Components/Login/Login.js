@@ -23,10 +23,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        `${EXCHANGE_URLS}/userlogin`,
-        data
-      );
+      const res = await axios.post(`${EXCHANGE_URLS}/userlogin`, data);
       console.log("resres", res?.data?.customer);
       if (res?.status === 200) {
         navigate("/checkout");
@@ -122,8 +119,9 @@ const Root = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+
     .sub_div {
-      width: 35%;
+      width: 40vw;
       display: flex;
       flex-direction: column;
       padding: 30px 0;
@@ -204,6 +202,20 @@ const Root = styled.section`
           text-decoration: underline;
           font-weight: 600;
         }
+      }
+    }
+  }
+  @media (max-width: 1030px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
+      }
+    }
+  }
+  @media (max-width: 830px) {
+    .main_div {
+      .sub_div {
+        width: 60vw;
       }
     }
   }
