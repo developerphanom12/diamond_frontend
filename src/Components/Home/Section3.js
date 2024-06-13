@@ -81,7 +81,7 @@ const Root = styled.section`
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: end;
-      align-items: center;
+      align-items: start;
     }
     h3 {
       line-height: 1.25;
@@ -120,13 +120,13 @@ const Root = styled.section`
   .col-lg-3.col4 {
     background-image: url(${ringg4});
   }
-  @media (max-width: 899px) {
+  @media (max-width: 567px) {
     .col-lg-3 {
       padding: 0px;
       gap: 20px;
 
       .content_div {
-        padding: 5px;
+        padding: 10px;
         width: 100%;
         h3 {
           font-size: 18px;
@@ -139,8 +139,21 @@ const Root = styled.section`
     .col-lg-3.col1 {
   
       height: 300px;
-      width: 164px;
+      width: 46%;
       margin-top: 10px;
     }
+  }
+
+  @media (min-width: 567px) and (max-width: 992px) {
+    .col-lg-3.col4,
+    .col-lg-3.col3,
+    .col-lg-3.col2,
+    .col-lg-3.col1 {
+  
+      height: 300px;
+      width: 48%;
+      margin-top: 10px;
+    }
+
   }
 `;

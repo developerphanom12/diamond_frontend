@@ -61,7 +61,7 @@ export default function Section7() {
         <div className="row">
           <div className="col-lg-12 pt-4">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h2>Best Sellers</h2>{" "}
+              <h2> OUR Best Sellers</h2>{" "}
               <div>
                 <button onClick={goToPrevSlide}>
                   {" "}
@@ -373,7 +373,7 @@ const Root = styled.section`
     background-color: #fff;
     border: none;
     svg {
-      font-size: 40px;
+      font-size: 30px;
     }
   }
   img {

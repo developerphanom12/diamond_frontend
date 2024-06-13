@@ -45,20 +45,20 @@ export default function Section5() {
             </p>
             <button>Set an Appointment</button>
           </div>
-          <div className="col-lg-6 col-0"></div>
+          <div className="col-lg-6 col"></div>
         </div>
       </div>
     </Root>
   );
 }
 const Root = styled.section`
-  margin: 20px 0px 0px;
   color: #000;
   .col-lg-2 {
     text-align: center;
-    img{
+    img {
       width: 100%;
       height: 100%;
+      object-fit: scale-down;
     }
   }
   .imgbanner {
@@ -71,14 +71,14 @@ const Root = styled.section`
     padding: 60px;
     height: 100%;
     display: inline-block;
-    @media (max-width:999px){
+    @media (max-width: 999px) {
       padding: 25px;
-      h1{
+      h1 {
         font-size: 24px;
       }
     }
     h1 {
-      font-size: 3.75rem;
+      font-size: 1.75rem;
       line-height: 1;
       text-transform: uppercase;
       font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
@@ -105,5 +105,12 @@ const Root = styled.section`
         transition-duration: 0.5s;
       }
     }
+  }
+  @media (max-width: 567px) {
+
+    .imgbanner {
+      height: 300px;
+    }
+
   }
 `;

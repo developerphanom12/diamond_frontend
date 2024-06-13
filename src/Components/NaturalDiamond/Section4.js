@@ -7,11 +7,11 @@ export default function Section4({ value }) {
   const navigate = useNavigate();
 
   const handleNavigate = (diamond) => {
-    navigate('/productpage', { state: { diamond } });
+    navigate("/productpage", { state: { diamond } });
   };
 
   return (
-    <Root>     
+    <Root>
       <div className="main_div">
         {value &&
           value.map((i, index) => {
@@ -88,6 +88,7 @@ const Root = styled.section`
     flex-wrap: wrap;
     margin-top: 20px;
     margin-bottom: 100px;
+    gap: 15px;
 
     .subdiv {
       width: 300px;
@@ -186,7 +187,7 @@ const Root = styled.section`
       gap: 6px;
       padding: 0 0 20px 0;
       .info_btn {
-        padding: 12px 21px;
+        padding: 12px 14px;
         border-radius: 25px;
         font-size: 13px;
         background-color: #fff;
@@ -199,6 +200,18 @@ const Root = styled.section`
         border-radius: 25px;
         font-size: 13px;
       }
+    }
+  }
+
+  @media only screen and (max-width: 567px){
+    .main_div {
+      justify-content: center;
+    }
+  }
+
+  @media only screen and (min-width: 567px) and (max-width: 992px){
+    .main_div {
+      justify-content: center;
     }
   }
 `;

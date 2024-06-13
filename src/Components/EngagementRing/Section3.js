@@ -324,10 +324,7 @@ const Root = styled.section`
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
-    @media (max-width: 567px) {
-      overflow-x: scroll;
-      gap: 10px;
-    }
+   
     .select_opt {
       display: flex;
       gap: 20px;
@@ -377,7 +374,7 @@ const Root = styled.section`
         .btn_row {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
+          gap: 6px;
           margin-top: 15px;
 
           button {
@@ -449,7 +446,7 @@ const Root = styled.section`
         .btn_row {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
+          gap: 6px;
           margin-top: 15px;
           button {
             border-radius: 10px;
@@ -497,4 +494,61 @@ const Root = styled.section`
       border: 1px solid transparent;
     }
   }
+
+  @media only screen and (max-width: 567px) {
+    .select_div .select_opt .select_metal {
+      left: 6px;
+      bottom: unset;
+      width: 96%;
+    }
+
+    .select_div .select_opt .select_metal .btn_row button {
+      width:75px;
+    }
+
+    .select_div .select_opt .select_shape {
+
+    left:2%;
+    bottom:unset;
+    width:96%;
+
+}
+
+
+
+.select_div .select_opt .select_shape .btn_row button {
+    width: 75px;
+}
+
+.select_div {
+    display:flex;
+    justify-content:center;
+    margin-top:40px;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+
+  }
+
+@media only screen and (min-width: 567px) and (max-width: 992px){
+
+  .select_div .select_opt .select_metal {
+    position:absolute;
+    left:30px;
+    width:70%;
+    bottom:unset;
+}
+
+
+ .select_div .select_opt .select_shape {
+    left:4%;
+    width:70%;
+    bottom:unset;
+
+}
+
+
+
+}
 `;

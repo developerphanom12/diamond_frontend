@@ -157,15 +157,17 @@ const Root = styled.section`
     text-align: center;
     font-weight: 400;
     width: 100%;
+    text-transform: capitalize; 
   }
   p {
     text-align: center;
-    line-height: 1.375;
-    margin: 10px 40px 0px;
+    line-height: 1.8;
+    margin: 20px 40px 0px;
   }
   outline: none;
   .sliderrr {
-    padding: 40px 0px;
+    padding: 10px 0 40px;
+
 
     img {
       width: 100%;

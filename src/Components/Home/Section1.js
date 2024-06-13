@@ -138,7 +138,7 @@ const Root = styled.section`
       padding: 0px 10px;
       text-align: start;
       b {
-        font-size: 18px;
+        font-size: 16px;
         display: flex;
         flex-wrap: wrap;
       }

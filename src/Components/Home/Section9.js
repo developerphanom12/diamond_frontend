@@ -67,7 +67,7 @@ export default function Section9() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-12 pt-4" style={{ textAlign: "center" }}>
+          <div className="col-lg-12 pt-4 pb-5" style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>Our Couples</h2>{" "}
               <div>
@@ -255,7 +255,7 @@ const Root = styled.section`
     background-color: #000;
     border: none;
     svg {
-      font-size: 40px;
+      font-size: 30px;
       color: #fff;
     }
   }
@@ -264,6 +264,8 @@ const Root = styled.section`
     color: #000 !important;
     margin: 20px 0px;
     padding: 5px;
+    display: none;
+
   }
   .slick-prev:before,
   .slick-next:before {

@@ -448,9 +448,9 @@ const Root = styled.section`
       }
 
       .plus_sign {
-        position: absolute;
-        z-index: 1111;
-        transform: translate(274px, 0);
+        position:absolute;
+        z-index:1111;
+        transform:translate(265px, 0);
         span {
           border: 1px solid rgba(0, 0, 0);
           padding: 0px 6px 3px 6px;

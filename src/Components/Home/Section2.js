@@ -10,14 +10,41 @@ export default function Section2() {
   // Duplicate the image array to create a loop effect
   const images = [s1, s2, s3, s4, s2, s1, s4, s1, s2, s3, s4, s2, s1, s4];
 
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 2000,
-    slidesToShow: 5,
-    slidesToScroll: 2,
-    autoplay: true,
-    autoplaySpeed: 200,
+  var settings = { 
+    dots:false,
+    infinite:true,
+    speed:2000,
+    slidesToShow:5,
+    slidesToScroll:2,
+    autoplay:true,
+    autoplaySpeed:200,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+    ]
+
   };
   return (
     <Root>
@@ -38,13 +65,14 @@ const Root = styled.section`
   font-weight: 600;
   padding: 20px 0px;
   height: 141px;
+
   .slick-slide {
     overflow: hidden; // Hide overflow
   }
 
   img {
     width: 200px;
-    height: auto;
+    height: 120px;
     padding: 20px;
   }
 
@@ -58,4 +86,6 @@ const Root = styled.section`
       opacity: 1; // End with opacity 1
     }
   }
+
+
 `;

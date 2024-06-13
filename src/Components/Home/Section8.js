@@ -207,17 +207,23 @@ const Root = styled.section`
     width: 24%;
     margin: 0px 6px;
     .content_div {
-      padding: 20px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
+      padding:20px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:end;
+      align-items:start;
+      background-color: #000000;
+      opacity: 0.5;
+      border-radius: 20px;
+
     }
     h3 {
       line-height: 1.25;
       font-weight: 400;
       font-size: 24px;
       color: #fff;
+      text-align: left;
     }
     &:hover {
       svg {
@@ -229,7 +235,7 @@ const Root = styled.section`
     background-color: #fff;
     border: none;
     svg {
-      font-size: 40px;
+      font-size: 30px;
     }
   }
   input[type="range"] {
@@ -237,10 +243,11 @@ const Root = styled.section`
     color: #000 !important;
     margin: 20px 0px;
     padding: 5px;
+    display: none;
   }
 
   .btn {
-    margin-top: 10px;
+    margin-top: 40px;
     font-size: 18px;
     padding: 18px 34px;
     border-radius: 50px;
@@ -255,4 +262,5 @@ const Root = styled.section`
       transition-duration: 0.5s;
     }
   }
+
 `;

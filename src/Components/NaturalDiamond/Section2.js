@@ -44,7 +44,7 @@ const shapesList = [
 ];
 
 const colorOptions = ["J", "I", "H", "G", "F", "E", "D"];
-const clarityOptions = ["SI1","I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
+const clarityOptions = ["SI1", "I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
 const cutOptions = ["GD", "VG", "EX"];
 const polishOptions = ["GD", "VG", "EX"];
 const symmetryOptions = ["GD", "VG", "EX"];
@@ -447,7 +447,7 @@ export default function Section2() {
                     </div>
 
                     <section>
-                    {polishOptions.map((polish, index) => (
+                      {polishOptions.map((polish, index) => (
                         <button
                           key={index}
                           className={
@@ -458,7 +458,6 @@ export default function Section2() {
                           {polish}
                         </button>
                       ))}
-                     
                     </section>
                   </div>
                 </div>
@@ -558,8 +557,8 @@ const Root = styled.section`
 
       .carat_div {
         display: flex;
-       flex-direction: column;
-       flex: 1;
+        flex-direction: column;
+        flex: 1;
         h5 {
           font-size: 17px;
           margin-bottom: 0;
@@ -590,6 +589,7 @@ const Root = styled.section`
               display: flex;
               justify-content: space-between;
               align-items: center;
+              gap: 10px;
               h6 {
                 color: rgba(102, 102, 102);
                 margin-bottom: 0;
@@ -598,7 +598,7 @@ const Root = styled.section`
               p {
                 color: #000000;
                 font-size: 16px;
-                margin-top: 9px;
+                margin: 0;
               }
             }
             .carat_btn_div {
@@ -626,10 +626,10 @@ const Root = styled.section`
       }
 
       .budget_div {
-       display: flex;
-       flex-direction: column;
-       flex: 1;
-        
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
         h5 {
           font-size: 17px;
         }
@@ -643,7 +643,7 @@ const Root = styled.section`
             /* width: 45%;/ */
             border-radius: 5px;
             display: flex;
-            .value_div {   
+            .value_div {
               /* width: 80%; */
               padding: 6px;
               h6 {
@@ -680,8 +680,8 @@ const Root = styled.section`
       .certificate_div {
         /* width: 20%;/ */
         display: flex;
-       flex-direction: column;
-       flex: 1;
+        flex-direction: column;
+        flex: 1;
         h5 {
           font-size: 17px;
         }
@@ -794,5 +794,43 @@ const Root = styled.section`
         gap: 4px;
       }
     }
+  }
+
+  @media only screen and (max-width: 567px) {
+    .section3 .variation {
+      gap: 30px;
+    }
+
+    .section3 .variation .var_kind {
+      width: 100%;
+      flex: unset;
+    }
+
+    .section3 .carat_budget_certificate .carat_div {
+      gap: 15px;
+      width: 100%;
+    }
+
+    .section3 .carat_budget_certificate .budget_div {
+      flex: unset;
+      width: 100%;
+    }
+
+    .section3 .carat_budget_certificate .budget_div .budget_value_div {
+      justify-content: center;
+    }
+
+    .section3 .carat_budget_certificate .certificate_div {
+      flex: unset;
+      width: 100%;
+    }
+
+    /* .main_div .subdiv {
+      width: 373px;
+    }
+
+    .main_div .subdiv:hover .hov_content {
+      width: 373px;
+    } */
   }
 `;
