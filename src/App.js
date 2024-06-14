@@ -14,6 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/Login/ForgetPassword";
 import Education from "./Components/Edu/Education";
 import { useSelector } from "react-redux";
+import RingDetails from "./Components/RingDetails/RingDetails";
+import DiamondDetails from "./Components/DiamondDetails/DiamondDetails";
 
 function App() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -24,15 +26,19 @@ function App() {
       <Layout>
         <Routes>
           <>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/password" element={<ForgetPassword />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/engagementring" element={<EngagementRing />} />
-            <Route path="/naturaldiamond" element={<NaturalDiamond />} />
-            <Route path="/productpage" element={<ProductPage />} />
+            <Route path="/" element={<Home />}/>
+            <Route path="/home" element={<Home />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/password" element={<ForgetPassword />}/>
+            <Route path="/education" element={<Education />}/>
+            <Route path="/engagementring" element={<EngagementRing />}/>
+            <Route path="/naturaldiamond" element={<NaturalDiamond />}/>
+            <Route path="/productpage" element={<ProductPage />}/>
+            <Route path="/ringdetails" element={<RingDetails/>}/>
+            <Route path="/diamonddetails" element={<DiamondDetails/>}/>
+
+
             {userCheck && token ? (
               <Route path="/checkout" element={<Checkout />} />
             ) : (
