@@ -40,7 +40,7 @@ export default function Section2() {
   const diamondType = useSelector((state) => state.users.diamondType);
   const location = useLocation();
   const { diamond } = location.state || {};
-  console.log("ring", productIds);
+  console.log("ring", diamond);
 
   const settings = {
     dots: false,

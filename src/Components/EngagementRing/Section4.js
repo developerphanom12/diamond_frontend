@@ -32,10 +32,14 @@ export default function Section4({ products }) {
 
   const handleModalNavigate = (labgrownValue) => {
     console.log("Navigating with labgrownValue:", labgrownValue);
-    dispatch(setDiamondType(labgrownValue))
+    dispatch(setDiamondType(labgrownValue));
     navigate("/naturaldiamond", {
       state: { labgrownValue, products: selectedProductId },
     });
+  };
+
+  const handleNavigate = (diamond) => {
+    navigate("/ringdetails", { state: { diamond } });
   };
 
   return (
@@ -94,7 +98,14 @@ export default function Section4({ products }) {
                   </div>
 
                   <div className="btn">
-                    <button className="info_btn">More Info</button>
+                    <button
+                      className="info_btn"
+                      onClick={() => {
+                        handleNavigate()
+                      }}
+                    >
+                      More Info
+                    </button>
                     <button
                       className="add_btn"
                       onClick={() => handleAddDiamondClick(i?.node)}

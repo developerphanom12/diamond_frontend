@@ -18,7 +18,6 @@ import vs from "../Images/vs.png";
 import images from "../Images/images.PNG";
 
 import { useNavigate } from "react-router-dom";
-import { Hidden } from "@mui/material";
 
 export default function Section2() {
   const navigate = useNavigate();
@@ -147,7 +146,8 @@ export default function Section2() {
               <img src={aeroplane} alt="aeroplane_images" />
 
               <p>
-                Overnight <br></br>Shipping
+                Overnight <br />
+                Shipping
               </p>
             </div>
 
@@ -158,21 +158,24 @@ export default function Section2() {
                 style={{ width: "50px", height: "50px" }}
               />
               <p>
-                Lifetime <br></br>Warranty
+                Lifetime <br />
+                Warranty
               </p>
             </div>
 
             <div className="policy_type">
               <img src={moneyinhand} alt="moneyinhand_images" />
               <p>
-                30 Days <br></br>Free Return
+                30 Days <br />
+                Free Return
               </p>
             </div>
 
             <div className="policy_type">
               <img src={certifiedd} alt="certifiedd_images" />
               <p>
-                Certificate<br></br>& Appraisal
+                Certificate
+                <br />& Appraisal
               </p>
             </div>
           </div>
@@ -474,14 +477,12 @@ const Root = styled.section`
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
     }
-     .main_div .des_div .prod_spec .spec{
-  
-    padding: 0px 14px;
-}
- .main_div .des_div .prod_spec{
-    gap: 20px;
-}
-
+    .main_div .des_div .prod_spec .spec {
+      padding: 0px 14px;
+    }
+    .main_div .des_div .prod_spec {
+      gap: 20px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {

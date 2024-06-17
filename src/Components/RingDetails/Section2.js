@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Section3 from "./Section3";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
 import round from "../Images/round-removebg-preview.png";
@@ -22,9 +22,10 @@ import modimg from "../Images/modimg.PNG";
 import images from "../Images/images.PNG";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Section2() {
-
+  const productIds = useSelector((state) => state.users.productIds);
   const navigate = useNavigate();
   let sliderRef = useRef(null);
 

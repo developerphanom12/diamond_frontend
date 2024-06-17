@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import noimg from "../Images/s6.png";
+import { EXCHANGE_URLS } from "../URLS";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const { diamond } = location.state || {};
+  const [diamondById, setDiamondById] = useState();
+  console.log("valueue", diamond);
   const handleNavigate = (diamond) => {
     navigate("/productpage", { state: { diamond } });
+  };
+  // diamondbyId
+  const handleNavigateDetail = async () => {
+    const diamondId = diamond?.diamond?.id;
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/diamondbyId?id=${diamondId}`
+      );
+      setDiamondById(response.data.data);
+      navigate("/diamonddetails", {
+        state: { diamondIds: response.data.data },
+      });
+    } catch (error) {
+      console.error("Error fetching diamond details:", error);
+    }
   };
 
   return (
@@ -64,7 +85,12 @@ export default function Section4({ value }) {
                     </div>
                   </div>
                   <div className="btn">
-                    <button className="info_btn">More Info</button>
+                    <button
+                      className="info_btn"
+                      onClick={() => handleNavigateDetail(i)}
+                    >
+                      More Info
+                    </button>
                     <button
                       className="add_btn"
                       onClick={() => handleNavigate(i)}
@@ -203,13 +229,13 @@ const Root = styled.section`
     }
   }
 
-  @media only screen and (max-width: 567px){
+  @media only screen and (max-width: 567px) {
     .main_div {
       justify-content: center;
     }
   }
 
-  @media only screen and (min-width: 567px) and (max-width: 992px){
+  @media only screen and (min-width: 567px) and (max-width: 992px) {
     .main_div {
       justify-content: center;
     }
