@@ -10,7 +10,7 @@ import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
-
+   
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
   const [productById, setProductById] = useState("");
