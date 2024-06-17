@@ -13,6 +13,7 @@ import overn from "../Images/aeroplane.png";
 import lifet from "../Images/certifiedd.png";
 import monyy from "../Images/moneyinhand.png";
 import badgedd from "../Images/badgess.png"
+import RingShipReturn from "../DiamondDetails/RingShipReturn";
 
 
 
@@ -312,7 +313,7 @@ export default function Section2() {
           </div>
 
           <div>
-            <Section3 />
+            <RingShipReturn />
           </div>
 
           <div className="appointment">

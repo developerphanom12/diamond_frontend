@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Section3 from "./Section3";
+import RingShipReturn from "./RingShipReturn";
 import React, { useRef } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
@@ -11,17 +11,17 @@ import carat from "../Images/carat.PNG";
 import color from "../Images/color.PNG";
 import clarity from "../Images/clarity.PNG";
 import diamo from "../Images/diamo.PNG";
-
 import j from "../Images/j.jpg";
 import vs from "../Images/vs.png";
-
 import images from "../Images/images.PNG";
-
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Section2() {
+  const diamondById = useSelector((state) => state.users.diamondById);
   const navigate = useNavigate();
   let sliderRef = useRef(null);
+  console.log("jagsdjhgd", diamondById);
 
   const next = () => {
     sliderRef.slickNext();
@@ -93,40 +93,39 @@ export default function Section2() {
             </div>
           </div>
         </div>
-
         <div className="des_div">
           <div className="title">
-            <h2>The Ashley</h2>
-            <h4>$725</h4>
+            <h2> Diamond Shape : {diamondById?.diamond?.certificate?.shape}</h2>
+            <h4>$ {diamondById?.price}</h4>
           </div>
 
           <div className="prod_spec">
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>0.5</h4>
+              <h4>{diamondById?.diamond?.certificate?.carats}</h4>
               <p>Carat</p>
             </div>
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>J</h4>
+              <h4>{diamondById?.diamond?.certificate?.color}</h4>
               <p>Color</p>
             </div>
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>VS2</h4>
+              <h4>{diamondById?.diamond?.certificate?.clarity}</h4>
               <p>Clarity</p>
             </div>
 
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>Excellent</h4>
+              <h4>{diamondById?.diamond?.certificate?.cut}</h4>
               <p>Cut</p>
             </div>
 
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>5.17/5.18</h4>
+              <h4>{diamondById?.diamond?.certificate?.length}/{diamondById?.diamond?.certificate?.width}</h4>
               <p>L/W (mm)</p>
             </div>
 
             <div className="spec">
-              <h4>1</h4>
-              <p>Ratio</p>
+              <h4>{diamondById?.diamond?.certificate?.shape}</h4>
+              <p>Shape</p>
             </div>
           </div>
 
@@ -189,7 +188,7 @@ export default function Section2() {
                   <img src={carat} alt="carat" />
                   <p>CARAT</p>
                 </div>
-                <h4>0.5</h4>
+                <h4>{diamondById?.diamond?.certificate?.carats}</h4>
                 <img
                   src={j}
                   alt="j"
@@ -204,7 +203,7 @@ export default function Section2() {
                   <img src={color} alt="color" />
                   <p>COLOR</p>
                 </div>
-                <h4>J</h4>
+                <h4>{diamondById?.diamond?.certificate?.color}</h4>
                 <img src={j} alt="j" className="ring_img" />
                 <p className="para">Slightly tinted</p>
               </div>
@@ -214,7 +213,7 @@ export default function Section2() {
                   <img src={clarity} alt="clarity" />
                   <p>CLARITY</p>
                 </div>
-                <h4>VS2</h4>
+                <h4>{diamondById?.diamond?.certificate?.clarity}</h4>
                 <img src={vs} alt="vs" className="ring_img" />
                 <p className="para">
                   Visible inclusion under 10x magnification
@@ -226,7 +225,7 @@ export default function Section2() {
                   <img src={diamo} alt="diamo" />
                   <p>CUT</p>
                 </div>
-                <h4>Excellent</h4>
+                <h4>{diamondById?.diamond?.certificate?.cut}</h4>
                 <img
                   src={j}
                   alt="j"
@@ -239,7 +238,7 @@ export default function Section2() {
           </div>
 
           <div>
-            <Section3 />
+            <RingShipReturn />
           </div>
 
           <div className="appointment">

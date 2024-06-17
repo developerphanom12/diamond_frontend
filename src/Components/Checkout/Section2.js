@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 
 export default function Section2() {
   const userDetails = useSelector((state) => state?.users.user);
-  console.log("userDetails", userDetails);
   const location = useLocation();
   const { selectedVariantId, productId, diamondId, totalPrice } =
     location.state || {};
@@ -69,7 +68,7 @@ export default function Section2() {
       const res = await axios.post(`${EXCHANGE_URLS}/ordercreate`, postValue);
       if (res?.status === 201) {
         navigate("/home");
-        toast.success("Updated");
+        toast.success("Order successfully Done");
       }
     } catch (err) {
       toast.error("Fill all details");
@@ -115,7 +114,7 @@ export default function Section2() {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          flexDirection:"column"
+          flexDirection: "column",
         }}
       >
         <h6>Express check out</h6>
@@ -316,7 +315,7 @@ const Check = styled.section`
   }
   ul {
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: center;
     list-style: none;
     padding: 0px;

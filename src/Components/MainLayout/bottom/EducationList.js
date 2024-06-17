@@ -106,6 +106,8 @@ const Root = styled.section`
       font-weight: 400;
       font-size: 15px;
       margin: 10px 0px;
+      cursor: pointer;
+
     }
   }
   svg,

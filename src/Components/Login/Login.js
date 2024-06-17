@@ -26,7 +26,7 @@ export default function Login() {
       const res = await axios.post(`${EXCHANGE_URLS}/userlogin`, data);
       console.log("resres", res?.data?.customer);
       if (res?.status === 200) {
-        navigate("/checkout");
+        navigate("/productpage");
         localStorage.setItem("token", res?.data?.customer?.token);
         dispatch(userDataAction(res?.data?.customer));
         dispatch(userCheckAction(true));

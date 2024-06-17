@@ -4,8 +4,12 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useSelector } from "react-redux";
+import diam from "../Images/diamondwithoutring.png";
 
-export default function Section3() {
+export default function RingShipReturn() {
+  const diamondById = useSelector((state) => state.users.diamondById);
+
   return (
     <Root>
       <Accordion>
@@ -15,16 +19,8 @@ export default function Section3() {
           id="panel1-header"
         >
           <div className="heading">
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M28.9085 8H11.0919L2 17.0923L19.9924 33.0628L37.9707 17.1189L38 17.0923L28.9085 8ZM11.916 9.99069H21.8844L27.7042 17.0359L19.6717 30.1165L4.90143 17.0067L11.916 9.99069ZM24.0319 26.8208L30.1461 16.8659L24.4671 9.99069H28.084L35.0986 17.0055L24.0319 26.8208ZM19.6447 26.4863L9.19873 17.2133L14.4772 11.9346L13.4674 16.419L19.6447 26.4863Z"
-                fill="currentColor"
-              ></path>
-            </svg>
+          <img src={diam} alt="img" style={{ width: "25px" }} />
+
             <h5>Ring Details</h5>
           </div>
         </AccordionSummary>
@@ -36,30 +32,30 @@ export default function Section3() {
           <table>
             <tr>
               <td>Size</td>
-              <td>0.51ct</td>
+              <td>{diamondById?.diamond?.certificate?.carats}ct</td>
             </tr>
             <tr>
-              <td>Type</td>
-              <td>Loose Diamond</td>
+              <td>Available</td>
+              <td>{diamondById?.diamond?.availability}</td>
             </tr>
             <tr>
               <td>Color</td>
-              <td>J</td>
+              <td>{diamondById?.diamond?.certificate?.color}</td>
             </tr>
 
             <tr>
               <td>Clarity</td>
-              <td>SI1</td>
+              <td>{diamondById?.diamond?.certificate?.clarity}</td>
             </tr>
 
             <tr>
               <td>Shape</td>
-              <td>Round</td>
+              <td>{diamondById?.diamond?.certificate?.shape}</td>
             </tr>
 
             <tr>
               <td>Cut</td>
-              <td>Excellent</td>
+              <td>{diamondById?.diamond?.certificate?.cut}</td>
             </tr>
           </table>
         </AccordionDetails>

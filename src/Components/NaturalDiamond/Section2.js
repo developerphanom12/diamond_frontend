@@ -53,10 +53,10 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-const minDistance = 0.5;
+const minDistance = 0.1;
 
 export default function Section2() {
-  const [selectedShapes, setSelectedShapes] = useState([]);
+  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedClarity, setSelectedClarity] = useState([]);
   const [selectedCut, setSelectedCut] = useState([]);
@@ -84,11 +84,13 @@ export default function Section2() {
 
     const diamondApi = async () => {
       try {
-        const shapesParam = selectedShapes.join(",");
+        const shapesParam = selectedShapes.length
+          ? selectedShapes.join(",")
+          : "ROUND";
         const colors = selectedColors.join(",");
         const clarity = selectedClarity.join(",");
         const cut = selectedCut.join(",");
-        // const carat = selectedCarat.join(",");
+        const carat = selectedCarat.join(",");
         // const Budget = selectedBudget.join(",");
         // const lab = Object.keys(selectedCertificate).filter(
         //   (key) => selectedCertificate[key]
@@ -97,7 +99,7 @@ export default function Section2() {
         const symmetry = selectedSymmetry.join(",");
         //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
-          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&carat=${carat}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
         );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
@@ -117,7 +119,7 @@ export default function Section2() {
     selectedColors,
     selectedClarity,
     selectedCut,
-    // selectedCarat,
+    selectedCarat,
     // selectedBudget,
     // selectedCertificate,
     selectedPolish,
@@ -128,11 +130,7 @@ export default function Section2() {
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
-    setSelectedShapes((prevShapes) =>
-      prevShapes.includes(shapeName)
-        ? prevShapes.filter((s) => s !== shapeName)
-        : [...prevShapes, shapeName]
-    );
+    setSelectedShapes([shapeName]); // Set the selected shape
   };
 
   const handleColorClick = (color) => {
@@ -202,35 +200,30 @@ export default function Section2() {
     setmaxCount(maxcount - 2100);
   };
 
-  const handleChange1 = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
-    } else {
-      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
-    }
+  const [caratRange, setCaratRange] = useState([0.5, 11.5]);
+
+  const handleChangeCarat = (event, newValue) => {
+    setCaratRange(newValue);
   };
 
   const increaseMinimum = () => {
-    const newValue = [value1[0] + 1, value1[1]];
-    setValue1(newValue);
+    const newMin = Math.min(caratRange[0] + 0.1, caratRange[1]);
+    setCaratRange([newMin, caratRange[1]]);
   };
 
   const decreaseMinimum = () => {
-    const newValue = [value1[0] - 1, value1[1]];
-    setValue1(newValue);
+    const newMin = Math.max(caratRange[0] - 0.1, 0.1);
+    setCaratRange([newMin, caratRange[1]]);
   };
 
   const increaseMaximum = () => {
-    const newValue = [value1[0], value1[1] + 1];
-    setValue1(newValue);
+    const newMax = Math.min(caratRange[1] + 0.1, 11.5);
+    setCaratRange([caratRange[0], newMax]);
   };
 
   const decreaseMaximum = () => {
-    const newValue = [value1[0], value1[1] - 1];
-    setValue1(newValue);
+    const newMax = Math.max(caratRange[1] - 0.1, caratRange[0]);
+    setCaratRange([caratRange[0], newMax]);
   };
   return (
     <Root>
@@ -311,20 +304,20 @@ export default function Section2() {
           <div className="carat_div">
             <h5>Carat</h5>
             <Slider
-              getAriaLabel={() => "Minimum distance"}
-              value={value1}
-              onChange={handleChange1}
+              value={caratRange}
+              onChange={handleChangeCarat}
               valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
               disableSwap
+              min={0.5}
+              max={11.5}
+              step={0.1}
             />
             <div className="carat_value_div">
               <div className="carat_min_max_div">
                 <div className="value">
-                  <p>{value1[0]}</p>
+                  <p>{caratRange[0]}</p>
                   <h6>Minimum</h6>
                 </div>
-
                 <div className="carat_btn_div">
                   <button onClick={increaseMinimum}>
                     <IoIosArrowUp />
@@ -337,10 +330,9 @@ export default function Section2() {
               <hr />
               <div className="carat_min_max_div">
                 <div className="value">
-                  <p>{value1[1]}</p>
+                  <p>{caratRange[1]}</p>
                   <h6>Maximum</h6>
                 </div>
-
                 <div className="carat_btn_div">
                   <button onClick={increaseMaximum}>
                     <IoIosArrowUp />

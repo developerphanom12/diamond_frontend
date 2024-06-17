@@ -8,9 +8,12 @@ import { useDispatch } from "react-redux";
 import { setDiamondType, setProductIds } from "../../redux/users/action";
 import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
+import { EXCHANGE_URLS } from "../URLS";
+import axios from "axios";
 
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
+  const [productById, setProductById] = useState("");
   const [selectedProductId, setSelectedProductId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,8 +41,22 @@ export default function Section4({ products }) {
     });
   };
 
-  const handleNavigate = (diamond) => {
-    navigate("/ringdetails", { state: { diamond } });
+  const handleNavigateDetail = async (products) => {
+    const productId = products?.node?.id;
+    console.log("products", productId);
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/fetchproductsbyid?productId=${productId}`
+      );
+      if (response?.status === 200) {
+        const productData = response?.data?.data;
+        console.log("nikeee", productData);
+        setProductById(productData);
+        navigate("/ringdetails", { state: { products: productData } });
+      }
+    } catch (error) {
+      console.error("Error fetching diamond details:", error);
+    }
   };
 
   return (
@@ -97,12 +114,10 @@ export default function Section4({ products }) {
                     </>
                   </div>
 
-                  <div className="btn">
+                  <div className="btn_div">
                     <button
                       className="info_btn"
-                      onClick={() => {
-                        handleNavigate()
-                      }}
+                      onClick={() => handleNavigateDetail(i)}
                     >
                       More Info
                     </button>
@@ -254,7 +269,7 @@ const Root = styled.section`
         background-color: #efcbcb;
       }
 
-      .btn {
+      .btn_div {
         display: flex;
         justify-content: space-between;
         padding: 0;
@@ -264,9 +279,11 @@ const Root = styled.section`
           border-radius: 25px;
           font-size: 13px;
           background-color: #fff;
+          border: 2px solid black;
         }
         .add_btn {
           background-color: black;
+          border: 2px solid black;
           color: white;
           padding: 5px 17px;
           border-radius: 25px;

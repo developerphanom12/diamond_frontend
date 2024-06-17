@@ -1,31 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import noimg from "../Images/s6.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { setDiamondById } from "../../redux/users/action";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Section4({ value }) {
+  const userCheck = useSelector((state) => state?.users?.userCheck);
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const location = useLocation();
-  const { diamond } = location.state || {};
-  const [diamondById, setDiamondById] = useState();
-  console.log("valueue", diamond);
+  const dispatch = useDispatch();
+  const [diamondByIdState, setDiamondByIdState] = useState("");
+  console.log("valueue", diamondByIdState);
+
   const handleNavigate = (diamond) => {
-    navigate("/productpage", { state: { diamond } });
+    if (userCheck && token) {
+      navigate("/productpage", { state: { diamond } });
+    } else {
+      window.open("/login", "_blank"); // Opens the login page in a new tab
+    }
   };
+
   // diamondbyId
-  const handleNavigateDetail = async () => {
-    const diamondId = diamond?.diamond?.id;
+  const handleNavigateDetail = async (value) => {
+    const diamondId = value?.diamond?.id;
+
     try {
       const response = await axios.get(
         `${EXCHANGE_URLS}/diamondbyId?id=${diamondId}`
       );
-      setDiamondById(response.data.data);
-      navigate("/diamonddetails", {
-        state: { diamondIds: response.data.data },
-      });
+      if (response?.status === 200) {
+        const diamondData = response?.data?.diamondData;
+        console.log("reponsee", diamondData);
+        setDiamondByIdState(diamondData);
+        dispatch(setDiamondById(diamondData));
+        navigate("/diamonddetails");
+      }
     } catch (error) {
       console.error("Error fetching diamond details:", error);
     }
@@ -84,7 +96,7 @@ export default function Section4({ value }) {
                       <p>Cut</p>
                     </div>
                   </div>
-                  <div className="btn">
+                  <div className="btn_div">
                     <button
                       className="info_btn"
                       onClick={() => handleNavigateDetail(i)}
@@ -208,13 +220,14 @@ const Root = styled.section`
       }
     }
 
-    .btn {
+    .btn_div {
       display: flex;
       gap: 6px;
       padding: 0 0 20px 0;
       .info_btn {
         padding: 12px 14px;
         border-radius: 25px;
+        border: 2px solid black;
         font-size: 13px;
         background-color: #fff;
       }
@@ -222,6 +235,7 @@ const Root = styled.section`
       .add_btn {
         background-color: black;
         color: white;
+        border: 2px solid black;
         padding: 12px 27px;
         border-radius: 25px;
         font-size: 13px;

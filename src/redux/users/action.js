@@ -6,9 +6,12 @@ export const SET_SELECTED_VARIANT_ID = "SET_SELECTED_VARIANT_ID";
 export const SET_DIAMOND_TYPE = "SET_DIAMOND_TYPE";
 export const SET_SELECTED_SHAPE_IMAGE = 'SET_SELECTED_SHAPE_IMAGE';
 export const SET_SELECTED_RING_SVG = 'SET_SELECTED_RING_SVG';
+export const SET_DIAMOND_BY_ID = "SET_DIAMOND_BY_ID";
 
-
-// Action Creators
+export const setDiamondById = (diamondById) => ({
+  type: SET_DIAMOND_BY_ID,
+  payload: diamondById,
+});
 export const setSelectedRingSvg= (imageUrl) => ({
   type: SET_SELECTED_RING_SVG,
   payload: imageUrl,

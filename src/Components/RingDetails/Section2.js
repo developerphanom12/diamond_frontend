@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import Section3 from "./Section3";
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import ring from "../Images/ring.png";
 import round from "../Images/round-removebg-preview.png";
 import emerald from "../Images/emerald-removebg-preview.png";
 import heart from "../Images/heart-removebg-preview.png";
@@ -21,11 +19,12 @@ import pinkimg from "../Images/pink.PNG";
 import modimg from "../Images/modimg.PNG";
 import images from "../Images/images.PNG";
 
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import RingShipReturn from "../DiamondDetails/RingShipReturn";
 
 export default function Section2() {
-  const productIds = useSelector((state) => state.users.productIds);
+  const location = useLocation();
+  const { products } = location.state || {};
   const navigate = useNavigate();
   let sliderRef = useRef(null);
 
@@ -81,7 +80,7 @@ export default function Section2() {
               {...settings}
             >
               <div key={1}>
-                <img src={ring} alt="text" />
+                <img  src={products?.mainImage && products.mainImage} alt="text" />
               </div>
               {/* <div key={2}>
                 <img src={ring} alt="text" />
@@ -96,6 +95,7 @@ export default function Section2() {
               }}
             >
               <button className="button" onClick={previous}>
+                
                 <img src={images} alt="images" />
                 <span>Image</span>
               </button>
@@ -105,15 +105,11 @@ export default function Section2() {
 
         <div className="des_div">
           <div className="title">
-            <h2>The Ashley</h2>
-            <h4>$700</h4>
+            <h2>{products?.title}</h2>
+            <h4>$ {products?.variants?.edges?.[0]?.node?.price}</h4>
             <p>
-              Modest yet magnificent, The Ashley engagement ring has a slender
-              1.5mm band that amplifies the size and sparkle of the center
-              stone, turning it into a major showpiece. Four delicate claw
-              prongs secure the gem in place and emphasize its low-profile
-              silhouette. The clean lines, striking details, and modest geometry
-              of this spectacular solitaire are both classic and oh-so modern.
+              {products?.description && products.description}
+              {!products?.description && "No Description About Product"}
             </p>
           </div>
 
@@ -149,7 +145,7 @@ export default function Section2() {
               <img src={aeroplane} alt="aeroplane_images" />
 
               <p>
-                Overnight <br></br>Shipping
+                Overnight <br/>Shipping
               </p>
             </div>
 
@@ -193,7 +189,7 @@ export default function Section2() {
           </div>
 
           <div>
-            <Section3 />
+            <RingShipReturn />
           </div>
 
           <div className="appointment">

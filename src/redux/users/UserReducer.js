@@ -1,4 +1,5 @@
 import {
+  SET_DIAMOND_BY_ID,
   SET_DIAMOND_IDS,
   SET_DIAMOND_TYPE,
   SET_PRODUCT_IDS,
@@ -19,9 +20,15 @@ const initialState = {
   diamondType: "",
   selectedShapeImage: null,
   selectedRingSvg:null,
+  diamondById: null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_DIAMOND_BY_ID:
+      return {
+        ...state,
+        diamondById: action.payload,
+      };
     case SET_SELECTED_RING_SVG:
       return {
         ...state,
