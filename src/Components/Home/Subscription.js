@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import b1 from "../Images/black1.png";
-import b2 from "../Images/black2.png"
-import b3 from "../Images/black3.png"
-
+import b2 from "../Images/black2.png";
+import b3 from "../Images/black3.png";
 
 export default function Subscription() {
   return (
@@ -21,25 +20,25 @@ export default function Subscription() {
           <div className="col-lg-2  col-md-2 col-0"></div>
         </div>
         <div className="row">
-          <div className="col-lg-4  col-md-4 col-4">
-            <img src={b1} alt="img"/>
+          <div className="col-lg-4  col-md-6 col-12">
+            <img src={b1} alt="img" />
             <h3 className="h3">Worldwide Delivery</h3>
             <p>Overnight Complimentary Shipping</p>
           </div>
           <div
-            className="col-lg-4   col-md-4 col-4"
+            className="col-lg-4  col-md-6 col-12"
             style={{
               borderLeft: "1px solid white",
               borderRight: "1px solid white",
             }}
           >
-             <img src={b2} alt="img"/>
+            <img src={b2} alt="img" />
             <h3 className="h3">Returns Within 30 Days</h3>
 
             <p>Satisfaction Guaranteed</p>
           </div>
-          <div className="col-lg-4   col-md-4 col-4">
-          <img src={b3} alt="img"/>
+          <div className="col-lg-4   col-md-6 col-12">
+            <img src={b3} alt="img" />
             <h3 className="h3">Life Time Warranty</h3>
 
             <p>Shop With Confidence</p>
@@ -61,7 +60,6 @@ const Root = styled.section`
   }
   .col-lg-8.inputy_btn {
     display: flex;
-
     margin: 10px 30px;
     width: fit-content;
   }
@@ -96,15 +94,23 @@ const Root = styled.section`
     margin: 40px 0px;
     text-align: center;
     padding: 0px !important;
-    p{
-        font-size: 12px;
-        margin: 0;
+    p {
+      font-size: 12px;
+      margin: 0;
     }
-    .h3{
-        font-weight: 300;
-    width: 100%;
-    text-align: center;
-    margin:  0px 0px 30px;
+    .h3 {
+      font-weight: 300;
+      width: 100%;
+      text-align: center;
+      margin: 0px 0px 30px;
+    }
+  }
+  @media (max-width: 767px) {
+    h3 {
+      font-size: 14px;
+    }
+    .col-lg-4 {
+      margin: 20px 0px;
     }
   }
 `;

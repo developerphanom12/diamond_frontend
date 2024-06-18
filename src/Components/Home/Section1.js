@@ -123,7 +123,7 @@ const Root = styled.section`
     }
   }
   @media (max-width: 999px) {
-    height: 350px;
+    height: 291px;
     .everyday {
       > div {
         text-align: justify;
