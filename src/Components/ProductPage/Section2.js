@@ -16,8 +16,6 @@ import RingShipReturn from "../DiamondDetails/RingShipReturn";
 import { useLoading } from "../LoadingContext";
 
 export default function Section2() {
-  const userCheck = useSelector((state) => state?.users?.userCheck);
-  const token = localStorage.getItem("token");
   const [selectedButton, setSelectedButton] = useState(1);
   const [object, setObject] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -87,23 +85,21 @@ export default function Section2() {
   }, [productIds.id, selectedSize, setLoading]);
 
   const handleCheckout = () => {
-    if (userCheck && token) {
-      if (!selectedSize) {
-        alert("Please select a ring size before proceeding to checkout.");
-        return;
-      }
-      navigate("/checkout", {
-        state: {
-          diamond: diamond?.diamond,
-          price: diamond?.price,
-          selectedVariantId: selectedVariantId,
-          productId: productIds.id,
-          diamondId: diamond?.id,
-          totalPrice: totalPrice.toFixed(2),
-          selectedSize: selectedSize,
-        },
-      });
+    if (!selectedSize) {
+      alert("Please select a ring size before proceeding to checkout.");
+      return;
     }
+    navigate("/checkout", {
+      state: {
+        diamond: diamond?.diamond,
+        price: diamond?.price,
+        selectedVariantId: selectedVariantId,
+        productId: productIds.id,
+        diamondId: diamond?.id,
+        totalPrice: totalPrice.toFixed(2),
+        selectedSize: selectedSize,
+      },
+    });
   };
   return (
     <Root>

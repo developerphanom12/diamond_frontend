@@ -15,22 +15,22 @@ export default function Section5() {
     <Root>
       <div className="container-fluid" style={{ padding: "40px 24px" }}>
         <div className="row">
-          <div className="col-lg-2 col-md-2 col-2">
+          <div className="col-lg-2 col-md-2 col-4">
             <img src={ss1} alt="img" />
           </div>
-          <div className="col-lg-2  col-md-2 col-2">
+          <div className="col-lg-2  col-md-2 col-4">
             <img src={ss2} alt="img" />
           </div>
-          <div className="col-lg-2  col-md-2 col-2">
+          <div className="col-lg-2  col-md-2 col-4">
             <img src={ss3} alt="img" />
           </div>
-          <div className="col-lg-2  col-md-2 col-2">
+          <div className="col-lg-2  col-md-2 col-4">
             <img src={ss4} alt="img" />
           </div>
-          <div className="col-lg-2  col-md-2 col-2">
+          <div className="col-lg-2  col-md-2 col-4">
             <img src={ss5} alt="img" />
           </div>
-          <div className="col-lg-2  col-md-2 col-2">
+          <div className="col-lg-2  col-md-2 col-4">
             <img src={ss6} alt="img" />
           </div>
         </div>
@@ -45,7 +45,13 @@ export default function Section5() {
               Enjoy personalized advice and a free live consultation <br />
               with Keyzar experts for your dream ring
             </p>
-            <button onClick={()=>{navigate("/contactus")}}>Set an Appointment</button>
+            <button
+              onClick={() => {
+                navigate("/contactus");
+              }}
+            >
+              Set an Appointment
+            </button>
           </div>
           <div className="col-lg-6 col"></div>
         </div>
@@ -109,10 +115,20 @@ const Root = styled.section`
     }
   }
   @media (max-width: 567px) {
-
     .imgbanner {
       height: 300px;
     }
 
+    .col-lg-2 img {
+      margin-bottom: 10px;
+    }
+
+    .col-lg-6 p {
+      width: 60%;
+    }
+
+    .col-lg-6 button {
+      padding: 18px 10px;
+    }
   }
 `;

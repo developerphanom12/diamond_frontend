@@ -13,7 +13,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/Login/ForgetPassword";
 import Education from "./Components/Edu/Education";
-import { useSelector } from "react-redux";
 import RingDetails from "./Components/RingDetails/RingDetails";
 import DiamondDetails from "./Components/DiamondDetails/DiamondDetails";
 import { LoadingProvider } from "./Components/LoadingContext";
@@ -24,9 +23,7 @@ import ContactUs from "./Components/AllOrders/ContactUs";
  
 
 function App() {
-  const userCheck = useSelector((state) => state?.users?.userCheck);
-  const token = localStorage.getItem("token");
-  console.log("userCheck", userCheck);
+ 
   return (
     <div>
       <LoadingProvider>
@@ -49,11 +46,11 @@ function App() {
               <Route path="/contactus" element={<ContactUs />} />
 
 
-              {userCheck && token ? (
+           
                 <Route path="/checkout" element={<Checkout />} />
-              ) : (
+         
                 <Route path="/login" element={<Login />} />
-              )}
+            
             </>
           </Routes>
         </Layout>

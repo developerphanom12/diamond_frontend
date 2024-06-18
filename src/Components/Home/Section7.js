@@ -335,8 +335,14 @@ export default function Section7() {
                 </div>
               </div>
             </Slider>
-            <div style={{ width: "100%",textAlign:"center",marginBottom:"20px"}}>
-              <button className="btn">View More</button>
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                marginBottom: "20px",
+              }}
+            >
+              {/* <button className="btn">View More</button> */}
             </div>
           </div>
         </div>
@@ -418,4 +424,11 @@ const Root = styled.section`
   .d_flexx {
     display: flex;
   }
+
+  @media (max-width: 567px) {
+    h2 {
+    font-size: 20px;
+}
+  }
+
 `;

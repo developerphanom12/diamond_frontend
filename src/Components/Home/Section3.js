@@ -145,6 +145,13 @@ const Root = styled.section`
     background-image: url(${ringg4});
   }
   @media (max-width: 567px) {
+    padding: 0px 10px;
+ h2 {
+  
+    font-size: 20px;
+    margin-bottom:0;
+
+}
     .col-lg-3 {
       padding: 0px;
       gap: 20px;
@@ -161,9 +168,9 @@ const Root = styled.section`
     .col-lg-3.col3,
     .col-lg-3.col2,
     .col-lg-3.col1 {
-      height: 300px;
-      width: 46%;
-      margin-top: 10px;
+      width:100%;
+      margin-top:10px;
+      flex: unset;
     }
   }
 

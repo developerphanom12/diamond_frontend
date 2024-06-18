@@ -22,7 +22,7 @@ export default function Section2() {
   const [postValue, setPostValue] = useState({
     variant_id: selectedVariantId,
     price: totalPrice,
-    customerId: userDetails.id,
+    customerId: "7352326586586",
     diamondid: diamondId,
     address: {
       first_name: "",
@@ -85,13 +85,19 @@ export default function Section2() {
 
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
-    setPostValue((prev) => ({
-      ...prev,
-      address: {
-        ...prev.address,
-        [name]: value,
-      },
-    }));
+
+    // Check if the entered phone number is exactly 10 digits
+    if (name === "phone" && value.length > 10  && value.length < 10) {
+      toast.error("Phone number must be exactly 10 digits.");
+    } else {
+      setPostValue({
+        ...postValue,
+        address: {
+          ...postValue.address,
+          [name]: value,
+        },
+      });
+    }
   };
   return (
     <Check>

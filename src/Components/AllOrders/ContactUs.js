@@ -3,13 +3,14 @@ import axios from "axios";
 import { EXCHANGE_URLS } from "../URLS";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,9 +21,10 @@ const ContactUs = () => {
         message,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setResponseMessage("Thank you for contacting us!");
-        toast.success("Thankyou for contacting us")
+        toast.success("Thankyou for contacting us");
+        navigate("/home");
       } else {
         setResponseMessage("Something went wrong. Please try again later.");
       }
@@ -76,7 +78,7 @@ const Root = styled.section`
   justify-content: center;
   align-items: center;
   margin: 40px;
-  h2{
+  h2 {
     margin: 0;
   }
   form {
@@ -84,7 +86,7 @@ const Root = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin:10px 40px ;
+    margin: 10px 40px;
     padding: 0px 40px;
     width: 80%;
   }
@@ -96,7 +98,8 @@ const Root = styled.section`
     flex: 1;
     width: 80%;
     input,
-    textarea ,label{
+    textarea,
+    label {
       height: 50px;
       padding: 10px;
       width: 80%;
@@ -119,17 +122,19 @@ const Root = styled.section`
       transition-duration: 0.5s;
     }
   }
-  @media (max-width:797px){
-    form{
+  @media (max-width: 797px) {
+    form {
+      width: 100%;
+      padding: 0px 10px;
+      margin: 0px 10px;
+      .text_div {
         width: 100%;
-        padding: 0px 10px;
-        margin: 0px 10px;
-        .text_div{
-            width: 100%;
-            input,
-            textarea ,label{
-                width: 93%;}
+        input,
+        textarea,
+        label {
+          width: 93%;
         }
+      }
     }
   }
 `;

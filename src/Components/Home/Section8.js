@@ -163,7 +163,7 @@ export default function Section8() {
                 marginBottom: "20px",
               }}
             >
-              <button className="btn">Visit the Blog</button>
+              {/* <button className="btn">Visit the Blog</button> */}
             </div>
           </div>
         </div>
@@ -262,5 +262,9 @@ const Root = styled.section`
       transition-duration: 0.5s;
     }
   }
-
+  @media (max-width: 567px) {
+    h2 {
+    font-size: 20px;
+}
+  }
 `;

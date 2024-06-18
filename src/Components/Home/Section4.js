@@ -193,4 +193,18 @@ const Root = styled.section`
       }
     }
   }
+  @media (max-width: 567px) {
+    padding-top:30px;
+    h1{
+      font-size: 20px;
+    }
+
+     h1,  h4 {
+      font-size: 20px;
+
+}
+.sliderrr {
+    padding: 10px 0 30px;
+}
+  }
 `;

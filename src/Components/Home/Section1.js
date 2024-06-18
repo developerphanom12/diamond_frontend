@@ -143,9 +143,15 @@ const Root = styled.section`
         font-size: 16px;
         display: flex;
         flex-wrap: wrap;
+        letter-spacing: 5px;
       }
       h1 {
-        font-size: 40px;
+        font-size: 20px;
+      }
+      h4{
+        letter-spacing: 0;
+        margin-left:0;
+        font-size: 20px;
       }
       h6{
         justify-content: flex-start;

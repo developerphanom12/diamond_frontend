@@ -270,4 +270,10 @@ const Root = styled.section`
   .slick-next:before {
     color: #212529;
   }
+
+  @media (max-width: 567px) {
+    h2 {
+    font-size: 20px;
+}
+  }
 `;
