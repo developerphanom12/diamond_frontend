@@ -11,8 +11,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { EXCHANGE_URLS } from "../URLS";
 import { useSelector } from "react-redux";
+import { useLoading } from "../LoadingContext";
 
 export default function Section2() {
+  const { setLoading } = useLoading();
   const userDetails = useSelector((state) => state?.users.user);
   const location = useLocation();
   const { selectedVariantId, productId, diamondId, totalPrice } =
@@ -45,6 +47,7 @@ export default function Section2() {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchCountries = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`https://restcountries.com/v3.1/all`);
         const countryList = response.data.map((country) => ({
@@ -58,11 +61,13 @@ export default function Section2() {
         setCountries(countryList);
       } catch (error) {
         console.error("Error fetching countries:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCountries();
-  }, []);
+  }, [setLoading]);
   const appApi = async () => {
     try {
       const res = await axios.post(`${EXCHANGE_URLS}/ordercreate`, postValue);

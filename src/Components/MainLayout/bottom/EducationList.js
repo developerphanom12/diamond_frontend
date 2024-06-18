@@ -8,7 +8,7 @@ export default function EducationList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-6 col-6">
             <b>Diamonds</b>
             <ul>
               <li> 4 C'S</li>
@@ -18,7 +18,7 @@ export default function EducationList() {
               <li>Sparkle</li>
             </ul>
           </div>
-          <div className="col-lg-3" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3  col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
             <b>MOISSANITE & GEMSTONES</b>
             <div
               style={{
@@ -47,7 +47,7 @@ export default function EducationList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-3" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3  col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
             <b>ENGAGEMENT RINGS</b>
             <div
               style={{
@@ -71,7 +71,7 @@ export default function EducationList() {
             </div>
           </div>
           <div
-            className="col-lg-3"
+            className="col-lg-3  col-md-6 col-6"
             style={{
               borderLeft: "1px solid #ededed",
               padding: "0px",

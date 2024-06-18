@@ -29,6 +29,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { EXCHANGE_URLS } from "../URLS";
+import { useLoading } from "../LoadingContext";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -49,30 +50,23 @@ const cutOptions = ["GD", "VG", "EX"];
 const polishOptions = ["GD", "VG", "EX"];
 const symmetryOptions = ["GD", "VG", "EX"];
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const minDistance = 0.1;
-
 export default function Section2() {
   const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
-  const [selectedColors, setSelectedColors] = useState([]);
-  const [selectedClarity, setSelectedClarity] = useState([]);
-  const [selectedCut, setSelectedCut] = useState([]);
+  const [selectedColors, setSelectedColors] = useState(["F"]);
+  const [selectedClarity, setSelectedClarity] = useState(null);
+  const [selectedCut, setSelectedCut] = useState(null);
   const [selectedCarat, setSelectedCarat] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState([]);
   const [selectedCertificate, setSelectedCertificate] = useState({
     1: false,
     2: false,
   });
-  const [selectedPolish, setSelectedPolish] = useState([]);
-  const [selectedSymmetry, setSelectedSymmetry] = useState([]);
+  const [selectedPolish, setSelectedPolish] = useState(null);
+  const [selectedSymmetry, setSelectedSymmetry] = useState(null);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(2086918);
-  const [value1, setValue1] = React.useState([0.5, 11.5]);
   const [value, setValue] = useState([]);
-
+  const { setLoading } = useLoading();
   const dispatch = useDispatch();
   const { state } = useLocation();
   const typelabgrown = state ? state.labgrownValue : false;
@@ -83,20 +77,21 @@ export default function Section2() {
     }
 
     const diamondApi = async () => {
+      setLoading(true);
       try {
         const shapesParam = selectedShapes.length
           ? selectedShapes.join(",")
           : "ROUND";
-        const colors = selectedColors.join(",");
-        const clarity = selectedClarity.join(",");
-        const cut = selectedCut.join(",");
+        const colors = selectedColors ? selectedColors : "F";
+        const clarity = selectedClarity ? selectedClarity : "";
+        const cut = selectedCut ? selectedCut : "";
         const carat = selectedCarat.join(",");
         // const Budget = selectedBudget.join(",");
         // const lab = Object.keys(selectedCertificate).filter(
         //   (key) => selectedCertificate[key]
         // ).join(",");
-        const polish = selectedPolish.join(",");
-        const symmetry = selectedSymmetry.join(",");
+        const polish = selectedPolish ? selectedPolish : " ";
+        const symmetry = selectedSymmetry ? selectedSymmetry : "";
         //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
           `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&carat=${carat}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
@@ -110,6 +105,8 @@ export default function Section2() {
         }
       } catch (err) {
         console.error("err", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -126,6 +123,7 @@ export default function Section2() {
     selectedSymmetry,
     dispatch,
     typelabgrown,
+    setLoading,
   ]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
@@ -134,42 +132,25 @@ export default function Section2() {
   };
 
   const handleColorClick = (color) => {
-    setSelectedColors((prevColors) =>
-      prevColors.includes(color)
-        ? prevColors.filter((c) => c !== color)
-        : [...prevColors, color]
-    );
+    setSelectedColors((prevColor) => (prevColor === color ? null : color));
   };
-
   const handleButtonClarity = (clarity) => {
     setSelectedClarity((prevClarity) =>
-      prevClarity.includes(clarity)
-        ? prevClarity.filter((c) => c !== clarity)
-        : [...prevClarity, clarity]
+      prevClarity === clarity ? null : clarity
     );
   };
 
   const handleButtonCut = (cut) => {
-    setSelectedCut((prevCut) =>
-      prevCut.includes(cut)
-        ? prevCut.filter((c) => c !== cut)
-        : [...prevCut, cut]
-    );
+    setSelectedCut((prevCut) => (prevCut === cut ? null : cut));
+  };
+
+  const handleButtonPolish = (polish) => {
+    setSelectedPolish((prevPolish) => (prevPolish === polish ? null : polish));
   };
 
   const handleButtonSymmetry = (symmetry) => {
     setSelectedSymmetry((prevSymmetry) =>
-      prevSymmetry.includes(symmetry)
-        ? prevSymmetry.filter((s) => s !== symmetry)
-        : [...prevSymmetry, symmetry]
-    );
-  };
-
-  const handleButtonPolish = (polish) => {
-    setSelectedPolish((prevPolish) =>
-      prevPolish.includes(polish)
-        ? prevPolish.filter((p) => p !== polish)
-        : [...prevPolish, polish]
+      prevSymmetry === symmetry ? null : symmetry
     );
   };
 
@@ -251,7 +232,7 @@ export default function Section2() {
               {colorOptions.map((color, index) => (
                 <button
                   key={index}
-                  className={selectedColors.includes(color) ? "selected" : ""}
+                  className={selectedColors === color ? "selected" : ""}
                   onClick={() => handleColorClick(color)}
                 >
                   {color}
@@ -269,9 +250,7 @@ export default function Section2() {
               {clarityOptions.map((clarity, index) => (
                 <button
                   key={index}
-                  className={
-                    selectedClarity.includes(clarity) ? "selected" : ""
-                  }
+                  className={selectedClarity === clarity ? "selected" : ""}
                   onClick={() => handleButtonClarity(clarity)}
                 >
                   {clarity}
@@ -290,7 +269,7 @@ export default function Section2() {
               {cutOptions.map((cut, index) => (
                 <button
                   key={index}
-                  className={selectedCut.includes(cut) ? "selected" : ""}
+                  className={selectedCut === cut ? "selected" : ""}
                   onClick={() => handleButtonCut(cut)}
                 >
                   {cut}
@@ -420,15 +399,15 @@ export default function Section2() {
                     </div>
 
                     <section>
-                      {symmetryOptions.map((symm, index) => (
+                      {symmetryOptions.map((symmetry, index) => (
                         <button
                           key={index}
                           className={
-                            selectedSymmetry.includes(symm) ? "selected" : ""
+                            selectedSymmetry === symmetry ? "selected" : ""
                           }
-                          onClick={() => handleButtonSymmetry(symm)}
+                          onClick={() => handleButtonSymmetry(symmetry)}
                         >
-                          {symm}
+                          {symmetry}
                         </button>
                       ))}
                     </section>
@@ -443,7 +422,7 @@ export default function Section2() {
                         <button
                           key={index}
                           className={
-                            selectedPolish.includes(polish) ? "selected" : ""
+                            selectedPolish === polish ? "selected" : ""
                           }
                           onClick={() => handleButtonPolish(polish)}
                         >

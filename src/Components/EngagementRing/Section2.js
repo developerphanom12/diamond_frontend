@@ -15,6 +15,7 @@ import threestone from "../Images/ThreeStones-removebg-preview.png";
 import vintage from "../Images/Vintage-removebg-preview.png";
 import tension from "../Images/Tension-removebg-preview.png";
 import { EXCHANGE_URLS } from "../URLS";
+import { useLoading } from "../LoadingContext";
 
 const shapesList = [
   { title: "Solitaire", imgUrl: solitaire },
@@ -33,7 +34,7 @@ export default function Section2() {
   const [collection, setCollection] = useState([]);
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-
+  const { setLoading } = useLoading();
   const handleButtonClick = (buttonIndex, selectedRingSvg) => {
     setSelectedButton(buttonIndex);
     dispatch(setSelectedRingSvg(selectedRingSvg));  
@@ -41,6 +42,7 @@ export default function Section2() {
 
   useEffect(() => {
     const fetchCollections = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${EXCHANGE_URLS}/collection`
@@ -51,11 +53,13 @@ export default function Section2() {
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
+      }finally {
+        setLoading(false);
       }
     };
 
     fetchCollections();
-  }, []);
+  }, [    setLoading]);
 
   useEffect(() => {
     const fetchProductsDetails = async () => {
@@ -73,12 +77,14 @@ export default function Section2() {
           }
         } catch (error) {
           console.error("Error fetching products:", error);
+        }finally {
+          setLoading(false);
         }
       }
     };
 
     fetchProductsDetails();
-  }, [collection, selectedButton, dispatch]);
+  }, [collection, selectedButton, dispatch,    setLoading]);
 
   return (
     <Root>

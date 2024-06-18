@@ -27,6 +27,6 @@ const Root = styled.section`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden !important;
    
 `;

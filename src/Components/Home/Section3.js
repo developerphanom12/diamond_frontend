@@ -106,6 +106,7 @@ const Root = styled.section`
     background-size: 100% 100%;
     object-fit: contain;
     border-radius: 20px;
+    flex: 1;
     display: flex;
   }
   .col-lg-3.col1 {

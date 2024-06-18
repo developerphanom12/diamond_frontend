@@ -107,7 +107,7 @@ const Root = styled.section`
   }
   @media (max-width: 767px) {
     h3 {
-      font-size: 14px;
+      font-size: 16px;
     }
     .col-lg-4 {
       margin: 20px 0px;

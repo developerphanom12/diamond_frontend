@@ -6,6 +6,7 @@ import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import { setDiamondById } from "../../redux/users/action";
 import { useDispatch, useSelector } from "react-redux";
+import { useLoading } from "../LoadingContext";
 
 export default function Section4({ value }) {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -14,6 +15,7 @@ export default function Section4({ value }) {
   const dispatch = useDispatch();
   const [diamondByIdState, setDiamondByIdState] = useState("");
   console.log("valueue", diamondByIdState);
+  const { setLoading } = useLoading();
 
   const handleNavigate = (diamond) => {
     if (userCheck && token) {
@@ -26,7 +28,7 @@ export default function Section4({ value }) {
   // diamondbyId
   const handleNavigateDetail = async (value) => {
     const diamondId = value?.diamond?.id;
-
+    setLoading(true);
     try {
       const response = await axios.get(
         `${EXCHANGE_URLS}/diamondbyId?id=${diamondId}`
@@ -40,6 +42,8 @@ export default function Section4({ value }) {
       }
     } catch (error) {
       console.error("Error fetching diamond details:", error);
+    } finally {
+      setLoading(false);
     }
   };
 

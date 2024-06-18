@@ -15,14 +15,14 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function Section6() {
   const images = [
-      shape9,
-      shape8,
-      shape7,
-      shape6,
-      shape5,
-      shape4,
-      shape3,
-      shape2,
+    shape9,
+    shape8,
+    shape7,
+    shape6,
+    shape5,
+    shape4,
+    shape3,
+    shape2,
     shape1,
   ];
   const h2 = [
@@ -34,8 +34,7 @@ export default function Section6() {
     "marquise",
     "heart",
     "emerald",
-    "cushion"
-    
+    "cushion",
   ];
   const text = [
     "The classic shape with the 58 facet Sparkler",
@@ -46,8 +45,7 @@ export default function Section6() {
     "Long, narrow sparkle buster",
     "A romantic statement of your love - FOREVER",
     "Long, clean lines create the Hall of Mirrors",
-    "Cozy rounded corners with large brilliant facets"
-    
+    "Cozy rounded corners with large brilliant facets",
   ];
 
   const imageSliderRef = useRef(null);
@@ -157,7 +155,7 @@ const Root = styled.section`
     text-align: center;
     font-weight: 400;
     width: 100%;
-    text-transform: capitalize; 
+    text-transform: capitalize;
   }
   p {
     text-align: center;
@@ -167,7 +165,6 @@ const Root = styled.section`
   outline: none;
   .sliderrr {
     padding: 10px 0 40px;
-
 
     img {
       width: 100%;

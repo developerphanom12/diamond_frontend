@@ -98,7 +98,7 @@ const Root = styled.section`
   border-top: 0.5px solid #dadbddab;
   box-shadow: 1px 3px 6px 1px #d3d3d36b;
   background-color: #fff !important;
-  z-index: 11;
+  z-index: 1;
   position: relative;
   display: flex !important;
 
@@ -128,7 +128,7 @@ const Root = styled.section`
     min-width: 100vw;
     width: 100%;
     background-color: #fff;
-    z-index: 11;
+    z-index: 1;
     left: 0;
     /* right: -350px; */
     font-size: 14px;

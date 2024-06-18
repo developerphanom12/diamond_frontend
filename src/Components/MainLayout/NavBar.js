@@ -52,7 +52,7 @@ export default function NavBar() {
 const Root = styled.section`
   font-family: "ProximaNova", "sans-serif";
   border-bottom: 1px solid #f2f2f2;
-  z-index: 11110011;
+  z-index: 11;
   position: sticky;
   h2 {
     text-transform: uppercase;

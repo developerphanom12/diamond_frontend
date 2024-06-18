@@ -4,19 +4,28 @@ import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
- import ring from "../Images/Solitaire-removebg-preview.png"
+import ring from "../Images/Solitaire-removebg-preview.png";
 import { CiCircleCheck } from "react-icons/ci";
-
+import { setDiamondType } from "../../redux/users/action";
+import { useDispatch } from "react-redux";
 
 export default function Section1() {
-  const [selectedButton, setSelectedButton] = useState(2);
-  const handleButtonClick = (buttonIndex) => {
-    setSelectedButton(buttonIndex);
-  };
+  const [selectedButton, setSelectedButton] = useState(false);
+
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleModalNavigate = (labgrownValue, buttonIndex) => {
+    console.log("Navigating with labgrownValue:", labgrownValue);
+    dispatch(setDiamondType(labgrownValue));
+    setSelectedButton(buttonIndex);
+    setmodal(false); 
+    navigate("/naturaldiamond", {
+      state: { labgrownValue },
+    });
+  };
 
   return (
     <Root>
@@ -40,7 +49,6 @@ export default function Section1() {
                 </div>
               </div>
               <CiCircleCheck />
-
             </div>
           </div>
 
@@ -54,7 +62,6 @@ export default function Section1() {
                 </div>
               </div>
               <CiCircleCheck />
-
             </div>
           </div>
 
@@ -68,7 +75,6 @@ export default function Section1() {
                 </div>
               </div>
               <CiCircleCheck />
-
             </div>
           </div>
         </div>
@@ -80,8 +86,8 @@ export default function Section1() {
 
         <div className="two_btn">
           <button
-            className={selectedButton === 1 ? "selected" : ""}
-            onClick={() => handleButtonClick(1)}
+            className={selectedButton === true ? "selected" : ""}
+            onClick={() => handleModalNavigate(true,true)}
           >
             <img
               src={labgrown}
@@ -92,8 +98,8 @@ export default function Section1() {
           </button>
 
           <button
-            className={selectedButton === 2 ? "selected" : ""}
-            onClick={() => handleButtonClick(2)}
+            className={selectedButton === false ? "selected" : ""}
+            onClick={() => handleModalNavigate(false,false)}
           >
             <img
               src={ndia}
@@ -118,11 +124,11 @@ export default function Section1() {
                 navigate("/engagementring");
               }}
             >
-           <img
-              src={ring}
-              alt="img of natural diamond"
-              style={{ width: "42px" }}
-            />
+              <img
+                src={ring}
+                alt="img of natural diamond"
+                style={{ width: "42px" }}
+              />
               <span>Engagement Ring</span>
             </div>
           </div>
@@ -135,59 +141,32 @@ export default function Section1() {
         style={{ zIndex: "111111", position: "relative" }}
       >
         <ModalHeader toggle={() => setmodal(!modal)}></ModalHeader>
-
         <CustomModalBody>
           <h5>Before we continue</h5>
           <h2>CHOOSE YOUR CENTER STONE</h2>
           <div className="choose_option">
             <div
               className="ring_pandet"
-              onClick={() => {
-                navigate("/naturaldiamond");
-              }}
+              onClick={() => handleModalNavigate(false,false)}
             >
               <img
                 src={ndia}
                 alt="img of natural diamond"
-                style={{ width: "42px" }}
+                style={{ width: "52px" }}
               />
               <span>Natural Diamond</span>
             </div>
-            <div className="ring_pandet">
+            <div
+              className="ring_pandet"
+              onClick={() => handleModalNavigate(true,true)}
+            >
               <img
                 src={labgrown}
                 alt="img of lab grown diamond"
-                style={{ width: "42px" }}
+                style={{ width: "52px" }}
               />
               <span>Lab Diamond</span>
             </div>
-
-            {/* <div
-              className="ring_pandet"
-              onClick={() => {
-                navigate("/gemstone");
-              }}
-            >
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.94139 16.0419C5.53661 16.0419 3.58022 14.079 3.58022 11.6669C3.58022 11.4441 3.60199 11.2254 3.63495 11.0097C4.09963 11.1733 4.56248 11.2591 5.0174 11.2591C5.10773 11.2591 5.19807 11.2559 5.2884 11.2494C5.81167 11.2111 6.18196 11.0736 6.54002 10.9401C6.88507 10.8124 7.2106 10.6911 7.67527 10.6521C7.95939 10.6272 8.24636 10.6413 8.53567 10.6882L8.88519 10.3385C8.46466 10.2417 8.04779 10.2021 7.64109 10.237C7.11944 10.2809 6.75079 10.4177 6.39516 10.5495C6.04847 10.6781 5.72133 10.8002 5.25747 10.8343C4.76146 10.8701 4.24723 10.7862 3.72853 10.5978C4.10837 9.10644 5.2477 7.88004 6.77521 7.45462L7.00388 7.39115V4.69991H8.87888V7.39115L9.10756 7.45462C10.1887 7.75532 11.0713 8.46262 11.6358 9.37499H12.3664C11.7774 8.23781 10.763 7.33896 9.50388 6.92239V4.6999H10.0247C10.1972 4.6999 10.3372 4.55992 10.3372 4.3874C10.3372 4.21487 10.1972 4.0749 10.0247 4.0749H9.50388V4.07408H6.37888V4.0749H5.85805C5.68552 4.0749 5.54555 4.21487 5.54555 4.3874C5.54555 4.55992 5.68552 4.6999 5.85805 4.6999H6.37888V6.92239C4.3517 7.59377 2.95522 9.5111 2.95522 11.6669C2.95522 14.424 5.19236 16.6669 7.94138 16.6669C8.74176 16.6669 9.49595 16.4722 10.1669 16.1346L9.66033 15.685C9.13227 15.9133 8.55193 16.0419 7.94138 16.0419H7.94139Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  d="M15.554 10H10.1076L7.32839 12.7793L12.8285 17.6613L18.3242 12.7875H18.3243L18.3333 12.7793L15.554 10ZM10.3665 10.625H13.3115L14.8327 12.8037L12.7929 16.794L8.23934 12.7523L10.3665 10.625H10.3665ZM13.5903 16.1503L15.3177 12.7712L13.8201 10.625H15.2951L17.4222 12.7521L13.5903 16.1503V16.1503Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  d="M10.6499 12.7344L11.1764 11.4201L9.75697 12.8396L12.566 15.333L10.6499 12.7344Z"
-                  fill="currentColor"
-                ></path>
-              </svg>{" "}
-              <span>Gemstones & Moissanite</span>
-            </div> */}
           </div>
         </CustomModalBody>
       </Modal>
@@ -210,7 +189,7 @@ const Root = styled.section`
     align-items: center;
     padding: 10px 15px;
     border-radius: 10px;
-     
+
     h2 {
       font-size: 40px;
       font-weight: 400;
@@ -298,6 +277,8 @@ const Root = styled.section`
       &.selected {
         border: 2px solid black;
         border-radius: 10px;
+        font-weight: 600;
+  
       }
     }
     svg {
@@ -313,6 +294,8 @@ const Root = styled.section`
 `;
 
 const CustomModalBody = styled(ModalBody)`
+  position: relative;
+  z-index: 1212121;
   padding: 30px 85px 50px;
   text-align: center;
   /* *{text-align:center;
@@ -331,17 +314,25 @@ const CustomModalBody = styled(ModalBody)`
     z-index: 1111;
     justify-content: center;
     margin-top: 20px;
+
     .ring_pandet {
       flex-direction: column;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      &.selected {
+        border: 2px solid black;
+        border-radius: 10px;
+        font-weight: 600;
+      }
       svg {
         width: 56px;
         height: 56px;
+        cursor: pointer;
       }
       span {
+        cursor: pointer;
         font-size: 14px;
       }
     }

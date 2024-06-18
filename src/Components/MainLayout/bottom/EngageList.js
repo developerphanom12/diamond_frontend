@@ -30,30 +30,29 @@ export default function EngageList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-mg-6 col-6">
             <b>Design your engagement ring</b>
             <ul>
               <li>
                 {" "}
                 <img src={rinfWdiamond} alt="img" />
-                Start with a setting
+                <a href="engagementring">Start with a setting</a>
               </li>
               <li>
                 {" "}
                 <img src={naturaldiamond} alt="img" />
-                Start with a Natural Diamond
+                <a href="naturaldiamond"> Start with a Natural Diamond</a>
               </li>
               <li>
                 <img src={labgrown} alt="img" />
                 Start with a Lab-created Diamond
               </li>
-              {/* <li>
-               
-                Start with a Gemstone
-              </li> */}
             </ul>
           </div>
-          <div className="col-lg-3" style={{ borderLeft: "1px solid #ededed" }}>
+          <div
+            className="col-lg-3 col-mg-6 col-6"
+            style={{ borderLeft: "1px solid #ededed" }}
+          >
             <b>Present Engagement Rings</b>
             <div
               style={{
@@ -110,7 +109,10 @@ export default function EngageList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-4" style={{ borderLeft: "1px solid #ededed" }}>
+          <div
+            className="col-lg-4 col-md-8 col-8"
+            style={{ borderLeft: "1px solid #ededed" }}
+          >
             <b>Shop By Style</b>
             <div
               style={{
@@ -164,7 +166,10 @@ export default function EngageList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-2" style={{ borderLeft: "1px solid #ededed" }}>
+          <div
+            className="col-lg-2 col-md-4 col-4"
+            style={{ borderLeft: "1px solid #ededed" }}
+          >
             <b>Shop By Metal</b>
             <ul>
               <li style={{ display: "flex", alignItems: "center" }}>
@@ -207,7 +212,13 @@ const Root = styled.section`
       font-size: 15px;
       margin: 10px 0px;
       cursor: pointer;
-
+      a {
+        text-decoration: none;
+        color: black;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
   svg,

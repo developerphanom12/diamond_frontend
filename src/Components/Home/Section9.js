@@ -30,25 +30,25 @@ export default function Section9() {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   const sliderRef = useRef(null);
 
@@ -70,7 +70,7 @@ export default function Section9() {
           <div className="col-lg-12 pt-4 pb-5" style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>Our Couples</h2>{" "}
-              <div>
+              <div style={{ padding: "20px 0px" }}>
                 <button onClick={goToPrevSlide}>
                   {" "}
                   <IoIosArrowBack />
@@ -136,7 +136,7 @@ export default function Section9() {
               </div>
               <div className="col-lg-3 col5">
                 <div className="content_div">
-                <h3>Grace Anne & Chad Byrd</h3>
+                  <h3>Grace Anne & Chad Byrd</h3>
                   <p>
                     We had talked about getting engaged for a while and Chad
                     wanted to surprise me. He knew...
@@ -162,7 +162,7 @@ export default function Section9() {
               </div>
               <div className="col-lg-3 col1">
                 <div className="content_div">
-                <h3>Grace Anne & Chad Byrd</h3>
+                  <h3>Grace Anne & Chad Byrd</h3>
                   <p>
                     We had talked about getting engaged for a while and Chad
                     wanted to surprise me. He knew...
@@ -265,7 +265,6 @@ const Root = styled.section`
     margin: 20px 0px;
     padding: 5px;
     display: none;
-
   }
   .slick-prev:before,
   .slick-next:before {

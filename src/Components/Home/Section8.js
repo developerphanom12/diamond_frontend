@@ -70,7 +70,7 @@ export default function Section8() {
           <div className="col-lg-12 pt-4" style={{ textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2>The Jewelry Blog</h2>{" "}
-              <div>
+              <div style={{ padding: "20px 0px" }}>
                 <button onClick={goToPrevSlide}>
                   {" "}
                   <IoIosArrowBack />

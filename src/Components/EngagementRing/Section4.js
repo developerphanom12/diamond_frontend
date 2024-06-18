@@ -170,15 +170,7 @@ export default function Section4({ products }) {
               <span>Lab Diamond</span>
             </div>
 
-            {/* <div
-              className="ring_pandet"
-              onClick={() => {
-                navigate("/gemstone");
-              }}
-            >
-              <img src={gem} alt="img"/>
-              <span>Gemstones & Moissanite</span>
-            </div> */}
+            
           </div>
         </CustomModalBody>
       </Modal>

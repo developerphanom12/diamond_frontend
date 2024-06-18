@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Section3 from "./Section3";
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import ring from "../Images/ring.png";
@@ -14,6 +13,7 @@ import lifet from "../Images/certifiedd.png";
 import monyy from "../Images/moneyinhand.png";
 import badgedd from "../Images/badgess.png"
 import RingShipReturn from "../DiamondDetails/RingShipReturn";
+import { useLoading } from "../LoadingContext";
 
 
 
@@ -25,6 +25,7 @@ export default function Section2() {
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedVariantId, setSelectedVariantId] = useState("");
   const navigate = useNavigate();
+  const { setLoading } = useLoading();
 
   const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
@@ -65,6 +66,7 @@ export default function Section2() {
     parseFloat(diamond?.price || 0);
 
   useEffect(() => {
+    setLoading(true);
     const fetchCollections = async () => {
       try {
         const response = await axios.get(
@@ -79,13 +81,19 @@ export default function Section2() {
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
+      }finally{
+        setLoading(false);
       }
     };
     fetchCollections();
-  }, [productIds.id, selectedSize]);
+  }, [productIds.id, selectedSize,setLoading]);
 
   const handleCheckout = () => {
     if (userCheck && token) {
+      if (!selectedSize) {
+        alert("Please select a ring size before proceeding to checkout.");
+        return;
+      }
       navigate("/checkout", {
         state: {
           diamond: diamond?.diamond,

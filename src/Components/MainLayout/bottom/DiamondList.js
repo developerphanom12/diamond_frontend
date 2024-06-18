@@ -19,13 +19,13 @@ export default function DiamondList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-6 col-6">
             <b>Design your Diamond ring</b>
             <ul>
               <li>
                 {" "}
                 <img src={rinfWdiamond} alt="img" />
-                Start with a setting
+                <a href="naturaldiamond">Start with a setting</a>
               </li>
               <li>
                 {" "}
@@ -38,7 +38,7 @@ export default function DiamondList() {
               </li>
             </ul>
           </div>
-          <div className="col-lg-3" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3 col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
             <b>Shop Natural Diamond By Shape</b>
             <div
               style={{
@@ -96,7 +96,7 @@ export default function DiamondList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-3" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3 col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
             <b>Shop Natural Diamond By Shape</b>
             <div
               style={{
@@ -157,7 +157,7 @@ export default function DiamondList() {
             </div>
           </div>
           <div
-            className="col-lg-3"
+            className="col-lg-3 col-md-6 col-6"
             style={{
               borderLeft: "1px solid #ededed",
               padding: "0px",
@@ -193,6 +193,10 @@ const Root = styled.section`
       font-size: 15px;
       margin: 10px 0px;
       cursor: pointer;
+      a{
+        text-decoration: none;
+        color: black;
+      }
     }
   }
   svg,
