@@ -85,7 +85,7 @@ export default function Section2() {
         const colors = selectedColors ? selectedColors.join(",") : "F";
         const clarity = selectedClarity ? selectedClarity.join(",")  : "VVS2";
         const cut = selectedCut ? selectedCut.join(",")  : "VG";
-        const carat = selectedCarat.join(",");
+        // const carat = selectedCarat.join(",");
         // const Budget = selectedBudget.join(",");
         // const lab = Object.keys(selectedCertificate).filter(
         //   (key) => selectedCertificate[key]
@@ -94,7 +94,7 @@ export default function Section2() {
         const symmetry = selectedSymmetry ? selectedSymmetry.join(",")  : "VG";
         //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
-          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&carat=${carat}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
         );
         if (resp?.status === 200) {
           setValue(resp?.data?.items);
