@@ -111,7 +111,7 @@ export default function Section1() {
         </div>
       </div>
 
-      <Modal isOpen={modal1} toggle={() => setmodal1(!modal1)}>
+      <Modal isOpen={modal1} toggle={() => setmodal1(!modal1)}      style={{ zIndex: "111111", position: "relative" ,top:"26%"}}>
         <ModalHeader toggle={() => setmodal1(!modal1)}></ModalHeader>
 
         <CustomModalBody>
@@ -138,7 +138,7 @@ export default function Section1() {
       <Modal
         isOpen={modal}
         toggle={() => setmodal(!modal)}
-        style={{ zIndex: "111111", position: "relative" }}
+        style={{ zIndex: "111111", position: "relative" ,top:"26%"}}
       >
         <ModalHeader toggle={() => setmodal(!modal)}></ModalHeader>
         <CustomModalBody>
@@ -298,6 +298,7 @@ const CustomModalBody = styled(ModalBody)`
   z-index: 1212121;
   padding: 30px 85px 50px;
   text-align: center;
+  
   /* *{text-align:center;
   } */
 
@@ -339,5 +340,7 @@ const CustomModalBody = styled(ModalBody)`
   }
   .modal-dialog {
     margin-top: 82px !important;
+    top: 26% !important;
+
   }
 `;

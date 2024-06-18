@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { CiCircleCheck } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 export default function Section1() {
+  const navigate = useNavigate();
   return (
     <Root>
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-4 col-md-12 col-12">
-            <div className="column">
+            <div
+              className="column"
+              onClick={() => {
+                navigate("/engagementring");
+              }}
+            >
               <div className="d-flex ">
                 <h2>1</h2>
                 <div className="flex-column">
@@ -20,7 +27,7 @@ export default function Section1() {
               <div className="view_cont">
                 <h5>The Riley</h5>
                 <div className="view_btn">
-                  <h5>View/Change</h5>
+                  <h5>View</h5>
                   <p>$450</p>
                 </div>
               </div>
@@ -30,7 +37,12 @@ export default function Section1() {
           </div>
 
           <div className="col-lg-4 col-md-12 col-12">
-            <div className="column ">
+            <div
+              className="column "
+              onClick={() => {
+                navigate("/naturaldiamond");
+              }}
+            >
               <div className="d-flex">
                 <h2>2</h2>
                 <div className="flex-column">
@@ -41,12 +53,11 @@ export default function Section1() {
               <div className="view_cont">
                 <h5>The Riley</h5>
                 <div className="view_btn">
-                  <h5>View/Change</h5>
+                  <h5>View</h5>
                   <p>$450</p>
                 </div>
               </div>
               <CiCircleCheck />
-
             </div>
           </div>
 
@@ -63,13 +74,12 @@ export default function Section1() {
               <div className="view_cont">
                 <h5>The Riley</h5>
                 <div className="view_btn">
-                  <h5>View/Change</h5>
+                  <h5>View</h5>
                   <p>$450</p>
                 </div>
               </div>
 
               <CiCircleCheck />
-
             </div>
           </div>
         </div>

@@ -64,7 +64,7 @@ export default function Section2() {
   const [selectedPolish, setSelectedPolish] = useState(null);
   const [selectedSymmetry, setSelectedSymmetry] = useState(null);
   const [mincount, setminCount] = useState(181);
-  const [maxcount, setmaxCount] = useState(2086918);
+  const [maxcount, setmaxCount] = useState(502086918);
   const [value, setValue] = useState([]);
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
@@ -82,16 +82,16 @@ export default function Section2() {
         const shapesParam = selectedShapes.length
           ? selectedShapes.join(",")
           : "ROUND";
-        const colors = selectedColors ? selectedColors : "F";
-        const clarity = selectedClarity ? selectedClarity : "";
-        const cut = selectedCut ? selectedCut : "";
+        const colors = selectedColors ? selectedColors.join(",") : "F";
+        const clarity = selectedClarity ? selectedClarity.join(",")  : "VVS2";
+        const cut = selectedCut ? selectedCut.join(",")  : "VG";
         const carat = selectedCarat.join(",");
         // const Budget = selectedBudget.join(",");
         // const lab = Object.keys(selectedCertificate).filter(
         //   (key) => selectedCertificate[key]
         // ).join(",");
-        const polish = selectedPolish ? selectedPolish : " ";
-        const symmetry = selectedSymmetry ? selectedSymmetry : "";
+        const polish = selectedPolish ? selectedPolish.join(",")    : "VG";
+        const symmetry = selectedSymmetry ? selectedSymmetry.join(",")  : "VG";
         //&carat=${carat}&Budget=${Budget}&lab=${lab}
         const resp = await axios.get(
           `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&carat=${carat}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
