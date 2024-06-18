@@ -31,7 +31,9 @@ export default function Section1() {
           >
             shop engagement rings
           </button>
-          <button>shop lab diamonds</button>
+          <button  onClick={() => {
+              navigate("/naturaldiamond");
+            }} >shop lab diamonds</button>
           <h6>
             apply code <b> earth </b> at checkout
           </h6>

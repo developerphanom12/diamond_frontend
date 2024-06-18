@@ -7,8 +7,10 @@ import ss4 from "../Images/s4.png";
 import ss5 from "../Images/s5.png";
 import ss6 from "../Images/s6.png";
 import Gbgimg from "../Images/girlbanner.webp";
+import { useNavigate } from "react-router-dom";
 
 export default function Section5() {
+  const navigate = useNavigate();
   return (
     <Root>
       <div className="container-fluid" style={{ padding: "40px 24px" }}>
@@ -43,7 +45,7 @@ export default function Section5() {
               Enjoy personalized advice and a free live consultation <br />
               with Keyzar experts for your dream ring
             </p>
-            <button>Set an Appointment</button>
+            <button onClick={()=>{navigate("/contactus")}}>Set an Appointment</button>
           </div>
           <div className="col-lg-6 col"></div>
         </div>

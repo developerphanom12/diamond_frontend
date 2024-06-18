@@ -7,27 +7,31 @@ import axios from "axios";
 import { setDiamondById } from "../../redux/users/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoading } from "../LoadingContext";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import ring from "../Images/Solitaire-removebg-preview.png";
 
 export default function Section4({ value }) {
-  const userCheck = useSelector((state) => state?.users?.userCheck);
-  const token = localStorage.getItem("token");
+  const [modal1, setModal1] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [diamondByIdState, setDiamondByIdState] = useState("");
-  console.log("valueue", diamondByIdState);
   const { setLoading } = useLoading();
+  const productIds = useSelector((state) => state.users.productIds);
+
+  console.log("productIds in Section4:", productIds.id);
 
   const handleNavigate = (diamond) => {
-    if (userCheck && token) {
-      navigate("/productpage", { state: { diamond } });
-    } else {
-      window.open("/login", "_blank"); // Opens the login page in a new tab
-    }
+    productIds?.id && productIds?.id?.length > 0
+      ? navigate("/productpage", { state: { diamond } })
+      : setModal1(true);
   };
-
   // diamondbyId
   const handleNavigateDetail = async (value) => {
     const diamondId = value?.diamond?.id;
+    if (!productIds || productIds.length === undefined) {
+      setModal1(true); // Show modal if productIds is not selected
+      return;
+    }
     setLoading(true);
     try {
       const response = await axios.get(
@@ -35,7 +39,6 @@ export default function Section4({ value }) {
       );
       if (response?.status === 200) {
         const diamondData = response?.data?.diamondData;
-        console.log("reponsee", diamondData);
         setDiamondByIdState(diamondData);
         dispatch(setDiamondById(diamondData));
         navigate("/diamonddetails");
@@ -119,6 +122,34 @@ export default function Section4({ value }) {
             );
           })}
       </div>
+      <Modal
+        isOpen={modal1}
+        toggle={() => setModal1(!modal1)}
+        style={{ zIndex: "111111", position: "relative", top: "26%" }}
+        onClose={() => setModal1(false)}
+      >
+        <ModalHeader toggle={() => setModal1(!modal1)}></ModalHeader>
+
+        <CustomModalBody>
+          <h5>Before we continue</h5>
+          <h2>CHOOSE YOUR SETTING</h2>
+          <div className="choose_option">
+            <div
+              className="ring_pandet"
+              onClick={() => {
+                navigate("/engagementring");
+              }}
+            >
+              <img
+                src={ring}
+                alt="img of natural diamond"
+                style={{ width: "42px" }}
+              />
+              <span>Engagement Ring</span>
+            </div>
+          </div>
+        </CustomModalBody>
+      </Modal>
     </Root>
   );
 }
@@ -172,11 +203,9 @@ const Root = styled.section`
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            /* transition:0.2s; */
           }
           p {
             font-size: 10px;
-            /* transition:0.2s; */
           }
         }
       }
@@ -257,5 +286,55 @@ const Root = styled.section`
     .main_div {
       justify-content: center;
     }
+  }
+`;
+const CustomModalBody = styled(ModalBody)`
+  position: relative;
+  z-index: 1212121;
+  padding: 30px 85px 50px;
+  text-align: center;
+
+  /* *{text-align:center;
+  } */
+
+  h2 {
+    font-size: 25px;
+    margin-top: 20px;
+    color: #000000;
+    font-weight: 700;
+  }
+  .choose_option {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    z-index: 1111;
+    justify-content: center;
+    margin-top: 20px;
+
+    .ring_pandet {
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &.selected {
+        border: 2px solid black;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+      svg {
+        width: 56px;
+        height: 56px;
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+  }
+  .modal-dialog {
+    margin-top: 82px !important;
+    top: 26% !important;
   }
 `;

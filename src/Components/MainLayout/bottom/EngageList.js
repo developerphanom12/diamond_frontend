@@ -45,7 +45,8 @@ export default function EngageList() {
               </li>
               <li>
                 <img src={labgrown} alt="img" />
-                Start with a Lab-created Diamond
+                <a href="naturaldiamond">   Start with a Lab-created Diamond</a>
+              
               </li>
             </ul>
           </div>

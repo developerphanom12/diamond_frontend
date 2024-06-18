@@ -5,8 +5,11 @@ import ringg3 from "../Images/ringgg3.webp";
 import ringg2 from "../Images/ringgg2.webp";
 import ringg4 from "../Images/ringgg4.webp";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function Section3() {
+  const navigate = useNavigate();
+
   return (
     <Root>
       <div className="container-fluid mb-8">
@@ -23,7 +26,12 @@ export default function Section3() {
           <div className="col-lg-3 col-md-6 col-6 col1">
             <div className="content_div">
               <h3>Engagement ring</h3>
-              <div className="shop">
+              <div
+                className="shop"
+                onClick={() => {
+                  navigate("/engagementring");
+                }}
+              >
                 shop now <IoIosArrowForward />
               </div>
             </div>
@@ -31,7 +39,12 @@ export default function Section3() {
           <div className="col-lg-3  col-md-6 col-6  col2">
             <div className="content_div">
               <h3>Wedding bands</h3>
-              <div className="shop">
+              <div
+                className="shop"
+                onClick={() => {
+                  navigate("/engagementring");
+                }}
+              >
                 shop now <IoIosArrowForward />
               </div>
             </div>
@@ -39,7 +52,12 @@ export default function Section3() {
           <div className="col-lg-3  col-md-6 col-6  col3">
             <div className="content_div">
               <h3>fine jewelry</h3>
-              <div className="shop">
+              <div
+                className="shop"
+                onClick={() => {
+                  navigate("/engagementring");
+                }}
+              >
                 shop now <IoIosArrowForward />
               </div>
             </div>
@@ -47,7 +65,12 @@ export default function Section3() {
           <div className="col-lg-3  col-md-6 col-6  col4">
             <div className="content_div">
               <h3>eternity rings</h3>
-              <div className="shop">
+              <div
+                className="shop"
+                onClick={() => {
+                  navigate("/engagementring");
+                }}
+              >
                 shop now <IoIosArrowForward />
               </div>
             </div>
@@ -138,7 +161,6 @@ const Root = styled.section`
     .col-lg-3.col3,
     .col-lg-3.col2,
     .col-lg-3.col1 {
-  
       height: 300px;
       width: 46%;
       margin-top: 10px;
@@ -150,11 +172,9 @@ const Root = styled.section`
     .col-lg-3.col3,
     .col-lg-3.col2,
     .col-lg-3.col1 {
-  
       height: 300px;
       width: 48%;
       margin-top: 10px;
     }
-
   }
 `;

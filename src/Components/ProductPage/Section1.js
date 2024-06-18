@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { CiCircleCheck } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Section1() {
   const navigate = useNavigate();
+  const productIds = useSelector((state) => state.users.productIds);
+  const location = useLocation();
+  const { diamond } = location.state || {};
+  
   return (
     <Root>
       <div className="container-fluid">
@@ -25,10 +30,10 @@ export default function Section1() {
               </div>
 
               <div className="view_cont">
-                <h5>The Riley</h5>
+                <h5>{productIds?.title}</h5>
                 <div className="view_btn">
                   <h5>View</h5>
-                  <p>$450</p>
+                  <p>${productIds?.priceRange?.minVariantPrice?.amount}</p>
                 </div>
               </div>
 
@@ -51,10 +56,10 @@ export default function Section1() {
                 </div>
               </div>
               <div className="view_cont">
-                <h5>The Riley</h5>
+                <h5>{diamond?.diamond?.certificate?.carats}ct,{diamond?.diamond?.certificate?.cut}cut,{diamond?.diamond?.certificate?.color},{diamond?.diamond?.certificate?.shape} </h5>
                 <div className="view_btn">
                   <h5>View</h5>
-                  <p>$450</p>
+                  <p>${diamond?.price}</p>
                 </div>
               </div>
               <CiCircleCheck />
@@ -72,11 +77,7 @@ export default function Section1() {
               </div>
 
               <div className="view_cont">
-                <h5>The Riley</h5>
-                <div className="view_btn">
-                  <h5>View</h5>
-                  <p>$450</p>
-                </div>
+                
               </div>
 
               <CiCircleCheck />

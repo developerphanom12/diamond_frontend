@@ -11,11 +11,9 @@ import ringdiam from "../Images/ringwithdiamond.png";
 import overn from "../Images/aeroplane.png";
 import lifet from "../Images/certifiedd.png";
 import monyy from "../Images/moneyinhand.png";
-import badgedd from "../Images/badgess.png"
+import badgedd from "../Images/badgess.png";
 import RingShipReturn from "../DiamondDetails/RingShipReturn";
 import { useLoading } from "../LoadingContext";
-
-
 
 export default function Section2() {
   const userCheck = useSelector((state) => state?.users?.userCheck);
@@ -81,12 +79,12 @@ export default function Section2() {
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
-      }finally{
+      } finally {
         setLoading(false);
       }
     };
     fetchCollections();
-  }, [productIds.id, selectedSize,setLoading]);
+  }, [productIds.id, selectedSize, setLoading]);
 
   const handleCheckout = () => {
     if (userCheck && token) {
@@ -105,8 +103,6 @@ export default function Section2() {
           selectedSize: selectedSize,
         },
       });
-    } else {
-      window.open("/login", "_blank"); // Opens the login page in a new tab
     }
   };
   return (
@@ -287,7 +283,11 @@ export default function Section2() {
 
           <div className="policy">
             <div className="policy_type">
-            <img src={overn} alt="img" style={{width:"35px",height:"35px"}}/>
+              <img
+                src={overn}
+                alt="img"
+                style={{ width: "35px", height: "35px" }}
+              />
               <p>
                 Overnight <br />
                 Shipping
@@ -295,7 +295,11 @@ export default function Section2() {
             </div>
 
             <div className="policy_type">
-            <img src={badgedd} alt="img" style={{width:"50px",height:"50px"}}/>
+              <img
+                src={badgedd}
+                alt="img"
+                style={{ width: "50px", height: "50px" }}
+              />
 
               <p>
                 Lifetime <br></br>Warranty
@@ -303,7 +307,11 @@ export default function Section2() {
             </div>
 
             <div className="policy_type">
-            <img src={monyy} alt="img" style={{width:"35px",height:"35px"}}/>
+              <img
+                src={monyy}
+                alt="img"
+                style={{ width: "35px", height: "35px" }}
+              />
 
               <p>
                 30 Days <br></br>Free Return
@@ -311,7 +319,11 @@ export default function Section2() {
             </div>
 
             <div className="policy_type">
-            <img src={lifet} alt="img" style={{width:"35px",height:"35px"}}/>
+              <img
+                src={lifet}
+                alt="img"
+                style={{ width: "35px", height: "35px" }}
+              />
 
               <p>
                 Certificate
@@ -457,9 +469,9 @@ const Root = styled.section`
       }
 
       .plus_sign {
-        position:absolute;
-        z-index:1111;
-        transform:translate(265px, 0);
+        position: absolute;
+        z-index: 1111;
+        transform: translate(265px, 0);
         span {
           border: 1px solid rgba(0, 0, 0);
           padding: 0px 6px 3px 6px;

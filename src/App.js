@@ -18,6 +18,7 @@ import RingDetails from "./Components/RingDetails/RingDetails";
 import DiamondDetails from "./Components/DiamondDetails/DiamondDetails";
 import { LoadingProvider } from "./Components/LoadingContext";
 import LoaderDot from "./Components/LoaderDot";
+import ContactUs from "./Components/AllOrders/ContactUs";
  
 
  
@@ -45,6 +46,8 @@ function App() {
               <Route path="/productpage" element={<ProductPage />} />
               <Route path="/ringdetails" element={<RingDetails />} />
               <Route path="/diamonddetails" element={<DiamondDetails />} />
+              <Route path="/contactus" element={<ContactUs />} />
+
 
               {userCheck && token ? (
                 <Route path="/checkout" element={<Checkout />} />

@@ -71,56 +71,52 @@ export default function Section2() {
   const { state } = useLocation();
   const typelabgrown = state ? state.labgrownValue : false;
 
+  const diamondApi = async () => {
+    setLoading(true);
+    try {
+      const shapesParam = selectedShapes.length
+        ? selectedShapes.join(",")
+        : "ROUND";
+      const colors = selectedColors ? selectedColors.join(",") : "F";
+      const clarity = selectedClarity ? selectedClarity.join(",") : "I2";
+      const cut = selectedCut ? selectedCut.join(",") : "VG";
+      // const carat = selectedCarat.join(",");
+      // const Budget = selectedBudget.join(",");
+      // const lab = Object.keys(selectedCertificate).filter(
+      //   (key) => selectedCertificate[key]
+      // ).join(",");
+      const polish = selectedPolish ? selectedPolish.join(",") : "VG";
+      const symmetry = selectedSymmetry ? selectedSymmetry.join(",") : "VG";
+      //&carat=${carat}&Budget=${Budget}&lab=${lab}
+      const resp = await axios.get(
+        `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+      );
+      if (resp?.status === 200) {
+        setValue(resp?.data?.items);
+        const diamondIds = resp.data.items.map((item) => item);
+        dispatch(setDiamondIds(diamondIds));
+      }
+    } catch (err) {
+      console.error("err", err);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (typelabgrown) {
       dispatch(setDiamondType(typelabgrown));
     }
-
-    const diamondApi = async () => {
-      setLoading(true);
-      try {
-        const shapesParam = selectedShapes.length
-          ? selectedShapes.join(",")
-          : "ROUND";
-        const colors = selectedColors ? selectedColors.join(",") : "F";
-        const clarity = selectedClarity ? selectedClarity.join(",")  : "VVS2";
-        const cut = selectedCut ? selectedCut.join(",")  : "VG";
-        // const carat = selectedCarat.join(",");
-        // const Budget = selectedBudget.join(",");
-        // const lab = Object.keys(selectedCertificate).filter(
-        //   (key) => selectedCertificate[key]
-        // ).join(",");
-        const polish = selectedPolish ? selectedPolish.join(",")    : "VG";
-        const symmetry = selectedSymmetry ? selectedSymmetry.join(",")  : "VG";
-        //&carat=${carat}&Budget=${Budget}&lab=${lab}
-        const resp = await axios.get(
-          `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
-        );
-        if (resp?.status === 200) {
-          setValue(resp?.data?.items);
-          console.log("diaaa", resp?.data?.items);
-          const diamondIds = resp.data.items.map((item) => item);
-          dispatch(setDiamondIds(diamondIds));
-          console.log("diamondids", diamondIds);
-        }
-      } catch (err) {
-        console.error("err", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     diamondApi();
   }, [
-    selectedShapes,
-    selectedColors,
-    selectedClarity,
-    selectedCut,
-    selectedCarat,
-    // selectedBudget,
-    // selectedCertificate,
-    selectedPolish,
-    selectedSymmetry,
+    // selectedShapes,
+    // selectedColors,
+    // selectedClarity,
+    // selectedCut,
+    // selectedCarat,
+    // // selectedBudget,
+    // // selectedCertificate,
+    // selectedPolish,
+    // selectedSymmetry,
     dispatch,
     typelabgrown,
     setLoading,

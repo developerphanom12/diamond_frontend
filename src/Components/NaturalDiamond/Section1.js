@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import ring from "../Images/Solitaire-removebg-preview.png";
 import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
-import ring from "../Images/Solitaire-removebg-preview.png";
 import { CiCircleCheck } from "react-icons/ci";
 import { setDiamondType } from "../../redux/users/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+ 
 
 export default function Section1() {
   const [selectedButton, setSelectedButton] = useState(false);
-
+  const productIds = useSelector((state) => state.users.productIds);
+  
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
 
@@ -21,7 +23,7 @@ export default function Section1() {
     console.log("Navigating with labgrownValue:", labgrownValue);
     dispatch(setDiamondType(labgrownValue));
     setSelectedButton(buttonIndex);
-    setmodal(false); 
+    setmodal(false);
     navigate("/naturaldiamond", {
       state: { labgrownValue },
     });
@@ -42,10 +44,11 @@ export default function Section1() {
               </div>
 
               <div className="view_cont">
-                <h5>The Riley</h5>
+                <h5>{productIds?.[0]?.title}</h5>
                 <div className="view_btn">
                   <h5>View/Change</h5>
-                  <p>$450</p>
+                  <p>${productIds?.[0]?.priceRange?.minVariantPrice?.amount
+                  }</p>
                 </div>
               </div>
               <CiCircleCheck />
@@ -87,7 +90,7 @@ export default function Section1() {
         <div className="two_btn">
           <button
             className={selectedButton === true ? "selected" : ""}
-            onClick={() => handleModalNavigate(true,true)}
+            onClick={() => handleModalNavigate(true, true)}
           >
             <img
               src={labgrown}
@@ -99,7 +102,7 @@ export default function Section1() {
 
           <button
             className={selectedButton === false ? "selected" : ""}
-            onClick={() => handleModalNavigate(false,false)}
+            onClick={() => handleModalNavigate(false, false)}
           >
             <img
               src={ndia}
@@ -111,7 +114,11 @@ export default function Section1() {
         </div>
       </div>
 
-      <Modal isOpen={modal1} toggle={() => setmodal1(!modal1)}      style={{ zIndex: "111111", position: "relative" ,top:"26%"}}>
+      <Modal
+        isOpen={modal1}
+        toggle={() => setmodal1(!modal1)}
+        style={{ zIndex: "111111", position: "relative", top: "26%" }}
+      >
         <ModalHeader toggle={() => setmodal1(!modal1)}></ModalHeader>
 
         <CustomModalBody>
@@ -138,7 +145,7 @@ export default function Section1() {
       <Modal
         isOpen={modal}
         toggle={() => setmodal(!modal)}
-        style={{ zIndex: "111111", position: "relative" ,top:"26%"}}
+        style={{ zIndex: "111111", position: "relative", top: "26%" }}
       >
         <ModalHeader toggle={() => setmodal(!modal)}></ModalHeader>
         <CustomModalBody>
@@ -147,7 +154,7 @@ export default function Section1() {
           <div className="choose_option">
             <div
               className="ring_pandet"
-              onClick={() => handleModalNavigate(false,false)}
+              onClick={() => handleModalNavigate(false, false)}
             >
               <img
                 src={ndia}
@@ -158,7 +165,7 @@ export default function Section1() {
             </div>
             <div
               className="ring_pandet"
-              onClick={() => handleModalNavigate(true,true)}
+              onClick={() => handleModalNavigate(true, true)}
             >
               <img
                 src={labgrown}
@@ -278,7 +285,6 @@ const Root = styled.section`
         border: 2px solid black;
         border-radius: 10px;
         font-weight: 600;
-  
       }
     }
     svg {
@@ -298,7 +304,7 @@ const CustomModalBody = styled(ModalBody)`
   z-index: 1212121;
   padding: 30px 85px 50px;
   text-align: center;
-  
+
   /* *{text-align:center;
   } */
 
@@ -341,6 +347,5 @@ const CustomModalBody = styled(ModalBody)`
   .modal-dialog {
     margin-top: 82px !important;
     top: 26% !important;
-
   }
 `;
