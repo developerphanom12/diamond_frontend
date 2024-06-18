@@ -77,7 +77,10 @@ const Root = styled.section`
   @media (max-width: 767px) {
     .col-lg-2,
     .col-lg-3 {
-      padding: 10px 0px;
+      padding: 10px  ;
+      p {
+        font-size: 10px;
+      }
     }
     .col-lg-4 {
       padding: 10px;
