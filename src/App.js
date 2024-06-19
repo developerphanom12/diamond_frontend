@@ -18,16 +18,24 @@ import DiamondDetails from "./Components/DiamondDetails/DiamondDetails";
 import { LoadingProvider } from "./Components/LoadingContext";
 import LoaderDot from "./Components/LoaderDot";
 import ContactUs from "./Components/AllOrders/ContactUs";
- 
+import { useEffect } from "react";
+import Cookies from 'js-cookie';
 
- 
 
 function App() {
- 
+  useEffect(() => {
+    const allCookies = Cookies.get();
+    Object.keys(allCookies).forEach((cookieName) => {
+      Cookies.remove(cookieName);
+    });
+
+    
+  }, []);
+
   return (
     <div>
       <LoadingProvider>
-      <LoaderDot />
+        <LoaderDot />
 
         <Layout>
           <Routes>
@@ -45,12 +53,9 @@ function App() {
               <Route path="/diamonddetails" element={<DiamondDetails />} />
               <Route path="/contactus" element={<ContactUs />} />
 
+              <Route path="/checkout" element={<Checkout />} />
 
-           
-                <Route path="/checkout" element={<Checkout />} />
-         
-                <Route path="/login" element={<Login />} />
-            
+              <Route path="/login" element={<Login />} />
             </>
           </Routes>
         </Layout>

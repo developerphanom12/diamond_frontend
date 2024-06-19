@@ -51,18 +51,18 @@ const polishOptions = ["GD", "VG", "EX"];
 const symmetryOptions = ["GD", "VG", "EX"];
 
 export default function Section2() {
-  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
-  const [selectedColors, setSelectedColors] = useState(["F"]);
-  const [selectedClarity, setSelectedClarity] = useState(null);
-  const [selectedCut, setSelectedCut] = useState(null);
+  const [selectedShapes, setSelectedShapes] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedClarity, setSelectedClarity] = useState([]);
+  const [selectedCut, setSelectedCut] = useState([]);
   const [selectedCarat, setSelectedCarat] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState([]);
   const [selectedCertificate, setSelectedCertificate] = useState({
     1: false,
     2: false,
   });
-  const [selectedPolish, setSelectedPolish] = useState(null);
-  const [selectedSymmetry, setSelectedSymmetry] = useState(null);
+  const [selectedPolish, setSelectedPolish] = useState([]);
+  const [selectedSymmetry, setSelectedSymmetry] = useState([]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(502086918);
   const [value, setValue] = useState([]);
@@ -77,16 +77,16 @@ export default function Section2() {
       const shapesParam = selectedShapes.length
         ? selectedShapes.join(",")
         : "ROUND";
-      const colors = selectedColors ? selectedColors.join(",") : "F";
-      const clarity = selectedClarity ? selectedClarity.join(",") : "I2";
-      const cut = selectedCut ? selectedCut.join(",") : "VG";
+      const colors = selectedColors.join(",");
+      const clarity = selectedClarity.join(",");
+      const cut = selectedCut.join(",");
       // const carat = selectedCarat.join(",");
       // const Budget = selectedBudget.join(",");
       // const lab = Object.keys(selectedCertificate).filter(
       //   (key) => selectedCertificate[key]
       // ).join(",");
-      const polish = selectedPolish ? selectedPolish.join(",") : "VG";
-      const symmetry = selectedSymmetry ? selectedSymmetry.join(",") : "VG";
+      const polish = selectedPolish.join(",");
+      const symmetry = selectedSymmetry.join(",");
       //&carat=${carat}&Budget=${Budget}&lab=${lab}
       const resp = await axios.get(
         `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
@@ -108,15 +108,15 @@ export default function Section2() {
     }
     diamondApi();
   }, [
-    // selectedShapes,
-    // selectedColors,
-    // selectedClarity,
-    // selectedCut,
-    // selectedCarat,
-    // // selectedBudget,
-    // // selectedCertificate,
-    // selectedPolish,
-    // selectedSymmetry,
+    selectedShapes,
+    selectedColors,
+    selectedClarity,
+    selectedCut,
+    selectedCarat,
+    // selectedBudget,
+    // selectedCertificate,
+    selectedPolish,
+    selectedSymmetry,
     dispatch,
     typelabgrown,
     setLoading,
@@ -128,25 +128,32 @@ export default function Section2() {
   };
 
   const handleColorClick = (color) => {
-    setSelectedColors((prevColor) => (prevColor === color ? null : color));
+    setSelectedColors((prevColors) => 
+      prevColors.includes(color) ? prevColors.filter(c => c !== color) : [...prevColors, color]
+    );
   };
+
   const handleButtonClarity = (clarity) => {
     setSelectedClarity((prevClarity) =>
-      prevClarity === clarity ? null : clarity
+      prevClarity.includes(clarity) ? prevClarity.filter(c => c !== clarity) : [...prevClarity, clarity]
     );
   };
 
   const handleButtonCut = (cut) => {
-    setSelectedCut((prevCut) => (prevCut === cut ? null : cut));
+    setSelectedCut((prevCut) => 
+      prevCut.includes(cut) ? prevCut.filter(c => c !== cut) : [...prevCut, cut]
+    );
   };
 
   const handleButtonPolish = (polish) => {
-    setSelectedPolish((prevPolish) => (prevPolish === polish ? null : polish));
+    setSelectedPolish((prevPolish) => 
+      prevPolish.includes(polish) ? prevPolish.filter(p => p !== polish) : [...prevPolish, polish]
+    );
   };
 
   const handleButtonSymmetry = (symmetry) => {
-    setSelectedSymmetry((prevSymmetry) =>
-      prevSymmetry === symmetry ? null : symmetry
+    setSelectedSymmetry((prevSymmetry) => 
+      prevSymmetry.includes(symmetry) ? prevSymmetry.filter(s => s !== symmetry) : [...prevSymmetry, symmetry]
     );
   };
 
@@ -208,7 +215,9 @@ export default function Section2() {
         {shapesList.map((shape) => (
           <button
             key={shape.name}
-            className={selectedShapes.includes(shape.name) ? "selected" : ""}
+            className={`btn_shapes ${
+              selectedShapes.includes(shape.name) ? "selected" : ""
+            }`}
             onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
             {shape.name}
@@ -225,10 +234,12 @@ export default function Section2() {
             </div>
 
             <section>
-              {colorOptions.map((color, index) => (
+              {colorOptions.map((color) => (
                 <button
-                  key={index}
-                  className={selectedColors === color ? "selected" : ""}
+                  key={color}
+                  className={`btn_icons ${
+                    selectedColors.includes(color) ? "selected" : ""
+                  }`}
                   onClick={() => handleColorClick(color)}
                 >
                   {color}
@@ -243,10 +254,12 @@ export default function Section2() {
               <BsQuestionCircleFill />
             </div>
             <section>
-              {clarityOptions.map((clarity, index) => (
+              {clarityOptions.map((clarity) => (
                 <button
-                  key={index}
-                  className={selectedClarity === clarity ? "selected" : ""}
+                  key={clarity}
+                  className={`btn_icons ${
+                    selectedClarity.includes(clarity) ? "selected" : ""
+                  }`}
                   onClick={() => handleButtonClarity(clarity)}
                 >
                   {clarity}
@@ -262,10 +275,12 @@ export default function Section2() {
             </div>
 
             <section>
-              {cutOptions.map((cut, index) => (
+              {cutOptions.map((cut) => (
                 <button
-                  key={index}
-                  className={selectedCut === cut ? "selected" : ""}
+                  key={cut}
+                  className={`btn_icons ${
+                    selectedCut.includes(cut) ? "selected" : ""
+                  }`}
                   onClick={() => handleButtonCut(cut)}
                 >
                   {cut}
@@ -395,12 +410,14 @@ export default function Section2() {
                     </div>
 
                     <section>
-                      {symmetryOptions.map((symmetry, index) => (
+                      {symmetryOptions.map((symmetry) => (
                         <button
-                          key={index}
-                          className={
-                            selectedSymmetry === symmetry ? "selected" : ""
-                          }
+                          key={symmetry}
+                          className={`btn_icons ${
+                            selectedSymmetry.includes(symmetry)
+                              ? "selected"
+                              : ""
+                          }`}
                           onClick={() => handleButtonSymmetry(symmetry)}
                         >
                           {symmetry}
@@ -414,12 +431,12 @@ export default function Section2() {
                     </div>
 
                     <section>
-                      {polishOptions.map((polish, index) => (
+                      {polishOptions.map((polish) => (
                         <button
-                          key={index}
-                          className={
-                            selectedPolish === polish ? "selected" : ""
-                          }
+                          key={polish}
+                          className={`btn_icons ${
+                            selectedPolish.includes(polish) ? "selected" : ""
+                          }`}
                           onClick={() => handleButtonPolish(polish)}
                         >
                           {polish}
