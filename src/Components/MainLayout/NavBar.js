@@ -7,21 +7,72 @@ import BottomBar from "./bottom/BottomBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { EXCHANGE_URLS } from "../URLS";
+import { Link } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import EngageList from "./bottom/EngageList";
+import DiamondList from "./bottom/DiamondList";
+import EducationList from "./bottom/EducationList";
+
+
+
+const Nav = styled.div`
+  background: white;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const NavIcon = styled(Link)`
+  margin-right: 10px;
+  font-size: 22px;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const SidebarNav = styled.nav`
+  background: #ffffff;
+  width: 330px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  overflow: auto;
+  top: 60px;
+  left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
+  transition: 350ms;
+  z-index: 10;
+`;
+
+const SidebarWrap = styled.div`
+  width: 100%;
+`;
 
 const Root = styled.section`
   font-family: "ProximaNova", "sans-serif";
   border-bottom: 1px solid #f2f2f2;
   z-index: 11110011;
   position: sticky;
+
   h2 {
     text-transform: uppercase;
     margin: 20px 0px;
     text-align: center;
     background: linear-gradient(to right, #000, #333, #000, #333);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text;  
     -webkit-text-fill-color: transparent;
     cursor: pointer;
   }
+
   .search {
     display: flex;
     border-bottom: 1px solid black;
@@ -48,6 +99,7 @@ const Root = styled.section`
       }
     }
   }
+
   .icon {
     display: flex;
     justify-content: end;
@@ -59,8 +111,53 @@ const Root = styled.section`
     svg {
       width: 20px;
       height: 20px;
+      color: black;
     }
   }
+
+
+  .ico_div {
+    margin-top: -50px;
+    svg {
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+}
+  }
+  
+  
+  .ring_head{
+    margin-bottom:0;
+    margin-top:0;
+    text-transform:uppercase;
+  }
+
+  .icon_div {
+    color: black !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  .hightlight_content {
+    background-color: black;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h5 {
+      font-size: 12px;
+      color: white;
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+  }
+
+  .css-15v22id-MuiAccordionDetails-root {
+    padding:16px 16px 16px;
+    background:#f7f7f7;
+}
+
 
   .search_div {
     width: 60%;
@@ -92,7 +189,25 @@ const Root = styled.section`
     }
   }
 
+  .side_bar{
+    display: none;
+  }
+
   @media (max-width: 567px) {
+
+
+   .search {
+    margin: 20px 10px;
+}
+   
+    .first_header{
+      display:none;
+    }
+
+    .side_bar{
+    display:block;
+  }
+
     .search_div {
       width: 100%;
       margin: 0;
@@ -105,6 +220,15 @@ const Root = styled.section`
     }
     .search_div .product-card h3 {
       font-size: 20px;
+    }
+
+    .accor_heading {
+      margin:0;
+      font-family:ProximaNova, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #808080;
     }
   }
 
@@ -129,6 +253,8 @@ export default function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(0);
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
 
   useEffect(() => {
     if (typingTimeout) {
@@ -172,6 +298,8 @@ export default function NavBar() {
 
   return (
     <Root>
+
+<div className="first_header">
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-3 col-md-3 col-12">
@@ -236,6 +364,129 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+      
+  </div>
+
+      <div className="side_bar">
+      <IconContext.Provider value={{ color: "black" }}>
+        <Nav className="main_content">
+          <NavIcon to="#">
+            <FaIcons.FaBars onClick={showSidebar} className="icon_div" />
+          </NavIcon>
+
+          <h2 className="ring_head">Ring-Builder</h2>
+
+          <svg
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+            ></path>
+          </svg>
+        </Nav>
+        <SidebarNav sidebar={sidebar}>
+          <SidebarWrap>
+            <NavIcon to="#">
+              <AiIcons.AiOutlineClose onClick={showSidebar} />
+            </NavIcon>
+            <div className="ico_div">
+              <svg
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="12" cy="8" r="5"></circle>
+                <path d="M20 21a8 8 0 1 0-16 0"></path>
+              </svg>
+            </div>
+            <div className="search">
+              <input
+                placeholder="SEARCH..."
+                value={searchTerm}
+                onChange={onInputChange}
+              />
+              <button onClick={handleSearch}>
+                <IoSearchOutline />
+              </button>
+            </div>
+            <div className="hightlight_content">
+              <h5>30 Days Free Returns</h5>
+            </div>
+
+            <div>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                >
+                  <Typography>
+                    <div className="accor_heading">ENGAGEMENT RINGS</div>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    <EngageList />
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2-content"
+                  id="panel2-header"
+                >
+                  <Typography>
+                    <div className="accor_heading">DIAMONDS</div>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    <DiamondList/>
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2-content"
+                  id="panel2-header"
+                >
+                  <Typography>
+                    <div className="accor_heading">EDUCATION</div>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    <EducationList/>
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+          </SidebarWrap>
+        </SidebarNav>
+      </IconContext.Provider>
+
+      </div>
+  
+
     </Root>
   );
 }

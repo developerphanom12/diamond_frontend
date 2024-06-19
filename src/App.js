@@ -22,18 +22,17 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 
 function App() {
-  useEffect(() => {
-    const allCookies = Cookies.get();
-    Object.keys(allCookies).forEach((cookieName) => {
-      Cookies.remove(cookieName);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const allCookies = Cookies.get();
+  //   Object.keys(allCookies).forEach((cookieName) => {
+  //     Cookies.remove(cookieName);
+  //   });
+  // }, []);
 
   return (
     <div>
       <LoadingProvider>
         <LoaderDot />
-
         <Layout>
           <Routes>
             <>

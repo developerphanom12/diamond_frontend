@@ -4,7 +4,10 @@ import styled from "styled-components";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import Slider from "@mui/material/Slider";
 import Section4 from "./Section4";
+import "react-modern-drawer/dist/index.css";
+import Drawer from "react-modern-drawer";
 import { useDispatch } from "react-redux";
+import { IoFilterOutline } from "react-icons/io5";
 import {
   setDiamondIds,
   setDiamondType,
@@ -54,6 +57,9 @@ export default function Section2() {
   const [selectedShapes, setSelectedShapes] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedClarity, setSelectedClarity] = useState([]);
+  const [caratRange, setCaratRange] = useState([0.5, 11.5]);
+  const minCarat = caratRange[0];
+  const maxCarat = caratRange[1];
   const [selectedCut, setSelectedCut] = useState([]);
   const [selectedCarat, setSelectedCarat] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState([]);
@@ -88,6 +94,10 @@ export default function Section2() {
         query.append("polish", params.selectedPolish.join(","));
       if (params.selectedSymmetry.length)
         query.append("symmetry", params.selectedSymmetry.join(","));
+      if (minCarat !== undefined && minCarat !== null)
+        query.append("minPrice", minCarat);
+      if (maxCarat !== undefined && maxCarat !== null)
+        query.append("maxPrice", maxCarat);
 
       // If any optional parameters are needed, add them here
       // if (params.selectedCarat.length) query.append('carat', params.selectedCarat.join(','));
@@ -127,6 +137,7 @@ export default function Section2() {
       selectedCut,
       selectedPolish,
       selectedSymmetry,
+      caratRange
       // Include other parameters if needed
       // selectedCarat,
       // selectedBudget,
@@ -144,56 +155,6 @@ export default function Section2() {
     typelabgrown,
     dispatch,
   ]);
-  // const diamondApi = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const shapesParam = selectedShapes.length
-  //       ? selectedShapes.join(",")
-  //       : "ROUND";
-  //     const colors = selectedColors.join(",");
-  //     const clarity = selectedClarity.join(",");
-  //     const cut = selectedCut.join(",");
-  //     // const carat = selectedCarat.join(",");
-  //     // const Budget = selectedBudget.join(",");
-  //     // const lab = Object.keys(selectedCertificate).filter(
-  //     //   (key) => selectedCertificate[key]
-  //     // ).join(",");
-  //     const polish = selectedPolish.join(",");
-  //     const symmetry = selectedSymmetry.join(",");
-  //     //&carat=${carat}&Budget=${Budget}&lab=${lab}
-  //     const resp = await axios.get(
-  //       `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
-  //     );
-  //     if (resp?.status === 200) {
-  //       setValue(resp?.data?.items);
-  //       const diamondIds = resp.data.items.map((item) => item);
-  //       dispatch(setDiamondIds(diamondIds));
-  //     }
-  //   } catch (err) {
-  //     console.error("err", err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (typelabgrown) {
-  //     dispatch(setDiamondType(typelabgrown));
-  //   }
-  //   diamondApi();
-  // }, [
-  //   selectedShapes,
-  //   selectedColors,
-  //   selectedClarity,
-  //   selectedCut,
-  //   selectedCarat,
-  //   // selectedBudget,
-  //   // selectedCertificate,
-  //   selectedPolish,
-  //   selectedSymmetry,
-  //   dispatch,
-  //   typelabgrown,
-  //   setLoading,
-  // ]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
@@ -267,8 +228,6 @@ export default function Section2() {
     setmaxCount(maxcount - 2100);
   };
 
-  const [caratRange, setCaratRange] = useState([0.5, 11.5]);
-
   const handleChangeCarat = (event, newValue) => {
     setCaratRange(newValue);
   };
@@ -292,19 +251,37 @@ export default function Section2() {
     const newMax = Math.max(caratRange[1] - 0.1, caratRange[0]);
     setCaratRange([caratRange[0], newMax]);
   };
-  return (
-    <Root>
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+  const drawerContent = (
+    <>
       <div className="ring_types mt-4">
         {shapesList.map((shape) => (
           <button
+         
             key={shape.name}
             className={`btn_shapes ${
               selectedShapes.includes(shape.name) ? "selected" : ""
             }`}
             onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
-            {shape.name}
             <img src={shape.imgUrl} alt={shape.name} />
+            {shape.name}
           </button>
         ))}
       </div>
@@ -315,7 +292,6 @@ export default function Section2() {
               <h5>Color</h5>
               <BsQuestionCircleFill />
             </div>
-
             <section>
               {colorOptions.map((color) => (
                 <button
@@ -330,7 +306,6 @@ export default function Section2() {
               ))}
             </section>
           </div>
-
           <div className="var_kind">
             <div className="head_icon">
               <h5>Clarity</h5>
@@ -350,13 +325,11 @@ export default function Section2() {
               ))}
             </section>
           </div>
-
           <div className="var_kind">
             <div className="head_icon">
               <h5>Cut</h5>
               <BsQuestionCircleFill />
             </div>
-
             <section>
               {cutOptions.map((cut) => (
                 <button
@@ -372,7 +345,6 @@ export default function Section2() {
             </section>
           </div>
         </div>
-
         <div className="carat_budget_certificate">
           <div className="carat_div">
             <h5>Carat</h5>
@@ -425,7 +397,6 @@ export default function Section2() {
                   <h6>Minimum</h6>
                   <p>${formatNumber(mincount)}</p>
                 </div>
-
                 <div className="btn_div">
                   <button>
                     <IoIosArrowUp onClick={minincrement} />
@@ -441,7 +412,6 @@ export default function Section2() {
                   <h6>Maximum</h6>
                   <p>${formatNumber(maxcount)}</p>
                 </div>
-
                 <div className="btn_div">
                   <button>
                     <IoIosArrowUp onClick={maxincrement} />
@@ -453,6 +423,8 @@ export default function Section2() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="carat_budget_certificate">
           <div className="certificate_div">
             <h5> Lab Certificate</h5>
             <div className="btn">
@@ -483,15 +455,13 @@ export default function Section2() {
                 Advanced Quality Specs
               </Typography>
             </AccordionSummary>
-
             <AccordionDetails>
               <Typography>
                 <div className="symmetry_polish_div">
-                  <div className=" symmetry_var_kind">
+                  <div className="symmetry_var_kind">
                     <div className="symmetry_head_icon">
                       <h5>Symmetry</h5>
                     </div>
-
                     <section>
                       {symmetryOptions.map((symmetry) => (
                         <button
@@ -508,11 +478,10 @@ export default function Section2() {
                       ))}
                     </section>
                   </div>
-                  <div className=" symmetry_var_kind">
+                  <div className="symmetry_var_kind">
                     <div className="symmetry_head_icon">
                       <h5>Polish</h5>
                     </div>
-
                     <section>
                       {polishOptions.map((polish) => (
                         <button
@@ -533,6 +502,33 @@ export default function Section2() {
           </Accordion>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <Root>
+      <button className="drawer-toggle-button" onClick={toggleDrawer}>
+        <IoFilterOutline /> Filter
+      </button>
+      <div
+        className={`drawer-content ${
+          isOpen && screenWidth <= 876 ? "open" : ""
+        }`}
+      >
+        {screenWidth > 876 ? (
+          drawerContent
+        ) : (
+          <Drawer
+            open={isOpen}
+            onClose={toggleDrawer}
+            direction="bottom"
+            className="bla"
+          >
+            {drawerContent}
+          </Drawer>
+        )}
+      </div>
+
       <Section4 value={value} />
     </Root>
   );
@@ -541,18 +537,78 @@ const Root = styled.section`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding: 0px 10px;
+  .drawer-content {
+    padding: 20px 0px;
+    width: 100%;
+  }
+  .drawer-toggle-button {
+    font-weight: 500;
+    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+  }
+  @media (min-width: 877px) {
+    .drawer-toggle-button {
+      display: none;
+    }
+    .drawer-content {
+      display: block;
+      /* .ring_types {
+        gap: 4px;
+        margin: 0px 10px;
+     
+        .btn_shapes {
+        width: 93px;
+          border: 1px solid #d1d1d1;
+          background-color: rgba(247, 247, 247);
+        }
+      } */
+    }
+  }
+  .EZDrawer__container {
+    overflow-y: scroll !important;
+    height: 350px !important;
+    border-top-right-radius: 25px !important;
+    border-top-left-radius: 25px !important;
+    padding-bottom: 40px;
+  }
+
+  @media (max-width: 876px) {
+    .drawer-toggle-button {
+      display: block;
+    }
+    .drawer-content {
+      /* display: none; */
+      .ring_types {
+        justify-content: left;
+        gap: 4px;
+        margin: 0px 10px;
+        width: 100%;
+        .btn_shapes {
+          width: 93px !important;
+          border: 1px solid #d1d1d1;
+          background-color: rgba(247, 247, 247);
+          padding: 12px 42px;
+        }
+      }
+    }
+  }
   img {
-    width: 52px;
-    height: 52px;
+    width: 45px;
+    height: 45px;
   }
   .ring_types {
     display: flex;
     width: 100%;
-    flex-wrap: wrap;
+    overflow-x: auto;
     justify-content: center;
-    gap: 10px;
-    button {
-      width: 104px;
+    gap: 20px;
+
+    .btn_shapes {
+      width: 93px !important;
       border: 2px solid transparent;
       background: #fff;
       display: flex;
@@ -561,7 +617,9 @@ const Root = styled.section`
       border-radius: 10px;
       align-items: center;
       padding: 12px 0;
-
+      font-size: 12px;
+      line-height: 25px;
+      font-weight: 500;
       &.selected {
         border: 2px solid black;
         border-radius: 10px;
@@ -575,6 +633,7 @@ const Root = styled.section`
   .section3 {
     padding: 0 20px;
     width: 100%;
+
     .variation {
       display: flex;
       flex-wrap: wrap;
@@ -590,7 +649,9 @@ const Root = styled.section`
           gap: 5px;
 
           h5 {
-            font-size: 17px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
           }
           svg {
             height: 14px;
@@ -601,15 +662,22 @@ const Root = styled.section`
         section {
           display: flex;
           padding: 0;
+          background-color: rgba(247, 247, 247, 1);
+          border: 0.3px solid #d1d1d1;
+          border-radius: 7px;
+
           button {
-            border: 2px solid transparent;
+            border: none;
             flex: 1;
             padding: 10px 0;
             font-size: 14px;
+            background-color: transparent;
+            font-weight: 600;
+            color: #7e7676;
             &.selected {
               border: 2px solid black;
               background-color: #fff;
-              border-radius: 10px;
+              border-radius: 7px;
             }
           }
         }
@@ -618,17 +686,19 @@ const Root = styled.section`
 
     .carat_budget_certificate {
       display: flex;
-      gap: 30px;
-      margin-top: 40px;
+      margin-top: 20px;
       flex-wrap: wrap;
-
+      justify-content: space-between;
       .carat_div {
         display: flex;
         flex-direction: column;
-        flex: 1;
+        width: 35vw;
         h5 {
-          font-size: 17px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #000;
           margin-bottom: 0;
+          width: 100%;
         }
 
         .css-188mx6n-MuiSlider-root {
@@ -641,17 +711,19 @@ const Root = styled.section`
         }
 
         .carat_value_div {
+          width: 100%;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
           .carat_min_max_div {
             border: 1px solid #ededed;
             height: 40px;
-            /* width: 45%; */
             border-radius: 5px;
             display: flex;
+            width: 40%;
+            margin: 10px 0px;
             .value {
-              /* width: 80%; */
+              width: 100%;
               padding: 6px;
               display: flex;
               justify-content: space-between;
@@ -660,11 +732,11 @@ const Root = styled.section`
               h6 {
                 color: rgba(102, 102, 102);
                 margin-bottom: 0;
-                font-size: 12px;
+                font-size: 10px;
               }
               p {
                 color: #000000;
-                font-size: 16px;
+                font-size: 13px;
                 margin: 0;
               }
             }
@@ -672,6 +744,7 @@ const Root = styled.section`
               /* width: 20%; */
               display: flex;
               flex-direction: column;
+              align-items: flex-end;
               button {
                 border: 1px solid #ededed;
                 background-color: transparent;
@@ -695,42 +768,47 @@ const Root = styled.section`
       .budget_div {
         display: flex;
         flex-direction: column;
-        flex: 1;
-
+        width: 35vw;
         h5 {
-          font-size: 17px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #000;
         }
         .budget_value_div {
           display: flex;
-          /* justify-content: center; */
           align-items: center;
+          width: 100%;
           .min_max_div {
             border: 1px solid #ededed;
-            height: 56px;
-            /* width: 45%;/ */
+            height: 55px;
+            width: 40%;
+            margin-top: 10px;
             border-radius: 5px;
             display: flex;
+            justify-content: space-between;
             .value_div {
-              /* width: 80%; */
               padding: 6px;
               h6 {
                 color: rgba(102, 102, 102);
-                margin-bottom: 0;
-                font-size: 12px;
+                margin-bottom: 14px;
+                font-size: 10px;
               }
               p {
                 color: #000000;
-                font-size: 16px;
-                margin-top: 9px;
+                font-size: 13px;
+                margin: 2px;
               }
             }
             .btn_div {
-              /* width: 20%; */
               display: flex;
               flex-direction: column;
               button {
                 border: 1px solid #ededed;
                 background-color: transparent;
+                width: 27px;
+                height: 27px;
+                font-weight: 600;
+                color: #7e7676;
                 svg {
                   color: #7e7676;
                 }
@@ -745,12 +823,13 @@ const Root = styled.section`
       }
 
       .certificate_div {
-        /* width: 20%;/ */
         display: flex;
         flex-direction: column;
         flex: 1;
         h5 {
-          font-size: 17px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #000;
         }
         .btn {
           display: flex;
@@ -758,34 +837,24 @@ const Root = styled.section`
           padding: 0;
           border: none;
           button {
-            border: 2px solid transparent;
-            flex: 1;
-            padding: 15px 0;
+            background-color: rgba(247, 247, 247, 1);
+            border: 0.3px solid #d1d1d1;
+            border-radius: 7px;
+            width: 100px;
+            padding: 20px 0;
             font-size: 14px;
-            border-radius: 5px;
+            font-weight: 600;
+            color: #7e7676;
+
             &.selected {
               border: 2px solid black;
               background-color: #fff;
-              border-radius: 10px;
+              border-radius: 7px;
             }
           }
         }
       }
     }
-
-    /* .select_div {
-      display: flex;
-      justify-content: end;
-      margin-top: 20px;
-
-      select {
-        background-color: rgba(247, 247, 247);
-        border-radius: 0.375rem;
-        font-size: 14px;
-        padding: 10px 10px;
-        border: 1px solid transparent;
-      }
-    } */
 
     .advance_quality {
       /* border-top:1px solid black; */
@@ -819,8 +888,9 @@ const Root = styled.section`
             gap: 5px;
 
             h5 {
-              font-size: 17px;
+              font-size: 15px;
               font-weight: 600;
+              color: #000;
             }
             svg {
               /* color:#e9e4e4; */
@@ -833,15 +903,21 @@ const Root = styled.section`
           section {
             display: flex;
             padding: 0;
+            background-color: rgba(247, 247, 247, 1);
+            border: 0.3px solid #d1d1d1;
+            border-radius: 7px;
             button {
-              border: 2px solid transparent;
               flex: 1;
+              border: none;
               padding: 10px 0;
               font-size: 14px;
+              background-color: transparent;
+              font-weight: 600;
+              color: #7e7676;
               &.selected {
                 border: 2px solid black;
                 background-color: #fff;
-                border-radius: 10px;
+                border-radius: 7px;
               }
             }
           }
@@ -892,6 +968,14 @@ const Root = styled.section`
       width: 100%;
     }
 
+    .symmetry_polish_div {
+      flex-direction: column;
+    }
+    .section3 .carat_budget_certificate .certificate_div .btn button {
+      width: 50vw;
+      padding: 10px 0px;
+    }
+
     /* .main_div .subdiv {
       width: 373px;
     }
@@ -899,5 +983,9 @@ const Root = styled.section`
     .main_div .subdiv:hover .hov_content {
       width: 373px;
     } */
+  }
+  span.MuiSlider-thumb.MuiSlider-thumbSizeMedium.MuiSlider-thumbColorPrimary.MuiSlider-thumb.MuiSlider-thumbSizeMedium.MuiSlider-thumbColorPrimary.css-cp2j25-MuiSlider-thumb {
+    color: white;
+    border: 2px solid black;
   }
 `;

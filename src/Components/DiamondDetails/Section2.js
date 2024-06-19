@@ -14,7 +14,7 @@ import diamo from "../Images/diamo.PNG";
 import j from "../Images/j.jpg";
 import vs from "../Images/vs.png";
 import images from "../Images/images.PNG";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Section2() {
@@ -22,7 +22,9 @@ export default function Section2() {
   const navigate = useNavigate();
   let sliderRef = useRef(null);
   console.log("jagsdjhgd", diamondById);
-
+  const location = useLocation();
+  const { diamond } = location.state || {};
+  console.log("rindfffffffffffffg", diamond);
   const next = () => {
     sliderRef.slickNext();
   };
@@ -63,21 +65,48 @@ export default function Section2() {
     ],
   };
 
+  const VideoContainer = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: 613px;
+    height: 100%;
+
+    iframe.sc-kbovfZ.eUSVOq {
+      height: auto;
+    }
+  `;
+
+  const VideoFrame = styled.iframe`
+    width: 100%;
+    height: 100%;
+  `;
+
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <div className="slider-container">
+          {/* <div className="slider-container">
             <Slider
               ref={(slider) => {
                 sliderRef = slider;
               }}
               {...settings}
-            >
-              <div key={1}>
-                <img src={ring} alt="text" />
-              </div>
-            </Slider>
+            > */}
+              <div key={1} style={{width:"500px",height:"500px"}}>
+                {diamondById?.diamond?.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamondById?.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
+                ) : (
+                  "No image"
+                )}
+              {/* </div>
+            </Slider> */}
             <div
               style={{
                 textAlign: "center",
@@ -87,7 +116,20 @@ export default function Section2() {
               }}
             >
               <button className="button" onClick={previous}>
-                <img src={images} alt="images" />
+                {diamond?.diamond?.video ? (
+                  <VideoContainer>
+                    <div className="aws_wrapper">
+                      <VideoFrame
+                        src={diamond.diamond.video}
+                        title="Diamond Video"
+                        allowFullScreen
+                      />
+                    </div>
+                  </VideoContainer>
+                ) : (
+                  "No image"
+                )}
+
                 <span>Image</span>
               </button>
             </div>
@@ -119,7 +161,10 @@ export default function Section2() {
             </div>
 
             <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>{diamondById?.diamond?.certificate?.length}/{diamondById?.diamond?.certificate?.width}</h4>
+              <h4>
+                {diamondById?.diamond?.certificate?.length}/
+                {diamondById?.diamond?.certificate?.width}
+              </h4>
               <p>L/W (mm)</p>
             </div>
 

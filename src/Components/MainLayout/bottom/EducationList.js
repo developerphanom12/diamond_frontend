@@ -8,7 +8,7 @@ export default function EducationList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3 col-md-6 col-6">
+          <div className="col-lg-3 col-md-6 col-12">
             <b>Diamonds</b>
             <ul>
               <li> 4 C'S</li>
@@ -18,14 +18,10 @@ export default function EducationList() {
               <li>Sparkle</li>
             </ul>
           </div>
-          <div className="col-lg-3  col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3  col-md-6 col-12 bord">
             <b>MOISSANITE & GEMSTONES</b>
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 20px",
-              }}
+              className="ring_space"
             >
               <ul>
                 <li>
@@ -47,14 +43,10 @@ export default function EducationList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-3  col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3  col-md-6 col-12 bord" >
             <b>ENGAGEMENT RINGS</b>
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 20px",
-              }}
+              className="ring_space"
             >
               <ul>
                 <li>
@@ -72,11 +64,7 @@ export default function EducationList() {
           </div>
           <div
             className="col-lg-3  col-md-6 col-6"
-            style={{
-              borderLeft: "1px solid #ededed",
-              padding: "0px",
-              margin: "0",
-            }}
+
           >
             <img
               src={backimg}
@@ -114,5 +102,62 @@ const Root = styled.section`
   img {
     width: 30px;
     height: 30px;
+  }
+
+   
+  .ring_space{
+    display: flex;
+    justify-Content: space-between;
+    padding: 0px 20px
+  }
+
+  .bord{
+    border-left: 1px solid #ededed;
+  }
+
+
+  @media (max-width: 567px) {
+     margin-left:0;
+   
+ .col-lg-3 {
+    margin:0;
+    padding:0;
+} 
+    padding: 0px;
+
+    .ring_space {
+    padding: 0;
+    gap: 50px;
+    justify-content: unset;
+}
+
+ ul li a {
+    font-size:12px
+}
+
+.bord{
+    border-top: 1px solid #ededed;
+    border-left: unset;
+    padding-top: 20px;
+  }
+
+
+  span {
+    font-size: 12px;
+}
+
+
+ul li {
+    font-size: 12px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+}
+
+ b {
+    font-size: 13px;
+}
+
+
   }
 `;

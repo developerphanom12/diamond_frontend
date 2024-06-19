@@ -19,7 +19,7 @@ export default function DiamondList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3 col-md-6 col-6">
+          <div className="col-lg-3 col-md-6 col-12">
             <b>Design your Diamond ring</b>
             <ul>
               <li>
@@ -38,14 +38,10 @@ export default function DiamondList() {
               </li>
             </ul>
           </div>
-          <div className="col-lg-3 col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3 col-md-6 col-12 bord" >
             <b>Shop Natural Diamond By Shape</b>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 20px",
-              }}
+            <div className="ring_space"
+
             >
               <ul>
                 <li>
@@ -96,14 +92,10 @@ export default function DiamondList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 col-6" style={{ borderLeft: "1px solid #ededed" }}>
+          <div className="col-lg-3 col-md-6 col-12 bord" >
             <b>Shop Natural Diamond By Shape</b>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 20px",
-              }}
+            <div className="ring_space"
+             
             >
               <ul>
                 <li>
@@ -157,12 +149,8 @@ export default function DiamondList() {
             </div>
           </div>
           <div
-            className="col-lg-3 col-md-6 col-6"
-            style={{
-              borderLeft: "1px solid #ededed",
-              padding: "0px",
-              margin: "0",
-            }}
+            className="col-lg-3 col-md-6 col-12 "
+            
           >
             <img
               src={backimg}
@@ -204,4 +192,64 @@ const Root = styled.section`
     width: 30px;
     height: 30px;
   }
+
+
+  
+  .ring_space{
+    display:flex;
+    justify-Content:space-between;
+    padding:0px 20px;
+  }
+
+  .bord{
+    border-left: 1px solid #ededed;
+  }
+
+
+  @media (max-width: 567px) {
+     margin-left:0;
+   
+ .col-lg-3 {
+    margin:0;
+    padding:0;
+} 
+
+    padding: 0px;
+
+    .ring_space {
+    padding: 0;
+    gap: 50px;
+    justify-content: unset;
+}
+
+ ul li a {
+    font-size:12px
+}
+
+.bord{
+    border-top:1px solid #ededed;
+    border-left:unset;
+    padding-top:20px;
+  }
+
+
+  span {
+    font-size: 12px;
+}
+
+
+ul li {
+    font-size: 12px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+}
+
+ b {
+    font-size: 13px;
+}
+
+
+  }
+   
 `;

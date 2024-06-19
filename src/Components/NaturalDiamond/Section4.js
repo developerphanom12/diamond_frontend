@@ -49,6 +49,30 @@ export default function Section4({ value }) {
       setLoading(false);
     }
   };
+  const VideoContainer = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    max-height: 250px !important;
+    height: 100%;
+
+    .aws_wrapper {
+      width: 250px !important;
+      height: 250px !important;
+    }
+
+    iframe.sc-kbovfZ.eUSVOq {
+      width: 250px !important;
+      max-height: 250px !important;
+      height: 100%;
+    }
+  `;
+
+  const VideoFrame = styled.iframe`
+    width: 250px !important;
+    max-height: 250px !important;
+    height: 100%;
+  `;
 
   return (
     <Root>
@@ -57,25 +81,25 @@ export default function Section4({ value }) {
           value.map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                {i?.diamond?.image ? (
-                  <img
-                    src={i?.diamond?.image}
-                    alt="diamond images"
-                    style={{
-                      width: "100%",
-                      maxWidth: "500px",
-                      height: "250px",
-                    }}
-                  />
+                {i?.diamond?.video ? (
+                  <VideoContainer>
+                    <div className="aws_wrapper">
+                      <VideoFrame
+                        src={i.diamond.video}
+                        title="Diamond Video"
+                        allowFullScreen
+                      />
+                    </div>
+                  </VideoContainer>
                 ) : (
                   <img
-                    style={{
-                      width: "100%",
-                      maxWidth: "500px",
-                      height: "250px",
-                    }}
                     src={noimg}
                     alt="no img available"
+                    style={{
+                      width: "100%",
+                      width: "250px",
+                      height: "250px",
+                    }}
                   />
                 )}
 
@@ -155,6 +179,7 @@ export default function Section4({ value }) {
 }
 const Root = styled.section`
   padding: 0 20px;
+
   .main_div {
     width: 100%;
     display: flex;
@@ -172,7 +197,10 @@ const Root = styled.section`
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
-
+      .aws_wrapper {
+        height: 244px !important;
+        width: 262px !important;
+      }
       img {
         width: 100%;
       }
@@ -180,6 +208,10 @@ const Root = styled.section`
       &:hover {
         border: 3px solid black;
         overflow: unset;
+        .aws_wrapper {
+          height: 244px !important;
+          width: 262px !important;
+        }
       }
 
       &:hover .hov_content {
@@ -279,6 +311,10 @@ const Root = styled.section`
   @media only screen and (max-width: 567px) {
     .main_div {
       justify-content: center;
+      .subdiv {
+        width: 300px;
+        height: 380px;
+      }
     }
   }
 

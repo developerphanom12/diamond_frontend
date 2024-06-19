@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "react-js-loader";
 import { useLoading } from "./LoadingContext";
 import styled from "styled-components";
 
 const LoaderDot = () => {
   const { loading } = useLoading();
+
+
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    // Cleanup on component unmount
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [loading]);
+
+
   return loading ? (
     <Root>
       <div className="loader-container">
@@ -21,6 +37,8 @@ const LoaderDot = () => {
 
 export default LoaderDot;
 const Root = styled.section`
+      backdrop-filter: blur (4px);
+
   .sl-bubble1 {
     width: 100vw;
     height: 100vh;
@@ -29,9 +47,14 @@ const Root = styled.section`
     width: 100vw;
     height: 100vh;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    backdrop-filter: blur(2px);
+    overflow: hidden !important;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.8); /* Optional: add a semi-transparent background */
   }
 `;

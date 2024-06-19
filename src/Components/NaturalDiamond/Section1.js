@@ -91,7 +91,7 @@ export default function Section1() {
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12">
             <div className="heading">
-              <h2>Select your Stone Shape and Quality</h2>
+              <h3>Select your Stone Shape and Quality</h3>
               <p>
                 Use the filters below to design your perfect engagement ring
               </p>
@@ -102,35 +102,27 @@ export default function Section1() {
         <div className="row">
           <div className="two_btn">
             <div className="col-lg-2  "></div>
-            <div className="col-lg-2 col-md-3 col-2"></div>
+            <div className="col-lg-2 col-md-3 col-1"></div>
 
-            <div className="col-lg-2 col-md-3 col-4">
+            <div className="col-lg-2 col-md-3 col-5">
               <button
                 className={selectedButton === true ? "selected" : ""}
                 onClick={() => handleModalNavigate(true, true)}
               >
-                <img
-                  src={labgrown}
-                  alt="img of lab grown diamond"
-                  style={{ width: "42px" }}
-                />
+                <img src={labgrown} alt="img of lab grown diamond" />
                 <h5>Lab Grown</h5>
               </button>
             </div>
-            <div className="col-lg-2 col-md-3 col-4">
+            <div className="col-lg-2 col-md-3 col-5">
               <button
                 className={selectedButton === false ? "selected" : ""}
                 onClick={() => handleModalNavigate(false, false)}
               >
-                <img
-                  src={ndia}
-                  alt="img of natural diamond"
-                  style={{ width: "42px" }}
-                />
+                <img src={ndia} alt="img of natural diamond" />
                 <h5>Natural</h5>
               </button>
             </div>
-            <div className="col-lg-2 col-md-3 col-2"></div>
+            <div className="col-lg-2 col-md-3 col-1"></div>
             <div className="col-lg-2   "></div>
           </div>
         </div>
@@ -208,8 +200,10 @@ const Root = styled.section`
 
   .container-fluid {
     text-align: center;
-    margin: 0px 10px;
-    .col-lg-4   {
+    margin: 0px 5px;
+    .col-lg-4,
+    .col-md-4 {
+      margin: -1px;
       padding: 0px;
       width: 32vw;
       text-align: center;
@@ -219,6 +213,8 @@ const Root = styled.section`
     border: 2px solid black !important;
     width: 32vw;
     height: 11vh;
+    position: relative;
+    z-index: 1;
   }
 
   .column {
@@ -292,13 +288,17 @@ const Root = styled.section`
   .heading {
     text-align: center;
     margin-top: 20px;
-
-    h2 {
+    color: #000;
+    h3 {
       color: rgba(0, 0, 0);
-      font-size: 30px;
+      /* font-size: 30px; */
+      padding: 0px 20px;
+      line-height: 2.25rem;
     }
     p {
-      font-size: 20px;
+      font-size: large;
+      font-weight: 500;
+      word-spacing: 1.5px;
     }
   }
 
@@ -311,19 +311,20 @@ const Root = styled.section`
       display: flex;
       width: 100%;
       height: 8vh;
+      border: 1px solid #d1d1d1;
       align-items: center;
       justify-content: center;
       padding: 10px;
       gap: 10px;
-      border: 2px solid transparent;
-      border-radius: 5px;
+      border-radius: 4px;
       &.selected {
         border: 2px solid black;
-        border-radius: 10px;
         font-weight: 600;
+        position: relative;
+        z-index: 1;
       }
     }
-    svg {
+    img {
       width: 30px;
       height: 30px;
     }
@@ -348,6 +349,21 @@ const Root = styled.section`
       }
       .view_cont {
         display: none;
+      }
+    }
+    .two_btn {
+      button {
+        height: 5vh;
+        padding: 5px;
+        &.selected {
+          padding: 5px;
+          border: 1px solid black;
+          border-radius: 4px;
+        }
+      }
+      img {
+        width: 20px;
+        height: 20px;
       }
     }
   }
@@ -387,13 +403,11 @@ const Root = styled.section`
     .container-fluid {
       margin: 0px;
     }
-    .col-4 {
-      width: 28vw;
-    }
+
     .column,
     .bord {
       padding: 5px;
-      height: 5vh;
+      height: 6vh;
       width: 30vw;
       h2 {
         display: none;
@@ -420,9 +434,6 @@ const CustomModalBody = styled(ModalBody)`
   z-index: 1212121;
   padding: 30px 85px 50px;
   text-align: center;
-
-  /* *{text-align:center;
-  } */
 
   h2 {
     font-size: 25px;

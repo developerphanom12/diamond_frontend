@@ -101,6 +101,23 @@ export default function Section2() {
       },
     });
   };
+  const VideoContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  max-height: 613px;
+  height: 100%;
+
+  iframe.sc-kbovfZ.eUSVOq {
+    height: auto;
+  }
+`;
+
+const VideoFrame = styled.iframe`
+  width: 100%;
+  height: 100%;
+`;
+
   return (
     <Root>
       <div className="main_div">
@@ -112,7 +129,7 @@ export default function Section2() {
               }}
               {...settings}
             >
-              <div key={1}>
+              <div key={1} style={{width:"500px",height:"500px"}}>
                 {productIds?.images?.edges?.length > 0 && (
                   <img
                     src={productIds.images.edges[0].node.originalSrc}
@@ -123,13 +140,17 @@ export default function Section2() {
                 )}
               </div>
 
-              <div key={2}>
-                {diamond?.diamond?.video ? (
-                  <div>
-                    <img src={diamond?.diamond?.image} alt="img" />
-                  </div>
+              <div key={2}  style={{width:"500px",height:"500px"}}>
+              {diamond?.diamond?.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamond?.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
                 ) : (
-                  <img src={ring} alt="img" />
+                  "No image"
                 )}
               </div>
             </Slider>

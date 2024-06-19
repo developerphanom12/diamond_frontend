@@ -30,7 +30,7 @@ export default function EngageList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3 col-mg-6 col-6">
+          <div className="col-lg-3 col-mg-6 col-12">
             <b>Design your engagement ring</b>
             <ul>
               <li>
@@ -51,16 +51,12 @@ export default function EngageList() {
             </ul>
           </div>
           <div
-            className="col-lg-3 col-mg-6 col-6"
-            style={{ borderLeft: "1px solid #ededed" }}
+            className="col-lg-3 col-mg-6 col-12 bord"
+           
           >
             <b>Present Engagement Rings</b>
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 20px",
-              }}
+              className="ring_space"
             >
               <ul>
                 <li>
@@ -111,16 +107,15 @@ export default function EngageList() {
             </div>
           </div>
           <div
-            className="col-lg-4 col-md-8 col-8"
-            style={{ borderLeft: "1px solid #ededed" }}
+            className="col-lg-4 col-md-8 col-12 bord"
+            
           >
             <b>Shop By Style</b>
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "0px 30px",
-              }}
+             
+               
+                className="ring_space"
+             
             >
               <ul>
                 <li>
@@ -161,15 +156,15 @@ export default function EngageList() {
                 </li>
                 <li>
                   <img src={HiddenHalo} alt="img" />
-
                   <span>Hidden Halo</span>
                 </li>
               </ul>
             </div>
           </div>
+
           <div
-            className="col-lg-2 col-md-4 col-4"
-            style={{ borderLeft: "1px solid #ededed" }}
+            className="col-lg-2 col-md-4 col-12 bord"
+            
           >
             <b>Shop By Metal</b>
             <ul>
@@ -201,10 +196,12 @@ export default function EngageList() {
 }
 const Root = styled.section`
   padding: 30px;
+
   b {
     font-size: 15px;
     text-transform: uppercase;
   }
+
   ul {
     padding: 0;
     list-style: none;
@@ -227,4 +224,57 @@ const Root = styled.section`
     width: 30px;
     height: 30px;
   }
-`;
+
+
+  .ring_space{
+    display: flex;
+    justify-Content: space-between;
+    padding: 0px 20px
+  }
+
+  .bord{
+    border-left: 1px solid #ededed;
+  }
+
+
+  @media (max-width: 567px) {
+   
+    padding: 0px;
+
+  .ring_space {
+    padding: 0;
+    gap: 50px;
+    justify-content: unset;
+}
+
+ ul li a {
+    font-size:12px
+}
+
+.bord{
+    border-top: 1px solid #ededed;
+    border-left: unset;
+    padding-top: 20px;
+
+  }
+
+  span {
+    font-size: 12px;
+}
+
+ul li {
+    font-size: 12px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+}
+
+ b {
+    font-size: 13px;
+}
+
+
+  }
+   
+  `;
+
