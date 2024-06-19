@@ -8,12 +8,11 @@ import labgrown from "../Images/labgrowncopy-removebg.png";
 import { CiCircleCheck } from "react-icons/ci";
 import { setDiamondType } from "../../redux/users/action";
 import { useDispatch, useSelector } from "react-redux";
- 
 
 export default function Section1() {
   const [selectedButton, setSelectedButton] = useState(false);
   const productIds = useSelector((state) => state.users.productIds);
-  
+
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
 
@@ -33,7 +32,10 @@ export default function Section1() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-4" onClick={() => setmodal1(true)}>
+          <div
+            className="col-lg-4 col-md-4 col-4"
+            onClick={() => setmodal1(true)}
+          >
             <div className="column">
               <div className="d-flex ">
                 <h2>1</h2>
@@ -47,16 +49,19 @@ export default function Section1() {
                 <h5>{productIds?.[0]?.title}</h5>
                 <div className="view_btn">
                   <h5>View/Change</h5>
-                  <p>${productIds?.[0]?.priceRange?.minVariantPrice?.amount
-                  }</p>
+                  <p>${productIds?.[0]?.priceRange?.minVariantPrice?.amount}</p>
                 </div>
               </div>
               <CiCircleCheck />
             </div>
           </div>
 
-          <div className="col-lg-4">
-            <div className="column bord" onClick={() => setmodal(true)}>
+          <div className="col-lg-4 col-md-4 col-4">
+            <div
+              id="container"
+              className="column bord"
+              onClick={() => setmodal(true)}
+            >
               <div className="d-flex">
                 <h2>2</h2>
                 <div className="flex-column">
@@ -65,10 +70,12 @@ export default function Section1() {
                 </div>
               </div>
               <CiCircleCheck />
+
+              <div className="arrow-right"></div>
             </div>
           </div>
 
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-md-4 col-4">
             <div className="column">
               <div className="d-flex ">
                 <h2>3</h2>
@@ -81,36 +88,51 @@ export default function Section1() {
             </div>
           </div>
         </div>
-
-        <div className="heading">
-          <h2>Select your Stone Shape and Quality</h2>
-          <p>Use the filters below to design your perfect engagement ring</p>
+        <div className="row">
+          <div className="col-lg-12 col-md-12 col-12">
+            <div className="heading">
+              <h2>Select your Stone Shape and Quality</h2>
+              <p>
+                Use the filters below to design your perfect engagement ring
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="two_btn">
-          <button
-            className={selectedButton === true ? "selected" : ""}
-            onClick={() => handleModalNavigate(true, true)}
-          >
-            <img
-              src={labgrown}
-              alt="img of lab grown diamond"
-              style={{ width: "42px" }}
-            />
-            <h5>Lab Grown</h5>
-          </button>
+        <div className="row">
+          <div className="two_btn">
+            <div className="col-lg-2  "></div>
+            <div className="col-lg-2 col-md-3 col-2"></div>
 
-          <button
-            className={selectedButton === false ? "selected" : ""}
-            onClick={() => handleModalNavigate(false, false)}
-          >
-            <img
-              src={ndia}
-              alt="img of natural diamond"
-              style={{ width: "42px" }}
-            />
-            <h5>Natural</h5>
-          </button>
+            <div className="col-lg-2 col-md-3 col-4">
+              <button
+                className={selectedButton === true ? "selected" : ""}
+                onClick={() => handleModalNavigate(true, true)}
+              >
+                <img
+                  src={labgrown}
+                  alt="img of lab grown diamond"
+                  style={{ width: "42px" }}
+                />
+                <h5>Lab Grown</h5>
+              </button>
+            </div>
+            <div className="col-lg-2 col-md-3 col-4">
+              <button
+                className={selectedButton === false ? "selected" : ""}
+                onClick={() => handleModalNavigate(false, false)}
+              >
+                <img
+                  src={ndia}
+                  alt="img of natural diamond"
+                  style={{ width: "42px" }}
+                />
+                <h5>Natural</h5>
+              </button>
+            </div>
+            <div className="col-lg-2 col-md-3 col-2"></div>
+            <div className="col-lg-2   "></div>
+          </div>
         </div>
       </div>
 
@@ -181,21 +203,34 @@ export default function Section1() {
   );
 }
 const Root = styled.section`
-  padding: 20px;
+  padding: 20px 0px;
+  margin: 0px 10px;
 
+  .container-fluid {
+    text-align: center;
+    margin: 0px 10px;
+    .col-lg-4   {
+      padding: 0px;
+      width: 32vw;
+      text-align: center;
+    }
+  }
   .bord {
     border: 2px solid black !important;
+    width: 32vw;
+    height: 11vh;
   }
 
   .column {
-    margin: 10px 0px;
-    border: 1px solid rgba(247, 247, 247);
-    background-color: rgba(247, 247, 247);
+    height: 11vh;
+    border: 1px solid #d1d1d1;
+    background-color: rgba(247, 247, 247, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 32vw;
 
     h2 {
       font-size: 40px;
@@ -270,17 +305,18 @@ const Root = styled.section`
   .two_btn {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    margin: 20px 0px;
 
     button {
       display: flex;
-      flex-wrap: wrap;
+      width: 100%;
+      height: 8vh;
       align-items: center;
-      padding: 10px 70px;
+      justify-content: center;
+      padding: 10px;
       gap: 10px;
       border: 2px solid transparent;
-      border-radius: 10px;
+      border-radius: 5px;
       &.selected {
         border: 2px solid black;
         border-radius: 10px;
@@ -295,6 +331,86 @@ const Root = styled.section`
     h5 {
       font-size: 13px;
       padding-top: 7px;
+    }
+  }
+
+  @media (max-width: 987px) {
+    .column,
+    .bord {
+      padding: 5px;
+      height: 9vh;
+      width: 31vw;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 15px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .column,
+    .bord {
+      height: 8vh;
+      padding: 5px;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 13px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 667px) {
+    .column,
+    .bord {
+      padding: 5px;
+      height: 7vh;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 11px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 467px) {
+    .container-fluid {
+      margin: 0px;
+    }
+    .col-4 {
+      width: 28vw;
+    }
+    .column,
+    .bord {
+      padding: 5px;
+      height: 5vh;
+      width: 30vw;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 10px;
+      }
+      .view_cont {
+        display: none;
+      }
+      span {
+        font-size: 10px;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 `;

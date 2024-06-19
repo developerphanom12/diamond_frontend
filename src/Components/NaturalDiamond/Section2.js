@@ -70,27 +70,38 @@ export default function Section2() {
   const dispatch = useDispatch();
   const { state } = useLocation();
   const typelabgrown = state ? state.labgrownValue : false;
-
-  const diamondApi = async () => {
+  const diamondApi = async (params) => {
     setLoading(true);
     try {
-      const shapesParam = selectedShapes.length
-        ? selectedShapes.join(",")
-        : "ROUND";
-      const colors = selectedColors.join(",");
-      const clarity = selectedClarity.join(",");
-      const cut = selectedCut.join(",");
-      // const carat = selectedCarat.join(",");
-      // const Budget = selectedBudget.join(",");
-      // const lab = Object.keys(selectedCertificate).filter(
-      //   (key) => selectedCertificate[key]
-      // ).join(",");
-      const polish = selectedPolish.join(",");
-      const symmetry = selectedSymmetry.join(",");
-      //&carat=${carat}&Budget=${Budget}&lab=${lab}
+      const query = new URLSearchParams();
+
+      if (params.selectedShapes.length)
+        query.append("shapes", params.selectedShapes.join(","));
+      query.append("typelabgrown", params.typelabgrown);
+      if (params.selectedColors.length)
+        query.append("color", params.selectedColors.join(","));
+      if (params.selectedClarity.length)
+        query.append("clarity", params.selectedClarity.join(","));
+      if (params.selectedCut.length)
+        query.append("cut", params.selectedCut.join(","));
+      if (params.selectedPolish.length)
+        query.append("polish", params.selectedPolish.join(","));
+      if (params.selectedSymmetry.length)
+        query.append("symmetry", params.selectedSymmetry.join(","));
+
+      // If any optional parameters are needed, add them here
+      // if (params.selectedCarat.length) query.append('carat', params.selectedCarat.join(','));
+      // if (params.selectedBudget.length) query.append('Budget', params.selectedBudget.join(','));
+      // const selectedCertificate = Object.keys(params.selectedCertificate)
+      //   .filter((key) => params.selectedCertificate[key])
+      //   .join(',');
+      // if (selectedCertificate) query.append('lab', selectedCertificate);
+
+      const queryString = query.toString();
       const resp = await axios.get(
-        `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+        `${EXCHANGE_URLS}/nivodafilter?${queryString}`
       );
+
       if (resp?.status === 200) {
         setValue(resp?.data?.items);
         const diamondIds = resp.data.items.map((item) => item);
@@ -102,25 +113,87 @@ export default function Section2() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     if (typelabgrown) {
       dispatch(setDiamondType(typelabgrown));
     }
-    diamondApi();
+
+    const params = {
+      selectedShapes,
+      typelabgrown,
+      selectedColors,
+      selectedClarity,
+      selectedCut,
+      selectedPolish,
+      selectedSymmetry,
+      // Include other parameters if needed
+      // selectedCarat,
+      // selectedBudget,
+      // selectedCertificate
+    };
+
+    diamondApi(params);
   }, [
     selectedShapes,
     selectedColors,
     selectedClarity,
     selectedCut,
-    selectedCarat,
-    // selectedBudget,
-    // selectedCertificate,
     selectedPolish,
     selectedSymmetry,
-    dispatch,
     typelabgrown,
-    setLoading,
+    dispatch,
   ]);
+  // const diamondApi = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const shapesParam = selectedShapes.length
+  //       ? selectedShapes.join(",")
+  //       : "ROUND";
+  //     const colors = selectedColors.join(",");
+  //     const clarity = selectedClarity.join(",");
+  //     const cut = selectedCut.join(",");
+  //     // const carat = selectedCarat.join(",");
+  //     // const Budget = selectedBudget.join(",");
+  //     // const lab = Object.keys(selectedCertificate).filter(
+  //     //   (key) => selectedCertificate[key]
+  //     // ).join(",");
+  //     const polish = selectedPolish.join(",");
+  //     const symmetry = selectedSymmetry.join(",");
+  //     //&carat=${carat}&Budget=${Budget}&lab=${lab}
+  //     const resp = await axios.get(
+  //       `${EXCHANGE_URLS}/nivodafilter?shapes=${shapesParam}&typelabgrown=${typelabgrown}&color=${colors}&clarity=${clarity}&cut=${cut}&polish=${polish}&symmetry=${symmetry}`
+  //     );
+  //     if (resp?.status === 200) {
+  //       setValue(resp?.data?.items);
+  //       const diamondIds = resp.data.items.map((item) => item);
+  //       dispatch(setDiamondIds(diamondIds));
+  //     }
+  //   } catch (err) {
+  //     console.error("err", err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (typelabgrown) {
+  //     dispatch(setDiamondType(typelabgrown));
+  //   }
+  //   diamondApi();
+  // }, [
+  //   selectedShapes,
+  //   selectedColors,
+  //   selectedClarity,
+  //   selectedCut,
+  //   selectedCarat,
+  //   // selectedBudget,
+  //   // selectedCertificate,
+  //   selectedPolish,
+  //   selectedSymmetry,
+  //   dispatch,
+  //   typelabgrown,
+  //   setLoading,
+  // ]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
@@ -128,32 +201,42 @@ export default function Section2() {
   };
 
   const handleColorClick = (color) => {
-    setSelectedColors((prevColors) => 
-      prevColors.includes(color) ? prevColors.filter(c => c !== color) : [...prevColors, color]
+    setSelectedColors((prevColors) =>
+      prevColors.includes(color)
+        ? prevColors.filter((c) => c !== color)
+        : [...prevColors, color]
     );
   };
 
   const handleButtonClarity = (clarity) => {
     setSelectedClarity((prevClarity) =>
-      prevClarity.includes(clarity) ? prevClarity.filter(c => c !== clarity) : [...prevClarity, clarity]
+      prevClarity.includes(clarity)
+        ? prevClarity.filter((c) => c !== clarity)
+        : [...prevClarity, clarity]
     );
   };
 
   const handleButtonCut = (cut) => {
-    setSelectedCut((prevCut) => 
-      prevCut.includes(cut) ? prevCut.filter(c => c !== cut) : [...prevCut, cut]
+    setSelectedCut((prevCut) =>
+      prevCut.includes(cut)
+        ? prevCut.filter((c) => c !== cut)
+        : [...prevCut, cut]
     );
   };
 
   const handleButtonPolish = (polish) => {
-    setSelectedPolish((prevPolish) => 
-      prevPolish.includes(polish) ? prevPolish.filter(p => p !== polish) : [...prevPolish, polish]
+    setSelectedPolish((prevPolish) =>
+      prevPolish.includes(polish)
+        ? prevPolish.filter((p) => p !== polish)
+        : [...prevPolish, polish]
     );
   };
 
   const handleButtonSymmetry = (symmetry) => {
-    setSelectedSymmetry((prevSymmetry) => 
-      prevSymmetry.includes(symmetry) ? prevSymmetry.filter(s => s !== symmetry) : [...prevSymmetry, symmetry]
+    setSelectedSymmetry((prevSymmetry) =>
+      prevSymmetry.includes(symmetry)
+        ? prevSymmetry.filter((s) => s !== symmetry)
+        : [...prevSymmetry, symmetry]
     );
   };
 

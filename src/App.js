@@ -19,8 +19,7 @@ import { LoadingProvider } from "./Components/LoadingContext";
 import LoaderDot from "./Components/LoaderDot";
 import ContactUs from "./Components/AllOrders/ContactUs";
 import { useEffect } from "react";
-import Cookies from 'js-cookie';
-
+import Cookies from "js-cookie";
 
 function App() {
   useEffect(() => {
@@ -28,8 +27,6 @@ function App() {
     Object.keys(allCookies).forEach((cookieName) => {
       Cookies.remove(cookieName);
     });
-
-    
   }, []);
 
   return (
