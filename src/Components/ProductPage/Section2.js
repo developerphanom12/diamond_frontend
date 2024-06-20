@@ -102,89 +102,85 @@ export default function Section2() {
     });
   };
   const VideoContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  max-height: 613px;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    max-width: 500px ;
+    max-height: 613px;
+    height: 100%;
 
-  iframe.sc-kbovfZ.eUSVOq {
-    height: auto;
-  }
-`;
+    
+  `;
 
-const VideoFrame = styled.iframe`
-  width: 100%;
-  height: 100%;
-`;
+  const VideoFrame = styled.iframe`
+    width: 100%;
+    height: 100%;
+  `;
 
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <div className="slider-container">
-            <Slider
-              ref={(slider) => {
-                sliderRef = slider;
-              }}
-              {...settings}
-            >
-              <div key={1} style={{width:"500px",height:"500px"}}>
-                {productIds?.images?.edges?.length > 0 && (
-                  <img
-                    src={productIds.images.edges[0].node.originalSrc}
-                    alt={
-                      productIds.images.edges[0].node.altText || "Product Image"
-                    }
-                  />
-                )}
-              </div>
-
-              <div key={2}  style={{width:"500px",height:"500px"}}>
-              {diamond?.diamond?.video ? (
-                  <VideoContainer>
-                    <VideoFrame
-                      src={diamond?.diamond.video}
-                      title="Diamond Video"
-                      allowFullScreen
-                    />
-                  </VideoContainer>
-                ) : (
-                  "No image"
-                )}
-              </div>
-            </Slider>
-            <div
-              style={{
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <button
-                className="button"
-                onClick={() => handleButtonClick(1)}
-                style={{
-                  borderColor: selectedButton === 1 ? "black" : "transparent",
-                }}
-              >
-                <img src={ringdiam} alt="img" style={{ width: "25px" }} />
-
-                <span>Setting</span>
-              </button>
-
-              <button
-                className="button"
-                onClick={() => handleButtonClick(2)}
-                style={{
-                  borderColor: selectedButton === 2 ? "black" : "transparent",
-                }}
-              >
-                <img src={diam} alt="img" style={{ width: "20px" }} />
-                <span>Stone</span>
-              </button>
+          <Slider
+            ref={(slider) => {
+              sliderRef = slider;
+            }}
+            {...settings}
+          >
+            <div key={1} style={{ width: "500px", height: "500px" }}>
+              {productIds?.images?.edges?.length > 0 && (
+                <img
+                  src={productIds.images.edges[0].node.originalSrc}
+                  alt={
+                    productIds.images.edges[0].node.altText || "Product Image"
+                  }
+                />
+              )}
             </div>
+
+            <div key={2} style={{ width: "500px", height: "500px" }}>
+              {diamond?.diamond?.video ? (
+                <VideoContainer>
+                  <VideoFrame
+                    src={diamond?.diamond.video}
+                    title="Diamond Video"
+                    allowFullScreen
+                  />
+                </VideoContainer>
+              ) : (
+                "No image"
+              )}
+            </div>
+          </Slider>
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              className="button"
+              onClick={() => handleButtonClick(1)}
+              style={{
+                borderColor: selectedButton === 1 ? "black" : "transparent",
+              }}
+            >
+              <img src={ringdiam} alt="img" style={{ width: "25px" }} />
+
+              <span>Setting</span>
+            </button>
+
+            <button
+              className="button"
+              onClick={() => handleButtonClick(2)}
+              style={{
+                borderColor: selectedButton === 2 ? "black" : "transparent",
+              }}
+            >
+              <img src={diam} alt="img" style={{ width: "20px" }} />
+              <span>Stone</span>
+            </button>
           </div>
         </div>
 
@@ -370,7 +366,11 @@ const VideoFrame = styled.iframe`
 
 const Root = styled.section`
   padding: 30px 30px;
-
+  iframe {
+    padding: 20px;
+      height: 90vh;
+      width: 100vw;
+    }
   .main_div {
     display: flex;
 
@@ -642,7 +642,19 @@ const Root = styled.section`
     transform: rotate3d(360deg);
     /* transform: rotate3d(0, 1, 0, 60deg); */
   }
+  .slick-slide.slick-active.slick-current {
+    >div{
+      height: auto;
+    }
+  }
   @media (max-width: 1024px) {
+    .main_div .image_div .slick-slider,
+    .gMiibD .main_div .image_div .slick-track {
+      height: 362px;
+    }
+    .slick-slide.slick-active.slick-current {
+      height: 370px;
+    }
     .main_div {
       flex-direction: column;
       .image_div,
@@ -650,6 +662,10 @@ const Root = styled.section`
         width: 100%;
         margin: 10px 0px;
         padding: 0px;
+        height: auto;
+        .title h2 {
+          font-size: 18px;
+        }
       }
     }
   }

@@ -14,7 +14,7 @@ export default function Section1() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-4 col-md-12 col-12">
+          <div className="col-lg-4 col-md-4 col-4">
             <div
               className="column"
               onClick={() => {
@@ -41,7 +41,7 @@ export default function Section1() {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-12 col-12">
+          <div className="col-lg-4 col-md-4 col-4">
             <div
               className="column "
               onClick={() => {
@@ -66,7 +66,7 @@ export default function Section1() {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-12 col-12">
+          <div className="col-lg-4 col-md-4 col-4">
             <div className="column bord">
               <div className="d-flex ">
                 <h2>3</h2>
@@ -89,19 +89,39 @@ export default function Section1() {
   );
 }
 const Root = styled.section`
-  padding: 20px;
+  padding: 20px 0px;
+  margin: 0px 10px;
+
+  .container-fluid {
+    text-align: center;
+    margin: 0px 5px;
+    .col-lg-4,
+    .col-md-4 {
+      margin: -1px;
+      padding: 0px;
+      width: 32vw;
+      text-align: center;
+    }
+  }
   .bord {
     border: 2px solid black !important;
+    width: 32vw;
+    height: 11vh;
+    position: relative;
+    z-index: 1;
   }
+
   .column {
-    margin: 10px 0px;
-    border: 1px solid rgba(247, 247, 247);
-    background-color: rgba(247, 247, 247);
+    height: 11vh;
+    border: 1px solid #d1d1d1;
+    background-color: rgba(247, 247, 247, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 32vw;
+
     h2 {
       font-size: 40px;
       font-weight: 400;
@@ -123,9 +143,18 @@ const Root = styled.section`
       width: 35px;
       height: 35px;
     }
+    a {
+      color: rgba(128, 128, 128);
+      text-decoration: underline;
+      font-size: 10px;
+      margin-left: 100px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
     .view_cont {
-      margin-left: 75px;
+      margin-left: 5px;
       padding-top: 20px;
       h5 {
         font-size: 9px;
@@ -146,6 +175,84 @@ const Root = styled.section`
         p {
           font-size: 13px;
         }
+      }
+    }
+  }
+
+  @media (max-width: 987px) {
+    .column,
+    .bord {
+      padding: 5px;
+      height: 9vh;
+      width: 31vw;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 15px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .column,
+    .bord {
+      height: 8vh;
+      padding: 5px;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 13px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 667px) {
+    .column,
+    .bord {
+      padding: 5px;
+      height: 7vh;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 11px;
+      }
+      .view_cont {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 467px) {
+    .container-fluid {
+      margin: 0px;
+    }
+
+    .column,
+    .bord {
+      padding: 5px;
+      height: 6vh;
+      width: 30vw;
+      h2 {
+        display: none;
+      }
+      h6 {
+        font-size: 10px;
+      }
+      .view_cont {
+        display: none;
+      }
+      span {
+        font-size: 10px;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
   }

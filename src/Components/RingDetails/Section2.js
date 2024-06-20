@@ -26,87 +26,36 @@ export default function Section2() {
   const location = useLocation();
   const { products } = location.state || {};
   const navigate = useNavigate();
-  let sliderRef = useRef(null);
-
-  const next = () => {
-    sliderRef.slickNext();
-  };
-  const previous = () => {
-    sliderRef.slickPrev();
-  };
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <div className="slider-container">
-            <Slider
-              ref={(slider) => {
-                sliderRef = slider;
-              }}
-              {...settings}
-            >
-              <div key={1}>
-                <img  src={products?.mainImage && products.mainImage} alt="text" />
-              </div>
-              {/* <div key={2}>
-                <img src={ring} alt="text" />
-              </div> */}
-            </Slider>
-            <div
-              style={{
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <button className="button" onClick={previous}>
-                
-                <img src={images} alt="images" />
-                <span>Image</span>
-              </button>
-            </div>
+          <img src={products?.mainImage && products.mainImage} alt="No image available" />
+
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button className="button">
+              <img
+                src={images}
+                alt="images"
+                style={{ width: "35px", height: "35px" }}
+              />
+              <span>Image</span>
+            </button>
           </div>
         </div>
 
         <div className="des_div">
           <div className="title">
             <h2>{products?.title}</h2>
-            <h4>$ {products?.variants?.edges?.[0]?.node?.price}</h4>
+            <h4>${products?.variants?.edges?.[0]?.node?.price}</h4>
             <p>
               {products?.description && products.description}
               {!products?.description && "No Description About Product"}
@@ -145,7 +94,8 @@ export default function Section2() {
               <img src={aeroplane} alt="aeroplane_images" />
 
               <p>
-                Overnight <br/>Shipping
+                Overnight <br />
+                Shipping
               </p>
             </div>
 
@@ -208,26 +158,30 @@ export default function Section2() {
 }
 
 const Root = styled.section`
-  padding: 30px 30px;
+  padding: 20px;
 
   .main_div {
     display: flex;
     flex-wrap: wrap;
-
+    gap: 50px;
+    justify-content: space-between;
     .image_div {
+      flex: 1;
       border: 1px solid #d3d3d3;
-      width: 50%;
+      padding: 20px 20px 0px 20px;
       height: 613px;
       border-radius: 20px;
+      flex-direction: column;
+      height: 630px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      .slick-slide img {
-        display: block;
-        width: 100%;
-        border-radius: 20px;
+      img {
+        width: 40vw;
       }
+
       button.button {
-        width: 50%;
-        padding: 13px 0px;
         background-color: white;
         border: none;
         border-top: 1px solid #d3d3d3;
@@ -241,31 +195,29 @@ const Root = styled.section`
           font-size: 13px;
         }
       }
-      .slick-list,
-      .slick-slider,
-      .slick-track {
-        height: 560px;
-      }
     }
 
     .des_div {
-      width: 50%;
-      padding-left: 70px;
-
+      flex: 1;
+      padding: 10px 30px;
+      margin: 0px 10px;
       .title {
         h2 {
-          font-size: 24px;
+          font-size: 23px;
           font-weight: 600;
+          line-height: 1.2;
         }
         h4 {
           font-size: 21px;
           color: #666666;
-          font-weight: 700;
+          font-weight: 500;
+          line-height: 1.25;
         }
         p {
           font-weight: 400;
           color: grey;
           margin-top: 20px;
+          font-size: 13px;
         }
       }
 
@@ -405,25 +357,60 @@ const Root = styled.section`
   }
 
   @media (max-width: 567px) {
-    .main_div .image_div {
-      width: 100%;
+    padding: 10px 0px;
+    .main_div {
+      gap: 0px;
     }
 
+    .main_div .image_div {
+      width: 100%;
+      height: unset;
+      padding: 5px;
+      margin: 10px;
+    }
+    .main_div .des_div .prod_spec {
+      display: none;
+    }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding-left: 0;
+      padding: 5px;
+    }
+    .main_div .setting_detail .setting_info .setting_div {
+      flex: 1;
+    }
+    .main_div .des_div .prod_spec .spec {
+      padding: 0px 14px;
+    }
+    .main_div .des_div .prod_spec {
+      gap: 20px;
+    }
+    .main_div .des_div .title h2,
+    .main_div .des_div .title h4 {
+      font-size: 18px;
     }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
+    .main_div {
+      gap: 0px;
+    }
+
     .main_div .image_div {
       width: 100%;
+      height: unset;
+      margin: 20px;
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding-left: 0px;
+      padding: 5px;
+    }
+    .main_div .des_div h2 {
+      font-size: 18px;
+    }
+    .main_div .setting_detail .setting_info .setting_div {
+      flex: 1;
     }
   }
 `;

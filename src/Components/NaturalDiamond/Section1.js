@@ -46,10 +46,10 @@ export default function Section1() {
               </div>
 
               <div className="view_cont">
-                <h5>{productIds?.[0]?.title}</h5>
+                <h5>{productIds?.title}</h5>
                 <div className="view_btn">
-                  <h5>View/Change</h5>
-                  <p>${productIds?.[0]?.priceRange?.minVariantPrice?.amount}</p>
+                  <h5>View</h5>
+                  <p>${productIds?.priceRange?.minVariantPrice?.amount}</p>
                 </div>
               </div>
               <CiCircleCheck />
@@ -70,8 +70,6 @@ export default function Section1() {
                 </div>
               </div>
               <CiCircleCheck />
-
-              <div className="arrow-right"></div>
             </div>
           </div>
 

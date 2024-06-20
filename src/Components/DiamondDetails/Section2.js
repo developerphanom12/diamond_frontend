@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import RingShipReturn from "./RingShipReturn";
-import React, { useRef } from "react";
-import Slider from "react-slick";
-import ring from "../Images/ring.png";
+import React from "react";
 import aeroplane from "../Images/aeroplane.png";
 import badgess from "../Images/badgess.png";
 import moneyinhand from "../Images/moneyinhand.png";
@@ -13,132 +11,106 @@ import clarity from "../Images/clarity.PNG";
 import diamo from "../Images/diamo.PNG";
 import j from "../Images/j.jpg";
 import vs from "../Images/vs.png";
-import images from "../Images/images.PNG";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Section2() {
   const diamondById = useSelector((state) => state.users.diamondById);
   const navigate = useNavigate();
-  let sliderRef = useRef(null);
-  console.log("jagsdjhgd", diamondById);
-  const location = useLocation();
-  const { diamond } = location.state || {};
-  console.log("rindfffffffffffffg", diamond);
-  const next = () => {
-    sliderRef.slickNext();
-  };
-  const previous = () => {
-    sliderRef.slickPrev();
-  };
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  const diamondType = useSelector((state) => state.users.diamondType);
+  console.log("jagsdjhgd", diamondType);
 
   const VideoContainer = styled.div`
     position: relative;
-    width: 100%;
-    max-width: 500px;
-    max-height: 613px;
-    height: 100%;
-
-    iframe.sc-kbovfZ.eUSVOq {
-      height: auto;
+    width: 84%;
+    height: 100% !important;
+    object-fit: contain;
+    background-position: 100% 100%;
+    @media (max-width: 768px) {
+      height: 100%;
+      width: 100%;
+      min-height: 50vh;
+      min-width: 50vh; // Adjust height for mobile
+    }
+    iframe {
+      height: 100%;
+      width: 100%;
+      > div {
+        width: 100%;
+        height: 100%;
+      }
     }
   `;
 
   const VideoFrame = styled.iframe`
     width: 100%;
     height: 100%;
+    /* min-height:50vh;
+    min-width:50vh;  */
+    > div {
+      width: 76%;
+      height: 76%;
+    }
   `;
 
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
-          {/* <div className="slider-container">
-            <Slider
-              ref={(slider) => {
-                sliderRef = slider;
-              }}
-              {...settings}
-            > */}
-              <div key={1} style={{width:"500px",height:"500px"}}>
-                {diamondById?.diamond?.video ? (
-                  <VideoContainer>
-                    <VideoFrame
-                      src={diamondById?.diamond.video}
-                      title="Diamond Video"
-                      allowFullScreen
-                    />
-                  </VideoContainer>
-                ) : (
-                  "No image"
-                )}
-              {/* </div>
-            </Slider> */}
-            <div
-              style={{
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <button className="button" onClick={previous}>
-                {diamond?.diamond?.video ? (
-                  <VideoContainer>
-                    <div className="aws_wrapper">
-                      <VideoFrame
-                        src={diamond.diamond.video}
-                        title="Diamond Video"
-                        allowFullScreen
-                      />
-                    </div>
-                  </VideoContainer>
-                ) : (
-                  "No image"
-                )}
+          <ImageContainer>
+            {diamondById?.diamond?.video ? (
+              <VideoContainer>
+                <VideoFrame
+                  src={diamondById?.diamond.video}
+                  title="Diamond Video"
+                  allowFullScreen
+                />
+              </VideoContainer>
+            ) : (
+              <img
+                src={diamondById?.diamond?.image}
+                title="Diamond Image"
+                alt="Diamond"
+              />
+            )}
+          </ImageContainer>
 
-                <span>Image</span>
-              </button>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button className="button">
+              {diamondById?.diamond?.image ? (
+                <img
+                  src={diamondById?.diamond?.image}
+                  title="Diamond image"
+                  alt="img"
+                  style={{ width: "50px", height: "50px" }}
+                />
+              ) : (
+                "No image"
+              )}
+
+              <span>Image</span>
+            </button>
           </div>
         </div>
         <div className="des_div">
           <div className="title">
-            <h2> Diamond Shape : {diamondById?.diamond?.certificate?.shape}</h2>
-            <h4>$ {diamondById?.price}</h4>
+            <h2>
+              {" "}
+              {diamondById?.diamond?.certificate?.carats} Carat{" "}
+              {diamondById?.diamond?.certificate?.color}{" "}
+              {diamondById?.diamond?.certificate?.clarity}{" "}
+              {diamondById?.diamond?.certificate?.shape}{" "}
+              {diamondType && diamondType === false
+                ? "Natural Diamond"
+                : "Lab Grown"}
+            </h2>
+            <h4>${diamondById?.price}</h4>
           </div>
 
           <div className="prod_spec">
@@ -302,23 +274,23 @@ export default function Section2() {
 }
 
 const Root = styled.section`
-  padding: 30px 30px;
+  padding: 20px ;
 
   .main_div {
     display: flex;
     flex-wrap: wrap;
-
+    gap: 50px;
+    justify-content: space-between;
     .image_div {
+      flex: 1;
       border: 1px solid #d3d3d3;
-      width: 50%;
-      height: 613px;
+      padding: 20px 20px 0px 20px;
       border-radius: 20px;
-
-      .slick-slide img {
-        display: block;
-        width: 100%;
-        border-radius: 20px;
-      }
+      display: flex;
+      height: 630px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
       button.button {
         width: 50%;
@@ -337,28 +309,24 @@ const Root = styled.section`
           font-size: 13px;
         }
       }
-
-      .slick-list,
-      .slick-slider,
-      .slick-track {
-        height: 560px;
-      }
     }
 
     .des_div {
-      width: 50%;
-      padding-left: 70px;
-
+      flex: 1;
+      padding: 10px 30px;
+      margin: 0px 10px;
       .title {
         h2 {
-          font-size: 24px;
+          font-size: 23px;
           font-weight: 600;
+          line-height: 1.2;
         }
 
         h4 {
           font-size: 21px;
           color: #666666;
-          font-weight: 700;
+          font-weight: 500;
+          line-height: 1.25;
         }
       }
 
@@ -377,11 +345,13 @@ const Root = styled.section`
             font-size: 14px;
             color: #000000;
             font-weight: 600;
+            margin-bottom: 3px;
           }
           p {
             color: #666666;
             font-size: 11px;
             margin-bottom: 0;
+            line-height: 1.2;
           }
         }
       }
@@ -395,8 +365,9 @@ const Root = styled.section`
       .btn {
         background-color: rgba(0, 0, 0);
         color: white;
-        font-size: 17px;
-        padding: 16px 0;
+        font-size: 16px;
+        line-height: 1;
+        padding: 18px 32px;
         font-weight: 600;
         border-radius: 50px;
         border: 1px solid transparent;
@@ -445,7 +416,7 @@ const Root = styled.section`
         flex-wrap: wrap;
         gap: 10px;
         .setting_div {
-          width: 184px;
+          width: 47%;
           background: #fff;
           border: 1px solid #e0e0e0;
           border-radius: 12px;
@@ -509,14 +480,25 @@ const Root = styled.section`
   }
 
   @media (max-width: 567px) {
+    padding: 10px 0px;
+    .main_div{
+      gap: 0px;
+
+    }
+    
     .main_div .image_div {
       width: 100%;
+      height: unset;
+      padding: 5px;
     }
-
+    .main_div .des_div .prod_spec { 
+      display: none;
+    }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding-left: 0;
+      padding: 5px;
+
     }
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
@@ -527,19 +509,50 @@ const Root = styled.section`
     .main_div .des_div .prod_spec {
       gap: 20px;
     }
+    .main_div .des_div .title h2,  .main_div .des_div .title h4{
+      font-size: 18px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
+    .main_div{
+      gap: 0px;
+
+    }
+    
     .main_div .image_div {
       width: 100%;
+      height: unset;
+
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding-left: 0px;
+      padding: 5px;
+
+    }
+    .main_div .des_div h2{
+      font-size: 18px;
     }
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
+    }
+  }
+`;
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    /* height: auto; // Adjust height for mobile */
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    @media (max-width: 768px) {
+      height: 100%; // Adjust height for mobile
     }
   }
 `;

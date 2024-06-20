@@ -556,16 +556,7 @@ const Root = styled.section`
     }
     .drawer-content {
       display: block;
-      /* .ring_types {
-        gap: 4px;
-        margin: 0px 10px;
-     
-        .btn_shapes {
-        width: 93px;
-          border: 1px solid #d1d1d1;
-          background-color: rgba(247, 247, 247);
-        }
-      } */
+      
     }
   }
   .EZDrawer__container {

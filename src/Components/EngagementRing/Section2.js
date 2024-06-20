@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Section3 from "./Section3";
 import { useDispatch } from "react-redux";
 import Section4 from "./Section4";
 import { setProductIds, setSelectedRingSvg } from "../../redux/users/action";
@@ -16,6 +15,9 @@ import vintage from "../Images/Vintage-removebg-preview.png";
 import tension from "../Images/Tension-removebg-preview.png";
 import { EXCHANGE_URLS } from "../URLS";
 import { useLoading } from "../LoadingContext";
+import { IoFilterOutline } from "react-icons/io5";
+import "react-modern-drawer/dist/index.css";
+import Drawer from "react-modern-drawer";
 
 const shapesList = [
   { title: "Solitaire", imgUrl: solitaire },
@@ -37,29 +39,27 @@ export default function Section2() {
   const { setLoading } = useLoading();
   const handleButtonClick = (buttonIndex, selectedRingSvg) => {
     setSelectedButton(buttonIndex);
-    dispatch(setSelectedRingSvg(selectedRingSvg));  
+    dispatch(setSelectedRingSvg(selectedRingSvg));
   };
 
   useEffect(() => {
     const fetchCollections = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `${EXCHANGE_URLS}/collection`
-        );
+        const response = await axios.get(`${EXCHANGE_URLS}/collection`);
         if (response.status === 200) {
           setCollection(response.data.data);
           console.log("response", response.data.data);
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
-      }finally {
+      } finally {
         setLoading(false);
       }
     };
 
     fetchCollections();
-  }, [    setLoading]);
+  }, [setLoading]);
 
   useEffect(() => {
     const fetchProductsDetails = async () => {
@@ -77,19 +77,57 @@ export default function Section2() {
           }
         } catch (error) {
           console.error("Error fetching products:", error);
-        }finally {
+        } finally {
           setLoading(false);
         }
       }
     };
 
     fetchProductsDetails();
-  }, [collection, selectedButton, dispatch,    setLoading]);
+  }, [collection, selectedButton, dispatch, setLoading]);
 
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  const drawerContent = (
+    <>
+      <div className="ring_types mt-4">
+        {shapesList.map((shape, index) => (
+          <button
+            key={index}
+            className={selectedButton === index + 1 ? "selected" : ""}
+            onClick={() => handleButtonClick(index + 1, shape.imgUrl)}
+          >
+            <img
+              src={shape.imgUrl}
+              alt={`img of ring ${index + 1}`}
+              style={{ width: "52px" }}
+            />
+            <span>{shape.title}</span>
+          </button>
+        ))}
+      </div>
+    </>
+  );
   return (
     <Root>
       <div className="container-fluid">
-        <div className="row mt-4">
+        <div className="row ">
           <div className="col-lg-12">
             <div className="heading text-center">
               <h2>Engagement Rings</h2>
@@ -100,30 +138,35 @@ export default function Section2() {
             </div>
           </div>
         </div>
-        <div className="ring_types mt-4">
-          {shapesList.map((shape, index) => (
-            <button
-              key={index}
-              className={selectedButton === index + 1 ? "selected" : ""}
-              onClick={() => handleButtonClick(index + 1, shape.imgUrl)}
+        <button className="drawer-toggle-button" onClick={toggleDrawer}>
+          <IoFilterOutline /> Filter
+        </button>
+        <div
+          className={`drawer-content ${
+            isOpen && screenWidth <= 876 ? "open" : ""
+          }`}
+        >
+          {screenWidth > 876 ? (
+            drawerContent
+          ) : (
+            <Drawer
+              open={isOpen}
+              onClose={toggleDrawer}
+              direction="bottom"
+              className="bla"
             >
-              <img
-                src={shape.imgUrl}
-                alt={`img of ring ${index + 1}`}
-                style={{ width: "52px" }}
-              />
-              <span>{shape.title}</span>
-            </button>
-          ))}
+              {drawerContent}
+            </Drawer>
+          )}
         </div>
       </div>
-      <Section3 />
+      {/* <Section3 /> */}
       <Section4 products={products} />
     </Root>
   );
 }
 const Root = styled.section`
-  padding: 0 20px;
+  padding: 0 0 20px;
 
   .column {
     border: 1px solid rgba(247, 247, 247);
@@ -164,12 +207,16 @@ const Root = styled.section`
   }
 
   .heading {
+    padding: 10px 24px;
     h2 {
       color: rgba(0, 0, 0);
-      font-size: 30px;
+      font-size: 28px;
+      margin-bottom: 10px;
     }
     p {
-      font-size: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.75rem;
     }
   }
 
@@ -177,31 +224,81 @@ const Root = styled.section`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     button {
-      width: 100px;
+      width: 93px !important;
       border: 2px solid transparent;
       background: #fff;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
       border-radius: 10px;
+      align-items: center;
       padding: 12px 0;
-      &:hover {
-        background-color: rgba(247, 247, 247);
-      }
-
+      font-size: 12px;
+      line-height: 25px;
+      font-weight: 500;
       &.selected {
         border: 2px solid black;
-        background-color: #fff;
         border-radius: 10px;
+      }
+
+      &:hover {
+        background-color: rgba(247, 247, 247);
       }
 
       img,
       svg {
         height: 50px;
         width: 62px;
+      }
+    }
+  }
+
+  .drawer-content {
+    padding: 20px 0px;
+    width: 100%;
+  }
+  .drawer-toggle-button {
+    font-weight: 500;
+    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+  }
+  @media (min-width: 877px) {
+    .drawer-toggle-button {
+      display: none;
+    }
+    .drawer-content {
+      display: block;
+    }
+  }
+  .EZDrawer__container {
+    overflow-y: scroll !important;
+    height: 350px !important;
+    border-top-right-radius: 25px !important;
+    border-top-left-radius: 25px !important;
+    padding-bottom: 40px;
+  }
+  @media (max-width: 876px) {
+    .drawer-toggle-button {
+      display: block;
+    }
+    .drawer-content {
+      /* display: none; */
+      .ring_types {
+        justify-content: left;
+        gap: 4px;
+        margin: 0px 10px;
+        width: 100%;
+        .btn_shapes {
+          width: 93px !important;
+          border: 1px solid #d1d1d1;
+          background-color: rgba(247, 247, 247);
+          padding: 12px 42px;
+        }
       }
     }
   }

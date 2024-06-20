@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import noimg from "../Images/s6.png";
@@ -26,12 +26,10 @@ export default function Section4({ value }) {
       : setModal1(true);
   };
   // diamondbyId
-  const handleNavigateDetail = async (value) => {
-    const diamondId = value?.diamond?.id;
-    if (!productIds || productIds.length === undefined) {
-      setModal1(true); // Show modal if productIds is not selected
-      return;
-    }
+  const apiDetail = async (diamond) => {
+    const diamondId = diamond?.id;
+    console.log("xxxxx",diamondId)
+   
     setLoading(true);
     try {
       const response = await axios.get(
@@ -41,38 +39,25 @@ export default function Section4({ value }) {
         const diamondData = response?.data?.diamondData;
         setDiamondByIdState(diamondData);
         dispatch(setDiamondById(diamondData));
-        navigate("/diamonddetails");
+        console.log("mujhseee",response)
       }
     } catch (error) {
-      console.error("Error fetching diamond details:", error);
+      console.error('Error fetching diamond details:', error);
     } finally {
       setLoading(false);
     }
   };
-  const VideoContainer = styled.div`
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    max-height: 250px !important;
-    height: 100%;
 
-    .aws_wrapper {
-      width: 250px !important;
-      height: 250px !important;
+  useEffect(() => {
+    if (value && value.length > 0) {
+      apiDetail(value[0]?.diamond);
     }
+  }, [value]);
 
-    iframe.sc-kbovfZ.eUSVOq {
-      width: 250px !important;
-      max-height: 250px !important;
-      height: 100%;
-    }
-  `;
-
-  const VideoFrame = styled.iframe`
-    width: 250px !important;
-    max-height: 250px !important;
-    height: 100%;
-  `;
+  const handleNavigateDetail = ( ) => {
+    apiDetail( );
+    navigate('/diamonddetails');
+  };
 
   return (
     <Root>
@@ -81,16 +66,16 @@ export default function Section4({ value }) {
           value.map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                {i?.diamond?.video ? (
-                  <VideoContainer>
-                    <div className="aws_wrapper">
-                      <VideoFrame
-                        src={i.diamond.video}
-                        title="Diamond Video"
-                        allowFullScreen
-                      />
-                    </div>
-                  </VideoContainer>
+               {i?.diamond?.image ? (
+                  <img
+                    src={i?.diamond?.image}
+                    alt="diamond images"
+                    style={{
+                      width: "100%",
+                      maxWidth: "250px",
+                      height: "250px",
+                    }}
+                  />
                 ) : (
                   <img
                     src={noimg}
@@ -130,7 +115,7 @@ export default function Section4({ value }) {
                   <div className="btn_div">
                     <button
                       className="info_btn"
-                      onClick={() => handleNavigateDetail(i)}
+                      onClick={() => handleNavigateDetail(i.diamond)}
                     >
                       More Info
                     </button>

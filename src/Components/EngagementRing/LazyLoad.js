@@ -5,7 +5,7 @@ const CanvasImage = ({ src, width, height }) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext('3d');
     const image = new Image();
 
     image.src = src;
