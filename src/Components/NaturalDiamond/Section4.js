@@ -55,9 +55,11 @@ export default function Section4({ value }) {
   };
 
   const handleNavigate = (diamond, products) => {
-    productIds?.id && productIds?.id?.length > 0
-      ? navigate("/productpage", { state: { diamond, products } })
-      : setModal1(true);
+    if (productIds && productIds?.id) {
+      navigate("/productpage", { state: { diamond, products } });
+    } else {
+      setModal1(true);
+    }
   };
   return (
     <Root>
@@ -108,12 +110,12 @@ export default function Section4({ value }) {
                       </button>
                     </>
                     <>
-                      <button
-                        className="add_btn"
-                        onClick={(i) => {
-                          handleNavigate(i);
-                        }}
-                      >
+                    <button
+                    className="add_btn"
+                    onClick={() => {
+                      handleNavigate(i.diamond, i.products);
+                    }}
+                  >
                         Complete your ring
                       </button>
                     </>
