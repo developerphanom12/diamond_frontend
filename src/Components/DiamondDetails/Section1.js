@@ -2,12 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { CiCircleCheck } from "react-icons/ci";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export default function Section1() {
   const productIds = useSelector((state) => state.users.productIds);
   const diamondById = useSelector((state) => state.users.diamondById);
-  console.log("Navigating withlabgrownValue:", diamondById);
-
+  console.log("Navigating withlabgrownValue:", productIds);
+  const location = useLocation();
+  const { products } = location.state || {};
+  console.log("proooooooooooooooooo:", products);
   return (
     <Root>
       <div className="container-fluid">
@@ -46,8 +49,8 @@ export default function Section1() {
                 <h5>
                   {diamondById?.diamond?.certificate?.carats} ct,{" "}
                   {diamondById?.diamond?.certificate?.cut} cut,{" "}
-                  { diamondById?.diamond?.certificate?.color},{" "}
-                  { diamondById?.diamond?.certificate?.shape}{" "}
+                  {diamondById?.diamond?.certificate?.color},{" "}
+                  {diamondById?.diamond?.certificate?.shape}{" "}
                 </h5>
                 <div className="view_btn">
                   <h5>View</h5>

@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
-import Slider from "react-slick";
 import { useDispatch } from "react-redux";
 import { setDiamondType, setProductIds } from "../../redux/users/action";
 import ndia from "../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../Images/labgrowncopy-removebg.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
-   
+import noimg from "../Images/eligantPacking.png";
+
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
   const [productById, setProductById] = useState("");
@@ -18,15 +18,6 @@ export default function Section4({ products }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const settings = {
-    // dots: true,
-    lazyLoad: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    initialSlide: 2,
-  };
   const handleAddDiamondClick = (productIds) => {
     setSelectedProductId(productIds);
     setModal(true);
@@ -66,33 +57,27 @@ export default function Section4({ products }) {
           products.map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                <div className="slider-container">
-                  <Slider {...settings}>
-                    <div style={{ width: "283px", height: "283px" }}>
-                      {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
-                        <img
-                          src={i.node.images.edges[0].node.originalSrc}
-                          alt={i.node.images.edges[0].node.altText || "img"}
-                          style={{ width: "283px", height: "283px" }}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "https://via.placeholder.com/283";
-                          }}
-                        />
-                      ) : (
-                        <div
-                          style={{
-                            width: "283px",
-                            height: "283px",
-                            backgroundColor: "#ccc",
-                          }}
-                        >
-                          Image not available
-                        </div>
-                      )}
+                <>
+                  {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
+                    <img
+                      src={i.node.images.edges[0].node.originalSrc}
+                      alt={i.node.images.edges[0].node.altText || "img"}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/283";
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        backgroundColor: "#ccc",
+                      }}
+                    >
+                   <img src={noimg} alt="Image not available"/>
                     </div>
-                  </Slider>
-                </div>
+                  )}
+                </>
+
                 <div className="hov_content">
                   <div className="d-flex   flex-column">
                     <div className="d-flex flex justify-content-between">
@@ -169,8 +154,6 @@ export default function Section4({ products }) {
               />
               <span>Lab Diamond</span>
             </div>
-
-            
           </div>
         </CustomModalBody>
       </Modal>
@@ -180,35 +163,32 @@ export default function Section4({ products }) {
 
 const Root = styled.section`
   padding: 0 20px;
-  .slider-container {
-    position: relative;
-    perspective: 1000px;
-  }
 
-  &:hover .slider-container {
-    .slick-slide img {
-      transform: rotate3d(0, 1, 0.5, 3.142rad);
-      transition: transform 2.5s ease; /* Add transition for smooth animation */
-    }
-  }
   .main_div {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    position: relative;
     gap: 4px;
+    margin-top: 20px;
     .subdiv {
-      width: 300px;
-      height: 325px;
+      width: 24vw;
+      height: 55vh;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
       padding: 5px;
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
-
+      img {
+        width: 95%;
+        height: 95%;
+    
+      }
       &:hover {
         border: 3px solid black;
         overflow: unset;
+        transform: scale(1.1);
+        z-index: 1;
       }
       .hov_content {
         display: flex;
@@ -220,6 +200,7 @@ const Root = styled.section`
       }
 
       &:hover .hov_content {
+        width: 24vw;
         z-index: 1;
         position: absolute;
         background-color: white;
@@ -227,7 +208,6 @@ const Root = styled.section`
         padding: 0 20px 0;
         left: -3px;
         overflow: hidden;
-        width: 300px;
         border-top: none;
         border-radius: 0 0 20px 20px;
       }
@@ -236,7 +216,7 @@ const Root = styled.section`
         font-size: 14px;
       }
       .prd_price {
-        font-size: 14px;
+        font-size: 13px;
         width: 100%;
       }
       .white_color,
@@ -266,7 +246,9 @@ const Root = styled.section`
         justify-content: space-between;
         padding: 0;
         width: 100%;
+        gap: 10px;
         .info_btn {
+          flex: 1;
           padding: 12px 21px;
           border-radius: 25px;
           font-size: 13px;
@@ -274,6 +256,7 @@ const Root = styled.section`
           border: 2px solid black;
         }
         .add_btn {
+          flex: 1;
           background-color: black;
           border: 2px solid black;
           color: white;
@@ -293,6 +276,39 @@ const Root = styled.section`
         span {
           text-decoration: underline;
           cursor: pointer;
+        }
+      }
+    }
+  }
+  @media (max-width: 867px) {
+    padding: 0px 10px;
+    .main_div {
+      .subdiv {
+        width: 45vw;
+        height: 36vh;
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px;
+        }
+        .prd_name {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .prd_price {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .white_color,
+        .golden_color,
+        .red_color {
+          height: 10px;
+          width: 10px;
+        }
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 3px 10px;
+          border-radius: 15px;
         }
       }
     }
@@ -331,16 +347,5 @@ const CustomModalBody = styled(ModalBody)`
   }
   .modal-dialog {
     margin-top: 82px !important;
-  }
-
-  .slick-slide img {
-    width: 100%;
-  }
-  .slick-next {
-    right: 0px !important;
-  }
-  .slick-prev {
-    left: 0px !important;
-    z-index: 1;
   }
 `;

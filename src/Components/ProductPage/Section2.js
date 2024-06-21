@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import ring from "../Images/ring.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -35,10 +34,11 @@ export default function Section2() {
   );
   const selectedRingSvg = useSelector((state) => state.users.selectedRingSvg);
   const productIds = useSelector((state) => state.users.productIds);
+  const diamondById = useSelector((state) => state.users.diamondById);
   const diamondType = useSelector((state) => state.users.diamondType);
   const location = useLocation();
-  const { diamond } = location.state || {};
-  console.log("ring", diamond);
+  const { diamond, products } = location.state || {};
+  console.log("ring", diamond, products, diamondById);
 
   const settings = {
     dots: false,
@@ -104,11 +104,9 @@ export default function Section2() {
   const VideoContainer = styled.div`
     position: relative;
     width: 100%;
-    max-width: 500px ;
+    max-width: 500px;
     max-height: 613px;
     height: 100%;
-
-    
   `;
 
   const VideoFrame = styled.iframe`
@@ -126,7 +124,7 @@ export default function Section2() {
             }}
             {...settings}
           >
-            <div key={1} style={{ width: "500px", height: "500px" }}>
+            <div key={1} className="img_container">
               {productIds?.images?.edges?.length > 0 && (
                 <img
                   src={productIds.images.edges[0].node.originalSrc}
@@ -137,7 +135,7 @@ export default function Section2() {
               )}
             </div>
 
-            <div key={2} style={{ width: "500px", height: "500px" }}>
+            <div key={2} className="img_container">
               {diamond?.diamond?.video ? (
                 <VideoContainer>
                   <VideoFrame
@@ -246,13 +244,27 @@ export default function Section2() {
                 <div className="prod_name">
                   <h2> {diamond?.diamond?.certificate?.shape}</h2>
                   <p>
-                    {diamond?.diamond?.certificate?.carats}ct{" "}
-                    {diamond?.diamond?.certificate?.color}{" "}
-                    {diamond?.diamond?.certificate?.clarity}{" "}
+                    {diamond?.diamond ? (
+                      <>
+                        {diamond?.diamond?.certificate?.carats}ct{" "}
+                        {diamond?.diamond?.certificate?.color}{" "}
+                        {diamond?.diamond?.certificate?.clarity}{" "}
+                      </>
+                    ) : (
+                      <>
+                        {diamondById?.diamond?.certificate?.carats} ct,{" "}
+                        {diamondById?.diamond?.certificate?.cut} cut,{" "}
+                        {diamondById?.diamond?.certificate?.color},{" "}
+                        {diamondById?.diamond?.certificate?.shape}{" "}
+                      </>
+                    )}
                   </p>
                 </div>
                 <div className="prod_price">
-                  <h2>${diamond?.price}</h2>
+                  <h2>
+                    ${diamond && diamond.price ?(<>{diamond?.price} </>):
+                    (<>{diamondById.price}</>)}
+                  </h2>
                   <p>Change</p>
                 </div>
               </div>
@@ -368,9 +380,9 @@ const Root = styled.section`
   padding: 30px 30px;
   iframe {
     padding: 20px;
-      height: 90vh;
-      width: 100vw;
-    }
+    height: 90vh;
+    width: 50vw;
+  }
   .main_div {
     display: flex;
 
@@ -379,7 +391,10 @@ const Root = styled.section`
       width: 50%;
       height: 613px;
       border-radius: 20px;
-
+      .img_container {
+        width: 500px;
+        height: 500px;
+      }
       .slick-slide img {
         display: block;
         width: 100%;
@@ -643,7 +658,7 @@ const Root = styled.section`
     /* transform: rotate3d(0, 1, 0, 60deg); */
   }
   .slick-slide.slick-active.slick-current {
-    >div{
+    > div {
       height: auto;
     }
   }

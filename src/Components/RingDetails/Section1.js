@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { CiCircleCheck } from "react-icons/ci";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Section1() {
-  const productIds = useSelector((state) => state.users.productIds);
   const diamondById = useSelector((state) => state.users.diamondById);
-
   const location = useLocation();
   const { products } = location.state || {};
   console.log("Navigatingdgdfs:", products);

@@ -63,7 +63,7 @@ export default function EducationList() {
             </div>
           </div>
           <div
-            className="col-lg-3  col-md-6 col-6"
+            className="col-lg-3  col-md-6 col-12"
 
           >
             <img
@@ -80,17 +80,17 @@ export default function EducationList() {
 const Root = styled.section`
   margin-left: 10px;
   .col-lg-3 {
-    margin: 30px 0px;
+    margin:30px 0px;
   }
   b {
-    font-size: 15px;
-    text-transform: uppercase;
-    padding: 10px;
+    font-size:15px;
+    text-transform:uppercase;
+    padding:10px;
   }
   ul {
-    padding: 20px;
-    list-style: none;
-    li {
+    padding:20px;
+    list-style:none;
+    li{
       font-weight: 400;
       font-size: 15px;
       margin: 10px 0px;
@@ -99,9 +99,10 @@ const Root = styled.section`
     }
   }
   svg,
-  img {
-    width: 30px;
-    height: 30px;
+  img{
+    width:30px;
+    height:30px;
+    mix-blend-mode:multiply;
   }
 
    
@@ -116,19 +117,24 @@ const Root = styled.section`
   }
 
 
+
+
   @media (max-width: 567px) {
-     margin-left:0;
-   
+
+     margin-left:0; 
+     margin-bottom:70px;
+
  .col-lg-3 {
     margin:0;
     padding:0;
 } 
+
     padding: 0px;
 
-    .ring_space {
-    padding: 0;
+    .ring_space{
+    padding:0;
     gap: 50px;
-    justify-content: unset;
+    justify-content:unset;
 }
 
  ul li a {
@@ -157,6 +163,8 @@ ul li {
  b {
     font-size: 13px;
 }
+
+
 
 
   }

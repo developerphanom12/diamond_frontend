@@ -85,7 +85,8 @@ export default function Section4() {
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
-            <h1>SHOP BY STYLE</h1>
+            <h1>DISCOVER STYLES
+            </h1>
             <p>
               Discover diverse engagement ring styles, each embodying a distinct
               symbol of love and devotion
@@ -145,10 +146,16 @@ const Root = styled.section`
   color: #000;
   background-image: linear-gradient(180deg, #f7f7f7, #fff, #fff, #f7f7f7);
   padding: 96px 0px 0px;
-  h1,
-  h4 {
+  h1 {
     text-align: center;
     font-weight: 400;
+    width: 100%;
+    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
+
+  }
+  h4 {
+    text-align: center;
+    font-weight: 500;
     width: 100%;
   }
   p {

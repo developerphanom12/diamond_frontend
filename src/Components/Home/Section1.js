@@ -31,9 +31,13 @@ export default function Section1() {
           >
             shop engagement rings
           </button>
-          <button  onClick={() => {
+          <button
+            onClick={() => {
               navigate("/naturaldiamond");
-            }} >shop lab diamonds</button>
+            }}
+          >
+            shop lab diamonds
+          </button>
           <h6>
             apply code <b> earth </b> at checkout
           </h6>
@@ -124,8 +128,12 @@ const Root = styled.section`
       }
     }
   }
-  @media (max-width: 999px) {
+  @media (max-width: 567px) {
     height: 291px;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
+
     .everyday {
       > div {
         text-align: justify;
@@ -136,7 +144,55 @@ const Root = styled.section`
     }
 
     .main_content {
-      width: 90vw;
+      width: 100vw;
+      padding: 0px;
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .everyday {
+        margin-bottom: 5px;
+      }
+
+      b {
+        font-size:16px;
+        display:flex;
+        flex-wrap:wrap;
+        letter-spacing:2px;
+      }
+      h1 {
+        font-size:18px;
+      }
+      h4 {
+        letter-spacing:0;
+        margin:0;
+        font-size:15px;
+      }
+      h6{
+        margin-top:5px;
+      }
+      button {
+        padding:8px 10px;
+        font-size:12px;
+      }
+    }
+  }
+
+  @media (min-width: 567px) and (max-width: 992px) {
+    height: 291px;
+    display: flex;
+    align-items: flex-end;
+    .everyday {
+      > div {
+        text-align: justify;
+      }
+    }
+    .tag {
+      display: none;
+    }
+
+    .main_content {
+      width: 100vw;
       padding: 0px 10px;
       text-align: start;
       b {
@@ -148,12 +204,12 @@ const Root = styled.section`
       h1 {
         font-size: 20px;
       }
-      h4{
+      h4 {
         letter-spacing: 0;
-        margin-left:0;
+        margin-left: 0;
         font-size: 20px;
       }
-      h6{
+      h6 {
         justify-content: flex-start;
       }
       button {

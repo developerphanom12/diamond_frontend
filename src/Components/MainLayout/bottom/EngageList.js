@@ -223,6 +223,8 @@ const Root = styled.section`
   img {
     width: 30px;
     height: 30px;
+    mix-blend-mode:multiply;
+
   }
 
 

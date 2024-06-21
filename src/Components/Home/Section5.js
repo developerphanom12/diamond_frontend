@@ -15,6 +15,9 @@ export default function Section5() {
     <Root>
       <div className="container-fluid" style={{ padding: "40px 24px" }}>
         <div className="row">
+          <h2 className="heading">Our Promise</h2>
+        </div>
+        <div className="row">
           <div className="col-lg-2 col-md-2 col-4">
             <img src={ss1} alt="img" />
           </div>
@@ -80,7 +83,7 @@ const Root = styled.section`
     height: 100%;
     display: inline-block;
     @media (max-width: 999px) {
-      padding: 25px;
+      padding: 13px;
       h1 {
         font-size: 24px;
       }
@@ -113,7 +116,23 @@ const Root = styled.section`
         transition-duration: 0.5s;
       }
     }
+
+  
+
+
   }
+
+  .heading {
+    text-align:center;
+    font-size:2.5rem;
+    margin-bottom:50px;
+    font-weight:400;
+    text-transform:uppercase;
+    text-align: center;
+    display:none;
+}
+
+
   @media (max-width: 567px) {
     .imgbanner {
       height: 300px;
@@ -125,10 +144,17 @@ const Root = styled.section`
 
     .col-lg-6 p {
       width: 60%;
+      margin-bottom:0;
     }
 
     .col-lg-6 button {
       padding: 18px 10px;
     }
+
+    .heading {
+    display:block;
+    margin-bottom: 10px;
+}
+
   }
 `;

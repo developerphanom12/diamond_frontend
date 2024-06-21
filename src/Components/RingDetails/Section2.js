@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import React, { useRef } from "react";
-import Slider from "react-slick";
+import React from "react";
 import round from "../Images/round-removebg-preview.png";
 import emerald from "../Images/emerald-removebg-preview.png";
 import heart from "../Images/heart-removebg-preview.png";
@@ -31,8 +30,7 @@ export default function Section2() {
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <img src={products?.mainImage && products.mainImage} alt="No image available" />
-
+          <img src={products?.mainImage && products.mainImage} alt="img" />
           <div
             style={{
               textAlign: "center",

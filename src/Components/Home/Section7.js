@@ -374,6 +374,7 @@ const Root = styled.section`
   h2 {
     padding: 20px 0px;
     text-transform: uppercase;
+    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
   }
   button {
     background-color: #fff;

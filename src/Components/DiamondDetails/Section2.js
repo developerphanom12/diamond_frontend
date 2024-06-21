@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import RingShipReturn from "./RingShipReturn";
-import React from "react";
+import React, { useEffect } from "react";
 import aeroplane from "../Images/aeroplane.png";
 import badgess from "../Images/badgess.png";
 import moneyinhand from "../Images/moneyinhand.png";
@@ -11,7 +11,7 @@ import clarity from "../Images/clarity.PNG";
 import diamo from "../Images/diamo.PNG";
 import j from "../Images/j.jpg";
 import vs from "../Images/vs.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Section2() {
@@ -19,6 +19,15 @@ export default function Section2() {
   const navigate = useNavigate();
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log("jagsdjhgd", diamondType);
+  const location = useLocation();
+  const { products ,diamond} = location.state || {};
+  useEffect(() => {
+    if (!diamondById || !diamondById.diamond) {
+      alert("Please select a ring and diamond before proceeding.");
+      navigate("/engagementring");
+    }
+  }, [diamondById, navigate]);
+
 
   const VideoContainer = styled.div`
     position: relative;
@@ -30,7 +39,7 @@ export default function Section2() {
       height: 100%;
       width: 100%;
       min-height: 50vh;
-      min-width: 50vh; // Adjust height for mobile
+      min-width: 50vh; 
     }
     iframe {
       height: 100%;
@@ -45,8 +54,7 @@ export default function Section2() {
   const VideoFrame = styled.iframe`
     width: 100%;
     height: 100%;
-    /* min-height:50vh;
-    min-width:50vh;  */
+
     > div {
       width: 76%;
       height: 76%;
@@ -150,7 +158,7 @@ export default function Section2() {
             <button
               className="btn"
               onClick={() => {
-                navigate("/productpage");
+                navigate("/productpage",{state : {products,diamond}});
               }}
             >
               Complete Your Ring
@@ -274,7 +282,7 @@ export default function Section2() {
 }
 
 const Root = styled.section`
-  padding: 20px ;
+  padding: 20px;
 
   .main_div {
     display: flex;
@@ -481,24 +489,22 @@ const Root = styled.section`
 
   @media (max-width: 567px) {
     padding: 10px 0px;
-    .main_div{
+    .main_div {
       gap: 0px;
-
     }
-    
+
     .main_div .image_div {
       width: 100%;
       height: unset;
       padding: 5px;
     }
-    .main_div .des_div .prod_spec { 
+    .main_div .des_div .prod_spec {
       display: none;
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
       padding: 5px;
-
     }
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
@@ -509,29 +515,27 @@ const Root = styled.section`
     .main_div .des_div .prod_spec {
       gap: 20px;
     }
-    .main_div .des_div .title h2,  .main_div .des_div .title h4{
+    .main_div .des_div .title h2,
+    .main_div .des_div .title h4 {
       font-size: 18px;
     }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-    .main_div{
+    .main_div {
       gap: 0px;
-
     }
-    
+
     .main_div .image_div {
       width: 100%;
       height: unset;
-
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
       padding: 5px;
-
     }
-    .main_div .des_div h2{
+    .main_div .des_div h2 {
       font-size: 18px;
     }
     .main_div .setting_detail .setting_info .setting_div {

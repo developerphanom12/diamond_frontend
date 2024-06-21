@@ -90,7 +90,7 @@ export default function Section6() {
         <div className="row">
           <div className="col-lg-3"></div>
           <div className="col-lg-6">
-            <h1>SHOP BY SHAPE</h1>
+            <h1>DISCOVER SHAPES</h1>
             <p>
               Explore our curated selection, categorized by diamond shape, to
               find your perfect expression of elegance.
@@ -150,10 +150,16 @@ const Root = styled.section`
   color: #000;
   background-image: linear-gradient(180deg, #f7f7f7, #fff, #fff, #f7f7f7);
   padding: 96px 0px 0px;
-  h1,
-  h4 {
+  h1 {
     text-align: center;
     font-weight: 400;
+    width: 100%;
+    text-transform: capitalize;
+    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
+  }
+  h4 {
+    text-align: center;
+    font-weight: 500;
     width: 100%;
     text-transform: capitalize;
   }
@@ -198,15 +204,16 @@ const Root = styled.section`
       }
     }
   }
-  
+
   @media (max-width: 567px) {
     padding-top: 30px;
-    h1,  h4 {
-font-size:20px;
-}
+    h1,
+    h4 {
+      font-size: 20px;
+    }
 
-  .sliderrr {
-    padding: 10px 0 0px;
-}
+    .sliderrr {
+      padding: 10px 0 0px;
+    }
   }
 `;

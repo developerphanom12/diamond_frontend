@@ -191,6 +191,7 @@ const Root = styled.section`
   h2 {
     padding: 20px 0px;
     text-transform: uppercase;
+    font-family:"Playfair Display","Proxima Nova","ui-sans-serif"!important;
   }
   .col-lg-3.col4,
   .col-lg-3.col3,

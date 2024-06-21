@@ -177,29 +177,31 @@ const Root = styled.section`
     padding: 20px;
     list-style: none;
     li {
-      font-weight: 400;
-      font-size: 15px;
-      margin: 10px 0px;
-      cursor: pointer;
+      font-weight:400;
+      font-size:15px;
+      margin:10px 0px;
+      cursor:pointer;
       a{
-        text-decoration: none;
-        color: black;
+        text-decoration:none;
+        color:black;
       }
     }
   }
+
   svg,
   img {
     width: 30px;
     height: 30px;
+    mix-blend-mode:multiply;
   }
 
 
-  
   .ring_space{
     display:flex;
     justify-Content:space-between;
     padding:0px 20px;
   }
+
 
   .bord{
     border-left: 1px solid #ededed;
@@ -218,7 +220,7 @@ const Root = styled.section`
 
     .ring_space {
     padding: 0;
-    gap: 50px;
+    gap: 10px;
     justify-content: unset;
 }
 

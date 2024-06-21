@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { IoSearchOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import BottomBar from "./bottom/BottomBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -39,13 +39,13 @@ const NavIcon = styled(Link)`
 
 const SidebarNav = styled.nav`
   background: #ffffff;
-  width: 330px;
+  width: 95%;
   height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
   overflow: auto;
-  top: 60px;
+  top: 45px;
   left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
   transition: 350ms;
   z-index: 10;
@@ -53,6 +53,13 @@ const SidebarNav = styled.nav`
 
 const SidebarWrap = styled.div`
   width: 100%;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body.no-scroll {
+    overflow: hidden;
+  }
+  
 `;
 
 const Root = styled.section`
@@ -69,33 +76,6 @@ const Root = styled.section`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
-  }
-
-  .search {
-    display: flex;
-    border-bottom: 1px solid black;
-    flex: 2;
-    margin: 20px 0px;
-    align-items: center;
-    input {
-      border: transparent;
-      outline: none;
-      width: 100%;
-      padding: 8px 4px;
-      font-size: 1rem;
-      line-height: 1.2;
-      height: auto;
-      letter-spacing: 1px;
-    }
-    button {
-      padding: 5px;
-      background-color: #fff;
-      border: none;
-      svg {
-        width: 25px;
-        height: 25px;
-      }
-    }
   }
 
   .icon {
@@ -154,6 +134,33 @@ const Root = styled.section`
     background: #f7f7f7;
   }
 
+  .search {
+    display: flex;
+    border-bottom: 1px solid black;
+    flex: 2;
+    margin: 20px 0px;
+    align-items: center;
+    input {
+      border: transparent;
+      outline: none;
+      width: 100%;
+      padding: 8px 4px;
+      font-size: 1rem;
+      line-height: 1.2;
+      height: auto;
+      letter-spacing: 1px;
+    }
+    button {
+      padding: 5px;
+      background-color: #fff;
+      border: none;
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+
   .search_div {
     width: 60%;
     overflow: auto;
@@ -165,21 +172,28 @@ const Root = styled.section`
     border-radius: 20px;
     margin: 0 20px;
     z-index: 1111;
-    .col-lg-12,
-    .col-md-4,
-    .col-sm-6 {
-      width: 33%;
-    }
+    justify-content: center;
+
     .product-card {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
+      gap: 15px;
 
       img {
-        width: 70%;
+        width: 100px;
       }
-      h3 {
-        font-size: 24px;
+
+      .sear_cont {
+        display: flex;
+        flex-direction: column;
+        h3 {
+          font-size: 17px;
+          margin-bottom: 0;
+        }
+        p {
+          font-size: 13px;
+        }
       }
     }
   }
@@ -188,11 +202,44 @@ const Root = styled.section`
     display: none;
   }
 
-  @media (max-width: 567px) {
-    .search {
-      margin: 20px 10px;
-    }
+  .search_div_second {
+    width: 60%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    background-color: white;
+    max-height: 300px;
+    border-radius: 20px;
+    margin: 0 20px;
+    z-index: 1111;
+    justify-content: center;
 
+    .product-card_second {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+
+      img {
+        width: 100px;
+      }
+
+      .sear_cont_second {
+        display: flex;
+        flex-direction: column;
+        h3 {
+          font-size: 17px;
+          margin-bottom: 0;
+        }
+        p {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 567px) {
     .first_header {
       display: none;
     }
@@ -201,18 +248,17 @@ const Root = styled.section`
       display: block;
     }
 
-    .search_div {
-      width: 100%;
-      margin: 0;
+    .search {
+      margin: 20px 10px;
     }
 
-    .search_div .col-lg-12,
-    .iGkxGw .search_div .col-md-4,
-    .iGkxGw .search_div .col-sm-6 {
-      width: 50%;
-    }
-    .search_div .product-card h3 {
-      font-size: 20px;
+    .search_div_second {
+      width:100%;
+      margin:0;
+      justify-content:unset;
+      border-radius:0;
+      max-height:500px;
+
     }
 
     .accor_heading {
@@ -229,9 +275,6 @@ const Root = styled.section`
     .search_div {
       width: 80%;
     }
-    .search_div .product-card h3 {
-      font-size: 20px;
-    }
   }
 
   @media (min-width: 1024px) and (max-width: 1366px) {
@@ -246,8 +289,22 @@ export default function NavBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(0);
+
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
+  useEffect(() => {
+    if (sidebar) {
+      document.body.classList.add("no-scroll"); // Add class to prevent scrolling
+    } else {
+      document.body.classList.remove("no-scroll"); // Remove class to allow scrolling
+    }
+
+    // Clean up on component unmount
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [sidebar]);
 
   useEffect(() => {
     if (typingTimeout) {
@@ -301,11 +358,13 @@ export default function NavBar() {
                   value={searchTerm}
                   onChange={onInputChange}
                 />
+
                 <button onClick={handleSearch}>
                   <IoSearchOutline />
                 </button>
               </div>
             </div>
+
             <div className="col-lg-6 col-md-6 col-8">
               <h2
                 onClick={() => {
@@ -315,6 +374,7 @@ export default function NavBar() {
                 Ring-Builder
               </h2>
             </div>
+
             <div className="col-lg-3 col-md-3 col-4">
               <div className="icon">
                 <a href="/login">
@@ -332,7 +392,7 @@ export default function NavBar() {
               {products.length > 0 &&
                 products.map((product) => (
                   <div
-                    className="col-lg-12 col-md-4 col-sm-6"
+                    className="col-lg-5 col-md-5 col-sm-6"
                     key={product.node.id}
                   >
                     <div className="product-card">
@@ -340,10 +400,12 @@ export default function NavBar() {
                         src={product.node.images.edges[0]?.node.src}
                         alt={product.node.title}
                       />
-                      <h3>{product.node.title}</h3>
-                      <p>
-                        Price: ${product.node.variants.edges[0]?.node.price}
-                      </p>
+                      <div className="sear_cont">
+                        <h3>{product.node.title}</h3>
+                        <p>
+                          Price: ${product.node.variants.edges[0]?.node.price}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -367,7 +429,12 @@ export default function NavBar() {
               <FaIcons.FaBars onClick={showSidebar} className="icon_div" />
             </NavIcon>
 
-            <h2 className="ring_head" onClick={()=>{navigate("/home")}}>
+            <h2
+              className="ring_head"
+              onClick={() => {
+                navigate("/home");
+              }}
+            >
               Ring-Builder
             </h2>
 
@@ -409,6 +476,7 @@ export default function NavBar() {
                   <path d="M20 21a8 8 0 1 0-16 0"></path>
                 </svg>
               </div>
+
               <div className="search">
                 <input
                   placeholder="SEARCH..."
@@ -419,6 +487,35 @@ export default function NavBar() {
                   <IoSearchOutline />
                 </button>
               </div>
+
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="search_div_second">
+                    {products.length > 0 &&
+                      products.map((product) =>(
+                        <div
+                          className="col-lg-5 col-md-5 col-sm-12"
+                          key={product.node.id}
+                        >
+                          <div className="product-card_second">
+                            <img
+                              src={product.node.images.edges[0]?.node.src}
+                              alt={product.node.title}
+                            />
+                            <div className="sear_cont_second">
+                              <h3>{product.node.title}</h3>
+                              <p>
+                                Price: $
+                                {product.node.variants.edges[0]?.node.price}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+
               <div className="hightlight_content">
                 <h5>30 Days Free Returns</h5>
               </div>
@@ -479,6 +576,7 @@ export default function NavBar() {
           </SidebarNav>
         </IconContext.Provider>
       </div>
+      <GlobalStyle />
     </Root>
   );
 }

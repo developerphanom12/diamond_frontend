@@ -7,15 +7,22 @@ import ringg4 from "../Images/ringgg4.webp";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-export default function Section3() {
+export default function Section3(){
+
   const navigate = useNavigate();
 
   return (
+
     <Root>
+
       <div className="container-fluid mb-8">
+
         <div className="row">
+
           <div className="col-lg-2"></div>
+
           <div className="col-lg-8">
+    
             <h2>Our Selections</h2>
           </div>
           <div className="col-lg-2"></div>
@@ -91,6 +98,7 @@ const Root = styled.section`
     margin-bottom: 50px;
     font-weight: 400;
     text-transform: uppercase;
+    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
   }
   .col-lg-8 {
     padding: 20px;

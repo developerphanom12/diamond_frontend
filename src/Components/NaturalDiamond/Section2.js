@@ -48,7 +48,7 @@ const shapesList = [
 ];
 
 const colorOptions = ["J", "I", "H", "G", "F", "E", "D"];
-const clarityOptions = ["SI1", "I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
+const clarityOptions = ["SI1","SI2", "I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
 const cutOptions = ["GD", "VG", "EX"];
 const polishOptions = ["GD", "VG", "EX"];
 const symmetryOptions = ["GD", "VG", "EX"];

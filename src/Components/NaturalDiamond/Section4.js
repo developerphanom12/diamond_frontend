@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import noimg from "../Images/s6.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
@@ -18,18 +18,14 @@ export default function Section4({ value }) {
   const { setLoading } = useLoading();
   const productIds = useSelector((state) => state.users.productIds);
 
-  console.log("productIds in Section4:", productIds.id);
+  const location = useLocation();
+  const { products } = location.state || {};
 
-  const handleNavigate = (diamond) => {
-    productIds?.id && productIds?.id?.length > 0
-      ? navigate("/productpage", { state: { diamond } })
-      : setModal1(true);
-  };
   // diamondbyId
   const apiDetail = async (diamond) => {
     const diamondId = diamond?.id;
-    console.log("xxxxx",diamondId)
-   
+    console.log("xxxxx", diamondId);
+
     setLoading(true);
     try {
       const response = await axios.get(
@@ -39,10 +35,9 @@ export default function Section4({ value }) {
         const diamondData = response?.data?.diamondData;
         setDiamondByIdState(diamondData);
         dispatch(setDiamondById(diamondData));
-        console.log("mujhseee",response)
       }
     } catch (error) {
-      console.error('Error fetching diamond details:', error);
+      console.error("Error fetching diamond details:", error);
     } finally {
       setLoading(false);
     }
@@ -54,11 +49,16 @@ export default function Section4({ value }) {
     }
   }, [value]);
 
-  const handleNavigateDetail = ( ) => {
-    apiDetail( );
-    navigate('/diamonddetails');
+  const handleClickDiamondDetail = (products, diamond) => {
+    apiDetail();
+    navigate("/diamonddetails", { state: { products, diamond } });
   };
 
+  const handleNavigate = (diamond, products) => {
+    productIds?.id && productIds?.id?.length > 0
+      ? navigate("/productpage", { state: { diamond, products } })
+      : setModal1(true);
+  };
   return (
     <Root>
       <div className="main_div">
@@ -66,27 +66,13 @@ export default function Section4({ value }) {
           value.map((i, index) => {
             return (
               <div key={index} className="subdiv">
-               {i?.diamond?.image ? (
-                  <img
-                    src={i?.diamond?.image}
-                    alt="diamond images"
-                    style={{
-                      width: "100%",
-                      maxWidth: "250px",
-                      height: "250px",
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={noimg}
-                    alt="no img available"
-                    style={{
-                      width: "100%",
-                      width: "250px",
-                      height: "250px",
-                    }}
-                  />
-                )}
+                <>
+                  {i?.diamond?.image ? (
+                    <img src={i?.diamond?.image} alt="diamond images" />
+                  ) : (
+                    <img src={noimg} alt="no img available" />
+                  )}
+                </>
 
                 <div className="hov_content">
                   <div className="heading">
@@ -113,18 +99,24 @@ export default function Section4({ value }) {
                     </div>
                   </div>
                   <div className="btn_div">
-                    <button
-                      className="info_btn"
-                      onClick={() => handleNavigateDetail(i.diamond)}
-                    >
-                      More Info
-                    </button>
-                    <button
-                      className="add_btn"
-                      onClick={() => handleNavigate(i)}
-                    >
-                      Complete your ring
-                    </button>
+                    <>
+                      <button
+                        className="info_btn"
+                        onClick={(i) => handleClickDiamondDetail(i)}
+                      >
+                        More Info
+                      </button>
+                    </>
+                    <>
+                      <button
+                        className="add_btn"
+                        onClick={(i) => {
+                          handleNavigate(i);
+                        }}
+                      >
+                        Complete your ring
+                      </button>
+                    </>
                   </div>
                 </div>
               </div>
@@ -163,22 +155,21 @@ export default function Section4({ value }) {
   );
 }
 const Root = styled.section`
-  padding: 0 20px;
+  padding: 0 10px;
 
   .main_div {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    gap: 4px;
     margin-top: 20px;
-    margin-bottom: 100px;
-    gap: 15px;
 
     .subdiv {
-      width: 300px;
-      height: 380px;
+      width: 24vw;
+      height: 55vh;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
-      padding: 20px;
+      padding: 5px;
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
@@ -188,6 +179,7 @@ const Root = styled.section`
       }
       img {
         width: 100%;
+        height: 95%;
       }
 
       &:hover {
@@ -198,8 +190,14 @@ const Root = styled.section`
           width: 262px !important;
         }
       }
+      .hov_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
 
       &:hover .hov_content {
+        width: 24vw;
         z-index: 1;
         position: absolute;
         background-color: white;
@@ -207,11 +205,9 @@ const Root = styled.section`
         padding: 0 20px 0;
         left: -3px;
         overflow: hidden;
-        width: 300px;
         border-top: none;
         border-radius: 0 0 20px 20px;
       }
-
       &:hover .var {
         .var_types {
           h5 {
@@ -228,7 +224,7 @@ const Root = styled.section`
       }
     }
 
-    .heading {
+    .hov_content .heading {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
@@ -240,7 +236,7 @@ const Root = styled.section`
       }
       p {
         color: rgba(102, 102, 102);
-        font-size: 14px;
+        font-size: 13px;
         opacity: 1;
       }
     }
@@ -272,40 +268,72 @@ const Root = styled.section`
 
     .btn_div {
       display: flex;
-      gap: 6px;
-      padding: 0 0 20px 0;
+      justify-content: space-between;
+      padding: 0;
+      width: 100%;
+      gap: 10px;
+      padding-bottom: 10px;
+
       .info_btn {
-        padding: 12px 14px;
+        flex: 1;
+        padding: 12px 21px;
         border-radius: 25px;
-        border: 2px solid black;
         font-size: 13px;
         background-color: #fff;
-      }
-
-      .add_btn {
-        background-color: black;
-        color: white;
         border: 2px solid black;
-        padding: 12px 27px;
+      }
+      .add_btn {
+        flex: 1;
+        background-color: black;
+        border: 2px solid black;
+        color: white;
+        padding: 5px 17px;
         border-radius: 25px;
         font-size: 13px;
       }
     }
   }
-
-  @media only screen and (max-width: 567px) {
+  @media (max-width: 1024px) {
     .main_div {
-      justify-content: center;
-      .subdiv {
-        width: 300px;
-        height: 380px;
-      }
+      gap: 20px;
     }
   }
-
-  @media only screen and (min-width: 567px) and (max-width: 992px) {
+  @media (max-width: 876px) {
+    padding: 0px;
     .main_div {
-      justify-content: center;
+      .subdiv {
+        width: 45vw;
+        height: 30vh;
+        img {
+          height: 84%;
+          width: 100%;
+        }
+        .heading .h5 {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .heading .p {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 3px 10px;
+          border-radius: 15px;
+        }
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px 10px;
+        }
+      }
+    }
+    .main_div .var {
+      gap: 2px;
+    }
+    .main_div .hov_content .heading {
+      margin-top: 10px;
     }
   }
 `;
