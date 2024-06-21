@@ -20,8 +20,6 @@ import EngageList from "./bottom/EngageList";
 import DiamondList from "./bottom/DiamondList";
 import EducationList from "./bottom/EducationList";
 
-
-
 const Nav = styled.div`
   background: white;
   height: 60px;
@@ -68,7 +66,7 @@ const Root = styled.section`
     margin: 20px 0px;
     text-align: center;
     background: linear-gradient(to right, #000, #333, #000, #333);
-    -webkit-background-clip: text;  
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
   }
@@ -115,21 +113,19 @@ const Root = styled.section`
     }
   }
 
-
   .ico_div {
     margin-top: -50px;
     svg {
-    margin-left: 10px;
-    width: 24px;
-    height: 24px;
-}
+      margin-left: 10px;
+      width: 24px;
+      height: 24px;
+    }
   }
-  
-  
-  .ring_head{
-    margin-bottom:0;
-    margin-top:0;
-    text-transform:uppercase;
+
+  .ring_head {
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: uppercase;
   }
 
   .icon_div {
@@ -154,10 +150,9 @@ const Root = styled.section`
   }
 
   .css-15v22id-MuiAccordionDetails-root {
-    padding:16px 16px 16px;
-    background:#f7f7f7;
-}
-
+    padding: 16px 16px 16px;
+    background: #f7f7f7;
+  }
 
   .search_div {
     width: 60%;
@@ -189,24 +184,22 @@ const Root = styled.section`
     }
   }
 
-  .side_bar{
+  .side_bar {
     display: none;
   }
 
   @media (max-width: 567px) {
-
-
-   .search {
-    margin: 20px 10px;
-}
-   
-    .first_header{
-      display:none;
+    .search {
+      margin: 20px 10px;
     }
 
-    .side_bar{
-    display:block;
-  }
+    .first_header {
+      display: none;
+    }
+
+    .side_bar {
+      display: block;
+    }
 
     .search_div {
       width: 100%;
@@ -223,8 +216,8 @@ const Root = styled.section`
     }
 
     .accor_heading {
-      margin:0;
-      font-family:ProximaNova, sans-serif;
+      margin: 0;
+      font-family: ProximaNova, sans-serif;
       font-weight: 500;
       font-size: 16px;
       line-height: 1.5;
@@ -298,195 +291,194 @@ export default function NavBar() {
 
   return (
     <Root>
-
-<div className="first_header">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-3 col-md-3 col-12">
-            <div className="search">
-              <input
-                placeholder="SEARCH"
-                value={searchTerm}
-                onChange={onInputChange}
-              />
-              <button onClick={handleSearch}>
-                <IoSearchOutline />
-              </button>
+      <div className="first_header">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-3 col-md-3 col-12">
+              <div className="search">
+                <input
+                  placeholder="SEARCH"
+                  value={searchTerm}
+                  onChange={onInputChange}
+                />
+                <button onClick={handleSearch}>
+                  <IoSearchOutline />
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="col-lg-6 col-md-6 col-8">
-            <h2
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              Ring-Builder
-            </h2>
-          </div>
-          <div className="col-lg-3 col-md-3 col-4">
-            <div className="icon">
-              <a href="/login">
-                <LuUser2 />
-              </a>
-              <HiOutlineShoppingBag />
+            <div className="col-lg-6 col-md-6 col-8">
+              <h2
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Ring-Builder
+              </h2>
+            </div>
+            <div className="col-lg-3 col-md-3 col-4">
+              <div className="icon">
+                <a href="/login">
+                  <LuUser2 />
+                </a>
+                <HiOutlineShoppingBag />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="search_div">
-            {products.length > 0 &&
-              products.map((product) => (
-                <div
-                  className="col-lg-12 col-md-4 col-sm-6"
-                  key={product.node.id}
-                >
-                  <div className="product-card">
-                    <img
-                      src={product.node.images.edges[0]?.node.src}
-                      alt={product.node.title}
-                    />
-                    <h3>{product.node.title}</h3>
-                    <p>Price: ${product.node.variants.edges[0]?.node.price}</p>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="search_div">
+              {products.length > 0 &&
+                products.map((product) => (
+                  <div
+                    className="col-lg-12 col-md-4 col-sm-6"
+                    key={product.node.id}
+                  >
+                    <div className="product-card">
+                      <img
+                        src={product.node.images.edges[0]?.node.src}
+                        alt={product.node.title}
+                      />
+                      <h3>{product.node.title}</h3>
+                      <p>
+                        Price: ${product.node.variants.edges[0]?.node.price}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-12" style={{ padding: "0px" }}>
-            <BottomBar />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-12" style={{ padding: "0px" }}>
+              <BottomBar />
+            </div>
           </div>
         </div>
       </div>
-      
-  </div>
 
       <div className="side_bar">
-      <IconContext.Provider value={{ color: "black" }}>
-        <Nav className="main_content">
-          <NavIcon to="#">
-            <FaIcons.FaBars onClick={showSidebar} className="icon_div" />
-          </NavIcon>
-
-          <h2 className="ring_head">Ring-Builder</h2>
-
-          <svg
-            stroke="currentColor"
-            fill="none"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-            ></path>
-          </svg>
-        </Nav>
-        <SidebarNav sidebar={sidebar}>
-          <SidebarWrap>
+        <IconContext.Provider value={{ color: "black" }}>
+          <Nav className="main_content">
             <NavIcon to="#">
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
+              <FaIcons.FaBars onClick={showSidebar} className="icon_div" />
             </NavIcon>
-            <div className="ico_div">
-              <svg
-                stroke="currentColor"
-                fill="none"
-                stroke-width="2"
-                viewBox="0 0 24 24"
+
+            <h2 className="ring_head" onClick={()=>{navigate("/home")}}>
+              Ring-Builder
+            </h2>
+
+            <svg
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="12" cy="8" r="5"></circle>
-                <path d="M20 21a8 8 0 1 0-16 0"></path>
-              </svg>
-            </div>
-            <div className="search">
-              <input
-                placeholder="SEARCH..."
-                value={searchTerm}
-                onChange={onInputChange}
-              />
-              <button onClick={handleSearch}>
-                <IoSearchOutline />
-              </button>
-            </div>
-            <div className="hightlight_content">
-              <h5>30 Days Free Returns</h5>
-            </div>
-
-            <div>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              ></path>
+            </svg>
+          </Nav>
+          <SidebarNav sidebar={sidebar}>
+            <SidebarWrap>
+              <NavIcon to="#">
+                <AiIcons.AiOutlineClose onClick={showSidebar} />
+              </NavIcon>
+              <div className="ico_div">
+                <svg
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <Typography>
-                    <div className="accor_heading">ENGAGEMENT RINGS</div>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    <EngageList />
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+                  <circle cx="12" cy="8" r="5"></circle>
+                  <path d="M20 21a8 8 0 1 0-16 0"></path>
+                </svg>
+              </div>
+              <div className="search">
+                <input
+                  placeholder="SEARCH..."
+                  value={searchTerm}
+                  onChange={onInputChange}
+                />
+                <button onClick={handleSearch}>
+                  <IoSearchOutline />
+                </button>
+              </div>
+              <div className="hightlight_content">
+                <h5>30 Days Free Returns</h5>
+              </div>
 
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2-content"
-                  id="panel2-header"
-                >
-                  <Typography>
-                    <div className="accor_heading">DIAMONDS</div>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    <DiamondList/>
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+              <div>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    <Typography>
+                      <div className="accor_heading">ENGAGEMENT RINGS</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <EngageList />
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
 
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2-content"
-                  id="panel2-header"
-                >
-                  <Typography>
-                    <div className="accor_heading">EDUCATION</div>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    <EducationList/>
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-          </SidebarWrap>
-        </SidebarNav>
-      </IconContext.Provider>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2-content"
+                    id="panel2-header"
+                  >
+                    <Typography>
+                      <div className="accor_heading">DIAMONDS</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <DiamondList />
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
 
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2-content"
+                    id="panel2-header"
+                  >
+                    <Typography>
+                      <div className="accor_heading">EDUCATION</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <EducationList />
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            </SidebarWrap>
+          </SidebarNav>
+        </IconContext.Provider>
       </div>
-  
-
     </Root>
   );
 }
