@@ -13,6 +13,7 @@ import monyy from "../Images/moneyinhand.png";
 import badgedd from "../Images/badgess.png";
 import RingShipReturn from "../DiamondDetails/RingShipReturn";
 import { useLoading } from "../LoadingContext";
+import { toast } from "react-toastify";
 
 export default function Section2() {
   const [selectedButton, setSelectedButton] = useState(1);
@@ -38,7 +39,7 @@ export default function Section2() {
   const diamondType = useSelector((state) => state.users.diamondType);
   const location = useLocation();
   const { diamond, products } = location.state || {};
-  console.log("ring", diamond, products, diamondById);
+  console.log("ring", productIds, diamond, products, diamondById);
 
   const settings = {
     dots: false,
@@ -59,7 +60,7 @@ export default function Section2() {
 
   const totalPrice =
     parseFloat(productIds?.priceRange?.maxVariantPrice?.amount || 0) +
-    parseFloat(diamond?.price || 0);
+    parseFloat(diamond?.price || diamondById?.price);
 
   useEffect(() => {
     setLoading(true);
@@ -86,7 +87,7 @@ export default function Section2() {
 
   const handleCheckout = () => {
     if (!selectedSize) {
-      alert("Please select a ring size before proceeding to checkout.");
+      toast.info("Please select a ring size before proceeding to checkout.");
       return;
     }
     navigate("/checkout", {
@@ -136,17 +137,31 @@ export default function Section2() {
             </div>
 
             <div key={2} className="img_container">
-              {diamond?.diamond?.video ? (
-                <VideoContainer>
-                  <VideoFrame
-                    src={diamond?.diamond.video}
-                    title="Diamond Video"
-                    allowFullScreen
-                  />
-                </VideoContainer>
-              ) : (
-                "No image"
-              )}
+              {diamond && diamond.diamond ? (
+                diamond.diamond.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamond.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
+                ) : (
+                  <img src={diamond.diamond.image} alt="img" />
+                )
+              ) : diamondById && diamondById.diamond ? (
+                diamondById.diamond.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamondById.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
+                ) : (
+                  <img src={diamondById.diamond.image} alt="img" />
+                )
+              ) : null}
             </div>
           </Slider>
           <div
@@ -262,8 +277,12 @@ export default function Section2() {
                 </div>
                 <div className="prod_price">
                   <h2>
-                    ${diamond && diamond.price ?(<>{diamond?.price} </>):
-                    (<>{diamondById.price}</>)}
+                    $
+                    {diamond && diamond.price ? (
+                      <>{diamond?.price} </>
+                    ) : (
+                      <>{diamondById.price}</>
+                    )}
                   </h2>
                   <p>Change</p>
                 </div>
@@ -339,7 +358,8 @@ export default function Section2() {
               />
 
               <p>
-                30 Days <br></br>Free Return
+                30 Days <br />
+                Free Return
               </p>
             </div>
 
@@ -395,6 +415,7 @@ const Root = styled.section`
         width: 500px;
         height: 500px;
       }
+
       .slick-slide img {
         display: block;
         width: 100%;
@@ -684,4 +705,7 @@ const Root = styled.section`
       }
     }
   }
+
+
+  
 `;

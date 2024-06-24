@@ -104,7 +104,7 @@ export default function Section4({ value }) {
                     <>
                       <button
                         className="info_btn"
-                        onClick={(i) => handleClickDiamondDetail(i)}
+                        onClick={(i) => handleClickDiamondDetail(i.diamond, i.products)}
                       >
                         More Info
                       </button>

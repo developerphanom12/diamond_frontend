@@ -13,6 +13,7 @@ import j from "../Images/j.jpg";
 import vs from "../Images/vs.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function Section2() {
   const diamondById = useSelector((state) => state.users.diamondById);
@@ -20,18 +21,17 @@ export default function Section2() {
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log("jagsdjhgd", diamondType);
   const location = useLocation();
-  const { products ,diamond} = location.state || {};
+  const { products, diamond } = location.state || {};
   useEffect(() => {
     if (!diamondById || !diamondById.diamond) {
-      alert("Please select a ring and diamond before proceeding.");
+      toast.error("Please select a ring and diamond before proceeding.");
       navigate("/engagementring");
     }
   }, [diamondById, navigate]);
 
-
   const VideoContainer = styled.div`
     position: relative;
-    width: 84%;
+    width: 100%;
     height: 100% !important;
     object-fit: contain;
     background-position: 100% 100%;
@@ -39,7 +39,7 @@ export default function Section2() {
       height: 100%;
       width: 100%;
       min-height: 50vh;
-      min-width: 50vh; 
+      min-width: 50vh;
     }
     iframe {
       height: 100%;
@@ -47,6 +47,10 @@ export default function Section2() {
       > div {
         width: 100%;
         height: 100%;
+        > div {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   `;
@@ -54,10 +58,9 @@ export default function Section2() {
   const VideoFrame = styled.iframe`
     width: 100%;
     height: 100%;
-
     > div {
-      width: 76%;
-      height: 76%;
+      width: 100%;
+      height: 100%;
     }
   `;
 
@@ -158,7 +161,7 @@ export default function Section2() {
             <button
               className="btn"
               onClick={() => {
-                navigate("/productpage",{state : {products,diamond}});
+                navigate("/productpage", { state: { products, diamond } });
               }}
             >
               Complete Your Ring
