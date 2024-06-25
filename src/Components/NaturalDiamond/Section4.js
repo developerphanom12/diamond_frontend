@@ -104,18 +104,20 @@ export default function Section4({ value }) {
                     <>
                       <button
                         className="info_btn"
-                        onClick={(i) => handleClickDiamondDetail(i.diamond, i.products)}
+                        onClick={(i) =>
+                          handleClickDiamondDetail(i.diamond, i.products)
+                        }
                       >
                         More Info
                       </button>
                     </>
                     <>
-                    <button
-                    className="add_btn"
-                    onClick={() => {
-                      handleNavigate(i.diamond, i.products);
-                    }}
-                  >
+                      <button
+                        className="add_btn"
+                        onClick={() => {
+                          handleNavigate(i.diamond, i.products);
+                        }}
+                      >
                         Complete your ring
                       </button>
                     </>
@@ -168,7 +170,7 @@ const Root = styled.section`
 
     .subdiv {
       width: 24vw;
-      height: 55vh;
+      height: 57vh;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
       padding: 5px;
@@ -181,7 +183,7 @@ const Root = styled.section`
       }
       img {
         width: 100%;
-        height: 95%;
+        height: 88%;
       }
 
       &:hover {
@@ -295,16 +297,20 @@ const Root = styled.section`
       }
     }
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 1025px) {
     .main_div {
       gap: 20px;
+      justify-content: center;
+      .subdiv {
+        height: auto;
+      }
     }
   }
   @media (max-width: 876px) {
     padding: 0px;
     .main_div {
       .subdiv {
-        width: 45vw;
+        width: 44vw;
         height: 30vh;
         img {
           height: 84%;
@@ -326,7 +332,7 @@ const Root = styled.section`
           border-radius: 15px;
         }
         &:hover .hov_content {
-          width: 45vw;
+          width: 44vw;
           padding: 0px 10px 10px;
         }
       }
