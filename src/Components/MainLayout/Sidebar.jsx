@@ -109,7 +109,7 @@ const Sidebar = () => {
               <FaIcons.FaBars onClick={showSidebar} className="icon_div" />
             </NavIcon>
 
-            <h2 className="ring_head">Ring-Builder</h2>
+            <h2 className="ring_head">The Precious Earth</h2>
 
             <svg
               stroke="currentColor"

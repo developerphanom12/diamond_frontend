@@ -371,7 +371,7 @@ export default function NavBar() {
                   navigate("/");
                 }}
               >
-                Ring-Builder
+                The Precious Earth
               </h2>
             </div>
 
@@ -435,7 +435,7 @@ export default function NavBar() {
                 navigate("/home");
               }}
             >
-              Ring-Builder
+              The Precious Earth
             </h2>
 
             <svg

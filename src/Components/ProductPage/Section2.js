@@ -108,6 +108,24 @@ export default function Section2() {
     max-width: 500px;
     max-height: 613px;
     height: 100%;
+    @media (max-width: 768px) {
+      height: 100%;
+      width: 100%;
+      min-height: 50vh;
+      min-width: 50vh;
+    }
+    iframe {
+      height: 100%;
+      width: 100%;
+      > div {
+        width: 100%;
+        height: 100%;
+        > div {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   `;
 
   const VideoFrame = styled.iframe`
@@ -687,6 +705,10 @@ const Root = styled.section`
     .main_div .image_div .slick-slider,
     .gMiibD .main_div .image_div .slick-track {
       height: 362px;
+      iframe{
+        width: 90vw;
+        height: 40vh;
+      }
     }
     .slick-slide.slick-active.slick-current {
       height: 370px;
