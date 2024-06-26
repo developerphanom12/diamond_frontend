@@ -1,64 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CiCircleCheck } from "react-icons/ci";
-import { useDispatch } from "react-redux";
-import ndia from "../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../Images/labgrowncopy-removebg.png";
-import { setDiamondType } from "../../redux/users/action";
+import { ModalBody } from "reactstrap";
 
 export default function Section1() {
-  const [modal, setmodal] = useState(false);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleModalNavigate = (labgrownValue) => {
-    console.log("Navigating with labgrownValue:", labgrownValue);
-    dispatch(setDiamondType(labgrownValue));
-    setmodal(false);
-    navigate("/naturaldiamond", {
-      state: { labgrownValue },
-    });
-  };
   return (
     <Root>
-      <Modal
-        isOpen={modal}
-        toggle={() => setmodal(!modal)}
-        style={{ zIndex: "111111", position: "relative", top: "26%" }}
-      >
-        <ModalHeader toggle={() => setmodal(!modal)}></ModalHeader>
-        <CustomModalBody>
-          <h5>Before we continue</h5>
-          <h2>CHOOSE YOUR CENTER STONE</h2>
-          <div className="choose_option">
-            <div
-              className="ring_pandet"
-              onClick={() => handleModalNavigate(false, false)}
-            >
-              <img
-                src={ndia}
-                alt="img of natural diamond"
-                style={{ width: "52px" }}
-              />
-              <span>Natural Diamond</span>
-            </div>
-            <div
-              className="ring_pandet"
-              onClick={() => handleModalNavigate(true, true)}
-            >
-              <img
-                src={labgrown}
-                alt="img of lab grown diamond"
-                style={{ width: "52px" }}
-              />
-              <span>Lab Diamond</span>
+      <div className="container-fluid ">
+        <div className="row ">
+          <div className="col-lg-12">
+            <div className="heading text-center">
+              <h2>Lab Diamond Engagement Rings</h2>
+              <p>
+                Discover our collection of made to order engagement rings and
+                customize it to your preference
+              </p>
             </div>
           </div>
-        </CustomModalBody>
-      </Modal>
+        </div>
+      </div>
     </Root>
   );
 }
@@ -70,6 +29,19 @@ const Root = styled.section`
   .container-fluid {
     text-align: center;
     margin: 0px 5px;
+    .heading {
+      padding: 10px 24px;
+      h2 {
+        color: rgba(0, 0, 0);
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.75rem;
+      }
+    }
     .col-lg-4,
     .col-md-4 {
       margin: -1px;

@@ -21,7 +21,7 @@ export default function RingShipReturn() {
           <div className="heading">
           <img src={diam} alt="img" style={{ width: "25px" }} />
 
-            <h5>Ring Details</h5>
+            <h5>Ring and Diamond Details</h5>
           </div>
         </AccordionSummary>
         

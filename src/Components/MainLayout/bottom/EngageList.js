@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import gold1 from "../../Images/4.png";
 import gold2 from "../../Images/6.png";
@@ -45,22 +45,19 @@ export default function EngageList() {
               </li>
               <li>
                 <img src={labgrown} alt="img" />
-                <a href="naturaldiamond">   Start with a Lab-created Diamond</a>
-              
+                <a href="naturaldiamond"> Start with a Lab-created Diamond</a>
               </li>
             </ul>
           </div>
-          <div
-            className="col-lg-3 col-mg-6 col-12 bord"
-           
-          >
+          <div className="col-lg-3 col-mg-6 col-12 bord">
             <b>Present Engagement Rings</b>
-            <div
-              className="ring_space"
-            >
+            <div className="ring_space">
               <ul>
                 <li>
-                  <img src={round} alt="img" /> <span>Round</span>
+                  <img src={round} alt="img" />
+                  <a href="uniquering">
+                    <span>Round</span>
+                  </a>
                 </li>
                 <li>
                   {" "}
@@ -106,17 +103,9 @@ export default function EngageList() {
               </ul>
             </div>
           </div>
-          <div
-            className="col-lg-4 col-md-8 col-12 bord"
-            
-          >
+          <div className="col-lg-4 col-md-8 col-12 bord">
             <b>Shop By Style</b>
-            <div
-             
-               
-                className="ring_space"
-             
-            >
+            <div className="ring_space">
               <ul>
                 <li>
                   <img src={Solitaire} alt="img" />
@@ -162,10 +151,7 @@ export default function EngageList() {
             </div>
           </div>
 
-          <div
-            className="col-lg-2 col-md-4 col-12 bord"
-            
-          >
+          <div className="col-lg-2 col-md-4 col-12 bord">
             <b>Shop By Metal</b>
             <ul>
               <li style={{ display: "flex", alignItems: "center" }}>
@@ -223,60 +209,51 @@ const Root = styled.section`
   img {
     width: 30px;
     height: 30px;
-    mix-blend-mode:multiply;
-
+    mix-blend-mode: multiply;
   }
 
-
-  .ring_space{
+  .ring_space {
     display: flex;
-    justify-Content: space-between;
-    padding: 0px 20px
+    justify-content: space-between;
+    padding: 0px 20px;
   }
 
-  .bord{
+  .bord {
     border-left: 1px solid #ededed;
   }
 
-
   @media (max-width: 567px) {
-   
     padding: 0px;
 
-  .ring_space {
-    padding: 0;
-    gap: 50px;
-    justify-content: unset;
-}
+    .ring_space {
+      padding: 0;
+      gap: 50px;
+      justify-content: unset;
+    }
 
- ul li a {
-    font-size:12px
-}
+    ul li a {
+      font-size: 12px;
+    }
 
-.bord{
-    border-top: 1px solid #ededed;
-    border-left: unset;
-    padding-top: 20px;
+    .bord {
+      border-top: 1px solid #ededed;
+      border-left: unset;
+      padding-top: 20px;
+    }
 
+    span {
+      font-size: 12px;
+    }
+
+    ul li {
+      font-size: 12px;
+      gap: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    b {
+      font-size: 13px;
+    }
   }
-
-  span {
-    font-size: 12px;
-}
-
-ul li {
-    font-size: 12px;
-    gap: 6px;
-    display: flex;
-    align-items: center;
-}
-
- b {
-    font-size: 13px;
-}
-
-
-  }
-   
-  `;
-
+`;

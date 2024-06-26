@@ -17,9 +17,10 @@ import { toast } from "react-toastify";
 
 export default function Section2() {
   const diamondById = useSelector((state) => state.users.diamondById);
+  const diamondByIdState = useSelector((state) => state.users.diamondByIdState);
   const navigate = useNavigate();
   const diamondType = useSelector((state) => state.users.diamondType);
-  console.log("jagsdjhgd", diamondType);
+  console.log("jagsdjhgd", diamondByIdState);
   const location = useLocation();
   const { products, diamond } = location.state || {};
   useEffect(() => {

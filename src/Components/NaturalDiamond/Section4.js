@@ -50,7 +50,7 @@ export default function Section4({ value }) {
   }, [value]);
 
   const handleClickDiamondDetail = (products, diamond) => {
-    apiDetail();
+    apiDetail(diamond);
     navigate("/diamonddetails", { state: { products, diamond } });
   };
 

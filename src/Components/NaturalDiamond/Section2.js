@@ -48,13 +48,23 @@ const shapesList = [
 ];
 
 const colorOptions = ["J", "I", "H", "G", "F", "E", "D"];
-const clarityOptions = ["SI1","SI2", "I2", "VS2", "VS1", "VVS2", "VVS1", "IF", "FL"];
+const clarityOptions = [
+  "SI1",
+  "SI2",
+  "I2",
+  "VS2",
+  "VS1",
+  "VVS2",
+  "VVS1",
+  "IF",
+  "FL",
+];
 const cutOptions = ["GD", "VG", "EX"];
 const polishOptions = ["GD", "VG", "EX"];
 const symmetryOptions = ["GD", "VG", "EX"];
 
 export default function Section2() {
-  const [selectedShapes, setSelectedShapes] = useState([]);
+  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedClarity, setSelectedClarity] = useState([]);
   const [caratRange, setCaratRange] = useState([0.5, 11.5]);
@@ -137,7 +147,7 @@ export default function Section2() {
       selectedCut,
       selectedPolish,
       selectedSymmetry,
-      caratRange
+      caratRange,
       // Include other parameters if needed
       // selectedCarat,
       // selectedBudget,
@@ -273,7 +283,6 @@ export default function Section2() {
       <div className="ring_types mt-4">
         {shapesList.map((shape) => (
           <button
-         
             key={shape.name}
             className={`btn_shapes ${
               selectedShapes.includes(shape.name) ? "selected" : ""
@@ -556,7 +565,6 @@ const Root = styled.section`
     }
     .drawer-content {
       display: block;
-      
     }
   }
   .EZDrawer__container {

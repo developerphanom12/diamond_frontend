@@ -11,342 +11,326 @@ import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import noimg from "../Images/eligantPacking.png";
 
-export default function Section4({ products }) {
-    const [modal, setModal] = useState(false);
-    const [productById, setProductById] = useState("");
-    const [selectedProductId, setSelectedProductId] = useState(null);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-  
-    const handleAddDiamondClick = (productIds) => {
-      setSelectedProductId(productIds);
-      setModal(true);
-      dispatch(setProductIds(productIds));
-    };
-  
-    const handleModalNavigate = (labgrownValue) => {
-      console.log("Navigating with labgrownValue:", labgrownValue);
-      dispatch(setDiamondType(labgrownValue));
-      navigate("/naturaldiamond", {
-        state: { labgrownValue, products: selectedProductId },
-      });
-    };
-  
-    const handleNavigateDetail = async (products) => {
-      const productId = products?.node?.id;
-      console.log("products", productId);
-      try {
-        const response = await axios.get(
-          `${EXCHANGE_URLS}/fetchproductsbyid?productId=${productId}`
-        );
-        if (response?.status === 200) {
-          const productData = response?.data?.data;
-          console.log("nikeee", productData);
-          setProductById(productData);
-          navigate("/ringdetails", { state: { products: productData } });
-        }
-      } catch (error) {
-        console.error("Error fetching diamond details:", error);
-      }
-    };
-  
-    return (
-      <Root>
-        <div className="main_div">
-          {products &&
-            products.map((i, index) => {
-              return (
-                <div key={index} className="subdiv">
-                  <>
-                    {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
-                      <img
-                        src={i.node.images.edges[0].node.originalSrc}
-                        alt={i.node.images.edges[0].node.altText || "img"}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "https://via.placeholder.com/283";
-                        }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          backgroundColor: "#ccc",
-                        }}
-                      >
-                     <img src={noimg} alt="Image not available"/>
-                      </div>
-                    )}
-                  </>
-  
-                  <div className="hov_content">
-                    <div className="d-flex   flex-column">
-                      <div className="d-flex flex justify-content-between">
-                        <h5 className="prd_name">{i?.node.title}</h5>
-                        <div className="d-flex">
-                          <span className="white_color"></span>
-                          <span className="golden_color"></span>
-                          <span className="red_color"></span>
-                        </div>
-                      </div>
-                      <>
-                        <p className="prd_price pt-1 pb-1">
-                          max-{" "}
-                          {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
-                          {i?.node?.priceRange?.maxVariantPrice?.amount} min-{" "}
-                          {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
-                          {i?.node?.priceRange?.minVariantPrice?.amount}{" "}
-                        </p>
-                      </>
+export default function Section4({ data }) {
+  const [modal, setModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleAddDiamondClick = (productIds) => {
+    setSelectedProductId(productIds);
+    setModal(true);
+    dispatch(setProductIds(productIds));
+  };
+
+  const handleModalNavigate = (labgrownValue) => {
+    console.log("Navigating with labgrownValue:", labgrownValue);
+    dispatch(setDiamondType(labgrownValue));
+    navigate("/naturaldiamond", {
+      state: { labgrownValue, products: selectedProductId },
+    });
+  };
+
+  const handleNavigateDetail = (productId) => {
+    console.log("Navigating with productId:", productId);
+    navigate(`/productdetail/${productId}`, {
+      state: { productId },
+    });
+  };
+
+  return (
+    <Root>
+      <div className="main_div">
+        
+        {data &&
+          data.map((i, index) => {
+            return (
+              <div key={index} className="subdiv">
+                <>
+                  {i?.images?.edges?.[0]?.node?.src ? (
+                    <img
+                      src={i.images.edges[0].node.src}
+                      alt={i.images.edges[0].node.altText || "img"}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/283";
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        backgroundColor: "#ccc",
+                      }}
+                    >
+                      <img src={noimg} alt="Image not available" />
                     </div>
-  
-                    <div className="btn_div">
-                      <button
-                        className="info_btn"
-                        onClick={() => handleNavigateDetail(i)}
-                      >
-                        More Info
-                      </button>
-                      <button
-                        className="add_btn"
-                        onClick={() => handleAddDiamondClick(i?.node)}
-                      >
-                        Add Diamond
-                      </button>
+                  )}
+                </>
+
+                <div className="hov_content">
+                  <div className="d-flex   flex-column">
+                    <div className="d-flex flex justify-content-between">
+                      <h5 className="prd_name">{i?.title}</h5>
+                      <div className="d-flex">
+                        <span className="white_color"></span>
+                        <span className="golden_color"></span>
+                        <span className="red_color"></span>
+                      </div>
                     </div>
-  
-                    <div className="note">
-                      <p className="note">
-                        Pay in 12 interest-free installments of $
-                        <span>Learn more</span>
+                    <>
+                      <p className="prd_price pt-1 pb-1">
+                        ${i?.variants?.edges?.[0]?.node?.price}:
                       </p>
-                    </div>
+                    </>
+                  </div>
+
+                  <div className="btn_div">
+                    <button
+                      className="info_btn"
+                      onClick={() => handleNavigateDetail(i.id)}
+                      style={{fontSize:"10px"}}
+                    >
+                   under maintainance
+                    </button>
+                    <button
+                      className="add_btn"
+                      onClick={() => handleAddDiamondClick(i)}
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+
+                  <div className="note">
+                    <p className="note">
+                      Pay in 12 interest-free installments of $
+                      <span>Learn more</span>
+                    </p>
                   </div>
                 </div>
-              );
-            })}
-        </div>
-        <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-          <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
-  
-          <CustomModalBody>
-            <h5>Before we continue</h5>
-            <h2>CHOOSE YOUR CENTER STONE</h2>
-            <div className="choose_option">
-              <div
-                className="ring_pandet"
-                onClick={() => handleModalNavigate(false)}
-              >
-                <img
-                  src={ndia}
-                  alt="img of natural diamond"
-                  style={{ width: "52px" }}
-                />
-                <span>Natural Diamond</span>
               </div>
-              <div
-                className="ring_pandet"
-                onClick={() => handleModalNavigate(true)}
-              >
-                <img
-                  src={labgrown}
-                  alt="img of lab grown diamond"
-                  style={{ width: "52px" }}
-                />
-                <span>Lab Diamond</span>
-              </div>
+            );
+          })}
+      </div>
+      <Modal isOpen={modal} toggle={() => setModal(!modal)}>
+        <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
+
+        <CustomModalBody>
+          <h5>Before we continue</h5>
+          <h2>CHOOSE YOUR CENTER STONE</h2>
+          <div className="choose_option">
+            <div
+              className="ring_pandet"
+              onClick={() => handleModalNavigate(false)}
+            >
+              <img
+                src={ndia}
+                alt="img of natural diamond"
+                style={{ width: "52px" }}
+              />
+              <span>Natural Diamond</span>
             </div>
-          </CustomModalBody>
-        </Modal>
-      </Root>
-    );
-  }
-  
-  const Root = styled.section`
-    padding: 0 20px;
-  
-    .main_div {
-      display: flex;
-      flex-wrap: wrap;
+            <div
+              className="ring_pandet"
+              onClick={() => handleModalNavigate(true)}
+            >
+              <img
+                src={labgrown}
+                alt="img of lab grown diamond"
+                style={{ width: "52px" }}
+              />
+              <span>Lab Diamond</span>
+            </div>
+          </div>
+        </CustomModalBody>
+      </Modal>
+    </Root>
+  );
+}
+
+const Root = styled.section`
+  padding: 0 20px;
+
+  .main_div {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 4px;
+    margin-top: 20px;
+    .subdiv {
+      width: 24vw;
+      height: 50vh;
+      border: 3px solid #f7f7f7;
+      border-radius: 20px;
+      padding: 5px;
+      overflow: hidden;
       position: relative;
-      gap: 4px;
-      margin-top: 20px;
-      .subdiv {
-        width: 24vw;
-        height: 55vh;
-        border: 3px solid #f7f7f7;
-        border-radius: 20px;
-        padding: 5px;
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 20px;
-        img {
-          width: 95%;
-          height: 95%;
-      
-        }
-        &:hover {
-          border: 3px solid black;
-          overflow: unset;
-          transform: scale(1.1);
-          z-index: 1;
-        }
-        .hov_content {
+      margin-bottom: 20px;
+      img {
+        width: 95%;
+        height: 86%;
+      }
+      &:hover {
+        border: 3px solid black;
+        overflow: unset;
+        transform: scale(1.1);
+        z-index: 1;
+      }
+      .hov_content {
+        display: flex;
+        flex-wrap: wrap;
+        .flex-column {
           display: flex;
-          flex-wrap: wrap;
-          .flex-column {
-            display: flex;
-            width: 100%;
-          }
+          width: 100%;
         }
-  
+      }
+
+      &:hover .hov_content {
+        width: 24vw;
+        z-index: 1;
+        position: absolute;
+        background-color: white;
+        border: 3px solid black;
+        padding: 0 20px 0;
+        left: -3px;
+        overflow: hidden;
+        border-top: none;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .prd_name {
+        font-size: 14px;
+      }
+      .prd_price {
+        font-size: 13px;
+        width: 100%;
+      }
+      .white_color,
+      .golden_color,
+      .red_color {
+        height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 50px;
+        margin-left: 10px;
+      }
+
+      .white_color {
+        background-color: #ebebeb;
+      }
+
+      .golden_color {
+        background-color: #ffdfb0;
+      }
+
+      .red_color {
+        background-color: #efcbcb;
+      }
+
+      .btn_div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+        gap: 10px;
+        .info_btn {
+          flex: 1;
+          padding: 12px 21px;
+          border-radius: 25px;
+          font-size: 13px;
+          background-color: #fff;
+          border: 2px solid black;
+        }
+        .add_btn {
+          flex: 1;
+          background-color: black;
+          border: 2px solid black;
+          color: white;
+          padding: 5px 17px;
+          border-radius: 25px;
+          font-size: 13px;
+        }
+      }
+
+      .note {
+        p {
+          font-size: 10px;
+          margin-top: 20px;
+          text-align: center;
+          margin-top: 8px;
+        }
+        span {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  @media (max-width: 867px) {
+    padding: 0px 10px;
+    .main_div {
+      .subdiv {
+        width: 45vw;
+        height: 36vh;
         &:hover .hov_content {
-          width: 24vw;
-          z-index: 1;
-          position: absolute;
-          background-color: white;
-          border: 3px solid black;
-          padding: 0 20px 0;
-          left: -3px;
-          overflow: hidden;
-          border-top: none;
-          border-radius: 0 0 20px 20px;
+          width: 45vw;
+          padding: 0px 10px;
         }
-  
         .prd_name {
-          font-size: 14px;
+          font-size: 12px;
+          margin-bottom: 9px;
         }
         .prd_price {
-          font-size: 13px;
-          width: 100%;
+          font-size: 11px;
+          margin-bottom: 10px;
         }
         .white_color,
         .golden_color,
         .red_color {
-          height: 18px;
-          width: 18px;
-          text-align: center;
-          border-radius: 50px;
-          margin-left: 10px;
+          height: 10px;
+          width: 10px;
         }
-  
-        .white_color {
-          background-color: #ebebeb;
-        }
-  
-        .golden_color {
-          background-color: #ffdfb0;
-        }
-  
-        .red_color {
-          background-color: #efcbcb;
-        }
-  
-        .btn_div {
-          display: flex;
-          justify-content: space-between;
-          padding: 0;
-          width: 100%;
-          gap: 10px;
-          .info_btn {
-            flex: 1;
-            padding: 12px 21px;
-            border-radius: 25px;
-            font-size: 13px;
-            background-color: #fff;
-            border: 2px solid black;
-          }
-          .add_btn {
-            flex: 1;
-            background-color: black;
-            border: 2px solid black;
-            color: white;
-            padding: 5px 17px;
-            border-radius: 25px;
-            font-size: 13px;
-          }
-        }
-  
-        .note {
-          p {
-            font-size: 10px;
-            margin-top: 20px;
-            text-align: center;
-            margin-top: 8px;
-          }
-          span {
-            text-decoration: underline;
-            cursor: pointer;
-          }
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 3px 10px;
+          border-radius: 15px;
         }
       }
     }
-    @media (max-width: 867px) {
-      padding: 0px 10px;
-      .main_div {
-        .subdiv {
-          width: 45vw;
-          height: 36vh;
-          &:hover .hov_content {
-            width: 45vw;
-            padding: 0px 10px;
-          }
-          .prd_name {
-            font-size: 12px;
-            margin-bottom: 9px;
-          }
-          .prd_price {
-            font-size: 11px;
-            margin-bottom: 10px;
-          }
-          .white_color,
-          .golden_color,
-          .red_color {
-            height: 10px;
-            width: 10px;
-          }
-          .btn_div .info_btn,
-          .btn_div .add_btn {
-            font-size: 11px;
-            padding: 3px 10px;
-            border-radius: 15px;
-          }
-        }
-      }
-    }
-  `;
-  const CustomModalBody = styled(ModalBody)`
-    padding: 30px 85px 50px;
-    text-align: center;
-  
-    h2 {
-      font-size: 25px;
-      margin-top: 20px;
-      color: #000000;
-      font-weight: 700;
-    }
-    .choose_option {
+  }
+`;
+const CustomModalBody = styled(ModalBody)`
+  padding: 30px 85px 50px;
+  text-align: center;
+
+  h2 {
+    font-size: 25px;
+    margin-top: 20px;
+    color: #000000;
+    font-weight: 700;
+  }
+  .choose_option {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 20px;
+    .ring_pandet {
+      flex-direction: column;
       display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
       justify-content: center;
-      margin-top: 20px;
-      .ring_pandet {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        svg {
-          width: 56px;
-          height: 56px;
-        }
-        span {
-          font-size: 14px;
-        }
+      align-items: center;
+      cursor: pointer;
+      svg {
+        width: 56px;
+        height: 56px;
+      }
+      span {
+        font-size: 14px;
       }
     }
-    .modal-dialog {
-      margin-top: 82px !important;
-    }
-  `;
-  
+  }
+  .modal-dialog {
+    margin-top: 82px !important;
+  }
+`;

@@ -1,172 +1,140 @@
-import React, {useState, useEffect} from "react";
-import styled from "styled-components";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Section4 from "./Section4";
+import "react-modern-drawer/dist/index.css";
+import Drawer from "react-modern-drawer";
 import { useDispatch } from "react-redux";
-import { setProductIds, setSelectedRingSvg } from "../../redux/users/action";
-import solitaire from "../Images/Solitaire-removebg-preview.png"
-import pave from "../Images/Pave-removebg-preview.png"
-import  halo from "../Images/Halo-removebg-preview.png"
-import nature from "../Images/Nature-removebg-preview.png"
-import hiddenhalo from "../Images/HiddenHalo-removebg-preview.png"
-import sidestone from "../Images/SideStone-removebg-preview.png"
-import threestone from "../Images/ThreeStones-removebg-preview.png"
-import vintage from "../Images/Vintage-removebg-preview.png"
-import tension from "../Images/Tension-removebg-preview.png"
+import { IoFilterOutline } from "react-icons/io5";
+import {
+  setDiamondIds,
+  setDiamondType,
+  setSelectedShapeImage,
+} from "../../redux/users/action";
+import ROUND from "../Images/round-removebg-preview.png";
+import EMERALD from "../Images/emerald-removebg-preview.png";
+import HEART from "../Images/heart-removebg-preview.png";
+import MARQUISE from "../Images/Marquise-removebg-preview.png";
+import OVAL from "../Images/oval-removebg-preview.png";
+import PEAR from "../Images/Pear-removebg-preview.png";
+import PRINCESS from "../Images/Princess-removebg-preview.png";
+import RADIANT from "../Images/Radiant-removebg-preview.png";
+import CUSHION from "../Images/cushionremovebg.png";
+import ECUSHION from "../Images/ECusion-removebg-preview.png";
+import { useLocation, useNavigate } from "react-router-dom";
 import { EXCHANGE_URLS } from "../URLS";
 import { useLoading } from "../LoadingContext";
-import { IoFilterOutline } from "react-icons/io5";
-import "react-modern-drawer/dist/index.css"
-import Drawer from "react-modern-drawer"
-import Section4 from "./Section4";
 
 const shapesList = [
-    { title: "Solitaire", imgUrl: solitaire },
-    { title: "Pave", imgUrl: pave },
-    { title: "Halo", imgUrl: halo },
-    { title: "Nature", imgUrl: nature },
-    { title: "Hidden Halo", imgUrl: hiddenhalo },
-    { title: "Sidestone", imgUrl: sidestone },
-    { title: "Three Stone", imgUrl: threestone },
-    { title: "Vintage", imgUrl: vintage },
-    { title: "Tension", imgUrl: tension },
-  ];
+  { name: "ROUND", imgUrl: ROUND },
+  { name: "EMERALD", imgUrl: EMERALD },
+  { name: "HEART", imgUrl: HEART },
+  { name: "MARQUISE", imgUrl: MARQUISE },
+  { name: "OVAL", imgUrl: OVAL },
+  { name: "PEAR", imgUrl: PEAR },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "RADIANT", imgUrl: RADIANT },
+  { name: "CUSHION", imgUrl: CUSHION },
+  { name: "E.CUSHION", imgUrl: ECUSHION },
+];
 
-  
 export default function Section2() {
-    const [selectedButton, setSelectedButton] = useState(1);
-    const [collection, setCollection] = useState([]);
-    const [products, setProducts] = useState([]);
-    const dispatch = useDispatch();
-    const { setLoading } = useLoading();
-    const handleButtonClick = (buttonIndex, selectedRingSvg) => {
-      setSelectedButton(buttonIndex);
-      dispatch(setSelectedRingSvg(selectedRingSvg));
+  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]); // Default to ROUND
+  const [data, setData] = useState([]);
+  const { setLoading } = useLoading();
+  const dispatch = useDispatch();
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const typelabgrown = state ? state.labgrownValue : false;
+
+  const fetchDiamondData = async (shape) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${EXCHANGE_URLS}/tagdata?tag=${shape}`);
+      if (response.status === 200) {
+        setData(response.data.data);
+        console.log("response", response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (typelabgrown) {
+      dispatch(setDiamondType(typelabgrown));
+    }
+
+    const shape = selectedShapes.length > 0 ? selectedShapes[0] : "ROUND";
+    fetchDiamondData(shape);
+  }, [selectedShapes, typelabgrown, dispatch, setLoading]);
+
+  const handleShapeClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedShapeImage(shapeImageUrl));
+    setSelectedShapes([shapeName]); // Set the selected shape
+    navigate('/uniquering', { state: { selectedShape: shapeName } }); // Navigate with selected shape
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
     };
-  
-    useEffect(() => {
-      const fetchCollections = async () => {
-        setLoading(true);
-        try {
-          const response = await axios.get(`${EXCHANGE_URLS}/collection`);
-          if (response.status === 200) {
-            setCollection(response.data.data);
-            console.log("response", response.data.data);
-          }
-        } catch (error) {
-          console.error("Error fetching collections:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchCollections();
-    }, [setLoading]);
-  
-    useEffect(() => {
-      const fetchProductsDetails = async () => {
-        if (collection.length > 0) {
-          const collectionId = collection[selectedButton]?.id;
-          try {
-            const res = await axios.get(
-              `${EXCHANGE_URLS}/collectionById?collectionId=${collectionId}`
-            );
-            if (res.status === 200) {
-              setProducts(res.data.products);
-              const productIds = res.data.products.map((product) => product.node);
-              dispatch(setProductIds(productIds));
-              console.log("productid", productIds);
-            }
-          } catch (error) {
-            console.error("Error fetching products:", error);
-          } finally {
-            setLoading(false);
-          }
-        }
-      };
-  
-      fetchProductsDetails();
-    }, [collection, selectedButton, dispatch, setLoading]);
-  
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
-    useEffect(() => {
-      const handleResize = () => {
-        setScreenWidth(window.innerWidth);
-      };
-  
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
-  
-    const toggleDrawer = () => {
-      setIsOpen((prevState) => !prevState);
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
-  
-    const drawerContent = (
-      <>
-        <div className="ring_types mt-4">
-          {shapesList.map((shape, index) => (
-            <button
-              key={index}
-              className={selectedButton === index + 1 ? "selected" : ""}
-              onClick={() => handleButtonClick(index + 1, shape.imgUrl)}
-            >
-              <img
-                src={shape.imgUrl}
-                alt={`img of ring ${index + 1}`}
-                style={{ width: "52px" }}
-              />
-              <span>{shape.title}</span>
-            </button>
-          ))}
-        </div>
-      </>
-    );
-    return (
-      <Root>
-        <div className="container-fluid">
-          <div className="row ">
-            <div className="col-lg-12">
-              <div className="heading text-center">
-                <h2>Unique Rings</h2>
-                <p>
-                  Discover our collection of made to order Unique rings and
-                  customize it to your preference
-                </p>
-              </div>
-            </div>
-          </div>
-          <button className="drawer-toggle-button" onClick={toggleDrawer}>
-            <IoFilterOutline /> Filter
-          </button>
-          <div
-            className={`drawer-content ${
-              isOpen && screenWidth <= 876 ? "open" : ""
+  }, []);
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  const drawerContent = (
+    <>
+      <div className="ring_types mt-4">
+        {shapesList.map((shape) => (
+          <button
+            key={shape.name}
+            className={`btn_shapes ${
+              selectedShapes.includes(shape.name) ? "selected" : ""
             }`}
+            onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
-            {screenWidth > 876 ? (
-              drawerContent
-            ) : (
-              <Drawer
-                open={isOpen}
-                onClose={toggleDrawer}
-                direction="bottom"
-                className="bla"
-              >
-                {drawerContent}
-              </Drawer>
-            )}
-          </div>
-        </div>
-        {/* <Section3 /> */}
-      <Section4 products={products}/>
-      </Root>
-    );
-  }
-  const Root = styled.section`
+            <img src={shape.imgUrl} alt={shape.name} />
+            {shape.name}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+
+  return (
+    <Root>
+      <button className="drawer-toggle-button" onClick={toggleDrawer}>
+        <IoFilterOutline /> Filter
+      </button>
+      <div className={`drawer-content ${isOpen && screenWidth <= 876 ? "open" : ""}`}>
+        {screenWidth > 876 ? drawerContent : (
+          <Drawer open={isOpen} onClose={toggleDrawer} direction="bottom" className="bla">
+            {drawerContent}
+          </Drawer>
+        )}
+      </div>
+
+      <Section4 data={data} />
+    </Root>
+  );
+}
+
+
+
+const Root = styled.section`
   padding: 0 0 20px;
 
   .column {

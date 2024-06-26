@@ -61,9 +61,9 @@ export default function Section2() {
           </div>
 
           <div className="stone_shape">
-            <h4>Center Stone Shape</h4>
+            {/* <h4>Center Stone Shape</h4> */}
             <div className="stone_images">
-              <img src={round} alt="round_images" />
+              {/* <img src={round} alt="round_images" />
               <img src={emerald} alt="emerald_images" />
               <img src={heart} alt="heart_images" />
               <img src={Marquise} alt="Marquise_images" />
@@ -72,7 +72,7 @@ export default function Section2() {
               <img src={Princess} alt="Princess_images" />
               <img src={Radiant} alt="Radiant_images" />
               <img src={cushionremovebg} alt="cushionremovebg_images" />
-              <img src={ECusion} alt="ECusion_images" />
+              <img src={ECusion} alt="ECusion_images" /> */}
             </div>
           </div>
 
