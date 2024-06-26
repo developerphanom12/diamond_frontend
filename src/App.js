@@ -20,6 +20,7 @@ import LoaderDot from "./Components/LoaderDot";
 import ContactUs from "./Components/AllOrders/ContactUs";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import UniqueRing from "./Components/UniqueRing/UniqueRing";
 
 function App() {
   // useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
               <Route path="/password" element={<ForgetPassword />} />
               <Route path="/education" element={<Education />} />
               <Route path="/engagementring" element={<EngagementRing />} />
+              <Route path="/uniquering" element={<UniqueRing/>}/>
               <Route path="/naturaldiamond" element={<NaturalDiamond />} />
               <Route path="/productpage" element={<ProductPage />} />
               <Route path="/ringdetails" element={<RingDetails />} />
