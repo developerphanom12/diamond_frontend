@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setDiamondType, setProductIds } from "../../redux/users/action";
-import ndia from "../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../Images/labgrowncopy-removebg.png";
-import { EXCHANGE_URLS } from "../URLS";
-import axios from "axios";
-import noimg from "../Images/eligantPacking.png";
+import { setDiamondType, setProductIds } from "../../../redux/users/action";
+import ndia from "../../Images/naturaldiamond-removebg-preview.png";
+import labgrown from "../../Images/labgrowncopy-removebg.png";
+import noimg from "../../Images/eligantPacking.png";
 
 export default function Section4({ data }) {
   const [modal, setModal] = useState(false);
@@ -33,15 +31,13 @@ export default function Section4({ data }) {
 
   const handleNavigateDetail = (productId) => {
     console.log("Navigating with productId:", productId);
-    navigate(`/productdetail/${productId}`, {
-      state: { productId },
-    });
+    navigate(`/uniqueringdetails`
+    );
   };
 
   return (
     <Root>
       <div className="main_div">
-        
         {data &&
           data.map((i, index) => {
             return (
@@ -50,7 +46,7 @@ export default function Section4({ data }) {
                   {i?.images?.edges?.[0]?.node?.src ? (
                     <img
                       src={i.images.edges[0].node.src}
-                      alt={i.images.edges[0].node.altText || "img"}
+                      alt="img"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = "https://via.placeholder.com/283";
@@ -62,7 +58,7 @@ export default function Section4({ data }) {
                         backgroundColor: "#ccc",
                       }}
                     >
-                      <img src={noimg} alt="Image not available" />
+                      <img src={noimg} alt="img" />
                     </div>
                   )}
                 </>
@@ -88,9 +84,9 @@ export default function Section4({ data }) {
                     <button
                       className="info_btn"
                       onClick={() => handleNavigateDetail(i.id)}
-                      style={{fontSize:"10px"}}
+                      style={{ fontSize: "10px" }}
                     >
-                   under maintainance
+                      More Info
                     </button>
                     <button
                       className="add_btn"

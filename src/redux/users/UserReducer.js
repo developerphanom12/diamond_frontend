@@ -4,6 +4,7 @@ import {
   SET_DIAMOND_TYPE,
   SET_PRODUCT_IDS,
   SET_SELECTED_RING_SVG,
+  SET_SELECTED_SHAPE,
   SET_SELECTED_SHAPE_IMAGE,
   SET_SELECTED_VARIANT_ID,
 } from "./action";
@@ -21,9 +22,15 @@ const initialState = {
   selectedShapeImage: null,
   selectedRingSvg:null,
   diamondById: null,
+  selectedShape: 'null',
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SELECTED_SHAPE:
+      return {
+        ...state,
+        selectedShape: action.payload,
+      };
     case SET_DIAMOND_BY_ID:
       return {
         ...state,

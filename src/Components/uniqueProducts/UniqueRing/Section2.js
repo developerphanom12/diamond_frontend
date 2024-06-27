@@ -4,26 +4,22 @@ import styled from "styled-components";
 import Section4 from "./Section4";
 import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoFilterOutline } from "react-icons/io5";
-import {
-  setDiamondIds,
-  setDiamondType,
-  setSelectedShapeImage,
-} from "../../redux/users/action";
-import ROUND from "../Images/round-removebg-preview.png";
-import EMERALD from "../Images/emerald-removebg-preview.png";
-import HEART from "../Images/heart-removebg-preview.png";
-import MARQUISE from "../Images/Marquise-removebg-preview.png";
-import OVAL from "../Images/oval-removebg-preview.png";
-import PEAR from "../Images/Pear-removebg-preview.png";
-import PRINCESS from "../Images/Princess-removebg-preview.png";
-import RADIANT from "../Images/Radiant-removebg-preview.png";
-import CUSHION from "../Images/cushionremovebg.png";
-import ECUSHION from "../Images/ECusion-removebg-preview.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import { EXCHANGE_URLS } from "../URLS";
-import { useLoading } from "../LoadingContext";
+import { setSelectedShape } from "../../../redux/users/action";
+import ROUND from "../../Images/round-removebg-preview.png";
+import EMERALD from "../../Images/emerald-removebg-preview.png";
+import HEART from "../../Images/heart-removebg-preview.png";
+import MARQUISE from "../../Images/Marquise-removebg-preview.png";
+import OVAL from "../../Images/oval-removebg-preview.png";
+import PEAR from "../../Images/Pear-removebg-preview.png";
+import PRINCESS from "../../Images/Princess-removebg-preview.png";
+import RADIANT from "../../Images/Radiant-removebg-preview.png";
+import CUSHION from "../../Images/cushionremovebg.png";
+import ECUSHION from "../../Images/ECusion-removebg-preview.png";
+import { useNavigate } from "react-router-dom";
+import { EXCHANGE_URLS } from "../../URLS";
+import { useLoading } from "../../LoadingContext";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -39,13 +35,12 @@ const shapesList = [
 ];
 
 export default function Section2() {
+  const selectedShape = useSelector((state) => state.users.selectedShape);
   const [selectedShapes, setSelectedShapes] = useState(["ROUND"]); // Default to ROUND
   const [data, setData] = useState([]);
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
-  const { state } = useLocation();
   const navigate = useNavigate();
-  const typelabgrown = state ? state.labgrownValue : false;
 
   const fetchDiamondData = async (shape) => {
     setLoading(true);
@@ -62,19 +57,18 @@ export default function Section2() {
     }
   };
 
+
   useEffect(() => {
-    if (typelabgrown) {
-      dispatch(setDiamondType(typelabgrown));
-    }
-
-    const shape = selectedShapes.length > 0 ? selectedShapes[0] : "ROUND";
+    const shape =
+      selectedShape ||
+      (selectedShapes.length > 0 ? selectedShapes[0] : "ROUND");
     fetchDiamondData(shape);
-  }, [selectedShapes, typelabgrown, dispatch, setLoading]);
+  }, [selectedShape, selectedShapes, dispatch, setLoading]);
 
-  const handleShapeClick = (shapeName, shapeImageUrl) => {
-    dispatch(setSelectedShapeImage(shapeImageUrl));
-    setSelectedShapes([shapeName]); // Set the selected shape
-    navigate('/uniquering', { state: { selectedShape: shapeName } }); // Navigate with selected shape
+  const handleShapeClick = (shapeName) => {
+    setSelectedShapes([shapeName]);
+    dispatch(setSelectedShape(shapeName)); // Set the selected shape
+    navigate("/uniquering", { state: { selectedShape: shapeName } }); // Navigate with selected shape
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -102,9 +96,11 @@ export default function Section2() {
           <button
             key={shape.name}
             className={`btn_shapes ${
-              selectedShapes.includes(shape.name) ? "selected" : ""
+              (selectedShape || selectedShapes).includes(shape.name)
+                ? "selected"
+                : ""
             }`}
-            onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
+            onClick={() => handleShapeClick(shape.name)}
           >
             <img src={shape.imgUrl} alt={shape.name} />
             {shape.name}
@@ -119,9 +115,20 @@ export default function Section2() {
       <button className="drawer-toggle-button" onClick={toggleDrawer}>
         <IoFilterOutline /> Filter
       </button>
-      <div className={`drawer-content ${isOpen && screenWidth <= 876 ? "open" : ""}`}>
-        {screenWidth > 876 ? drawerContent : (
-          <Drawer open={isOpen} onClose={toggleDrawer} direction="bottom" className="bla">
+      <div
+        className={`drawer-content ${
+          isOpen && screenWidth <= 876 ? "open" : ""
+        }`}
+      >
+        {screenWidth > 876 ? (
+          drawerContent
+        ) : (
+          <Drawer
+            open={isOpen}
+            onClose={toggleDrawer}
+            direction="bottom"
+            className="bla"
+          >
             {drawerContent}
           </Drawer>
         )}
@@ -131,8 +138,6 @@ export default function Section2() {
     </Root>
   );
 }
-
-
 
 const Root = styled.section`
   padding: 0 0 20px;

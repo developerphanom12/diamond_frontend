@@ -24,8 +24,18 @@ import Pave from "../../Images/Pave-removebg-preview.png";
 import ThreeStones from "../../Images/ThreeStones-removebg-preview.png";
 import Halo from "../../Images/Halo-removebg-preview.png";
 import HiddenHalo from "../../Images/HiddenHalo-removebg-preview.png";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSelectedShape } from "../../../redux/users/action";
 
 export default function EngageList() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleShapeClick = (shapeName) => {
+    dispatch(setSelectedShape(shapeName));
+    navigate("/uniquering");
+  };
   return (
     <Root>
       <div className="container-fluid">
@@ -53,50 +63,42 @@ export default function EngageList() {
             <b>Present Engagement Rings</b>
             <div className="ring_space">
               <ul>
-                <li>
+                <li onClick={() => handleShapeClick("ROUND")}>
                   <img src={round} alt="img" />
-                  <a href="uniquering">
-                    <span>Round</span>
-                  </a>
+
+                  <span>Round</span>
                 </li>
-                <li>
-                  {" "}
+                <li onClick={() => handleShapeClick("EMERALD")}>
                   <img src={emerald} alt="img" />
                   <span>Emerald</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("HEART")}>
                   <img src={heart} alt="img" />
-
                   <span>Heart</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("MARQUISE")}>
                   <img src={marquise} alt="img" />
-
                   <span>Marquise</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("OVAL")}>
                   <img src={oval} alt="img" />
-
                   <span>Oval</span>
                 </li>
               </ul>
               <ul>
-                <li>
+                <li onClick={() => handleShapeClick("PEAR")}>
                   <img src={pear} alt="img" />
-
                   <span>Pear</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("PRINCESS")}>
                   <img src={princess} alt="img" />
-
                   <span>Princess</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("RADIANT")}>
                   <img src={Radiant} alt="img" />
-
                   <span>Radiant</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("CUSHION")}>
                   <img src={Cushion} alt="img" />
                   <span>Cushion</span>
                 </li>
@@ -202,6 +204,9 @@ const Root = styled.section`
         &:hover {
           text-decoration: underline;
         }
+      }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
