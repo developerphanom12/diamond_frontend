@@ -9,6 +9,18 @@ export const SET_SELECTED_RING_SVG = 'SET_SELECTED_RING_SVG';
 export const SET_DIAMOND_BY_ID = "SET_DIAMOND_BY_ID";
 export const SET_SELECTED_SHAPE = 'SET_SELECTED_SHAPE';
 
+export const SET_UNIQUE_DATA = 'SET_UNIQUE_DATA';
+export const SET_UNIQUE_PRODUCT = "SET_UNIQUE_PRODUCT";
+
+export const setUniqueProduct = (product) => ({
+  type: SET_UNIQUE_PRODUCT,
+  payload: product,
+});
+export const setUniqueData = (data) => ({
+  type: SET_UNIQUE_DATA,
+  payload: data,
+});
+
 export const setSelectedShape = (shape) => ({
   type: SET_SELECTED_SHAPE,
   payload: shape,

@@ -1,15 +1,5 @@
 import styled from "styled-components";
-import React from "react";
-// import round from "../Images/round-removebg-preview.png";
-// import emerald from "../Images/emerald-removebg-preview.png";
-// import heart from "../Images/heart-removebg-preview.png";
-// import Marquise from "../Images/Marquise-removebg-preview.png";
-// import oval from "../Images/oval-removebg-preview.png";
-// import Pear from "../Images/Pear-removebg-preview.png";
-// import Princess from "../Images/Princess-removebg-preview.png";
-// import Radiant from "../Images/Radiant-removebg-preview.png";
-// import cushionremovebg from "../Images/cushionremovebg.png";
-// import ECusion from "../Images/ECusion-removebg-preview.png";
+import React, { useEffect, useState } from "react";
 import aeroplane from "../../Images/aeroplane.png";
 import badgess from "../../Images/badgess.png";
 import moneyinhand from "../../Images/moneyinhand.png";
@@ -23,73 +13,70 @@ import diamo from "../../Images/diamo.PNG";
 import j from "../../Images/j.jpg";
 import vs from "../../Images/vs.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import RingShipReturn from "../../DiamondDetails/RingShipReturn";
 import { useSelector } from "react-redux";
+import { EXCHANGE_URLS } from "../../URLS";
+import axios from "axios";
+import { useLoading } from "../../LoadingContext";
+import Section3 from "./Section3";
+import deleteicon from "../../Images/delete.PNG";
+import ww from "../../Images/ww.webp";
+import dia from "../../Images/dia.webp";
+import ring from "../../Images/ringwithdiamond.png";
+import diamondd from "../../Images/round-removebg-preview.png";
+import { Drawer } from "@mui/material";
 
 export default function Section2() {
-  const diamondById = useSelector((state) => state.users.diamondById);
-  const diamondType = useSelector((state) => state.users.diamondType);
+  const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
+  const [unique, setUnique] = useState("");
   const location = useLocation();
-  const { products } = location.state || {};
+  const { setLoading } = useLoading();
   const navigate = useNavigate();
+  const product = location.state;
+  console.log("uniqueProduct", product, uniqueProduct);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  const VideoContainer = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100% !important;
-    object-fit: contain;
-    background-position: 100% 100%;
-    @media (max-width: 768px) {
-      height: 100%;
-      width: 100%;
-      min-height: 50vh;
-      min-width: 50vh;
-    }
-    iframe {
-      height: 100%;
-      width: 100%;
-      > div {
-        width: 100%;
-        height: 100%;
-        > div {
-          width: 100%;
-          height: 100%;
-        }
+  const fetchUniqueData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/fetchpredefione?productId=${uniqueProduct}`
+      );
+      if (response.status === 200) {
+        setUnique(response.data.data);
+        console.log("shdgfhsgd", response.data.data);
       }
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    } finally {
+      setLoading(false);
     }
-  `;
-
-  const VideoFrame = styled.iframe`
-    width: 100%;
-    height: 100%;
-    > div {
-      width: 100%;
-      height: 100%;
-    }
-  `;
+  };
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+  useEffect(() => {
+    fetchUniqueData(uniqueProduct);
+  }, [setLoading]);
 
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
           <ImageContainer>
-            {diamondById?.diamond?.video ? (
-              <VideoContainer>
-                <VideoFrame
-                  src={diamondById?.diamond.video}
-                  title="Diamond Video"
-                  allowFullScreen
-                />
-              </VideoContainer>
+            {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+              <img
+                src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                title="Diamond Image"
+                alt="Diamond"
+              />
             ) : (
               <img
-                src={diamondById?.diamond?.image}
+                src={unique?.images?.edges?.[0]?.node?.originalSrc}
                 title="Diamond Image"
                 alt="Diamond"
               />
             )}
           </ImageContainer>
-
           <div
             style={{
               display: "flex",
@@ -98,9 +85,9 @@ export default function Section2() {
             }}
           >
             <button className="button">
-              {diamondById?.diamond?.image ? (
+              {unique?.images?.edges?.[0]?.node?.originalSrc ? (
                 <img
-                  src={diamondById?.diamond?.image}
+                  src={unique?.images?.edges?.[0]?.node?.originalSrc}
                   title="Diamond image"
                   alt="img"
                   style={{ width: "50px", height: "50px" }}
@@ -117,74 +104,188 @@ export default function Section2() {
         <div className="des_div">
           <div className="title">
             <h2>
-              {" "}
-              {diamondById?.diamond?.certificate?.carats} Carat{" "}
-              {diamondById?.diamond?.certificate?.color}{" "}
-              {diamondById?.diamond?.certificate?.clarity}{" "}
-              {diamondById?.diamond?.certificate?.shape}{" "}
-              {diamondType && diamondType === false
-                ? "Natural Diamond"
-                : "Lab Grown"}
+              {unique?.title} -{unique?.variants?.edges?.[0]?.node?.title}
             </h2>
-            <h4>${diamondById?.price}</h4>
+            <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
             <p>
-              {products?.description && products.description}
-              {!products?.description && "No Description About Product"}
+              {unique?.description && unique.description}
+              {!unique?.description && "No Description About Product"}
             </p>
           </div>
-
           <div className="prod_spec">
-            <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>{diamondById?.diamond?.certificate?.carats}</h4>
-              <p>Carat</p>
-            </div>
-            <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>{diamondById?.diamond?.certificate?.color}</h4>
-              <p>Color</p>
-            </div>
-            <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>{diamondById?.diamond?.certificate?.clarity}</h4>
-              <p>Clarity</p>
+            <div>
+              <h4>Carat Weight</h4>
             </div>
 
-            <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>{diamondById?.diamond?.certificate?.cut}</h4>
-              <p>Cut</p>
-            </div>
-
-            <div className="spec" style={{ borderRight: "1px solid #bbb9b9" }}>
-              <h4>
-                {diamondById?.diamond?.certificate?.length}/
-                {diamondById?.diamond?.certificate?.width}
-              </h4>
-              <p>L/W (mm)</p>
-            </div>
-
-            <div className="spec">
-              <h4>{diamondById?.diamond?.certificate?.shape}</h4>
-              <p>Shape</p>
+            <div>
+              {unique?.variants?.edges?.map((variant, index) => (
+                <div key={index} className="spec">
+                  {variant?.node?.selectedOptions &&
+                    variant?.node?.selectedOptions?.map(
+                      (option, idx) =>
+                        option?.name === "Carat Weight" && (
+                          <p key={idx}>{option?.value}</p>
+                        )
+                    )}
+                </div>
+              ))}
             </div>
           </div>
 
-         <div className="ring_size">
-            <select
-              value={""}
-         
-            >
+          <div className="ring_size">
+            <select value={""}>
               <option value="">Select Ring Size</option>
-              
+              {unique?.variants?.edges?.map((variant, index) =>
+                variant?.node?.selectedOptions?.map(
+                  (option, idx) =>
+                    option?.name === "size" && (
+                      <option key={idx} value={option?.value}>
+                        {option?.value}
+                      </option>
+                    )
+                )
+              )}
             </select>
           </div>
-
           <div className="product_btn">
-            <button
-              className="btn"
-              onClick={() => {
-                navigate("/naturaldiamond");
-              }}
-            >
-              Add Central Stone
+            <button className="btn" onClick={toggleDrawer}>
+              Add to Cart
             </button>
+            <Drawer
+              open={isOpen}
+              onClose={toggleDrawer}
+              direction="right"
+              className="custom-drawer"
+              size="300px"
+            >
+              <div className="cart_heading">
+                <h2>My Shopping Bag</h2>
+              </div>
+
+              <div className="prod_main_div">
+                <div className="prod_div">
+                  <div className="prod">
+                    <div className="bg-img">
+                      <div className="dia_img">
+                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        ) : (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="prod_name">
+                      <h3>
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                      </h3>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={ring} alt="img" />
+                        <div className="content_head">
+                          <h4>The Ashley </h4>
+                          <p>14k White Gold </p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$700</h4>
+                      </div>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={diamondd} />
+                        <div className="content_head">
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$713</h4>
+                      </div>
+                    </div>
+
+                    <div className="price_div">
+                      <p>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                      </p>
+                      <div className="delete_icon">
+                        <img src={deleteicon} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="prod_div">
+                  <div className="prod">
+                    <div className="bg-img">
+                      <div className="dia_img">
+                        <img src={dia} />
+                      </div>
+                    </div>
+
+                    <div className="prod_name">
+                      <h3>
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                      </h3>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={ring} />
+                        <div className="content_head">
+                          <h4>The Ashley </h4>
+                          <p>14k White Gold </p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$700</h4>
+                      </div>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={diamondd} />
+                        <div className="content_head">
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$713</h4>
+                      </div>
+                    </div>
+
+                    <div className="price_div">
+                      <p>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                      </p>
+                      <div className="delete_icon">
+                        <img src={deleteicon} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="total_price_div">
+                <p>Total:</p>
+                <h4>$2,799</h4>
+              </div>
+
+              <div className="but_div">
+                <button>Checkout Now</button>
+              </div>
+            </Drawer>
           </div>
 
           <div className="policy">
@@ -238,8 +339,8 @@ export default function Section2() {
                   style={{ visibility: "Hidden" }}
                 />
                 <p className="para">Universal measurement unit for diamonds</p>
-              </div> 
-               <div className="setting_div">
+              </div>
+              <div className="setting_div">
                 <div className="profile_cont">
                   <img src={pinkimg} alt="pinkimg" />
                   <p>profile</p>
@@ -258,8 +359,8 @@ export default function Section2() {
                   <img src={carat} alt="carat" />
                   <p>CARAT</p>
                 </div>
-                
-                <h4>{diamondById?.diamond?.certificate?.carats}</h4>
+
+                <h4> carat</h4>
                 <img
                   src={j}
                   alt="j"
@@ -274,7 +375,7 @@ export default function Section2() {
                   <img src={color} alt="color" />
                   <p>COLOR</p>
                 </div>
-                <h4>{diamondById?.diamond?.certificate?.color}</h4>
+                <h4> color</h4>
                 <img src={j} alt="j" className="ring_img" />
                 <p className="para">Slightly tinted</p>
               </div>
@@ -284,7 +385,7 @@ export default function Section2() {
                   <img src={clarity} alt="clarity" />
                   <p>CLARITY</p>
                 </div>
-                <h4>{diamondById?.diamond?.certificate?.clarity}</h4>
+                <h4>clarity</h4>
                 <img src={vs} alt="vs" className="ring_img" />
                 <p className="para">
                   Visible inclusion under 10x magnification
@@ -296,7 +397,7 @@ export default function Section2() {
                   <img src={diamo} alt="diamo" />
                   <p>CUT</p>
                 </div>
-                <h4>{diamondById?.diamond?.certificate?.cut}</h4>
+                <h4>cut</h4>
                 <img
                   src={j}
                   alt="j"
@@ -309,7 +410,7 @@ export default function Section2() {
           </div>
 
           <div>
-            <RingShipReturn />
+            <Section3 />
           </div>
 
           <div className="appointment">
@@ -329,7 +430,7 @@ export default function Section2() {
 
 const Root = styled.section`
   padding: 20px;
-margin: 20px 0px;
+  margin: 20px 0px;
   .main_div {
     display: flex;
     flex-wrap: wrap;
@@ -407,20 +508,32 @@ margin: 20px 0px;
       .prod_spec {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
         margin-top: 30px;
+        > div {
+          gap: 10px;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        h4 {
+          margin-bottom: 0;
+          font-size: 14px;
+          color: #000000;
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
         .spec {
           display: flex;
           flex-direction: column;
-          flex: 1;
+          padding: 10px;
+          width: 40px;
+          height: 40px;
+          justify-content: center;
+          border-radius: 7px;
           align-items: center;
+          cursor: pointer;
+          border: 1px solid #bbb9b9;
 
-          h4 {
-            margin-bottom: 0;
-            font-size: 14px;
-            color: #000000;
-            font-weight: 600;
-            margin-bottom: 3px;
-          }
           p {
             color: #666666;
             font-size: 11px;
@@ -444,6 +557,162 @@ margin: 20px 0px;
         font-weight: 600;
         border-radius: 50px;
         border: 1px solid transparent;
+      }
+      .custom-drawer {
+        z-index: 11111111 !important;
+      }
+      .cart_heading {
+        padding: 16px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+        h2 {
+          font-size: 16px;
+          color: #000000;
+          font-weight: 400;
+          font-family: ProximaNova, sans-serif;
+        }
+      }
+      .prod_main_div {
+        width: 100%;
+        height: 420px;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        .prod_div {
+          padding: 10px 16px;
+          .prod {
+            padding: 12px;
+            background-color: #f7f7f7;
+            border-radius: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .bg-img {
+              height: 180px;
+              background-image: url(${ww});
+              background-size: 100%;
+              background-repeat: no-repeat;
+              .dia_img {
+                display: flex;
+                align-items: flex-end;
+                height: 100%;
+                width: 100%;
+                justify-content: flex-end;
+
+                img {
+                  width: 20%;
+                  height: 20%;
+                  object-fit: contain;
+                }
+              }
+            }
+            .prod_name {
+              h3 {
+                font-size: 15px;
+                color: #000000;
+                font-weight: 400;
+                font-family: ProximaNova, sans-serif;
+              }
+            }
+            .prod_spec {
+              display: flex;
+              justify-content: space-between;
+              padding-bottom: 15px;
+              border-bottom: 1px solid #ededed;
+              .icon_content {
+                display: flex;
+                align-items: center;
+                img {
+                  width: 40px;
+                  height: 40px;
+                  mix-blend-mode: multiply;
+                }
+                .content_head {
+                  display: flex;
+                  flex-direction: column;
+                  h4 {
+                    font-size: 14px;
+                    color: #000000;
+                    font-family: ProximaNova, sans-serif;
+                    margin-bottom: 0;
+                    font-weight: 500;
+                  }
+                  p {
+                    font-size: 13px;
+                    color: #808080;
+                    margin-bottom: 0;
+                    font-family: ProximaNova, sans-serif;
+                  }
+                }
+              }
+              .prod_price {
+                h4 {
+                  font-weight: 500;
+                  font-size: 14px;
+                  font-family: ProximaNova, sans-serif;
+                  margin-bottom: 0;
+                }
+              }
+            }
+            .price_div {
+              display: flex;
+              justify-content: space-between;
+              p {
+                font-size: 21px;
+                color: rgba(102, 102, 102);
+                font-weight: 500;
+              }
+
+              .delete_icon {
+                img {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+      .element-with-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .total_price_div {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+
+        p {
+          font-size: 21px;
+          color: #666666;
+          font-family: ProximaNova, sans-serif;
+        }
+
+        h4 {
+          font-weight: 500;
+          font-size: 21px;
+          font-family: ProximaNova, sans-serif;
+          color: #000000;
+        }
+      }
+      .but_div {
+        padding: 16px;
+        button {
+          color: rgba(255, 255, 255);
+          font-weight: 600;
+          font-size: 1rem;
+          text-align: center;
+          padding: 1rem 2rem;
+          background-color: #000000;
+          border: transparent;
+          border-radius: 30px;
+          width: 100%;
+        }
+      }
+      @media (min-width: 567px) and (max-width: 992px) {
+        .prod_main_div {
+          height: 890px;
+        }
       }
     }
 
@@ -537,7 +806,7 @@ margin: 20px 0px;
           border-radius: 12px;
           padding: 10px;
           display: flex;
-          
+
           flex-direction: column;
           .profile_cont {
             display: flex;
@@ -597,7 +866,6 @@ margin: 20px 0px;
       }
     }
   }
-  
 
   @media (max-width: 567px) {
     padding: 10px 0px;
@@ -633,7 +901,6 @@ margin: 20px 0px;
       font-size: 18px;
     }
   }
-
   @media (min-width: 567px) and (max-width: 992px) {
     .main_div {
       gap: 0px;

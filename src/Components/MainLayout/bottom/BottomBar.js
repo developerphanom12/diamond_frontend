@@ -78,6 +78,14 @@ function BottomBar() {
               </div>
             )}
           </div>
+          <div
+            onMouseEnter={handleMouseEnter6}
+            onMouseLeave={handleMouseLeave6}
+            id="graphic"
+          >
+            <Nav.Link href="/gemstone">Gemstone</Nav.Link>
+            {isListOpen6 && <div className="option_list_list"><EducationList/></div>}
+          </div>
 
           <div
             onMouseEnter={handleMouseEnter6}
@@ -87,6 +95,7 @@ function BottomBar() {
             <Nav.Link href="/education">education</Nav.Link>
             {isListOpen6 && <div className="option_list_list"><EducationList/></div>}
           </div>
+
         </Nav>
       </ContainerFluid>
     </Root>

@@ -1,40 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import { useState } from "react";
+import { ModalBody } from "reactstrap";
 import { useDispatch } from "react-redux";
-import { setDiamondType, setProductIds } from "../../../redux/users/action";
-import ndia from "../../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../../Images/labgrowncopy-removebg.png";
+
 import noimg from "../../Images/eligantPacking.png";
+import { setUniqueProduct } from "../../../redux/users/action";
 
 export default function Section4({ data }) {
-  const [modal, setModal] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleAddDiamondClick = (productIds) => {
-    setSelectedProductId(productIds);
-    setModal(true);
-    dispatch(setProductIds(productIds));
+  const handleAddToCart = (product) => {
+    // Placeholder for add to cart functionality
   };
 
-  const handleModalNavigate = (labgrownValue) => {
-    console.log("Navigating with labgrownValue:", labgrownValue);
-    dispatch(setDiamondType(labgrownValue));
-    navigate("/naturaldiamond", {
-      state: { labgrownValue, products: selectedProductId },
-    });
+  const handleUniqueRingDetail = (product) => {
+    dispatch(setUniqueProduct(product));
+    console.log("Navigating with product:", product);
+    navigate('/uniqueringdetails', { state: { product } });
   };
-
-  const handleNavigateDetail = (productId) => {
-    console.log("Navigating with productId:", productId);
-    navigate(`/uniqueringdetails`
-    );
-  };
-
   return (
     <Root>
       <div className="main_div">
@@ -67,11 +52,6 @@ export default function Section4({ data }) {
                   <div className="d-flex   flex-column">
                     <div className="d-flex flex justify-content-between">
                       <h5 className="prd_name">{i?.title}</h5>
-                      <div className="d-flex">
-                        <span className="white_color"></span>
-                        <span className="golden_color"></span>
-                        <span className="red_color"></span>
-                      </div>
                     </div>
                     <>
                       <p className="prd_price pt-1 pb-1">
@@ -83,14 +63,14 @@ export default function Section4({ data }) {
                   <div className="btn_div">
                     <button
                       className="info_btn"
-                      onClick={() => handleNavigateDetail(i.id)}
+                      onClick={() => handleUniqueRingDetail(i.id)}
                       style={{ fontSize: "10px" }}
                     >
                       More Info
                     </button>
                     <button
                       className="add_btn"
-                      onClick={() => handleAddDiamondClick(i)}
+                      onClick={() => handleAddToCart(i.id)}
                     >
                       Add To Cart
                     </button>
@@ -107,38 +87,6 @@ export default function Section4({ data }) {
             );
           })}
       </div>
-      <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-        <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
-
-        <CustomModalBody>
-          <h5>Before we continue</h5>
-          <h2>CHOOSE YOUR CENTER STONE</h2>
-          <div className="choose_option">
-            <div
-              className="ring_pandet"
-              onClick={() => handleModalNavigate(false)}
-            >
-              <img
-                src={ndia}
-                alt="img of natural diamond"
-                style={{ width: "52px" }}
-              />
-              <span>Natural Diamond</span>
-            </div>
-            <div
-              className="ring_pandet"
-              onClick={() => handleModalNavigate(true)}
-            >
-              <img
-                src={labgrown}
-                alt="img of lab grown diamond"
-                style={{ width: "52px" }}
-              />
-              <span>Lab Diamond</span>
-            </div>
-          </div>
-        </CustomModalBody>
-      </Modal>
     </Root>
   );
 }

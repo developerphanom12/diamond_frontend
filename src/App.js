@@ -22,6 +22,7 @@ import Section2 from "./Components/uniqueProducts/UniqueRing/Section2";
 import EngageList from "./Components/MainLayout/bottom/EngageList";
 import UniqueRing from "./Components/uniqueProducts/UniqueRing/UniqueRing";
 import UniqueRingDetails from "./Components/uniqueProducts/UniqueRingDetails/UniqueRingDetails";
+import Gemstone from "./Components/Gemstone/Gemstone";
 
 function App() {
   // useEffect(() => {
@@ -45,17 +46,21 @@ function App() {
               <Route path="/password" element={<ForgetPassword />} />
               <Route path="/education" element={<Education />} />
               <Route path="/engagementring" element={<EngagementRing />} />
-              <Route path="/uniquering" element={<UniqueRing/>}/>
-              <Route path="/uniqueringdetails" element={<UniqueRingDetails/>}/>
+              <Route path="/uniquering" element={<UniqueRing />} />
+              <Route
+                path="/uniqueringdetails"
+                element={<UniqueRingDetails />}
+              />
               <Route path="/naturaldiamond" element={<NaturalDiamond />} />
               <Route path="/productpage" element={<ProductPage />} />
               <Route path="/ringdetails" element={<RingDetails />} />
               <Route path="/diamonddetails" element={<DiamondDetails />} />
               <Route path="/contactus" element={<ContactUs />} />
-              <Route path="/engagelist" element={<EngageList/>} />
-              <Route path="/section2" element={<Section2/>} />
+              <Route path="/engagelist" element={<EngageList />} />
+              <Route path="/section2" element={<Section2 />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/gemstone" element={<Gemstone />} />
             </>
           </Routes>
         </Layout>

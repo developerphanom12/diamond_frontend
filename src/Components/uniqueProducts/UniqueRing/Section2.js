@@ -6,7 +6,7 @@ import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { IoFilterOutline } from "react-icons/io5";
-import { setSelectedShape } from "../../../redux/users/action";
+import { setSelectedShape, setUniqueData } from "../../../redux/users/action";
 import ROUND from "../../Images/round-removebg-preview.png";
 import EMERALD from "../../Images/emerald-removebg-preview.png";
 import HEART from "../../Images/heart-removebg-preview.png";
@@ -48,6 +48,7 @@ export default function Section2() {
       const response = await axios.get(`${EXCHANGE_URLS}/tagdata?tag=${shape}`);
       if (response.status === 200) {
         setData(response.data.data);
+        dispatch(setUniqueData(response.data.data));
         console.log("response", response.data.data);
       }
     } catch (error) {
@@ -141,7 +142,6 @@ export default function Section2() {
 
 const Root = styled.section`
   padding: 0 0 20px;
-
   .column {
     border: 1px solid rgba(247, 247, 247);
     background-color: rgba(247, 247, 247);

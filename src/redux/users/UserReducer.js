@@ -7,6 +7,9 @@ import {
   SET_SELECTED_SHAPE,
   SET_SELECTED_SHAPE_IMAGE,
   SET_SELECTED_VARIANT_ID,
+  SET_UNIQUE_DATA,
+  SET_UNIQUE_PRODUCT,
+  SET_UNIQUE_RING_ID,
 } from "./action";
 
 const initialState = {
@@ -23,9 +26,21 @@ const initialState = {
   selectedRingSvg:null,
   diamondById: null,
   selectedShape: 'null',
+  uniqueData: [],
+  uniqueProduct: null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_UNIQUE_PRODUCT:
+      return {
+        ...state,
+        uniqueProduct: action.payload,
+      };
+    case SET_UNIQUE_DATA:
+      return {
+        ...state,
+        uniqueData: action.payload,
+      };
     case SET_SELECTED_SHAPE:
       return {
         ...state,
