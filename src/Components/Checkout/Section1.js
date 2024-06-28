@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 export default function Section1() {
   const location = useLocation();
+  const selectedOptions = useSelector((state) => state.selectedOptions);
   const {
     selectedVariantId,
     productId,
@@ -26,6 +27,7 @@ export default function Section1() {
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log(
     "Checkout state:",
+    selectedOptions,
     selectedSize,
     diamond,
     diamondId,
@@ -171,7 +173,7 @@ const Root = styled.section`
         margin: 60px;
         border-radius: 20px;
         padding: 32px;
-        @media (max-width:867px){
+        @media (max-width: 867px) {
           margin: 30px;
         }
         .image_content {

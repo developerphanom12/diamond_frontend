@@ -6,31 +6,34 @@ import moneyinhand from "../../Images/moneyinhand.png";
 import certifiedd from "../../Images/certifiedd.png";
 import pinkimg from "../../Images/pink.PNG";
 import modimg from "../../Images/modimg.PNG";
-import carat from "../../Images/carat.PNG";
 import color from "../../Images/color.PNG";
 import clarity from "../../Images/clarity.PNG";
 import diamo from "../../Images/diamo.PNG";
 import j from "../../Images/j.jpg";
 import vs from "../../Images/vs.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EXCHANGE_URLS } from "../../URLS";
 import axios from "axios";
 import { useLoading } from "../../LoadingContext";
 import Section3 from "./Section3";
 import deleteicon from "../../Images/delete.PNG";
 import ww from "../../Images/ww.webp";
-import dia from "../../Images/dia.webp";
-import ring from "../../Images/ringwithdiamond.png";
-import diamondd from "../../Images/round-removebg-preview.png";
-import { Drawer } from "@mui/material";
+import Drawer from "react-modern-drawer";
+import { setSelectedOptions } from "../../../redux/users/action";
 
 export default function Section2() {
   const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
-  const [unique, setUnique] = useState("");
+  const [unique, setUnique] = useState(null);
+  const [sizeOptions, setSizeOptions] = useState([]);
+  const [size, setSize] = useState("");
+  const [caratOptions, setCaratOptions] = useState([]);
+  const [carat, setCarat] = useState("");
+  const [preDefineData, setPreDefineData] = useState(null);
   const location = useLocation();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const product = location.state;
   console.log("uniqueProduct", product, uniqueProduct);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -44,6 +47,34 @@ export default function Section2() {
       if (response.status === 200) {
         setUnique(response.data.data);
         console.log("shdgfhsgd", response.data.data);
+        const uniqueSizes = [];
+        const uniqueCarats = [];
+
+        response.data.data?.variants?.edges?.forEach((variant) => {
+          variant?.node?.selectedOptions?.forEach((option) => {
+            if (option.name === "size" && !uniqueSizes.includes(option.value)) {
+              uniqueSizes.push(option.value);
+            }
+            if (
+              option.name === "carat" &&
+              !uniqueCarats.includes(option.value)
+            ) {
+              uniqueCarats.push(option.value);
+            }
+          });
+        });
+
+        setSizeOptions(uniqueSizes);
+        setCaratOptions(uniqueCarats);
+
+
+        if (!size && uniqueSizes.length > 0) {
+          setSize(uniqueSizes[0]);
+        }
+        if (!carat && uniqueCarats.length > 0) {
+          setCarat(uniqueCarats[0]);
+        }
+  
       }
     } catch (error) {
       console.error("Error fetching collections:", error);
@@ -51,21 +82,56 @@ export default function Section2() {
       setLoading(false);
     }
   };
+  const fetchPreDefineApi = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/productPredefine?productId=${uniqueProduct}&size=${size}&carat=${carat}`
+      );
+      if (response.status === 200) {
+        setPreDefineData(response.data.data);
+        console.log("Predefined Data:", response.data.data);
+        dispatch(setSelectedOptions(uniqueProduct, carat, size));
+      }
+    } catch (error) {
+      console.error("Error fetching", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
+
   useEffect(() => {
-    fetchUniqueData(uniqueProduct);
-  }, [setLoading]);
+    fetchUniqueData();
+  }, [uniqueProduct]);
+
+  useEffect(() => {
+    if (size && !isNaN(carat)) {
+      fetchPreDefineApi();
+    }
+  }, [size, carat]);
+  const handleCheckout = () => {
+    // Navigate to checkout page with stored values
+    navigate('/checkout', {
+      state: {
+        uniqueProduct: uniqueProduct,
+        size: size,
+        carat: carat
+      }
+    });
+  };
 
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
           <ImageContainer>
-            {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+            {preDefineData && preDefineData.image.length > 0 ? (
               <img
-                src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                src={preDefineData.image.originalSrc}
                 title="Diamond Image"
                 alt="Diamond"
               />
@@ -113,38 +179,32 @@ export default function Section2() {
             </p>
           </div>
           <div className="prod_spec">
-            <div>
-              <h4>Carat Weight</h4>
-            </div>
+            <h4>Carat Weight</h4>
 
-            <div>
-              {unique?.variants?.edges?.map((variant, index) => (
+            <div className="carattt">
+              {caratOptions.map((caratOption, index) => (
                 <div key={index} className="spec">
-                  {variant?.node?.selectedOptions &&
-                    variant?.node?.selectedOptions?.map(
-                      (option, idx) =>
-                        option?.name === "Carat Weight" && (
-                          <p key={idx}>{option?.value}</p>
-                        )
-                    )}
+                  <button
+                    onClick={() => setCarat(caratOption)}
+                    className={`spec ${
+                      carat === caratOption ? "selected" : ""
+                    }`}
+                  >
+                    <p>{caratOption}</p>
+                  </button>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="ring_size">
-            <select value={""}>
+            <select value={size} onChange={(e) => setSize(e.target.value)}>
               <option value="">Select Ring Size</option>
-              {unique?.variants?.edges?.map((variant, index) =>
-                variant?.node?.selectedOptions?.map(
-                  (option, idx) =>
-                    option?.name === "size" && (
-                      <option key={idx} value={option?.value}>
-                        {option?.value}
-                      </option>
-                    )
-                )
-              )}
+              {sizeOptions.map((sizeOption, index) => (
+                <option key={index} value={sizeOption}>
+                  {sizeOption}
+                </option>
+              ))}
             </select>
           </div>
           <div className="product_btn">
@@ -185,26 +245,51 @@ export default function Section2() {
 
                     <div className="prod_name">
                       <h3>
-                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                        {unique?.title} -
+                        {unique?.variants?.edges?.[0]?.node?.title}
                       </h3>
                     </div>
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        <img src={ring} alt="img" />
+                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        ) : (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        )}
                         <div className="content_head">
-                          <h4>The Ashley </h4>
+                          <h4> {unique?.title} </h4>
                           <p>14k White Gold </p>
                         </div>
                       </div>
                       <div className="prod_price">
-                        <h4>$700</h4>
+                        <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
                       </div>
                     </div>
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        <img src={diamondd} />
+                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        ) : (
+                          <img
+                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
+                            title="Diamond Image"
+                            alt="Diamond"
+                          />
+                        )}
                         <div className="content_head">
                           <h4>Round </h4>
                           <p>0.5 Carat J VS1</p>
@@ -217,60 +302,13 @@ export default function Section2() {
 
                     <div className="price_div">
                       <p>
-                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                        Total:{" "}
+                        <span style={{ color: "#000000" }}>
+                          ${unique?.variants?.edges?.[0]?.node?.price}
+                        </span>
                       </p>
                       <div className="delete_icon">
-                        <img src={deleteicon} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="prod_div">
-                  <div className="prod">
-                    <div className="bg-img">
-                      <div className="dia_img">
-                        <img src={dia} />
-                      </div>
-                    </div>
-
-                    <div className="prod_name">
-                      <h3>
-                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
-                      </h3>
-                    </div>
-
-                    <div className="prod_spec">
-                      <div className="icon_content">
-                        <img src={ring} />
-                        <div className="content_head">
-                          <h4>The Ashley </h4>
-                          <p>14k White Gold </p>
-                        </div>
-                      </div>
-                      <div className="prod_price">
-                        <h4>$700</h4>
-                      </div>
-                    </div>
-
-                    <div className="prod_spec">
-                      <div className="icon_content">
-                        <img src={diamondd} />
-                        <div className="content_head">
-                          <h4>Round </h4>
-                          <p>0.5 Carat J VS1</p>
-                        </div>
-                      </div>
-                      <div className="prod_price">
-                        <h4>$713</h4>
-                      </div>
-                    </div>
-
-                    <div className="price_div">
-                      <p>
-                        Total: <span style={{ color: "#000000" }}>$1,413</span>
-                      </p>
-                      <div className="delete_icon">
-                        <img src={deleteicon} />
+                        <img src={deleteicon} alt="img" />
                       </div>
                     </div>
                   </div>
@@ -279,11 +317,11 @@ export default function Section2() {
 
               <div className="total_price_div">
                 <p>Total:</p>
-                <h4>$2,799</h4>
+                <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
               </div>
 
               <div className="but_div">
-                <button>Checkout Now</button>
+                <button  onClick={handleCheckout}>Checkout Now</button>
               </div>
             </Drawer>
           </div>
@@ -443,7 +481,6 @@ const Root = styled.section`
       height: 613px;
       border-radius: 20px;
       flex-direction: column;
-      height: 630px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -471,11 +508,12 @@ const Root = styled.section`
       display: flex;
       justify-content: start;
       margin-top: 20px;
-
       select {
         font-size: 14px;
         font-weight: 400;
         border-radius: 6px;
+        background-color: #fff;
+        border: 1px solid lightgray;
         border: 1px solid #e0e0e0;
         padding: 0.75rem 3rem 0.75rem 0.75rem;
         cursor: pointer;
@@ -503,6 +541,11 @@ const Root = styled.section`
           font-weight: 500;
           line-height: 1.25;
         }
+        p {
+          font-size: 13px;
+          font-weight: 400;
+          color: #666666;
+        }
       }
 
       .prod_spec {
@@ -510,7 +553,8 @@ const Root = styled.section`
         flex-wrap: wrap;
         flex-direction: column;
         margin-top: 30px;
-        > div {
+        gap: 10px;
+        .carattt {
           gap: 10px;
           display: flex;
           flex-wrap: wrap;
@@ -530,6 +574,7 @@ const Root = styled.section`
           height: 40px;
           justify-content: center;
           border-radius: 7px;
+          background: transparent;
           align-items: center;
           cursor: pointer;
           border: 1px solid #bbb9b9;
@@ -542,176 +587,19 @@ const Root = styled.section`
           }
         }
       }
-    }
-
-    .product_btn {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      margin-top: 50px;
-      .btn {
-        background-color: rgba(0, 0, 0);
-        color: white;
-        font-size: 17px;
-        padding: 16px 0;
-        font-weight: 600;
-        border-radius: 50px;
-        border: 1px solid transparent;
-      }
-      .custom-drawer {
-        z-index: 11111111 !important;
-      }
-      .cart_heading {
-        padding: 16px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px -1px rgba(0, 0, 0, 0.1);
-
-        h2 {
-          font-size: 16px;
-          color: #000000;
-          font-weight: 400;
-          font-family: ProximaNova, sans-serif;
-        }
-      }
-      .prod_main_div {
-        width: 100%;
-        height: 420px;
-        overflow: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-        .prod_div {
-          padding: 10px 16px;
-          .prod {
-            padding: 12px;
-            background-color: #f7f7f7;
-            border-radius: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            .bg-img {
-              height: 180px;
-              background-image: url(${ww});
-              background-size: 100%;
-              background-repeat: no-repeat;
-              .dia_img {
-                display: flex;
-                align-items: flex-end;
-                height: 100%;
-                width: 100%;
-                justify-content: flex-end;
-
-                img {
-                  width: 20%;
-                  height: 20%;
-                  object-fit: contain;
-                }
-              }
-            }
-            .prod_name {
-              h3 {
-                font-size: 15px;
-                color: #000000;
-                font-weight: 400;
-                font-family: ProximaNova, sans-serif;
-              }
-            }
-            .prod_spec {
-              display: flex;
-              justify-content: space-between;
-              padding-bottom: 15px;
-              border-bottom: 1px solid #ededed;
-              .icon_content {
-                display: flex;
-                align-items: center;
-                img {
-                  width: 40px;
-                  height: 40px;
-                  mix-blend-mode: multiply;
-                }
-                .content_head {
-                  display: flex;
-                  flex-direction: column;
-                  h4 {
-                    font-size: 14px;
-                    color: #000000;
-                    font-family: ProximaNova, sans-serif;
-                    margin-bottom: 0;
-                    font-weight: 500;
-                  }
-                  p {
-                    font-size: 13px;
-                    color: #808080;
-                    margin-bottom: 0;
-                    font-family: ProximaNova, sans-serif;
-                  }
-                }
-              }
-              .prod_price {
-                h4 {
-                  font-weight: 500;
-                  font-size: 14px;
-                  font-family: ProximaNova, sans-serif;
-                  margin-bottom: 0;
-                }
-              }
-            }
-            .price_div {
-              display: flex;
-              justify-content: space-between;
-              p {
-                font-size: 21px;
-                color: rgba(102, 102, 102);
-                font-weight: 500;
-              }
-
-              .delete_icon {
-                img {
-                  cursor: pointer;
-                }
-              }
-            }
-          }
-        }
-      }
-      .element-with-scroll::-webkit-scrollbar {
-        display: none;
-      }
-      .total_price_div {
-        padding: 16px;
+      .product_btn {
         display: flex;
-        justify-content: space-between;
-
-        p {
-          font-size: 21px;
-          color: #666666;
-          font-family: ProximaNova, sans-serif;
-        }
-
-        h4 {
-          font-weight: 500;
-          font-size: 21px;
-          font-family: ProximaNova, sans-serif;
-          color: #000000;
-        }
-      }
-      .but_div {
-        padding: 16px;
-        button {
-          color: rgba(255, 255, 255);
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 50px;
+        .btn {
+          background-color: rgba(0, 0, 0);
+          color: white;
+          font-size: 17px;
+          padding: 16px 0;
           font-weight: 600;
-          font-size: 1rem;
-          text-align: center;
-          padding: 1rem 2rem;
-          background-color: #000000;
-          border: transparent;
-          border-radius: 30px;
-          width: 100%;
-        }
-      }
-      @media (min-width: 567px) and (max-width: 992px) {
-        .prod_main_div {
-          height: 890px;
+          border-radius: 50px;
+          border: 1px solid transparent;
         }
       }
     }
@@ -866,6 +754,163 @@ const Root = styled.section`
       }
     }
   }
+  .custom-drawer {
+    z-index: 11111111 !important;
+  }
+  .cart_heading {
+    padding: 16px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 400;
+      font-family: ProximaNova, sans-serif;
+    }
+  }
+  .prod_main_div {
+    width: 100%;
+    height: 420px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    .prod_div {
+      padding: 10px 16px;
+      .prod {
+        padding: 12px;
+        background-color: #f7f7f7;
+        border-radius: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        .bg-img {
+          height: 180px;
+          background-image: url(${ww});
+          background-size: 100%;
+          background-repeat: no-repeat;
+          .dia_img {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            width: 100%;
+            justify-content: flex-end;
+
+            img {
+              width: 20%;
+              height: 20%;
+              object-fit: contain;
+            }
+          }
+        }
+        .prod_name {
+          h3 {
+            font-size: 15px;
+            color: #000000;
+            font-weight: 400;
+            font-family: ProximaNova, sans-serif;
+          }
+        }
+        .prod_spec {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #ededed;
+          .icon_content {
+            display: flex;
+            align-items: center;
+            img {
+              width: 40px;
+              height: 40px;
+              mix-blend-mode: multiply;
+            }
+            .content_head {
+              display: flex;
+              flex-direction: column;
+              h4 {
+                font-size: 14px;
+                color: #000000;
+                font-family: ProximaNova, sans-serif;
+                margin-bottom: 0;
+                font-weight: 500;
+              }
+              p {
+                font-size: 13px;
+                color: #808080;
+                margin-bottom: 0;
+                font-family: ProximaNova, sans-serif;
+              }
+            }
+          }
+          .prod_price {
+            h4 {
+              font-weight: 500;
+              font-size: 14px;
+              font-family: ProximaNova, sans-serif;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .price_div {
+          display: flex;
+          justify-content: space-between;
+          p {
+            font-size: 21px;
+            color: rgba(102, 102, 102);
+            font-weight: 500;
+          }
+
+          .delete_icon {
+            img {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  .element-with-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .total_price_div {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 21px;
+      color: #666666;
+      font-family: ProximaNova, sans-serif;
+    }
+
+    h4 {
+      font-weight: 500;
+      font-size: 21px;
+      font-family: ProximaNova, sans-serif;
+      color: #000000;
+    }
+  }
+  .but_div {
+    padding: 16px;
+    margin-bottom: 20px;
+    button {
+      color: rgba(255, 255, 255);
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem 2rem;
+      background-color: #000000;
+      border: transparent;
+      border-radius: 30px;
+      width: 100%;
+    }
+  }
+  @media (min-width: 567px) and (max-width: 992px) {
+    .prod_main_div {
+      height: 890px;
+    }
+  }
 
   @media (max-width: 567px) {
     padding: 10px 0px;
@@ -880,7 +925,18 @@ const Root = styled.section`
       margin: 10px;
     }
     .main_div .des_div .prod_spec {
-      display: none;
+      width: 90vw;
+      .carattt {
+        width: 100%;
+        gap: 10px;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        padding-bottom: 10px;
+      }
+    }
+    .main_div .ring_size select {
+      width: 100%;
     }
     .main_div .des_div {
       width: 100%;

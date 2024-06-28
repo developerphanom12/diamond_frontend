@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a860e73c.css",
-    "main.js": "/static/js/main.49a5acae.js",
+    "main.js": "/static/js/main.1608a6b8.js",
     "static/js/453.0cded5a1.chunk.js": "/static/js/453.0cded5a1.chunk.js",
     "static/media/Diamond-2.jpg": "/static/media/Diamond-2.758c0743dc998eee9c7d.jpg",
     "static/media/Diamondweqw.jpg": "/static/media/Diamondweqw.96c0bbb7e59e2c0c170b.jpg",
@@ -11,6 +11,7 @@
     "static/media/girlbanner.webp": "/static/media/girlbanner.84282e4ccc4a6738911e.webp",
     "static/media/bannerimggg.webp": "/static/media/bannerimggg.d19518f4c06ffa750e2a.webp",
     "static/media/EducationBanner.jpg": "/static/media/EducationBanner.6f772103bcae9df216f9.jpg",
+    "static/media/handimg.webp": "/static/media/handimg.75d918c338b0ca492a79.webp",
     "static/media/couple3.webp": "/static/media/couple3.397847f64d0add043813.webp",
     "static/media/slideimg5.webp": "/static/media/slideimg5.b951e8cfe1270fffa711.webp",
     "static/media/couple1.webp": "/static/media/couple1.a0ff32962d1f901fd12e.webp",
@@ -23,6 +24,7 @@
     "static/media/shape-princess.webp": "/static/media/shape-princess.f79f0ac1d91ce1d7693c.webp",
     "static/media/rr3.webp": "/static/media/rr3.e5f0149ad7985603d98e.webp",
     "static/media/shape-radiant.webp": "/static/media/shape-radiant.604c9ffed112e0c24340.webp",
+    "static/media/dia.webp": "/static/media/dia.0ac713992e602c4e1443.webp",
     "static/media/Couple_2.webp": "/static/media/Couple_2.99849758a62e84bc6cd7.webp",
     "static/media/shape-heart.webp": "/static/media/shape-heart.f63de479f05d6f4478c7.webp",
     "static/media/Princess-removebg-preview.png": "/static/media/Princess-removebg-preview.8d96885c48e26b199f0b.png",
@@ -42,6 +44,7 @@
     "static/media/shape-round.webp": "/static/media/shape-round.3c6704e913b3474e4897.webp",
     "static/media/diamondwithoutring.png": "/static/media/diamondwithoutring.117836dfe79c22dfcc25.png",
     "static/media/Marquise-removebg-preview.png": "/static/media/Marquise-removebg-preview.8d25d285c6072502a97a.png",
+    "static/media/ww.webp": "/static/media/ww.9b81baeff3704b15f21d.webp",
     "static/media/ringgg2.webp": "/static/media/ringgg2.44bba975848e34f19827.webp",
     "static/media/rr4.webp": "/static/media/rr4.3580b0b86e9a8f1df6a4.webp",
     "static/media/emerald-removebg-preview.png": "/static/media/emerald-removebg-preview.e26e39acd8117e2252d4.png",
@@ -82,12 +85,13 @@
     "static/media/carat.PNG": "/static/media/carat.ff1464017b2bfdc37d8d.PNG",
     "static/media/pink.PNG": "/static/media/pink.d446d72da288531d7e0c.PNG",
     "static/media/clarity.PNG": "/static/media/clarity.23136e27488ea7a47546.PNG",
+    "static/media/delete.PNG": "/static/media/delete.7f4c2931d8ff1d56a75e.PNG",
     "main.a860e73c.css.map": "/static/css/main.a860e73c.css.map",
-    "main.49a5acae.js.map": "/static/js/main.49a5acae.js.map",
+    "main.1608a6b8.js.map": "/static/js/main.1608a6b8.js.map",
     "453.0cded5a1.chunk.js.map": "/static/js/453.0cded5a1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a860e73c.css",
-    "static/js/main.49a5acae.js"
+    "static/js/main.1608a6b8.js"
   ]
 }

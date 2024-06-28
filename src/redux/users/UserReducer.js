@@ -9,7 +9,7 @@ import {
   SET_SELECTED_VARIANT_ID,
   SET_UNIQUE_DATA,
   SET_UNIQUE_PRODUCT,
-  SET_UNIQUE_RING_ID,
+
 } from "./action";
 
 const initialState = {
@@ -28,9 +28,24 @@ const initialState = {
   selectedShape: 'null',
   uniqueData: [],
   uniqueProduct: null,
+  selectedOptions: {
+    uniqueProduct: null,
+    carat: null,
+    size: null,
+  },
+
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_SELECTED_OPTIONS':
+      return {
+        ...state,
+        selectedOptions: {
+          uniqueProduct: action.payload.uniqueProduct,
+          carat: action.payload.carat,
+          size: action.payload.size,
+        },
+      };
     case SET_UNIQUE_PRODUCT:
       return {
         ...state,

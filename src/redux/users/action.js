@@ -8,10 +8,16 @@ export const SET_SELECTED_SHAPE_IMAGE = 'SET_SELECTED_SHAPE_IMAGE';
 export const SET_SELECTED_RING_SVG = 'SET_SELECTED_RING_SVG';
 export const SET_DIAMOND_BY_ID = "SET_DIAMOND_BY_ID";
 export const SET_SELECTED_SHAPE = 'SET_SELECTED_SHAPE';
-
 export const SET_UNIQUE_DATA = 'SET_UNIQUE_DATA';
 export const SET_UNIQUE_PRODUCT = "SET_UNIQUE_PRODUCT";
 
+
+
+// Action creator
+export const setSelectedOptions = (uniqueProduct, carat, size) => ({
+  type: 'SET_SELECTED_OPTIONS',
+  payload: { uniqueProduct, carat, size },
+});
 export const setUniqueProduct = (product) => ({
   type: SET_UNIQUE_PRODUCT,
   payload: product,
@@ -53,9 +59,6 @@ export const setProductIds = (productIds) => ({
   type: SET_PRODUCT_IDS,
   payload: productIds,
 });
-
- 
-
 export const UserDetails = (data) => {
     return {
       type: "USER_DETAILS",
