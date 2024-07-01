@@ -21,7 +21,41 @@ import deleteicon from "../../Images/delete.PNG";
 import ww from "../../Images/ww.webp";
 import Drawer from "react-modern-drawer";
 import { setSelectedOptions } from "../../../redux/users/action";
+import ROUND from "../../Images/round-removebg-preview.png";
+import EMERALD from "../../Images/emerald-removebg-preview.png";
+import HEART from "../../Images/heart-removebg-preview.png";
+import MARQUISE from "../../Images/Marquise-removebg-preview.png";
+import OVAL from "../../Images/oval-removebg-preview.png";
+import PEAR from "../../Images/Pear-removebg-preview.png";
+import PRINCESS from "../../Images/Princess-removebg-preview.png";
+import RADIANT from "../../Images/Radiant-removebg-preview.png";
+import CUSHION from "../../Images/cushionremovebg.png";
+import ECUSHION from "../../Images/ECusion-removebg-preview.png";
 
+const shapesList = [
+  { name: "ROUND", imgUrl: ROUND },
+  { name: "EMERALD", imgUrl: EMERALD },
+  { name: "HEART", imgUrl: HEART },
+  { name: "MARQUISE", imgUrl: MARQUISE },
+  { name: "OVAL", imgUrl: OVAL },
+  { name: "PEAR", imgUrl: PEAR },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "RADIANT", imgUrl: RADIANT },
+  { name: "CUSHION", imgUrl: CUSHION },
+  { name: "E.CUSHION", imgUrl: ECUSHION },
+];
+const materialList = [
+  { name: "14k white gold", imgUrl: ROUND },
+  { name: "EMERALD", imgUrl: EMERALD },
+  { name: "HEART", imgUrl: HEART },
+  { name: "MARQUISE", imgUrl: MARQUISE },
+  { name: "OVAL", imgUrl: OVAL },
+  { name: "PEAR", imgUrl: PEAR },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "RADIANT", imgUrl: RADIANT },
+  { name: "CUSHION", imgUrl: CUSHION },
+  { name: "E.CUSHION", imgUrl: ECUSHION },
+];
 export default function Section2() {
   const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
   const [unique, setUnique] = useState(null);
@@ -30,6 +64,7 @@ export default function Section2() {
   const [caratOptions, setCaratOptions] = useState([]);
   const [carat, setCarat] = useState("");
   const [preDefineData, setPreDefineData] = useState(null);
+  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
   const location = useLocation();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
@@ -67,14 +102,12 @@ export default function Section2() {
         setSizeOptions(uniqueSizes);
         setCaratOptions(uniqueCarats);
 
-
         if (!size && uniqueSizes.length > 0) {
           setSize(uniqueSizes[0]);
         }
         if (!carat && uniqueCarats.length > 0) {
           setCarat(uniqueCarats[0]);
         }
-  
       }
     } catch (error) {
       console.error("Error fetching collections:", error);
@@ -114,13 +147,12 @@ export default function Section2() {
     }
   }, [size, carat]);
   const handleCheckout = () => {
-    // Navigate to checkout page with stored values
-    navigate('/checkout', {
+    navigate("/checkout", {
       state: {
         uniqueProduct: uniqueProduct,
         size: size,
-        carat: carat
-      }
+        carat: carat,
+      },
     });
   };
 
@@ -166,7 +198,6 @@ export default function Section2() {
             </button>
           </div>
         </div>
-
         <div className="des_div">
           <div className="title">
             <h2>
@@ -196,7 +227,37 @@ export default function Section2() {
               ))}
             </div>
           </div>
+          <div className="ring_types mt-4">
+            <h4>Center Stone Shape: Round</h4>
+            {shapesList.map((shape) => (
+              <button
+                key={shape.name}
+                className={`btn_shapes ${
+                  selectedShapes.includes(shape.name) ? "selected" : ""
+                }`}
+                onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
+              >
+                <img className="img" src={shape.imgUrl} alt={shape.name} />
+                <p style={{ display: "none" }}>{shape.name}</p>
+              </button>
+            ))}
+          </div>
 
+          <div className="ring_types mt-4">
+            <h4>Material: 14k White Gold</h4>
+            {shapesList.map((shape) => (
+              <button
+                key={shape.name}
+                className={`btn_shapes ${
+                  selectedShapes.includes(shape.name) ? "selected" : ""
+                }`}
+                onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
+              >
+                <img className="img" src={shape.imgUrl} alt={shape.name} />
+                <p style={{ display: "none" }}>{shape.name}</p>
+              </button>
+            ))}
+          </div>
           <div className="ring_size">
             <select value={size} onChange={(e) => setSize(e.target.value)}>
               <option value="">Select Ring Size</option>
@@ -321,7 +382,7 @@ export default function Section2() {
               </div>
 
               <div className="but_div">
-                <button  onClick={handleCheckout}>Checkout Now</button>
+                <button onClick={handleCheckout}>Checkout Now</button>
               </div>
             </Drawer>
           </div>
@@ -478,7 +539,7 @@ const Root = styled.section`
       flex: 1;
       border: 1px solid #d3d3d3;
       padding: 20px 20px 0px 20px;
-      height: 613px;
+      height: 600px;
       border-radius: 20px;
       flex-direction: column;
       display: flex;
@@ -487,6 +548,7 @@ const Root = styled.section`
 
       img {
         width: 40vw;
+        height: 90%;
       }
 
       button.button {
@@ -584,6 +646,36 @@ const Root = styled.section`
             font-size: 11px;
             margin-bottom: 0;
             line-height: 1.2;
+          }
+        }
+      }
+      .ring_types {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        .btn_shapes {
+          width: 63px !important;
+          border: 2px solid transparent;
+          background: #fff;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 12px 0;
+          font-size: 12px;
+          line-height: 25px;
+          font-weight: 500;
+          .img {
+            width: 45px;
+            height: 45px;
+          }
+          &.selected {
+            border-bottom: 3px solid black;
+          }
+
+          &:hover {
+            background-color: rgba(247, 247, 247);
           }
         }
       }

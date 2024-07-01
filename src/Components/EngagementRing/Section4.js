@@ -73,7 +73,7 @@ export default function Section4({ products }) {
                         backgroundColor: "#ccc",
                       }}
                     >
-                   <img src={noimg} alt="Image not available"/>
+                      <img src={noimg} alt="Image not available" />
                     </div>
                   )}
                 </>
@@ -182,7 +182,6 @@ const Root = styled.section`
       img {
         width: 95%;
         height: 95%;
-    
       }
       &:hover {
         border: 3px solid black;

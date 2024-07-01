@@ -23,42 +23,40 @@ export default function Section4() {
   }, []);
 
   const drawerContent = (
-    <>
-      <div className="main_div">
-        <div className="subdiv">
-          <img src={dia} alt="img" />
-          <div className="hov_content">
-            <div className="heading">
-              <h5>1Ct Marquise Keyzar Moissanite</h5>
-              <p>$502</p>
-            </div>
-            <div className="btn_div">
-              <button className="info_btn">More Info</button>
-              <button
-                className="add_btn"
-                onClick={() => {
-                  navigate("/productpage");
-                }}
-              >
-                Add Setting
-              </button>
-            </div>
+    <div className="main_div">
+      <div className={`subdiv ${isOpen ? "open" : ""}`}>
+        <img src={dia} alt="img" />
+        <div className={`hov_content ${isOpen ? "show" : ""}`}>
+          <div className="heading">
+            <h5>1Ct Marquise Keyzar Moissanite</h5>
+            <p>$502</p>
+          </div>
+          <div className="btn_div">
+            <button className="info_btn">More Info</button>
+            <button
+              className="add_btn"
+              onClick={() => {
+                navigate("/productpage");
+              }}
+            >
+              Add Setting
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
   return (
     <Root>
       <button className="drawer-toggle-button" onClick={toggleDrawer}>
-      {drawerContent}
-        </button>
+        {drawerContent}
+      </button>
       <div
         className={`drawer-content ${
-          isOpen && screenWidth <= 876 ? "open" : ""
+          isOpen && screenWidth <= 567 ? "open" : ""
         }`}
       >
-        {screenWidth > 876 ? (
+        {screenWidth > 567 ? (
           drawerContent
         ) : (
           <Drawer
@@ -71,7 +69,6 @@ export default function Section4() {
           </Drawer>
         )}
       </div>
-    
     </Root>
   );
 }
@@ -90,7 +87,7 @@ const Root = styled.section`
     font-size: 14px;
     background-color: transparent;
   }
-  @media (min-width: 877px) {
+  @media (min-width: 568px) {
     .drawer-toggle-button {
       display: none;
     }
@@ -100,7 +97,7 @@ const Root = styled.section`
   }
   .EZDrawer__container {
     overflow-y: scroll !important;
-    height: 60vh !important;
+    height: 70vh !important;
     border-top-right-radius: 25px !important;
     border-top-left-radius: 25px !important;
     padding-bottom: 40px;
@@ -130,12 +127,13 @@ const Root = styled.section`
         overflow: unset;
       }
 
-      &:hover .hov_content {
+      &:hover .hov_content,
+      &.open .hov_content {
         z-index: 1;
         position: absolute;
         background-color: white;
         border: 3px solid black;
-        padding: 0 20px 0;
+        padding: 0 20px;
         left: -3px;
         overflow: hidden;
         width: 314px;
@@ -148,15 +146,16 @@ const Root = styled.section`
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
+      padding-bottom: 10px;
 
       h5 {
-        font-size: 14px;
+        font-size: 13px;
         color: #000000;
         font-weight: 400;
       }
       p {
         color: rgba(102, 102, 102);
-        font-size: 14px;
+        font-size: 13px;
         opacity: 1;
       }
     }
@@ -188,14 +187,25 @@ const Root = styled.section`
       }
     }
   }
-  @media (max-width: 876px) {
+  @media (max-width: 567px) {
     padding: 0px;
     .main_div {
       .subdiv {
         width: 44vw;
         height: 30vh;
+        &.open {
+          width: 100vw;
+          height: 100vh;
+          img {
+            height: 60%;
+            width: 100%;
+          }
+        }
+        &:hover {
+          border: 1px solid transparent;
+        }
         img {
-          height: 84%;
+          height: 90%;
           width: 100%;
         }
         .heading .h5 {
@@ -213,9 +223,22 @@ const Root = styled.section`
           padding: 3px 10px;
           border-radius: 15px;
         }
+        &.open {
+          .btn_div .info_btn,
+          .btn_div .add_btn {
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 15px;
+          }
+        }
         &:hover .hov_content {
           width: 44vw;
+          border: 1px solid transparent;
           padding: 0px 10px 10px;
+        }
+        &.open .hov_content {
+          width: 96vw;
+          border: 1px solid transparent;
         }
       }
     }
