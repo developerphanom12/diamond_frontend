@@ -2,7 +2,7 @@ function Svgsvg() {
   return (
     <div>
       <svg
-        style={{ width: "37px" }}
+        style={{ width: "45px" }}
         class="block mx-auto w-13.5 h-13.5 mb-2 md:w-12 md:h-12"
         viewBox="0 0 48 48"
       >

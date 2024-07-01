@@ -495,6 +495,7 @@ const Root = styled.section`
     padding: 10px 0px;
     .main_div {
       gap: 0px;
+      flex-direction: column;
     }
 
     .main_div .image_div {
@@ -508,7 +509,7 @@ const Root = styled.section`
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding: 5px;
+     
     }
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;

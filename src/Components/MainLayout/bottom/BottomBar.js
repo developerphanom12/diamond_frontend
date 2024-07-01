@@ -5,11 +5,14 @@ import styled from "styled-components";
 import EngageList from "./EngageList";
 import DiamondList from "./DiamondList";
 import EducationList from "./EducationList";
+import GemstoneList from "./GemstoneList";
 
 function BottomBar() {
   const [isListOpen2, setIsListOpen2] = useState(false);
   const [isListOpen4, setIsListOpen4] = useState(false);
   const [isListOpen6, setIsListOpen6] = useState(false);
+  const [isListOpen8, setIsListOpen8] = useState(false);
+
 
   const handleMouseEnter2 = () => {
     setIsListOpen2(true);
@@ -34,6 +37,15 @@ function BottomBar() {
   const handleMouseLeave6 = () => {
     setIsListOpen6(false);
   };
+
+  const handleMouseEnter8 = () => {
+    setIsListOpen8(true);
+  };
+
+  const handleMouseLeave8 = () => {
+    setIsListOpen8(false);
+  };
+
 
   return (
     <Root>
@@ -84,16 +96,16 @@ function BottomBar() {
             id="graphic"
           >
             <Nav.Link href="/gemstone">Gemstone</Nav.Link>
-            {isListOpen6 && <div className="option_list_list"><EducationList/></div>}
+            {isListOpen6 && <div className="option_list_list"><GemstoneList/></div>}
           </div>
 
           <div
-            onMouseEnter={handleMouseEnter6}
-            onMouseLeave={handleMouseLeave6}
+            onMouseEnter={handleMouseEnter8}
+            onMouseLeave={handleMouseLeave8}
             id="graphic"
           >
             <Nav.Link href="/education">education</Nav.Link>
-            {isListOpen6 && <div className="option_list_list"><EducationList/></div>}
+            {isListOpen8 && <div className="option_list_list"><EducationList/></div>}
           </div>
 
         </Nav>

@@ -35,7 +35,7 @@ export default function Sliderr() {
           <button
             className={selectedButton === 1 ? "selected" : ""}
             onClick={() => handleButtonClick(1)}
-            style={{ width: "90%", margin: "10px" }}
+            style={{ width: "100%", margin: "10px" }}
           >
             <Svgsvg />
           </button>
@@ -44,7 +44,7 @@ export default function Sliderr() {
           <button
             className={selectedButton === 2 ? "selected" : ""}
             onClick={() => handleButtonClick(2)}
-            style={{ width: "90%", margin: "10px" }}
+            style={{ width: "100%", margin: "10px" }}
           >
             <Svgsvg2 />
           </button>
@@ -53,7 +53,7 @@ export default function Sliderr() {
           <button
             className={selectedButton === 3 ? "selected" : ""}
             onClick={() => handleButtonClick(3)}
-            style={{ width: "90%", margin: "10px" }}
+            style={{ width: "100%", margin: "10px" }}
           >
             <Svgsvg3 />
           </button>
@@ -75,7 +75,7 @@ const Root = styled.section`
     font-size: 20px;
     line-height: 1;
     opacity: 0.75;
-    color: hsl(332.31deg 1.29% 66.5%);
+    color: hsl(332.31deg 1.29% 66.5%) ;
     position: relative;
     /* left: 30px; */
     z-index: 11111;
@@ -85,6 +85,7 @@ const Root = styled.section`
     flex: 1;
     padding: 15px 0;
     font-size: 14px;
+    color:white;
     border-radius: 5px;
   }
   button {
