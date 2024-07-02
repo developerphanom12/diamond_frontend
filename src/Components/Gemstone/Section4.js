@@ -36,7 +36,7 @@ export default function Section4() {
             <button
               className="add_btn"
               onClick={() => {
-                navigate("/productpage");
+                navigate("/productgem");
               }}
             >
               Add Setting

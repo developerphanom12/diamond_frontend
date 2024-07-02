@@ -136,7 +136,6 @@ export default function Section2() {
         console.log("Predefined Data:", response.data.data);
         dispatch(setSelectedOptions(uniqueProduct, carat, size));
         console.log("storing_or_not", setSelectedOptions);
-
       }
     } catch (error) {
       console.error("Error fetching", error);
@@ -567,7 +566,7 @@ const Root = styled.section`
       justify-content: center;
 
       img {
-        width: 40vw;
+        width: 100%;
         height: 90%;
       }
 
@@ -609,7 +608,6 @@ const Root = styled.section`
     .des_div {
       flex: 1;
       padding: 10px 30px;
-      margin: 0px 10px;
       .title {
         h2 {
           font-size: 23px;
@@ -634,7 +632,6 @@ const Root = styled.section`
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        margin-top: 30px;
         gap: 10px;
         .carattt {
           gap: 10px;
@@ -681,6 +678,7 @@ const Root = styled.section`
         }
         > div {
           display: flex;
+          overflow-x: auto;
           .btn_shapes {
             width: 48px !important;
             border: 2px solid transparent;
@@ -852,7 +850,7 @@ const Root = styled.section`
       padding: 20px;
       border-radius: 20px;
       margin-top: 25px;
-      /* margin-bottom:40px; */
+
       h5 {
         font-size: 1rem;
         font-weight: 600;
@@ -891,8 +889,9 @@ const Root = styled.section`
   }
   .prod_main_div {
     width: 100%;
-    height: 420px;
-    overflow: auto;
+    max-height: 420px;
+    height: 100%;
+    overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -904,7 +903,7 @@ const Root = styled.section`
         border-radius: 1.25rem;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 7px;
         .bg-img {
           height: 180px;
           background-image: url(${ww});
@@ -926,7 +925,7 @@ const Root = styled.section`
         }
         .prod_name {
           h3 {
-            font-size: 15px;
+            font-size: 13px;
             color: #000000;
             font-weight: 400;
             font-family: ProximaNova, sans-serif;
@@ -935,7 +934,7 @@ const Root = styled.section`
         .prod_spec {
           display: flex;
           justify-content: space-between;
-          padding-bottom: 15px;
+          padding-bottom: 10px;
           border-bottom: 1px solid #ededed;
           .icon_content {
             display: flex;
@@ -949,14 +948,14 @@ const Root = styled.section`
               display: flex;
               flex-direction: column;
               h4 {
-                font-size: 14px;
+                font-size: 12px;
                 color: #000000;
                 font-family: ProximaNova, sans-serif;
                 margin-bottom: 0;
                 font-weight: 500;
               }
               p {
-                font-size: 13px;
+                font-size: 12px;
                 color: #808080;
                 margin-bottom: 0;
                 font-family: ProximaNova, sans-serif;
@@ -976,7 +975,7 @@ const Root = styled.section`
           display: flex;
           justify-content: space-between;
           p {
-            font-size: 21px;
+            font-size: 16px;
             color: rgba(102, 102, 102);
             font-weight: 500;
           }
@@ -994,19 +993,19 @@ const Root = styled.section`
     display: none;
   }
   .total_price_div {
-    padding: 16px;
+    padding:0px 16px;
     display: flex;
     justify-content: space-between;
 
     p {
-      font-size: 21px;
+      font-size: 18px;
       color: #666666;
       font-family: ProximaNova, sans-serif;
     }
 
     h4 {
       font-weight: 500;
-      font-size: 21px;
+      font-size: 18px;
       font-family: ProximaNova, sans-serif;
       color: #000000;
     }
@@ -1027,9 +1026,6 @@ const Root = styled.section`
     }
   }
   @media (min-width: 567px) and (max-width: 992px) {
-    .prod_main_div {
-      height: 890px;
-    }
   }
 
   @media (max-width: 567px) {
@@ -1043,6 +1039,9 @@ const Root = styled.section`
       height: unset;
       padding: 5px;
       margin: 10px;
+      img{
+        width: 90vw;
+      }
     }
     .main_div .des_div .prod_spec {
       width: 90vw;
@@ -1113,7 +1112,7 @@ const ImageContainer = styled.div`
     height: 100%;
 
     @media (max-width: 768px) {
-      height: 100%; // Adjust height for mobile
+      height: 100%;
     }
   }
 `;
