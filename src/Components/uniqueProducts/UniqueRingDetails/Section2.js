@@ -20,7 +20,11 @@ import Section3 from "./Section3";
 import deleteicon from "../../Images/delete.PNG";
 import ww from "../../Images/ww.webp";
 import Drawer from "react-modern-drawer";
-import { setSelectedOptions } from "../../../redux/users/action";
+import {
+  setSelectedMaterialImage,
+  setSelectedOptions,
+  setSelectedShapeImage,
+} from "../../../redux/users/action";
 import ROUND from "../../Images/round-removebg-preview.png";
 import EMERALD from "../../Images/emerald-removebg-preview.png";
 import HEART from "../../Images/heart-removebg-preview.png";
@@ -31,6 +35,13 @@ import PRINCESS from "../../Images/Princess-removebg-preview.png";
 import RADIANT from "../../Images/Radiant-removebg-preview.png";
 import CUSHION from "../../Images/cushionremovebg.png";
 import ECUSHION from "../../Images/ECusion-removebg-preview.png";
+import one from "../../Images/1.png";
+import four from "../../Images/4.png";
+import six from "../../Images/6.png";
+import two from "../../Images/2.png";
+import five from "../../Images/5.png";
+import seven from "../../Images/7.png";
+import three from "../../Images/3.png";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -45,16 +56,13 @@ const shapesList = [
   { name: "E.CUSHION", imgUrl: ECUSHION },
 ];
 const materialList = [
-  { name: "14k white gold", imgUrl: ROUND },
-  { name: "EMERALD", imgUrl: EMERALD },
-  { name: "HEART", imgUrl: HEART },
-  { name: "MARQUISE", imgUrl: MARQUISE },
-  { name: "OVAL", imgUrl: OVAL },
-  { name: "PEAR", imgUrl: PEAR },
-  { name: "PRINCESS", imgUrl: PRINCESS },
-  { name: "RADIANT", imgUrl: RADIANT },
-  { name: "CUSHION", imgUrl: CUSHION },
-  { name: "E.CUSHION", imgUrl: ECUSHION },
+  { name: "14k white gold", imgUrl: one },
+  { name: "14k yellow gold", imgUrl: four },
+  { name: "14k pink gold", imgUrl: six },
+  { name: "18k white gold", imgUrl: two },
+  { name: "18k yellow gold", imgUrl: five },
+  { name: "18k pink gold", imgUrl: seven },
+  { name: "Platinum", imgUrl: three },
 ];
 export default function Section2() {
   const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
@@ -65,6 +73,8 @@ export default function Section2() {
   const [carat, setCarat] = useState("");
   const [preDefineData, setPreDefineData] = useState(null);
   const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
+  const [selectedMaterial, setSelectedMaterial] = useState(["14kWhite"]);
+
   const location = useLocation();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
@@ -125,6 +135,8 @@ export default function Section2() {
         setPreDefineData(response.data.data);
         console.log("Predefined Data:", response.data.data);
         dispatch(setSelectedOptions(uniqueProduct, carat, size));
+        console.log("storing_or_not", setSelectedOptions);
+
       }
     } catch (error) {
       console.error("Error fetching", error);
@@ -154,6 +166,15 @@ export default function Section2() {
         carat: carat,
       },
     });
+  };
+
+  const handleShapeClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedShapeImage(shapeImageUrl));
+    setSelectedShapes([shapeName]); // Set the selected shape
+  };
+  const handleMaterialClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedMaterialImage(shapeImageUrl));
+    setSelectedMaterial([shapeName]); // Set the selected shape
   };
 
   return (
@@ -211,7 +232,6 @@ export default function Section2() {
           </div>
           <div className="prod_spec">
             <h4>Carat Weight</h4>
-
             <div className="carattt">
               {caratOptions.map((caratOption, index) => (
                 <div key={index} className="spec">
@@ -229,34 +249,37 @@ export default function Section2() {
           </div>
           <div className="ring_types mt-4">
             <h4>Center Stone Shape: Round</h4>
-            {shapesList.map((shape) => (
-              <button
-                key={shape.name}
-                className={`btn_shapes ${
-                  selectedShapes.includes(shape.name) ? "selected" : ""
-                }`}
-                onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
-              >
-                <img className="img" src={shape.imgUrl} alt={shape.name} />
-                <p style={{ display: "none" }}>{shape.name}</p>
-              </button>
-            ))}
+            <div>
+              {shapesList.map((shape) => (
+                <button
+                  key={shape.name}
+                  className={`btn_shapes ${
+                    selectedShapes.includes(shape.name) ? "selected" : ""
+                  }`}
+                  onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
+                >
+                  <img className="img" src={shape.imgUrl} alt={shape.name} />
+                  <p style={{ display: "none" }}>{shape.name}</p>
+                </button>
+              ))}
+            </div>
           </div>
-
           <div className="ring_types mt-4">
             <h4>Material: 14k White Gold</h4>
-            {shapesList.map((shape) => (
-              <button
-                key={shape.name}
-                className={`btn_shapes ${
-                  selectedShapes.includes(shape.name) ? "selected" : ""
-                }`}
-                onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
-              >
-                <img className="img" src={shape.imgUrl} alt={shape.name} />
-                <p style={{ display: "none" }}>{shape.name}</p>
-              </button>
-            ))}
+            <div>
+              {materialList.map((shape) => (
+                <button
+                  key={shape.name}
+                  className={`btn_shapes ${
+                    selectedMaterial.includes(shape.name) ? "selected" : ""
+                  }`}
+                  onClick={() => handleMaterialClick(shape.name, shape.imgUrl)}
+                >
+                  <img className="img" src={shape.imgUrl} alt={shape.name} />
+                  <p style={{ display: "none" }}>{shape.name}</p>
+                </button>
+              ))}
+            </div>
           </div>
           <div className="ring_size">
             <select value={size} onChange={(e) => setSize(e.target.value)}>
@@ -386,7 +409,6 @@ export default function Section2() {
               </div>
             </Drawer>
           </div>
-
           <div className="policy">
             <div className="policy_type">
               <img src={aeroplane} alt="aeroplane_images" />
@@ -507,11 +529,9 @@ export default function Section2() {
               </div>
             </div>
           </div>
-
           <div>
             <Section3 />
           </div>
-
           <div className="appointment">
             <h5>Virtual Appointment</h5>
             <p>
@@ -651,31 +671,39 @@ const Root = styled.section`
       }
       .ring_types {
         display: flex;
-        justify-content: center;
-        gap: 20px;
+        flex-direction: column;
 
-        .btn_shapes {
-          width: 63px !important;
-          border: 2px solid transparent;
-          background: #fff;
+        h4 {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
+        > div {
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: 12px 0;
-          font-size: 12px;
-          line-height: 25px;
-          font-weight: 500;
-          .img {
-            width: 45px;
-            height: 45px;
-          }
-          &.selected {
-            border-bottom: 3px solid black;
-          }
+          .btn_shapes {
+            width: 48px !important;
+            border: 2px solid transparent;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 12px;
+            line-height: 25px;
+            font-weight: 500;
+            .img {
+              width: 40px;
+              height: 40px;
+            }
+            &.selected {
+              border-bottom: 3px solid black;
+            }
 
-          &:hover {
-            background-color: rgba(247, 247, 247);
+            &:hover {
+              background-color: rgba(247, 247, 247);
+            }
           }
         }
       }

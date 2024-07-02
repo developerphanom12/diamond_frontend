@@ -9,7 +9,7 @@ import {
   SET_SELECTED_VARIANT_ID,
   SET_UNIQUE_DATA,
   SET_UNIQUE_PRODUCT,
-
+  SET_SELECTED_MATERIAL_IMAGE,
 } from "./action";
 
 const initialState = {
@@ -23,9 +23,9 @@ const initialState = {
   selectedVariantId: [],
   diamondType: "",
   selectedShapeImage: null,
-  selectedRingSvg:null,
+  selectedRingSvg: null,
   diamondById: null,
-  selectedShape: 'null',
+  selectedShape: "null",
   uniqueData: [],
   uniqueProduct: null,
   selectedOptions: {
@@ -33,11 +33,22 @@ const initialState = {
     carat: null,
     size: null,
   },
-
+  selectedMaterialImage: {
+    shape: null,
+    imageUrl: null,
+  },
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_SELECTED_OPTIONS':
+    case SET_SELECTED_MATERIAL_IMAGE:
+      return {
+        ...state,
+        selectedMaterialImage: {
+          shape: action.payload.shape,
+          imageUrl: action.payload.imageUrl,
+        },
+      };
+    case "SET_SELECTED_OPTIONS":
       return {
         ...state,
         selectedOptions: {

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 export default function Section1() {
   const location = useLocation();
-  const selectedOptions = useSelector((state) => state.selectedOptions);
+  const selectedOptions = useSelector((state) => state.users.selectedOptions);
   const {
     selectedVariantId,
     productId,
