@@ -22,7 +22,7 @@ import PEAR from "../Images/Pear-removebg-preview.png";
 import PRINCESS from "../Images/Princess-removebg-preview.png";
 import RADIANT from "../Images/Radiant-removebg-preview.png";
 import CUSHION from "../Images/cushionremovebg.png";
-import ECUSHION from "../Images/ECusion-removebg-preview.png";
+import ASSCHER from "../Images/ECusion-removebg-preview.png";
 import { useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
@@ -36,28 +36,28 @@ import { useLoading } from "../LoadingContext";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "OVAL", imgUrl: OVAL },
   { name: "EMERALD", imgUrl: EMERALD },
+  { name: "PEAR", imgUrl: PEAR },
   { name: "HEART", imgUrl: HEART },
   { name: "MARQUISE", imgUrl: MARQUISE },
-  { name: "OVAL", imgUrl: OVAL },
-  { name: "PEAR", imgUrl: PEAR },
-  { name: "PRINCESS", imgUrl: PRINCESS },
-  { name: "RADIANT", imgUrl: RADIANT },
   { name: "CUSHION", imgUrl: CUSHION },
-  { name: "E.CUSHION", imgUrl: ECUSHION },
+  { name: "ASSCHER", imgUrl: ASSCHER },
+  { name: "RADIANT", imgUrl: RADIANT },
 ];
 
-const colorOptions = ["J", "I", "H", "G", "F", "E", "D"];
+const colorOptions = ["D","E","F","G", "H", "I","J",   ];
 const clarityOptions = [
-  "SI1",
-  "SI2",
-  "I2",
-  "VS2",
-  "VS1",
-  "VVS2",
-  "VVS1",
-  "IF",
   "FL",
+  "IF",
+  "VVS1",
+  "VVS2",
+  "VS1",
+  "VS2",
+  "I2",
+  "SI2",
+  "SI1",
 ];
 const cutOptions = ["GD", "VG", "EX"];
 const polishOptions = ["GD", "VG", "EX"];
@@ -448,6 +448,12 @@ export default function Section2() {
                 onClick={() => handleButtonCertificate(2)}
               >
                 GIA
+              </button>
+              <button
+                className={selectedCertificate[3] ? "selected" : ""}
+                onClick={() => handleButtonCertificate(3)}
+              >
+                HRD
               </button>
             </div>
           </div>
