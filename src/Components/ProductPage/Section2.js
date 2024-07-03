@@ -112,7 +112,7 @@ export default function Section2() {
   const VideoContainer = styled.div`
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     max-height: 613px;
     height: 100%;
     @media (max-width: 768px) {
@@ -257,11 +257,14 @@ export default function Section2() {
                 </div>
 
                 <div className="prod_price">
-                  <h2>
-                    {productIds?.priceRange?.maxVariantPrice?.currencyCode}:
-                    {productIds?.priceRange?.maxVariantPrice?.amount}
-                  </h2>
-                  <p>Change</p>
+                  <h2>${productIds?.priceRange?.maxVariantPrice?.amount}</h2>
+                  <p
+                    onClick={() => {
+                      navigate("/engagementring");
+                    }}
+                  >
+                    Change
+                  </p>
                 </div>
               </div>
             </button>
@@ -312,7 +315,13 @@ export default function Section2() {
                       <>{diamondById.price}</>
                     )}
                   </h2>
-                  <p>Change</p>
+                  <p
+                    onClick={() => {
+                      navigate("/naturaldiamond");
+                    }}
+                  >
+                    Change
+                  </p>
                 </div>
               </div>
             </button>

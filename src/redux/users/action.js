@@ -48,6 +48,10 @@ export const setDiamondType = (diamondType) => ({
   type: SET_DIAMOND_TYPE,
   payload: diamondType,
 });
+export const setCollectionIds = (collectionIds) => ({
+  type: 'SET_COLLECTION_IDS',
+  payload: collectionIds,
+});
 export const setSelectedVariantId = (selectedVariantId) => ({
   type: SET_SELECTED_VARIANT_ID,
   payload: selectedVariantId,

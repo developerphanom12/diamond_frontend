@@ -33,6 +33,7 @@ const initialState = {
     carat: null,
     size: null,
   },
+  collectionIds:null,
   selectedMaterialImage: {
     shape: null,
     imageUrl: null,
@@ -61,6 +62,11 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         uniqueProduct: action.payload,
+      };
+      case 'SET_COLLECTION_IDS':
+      return {
+        ...state,
+        collectionIds: action.payload,
       };
     case SET_UNIQUE_DATA:
       return {

@@ -7,6 +7,7 @@ import Drawer from "react-modern-drawer";
 import { useDispatch } from "react-redux";
 import { IoFilterOutline } from "react-icons/io5";
 import {
+  setCollectionIds,
   setDiamondIds,
   setDiamondType,
   setSelectedShapeImage,
@@ -20,75 +21,95 @@ import PEAR from "../Images/Pear-removebg-preview.png";
 import PRINCESS from "../Images/Princess-removebg-preview.png";
 import RADIANT from "../Images/Radiant-removebg-preview.png";
 import CUSHION from "../Images/cushionremovebg.png";
-import ECUSHION from "../Images/ECusion-removebg-preview.png";
+import ASSCHER from "../Images/ECusion-removebg-preview.png";
 import { useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { EXCHANGE_URLS } from "../URLS";
 import { useLoading } from "../LoadingContext";
 import Sliderr from "./Sliderr";
+import Svgsvg2 from "../../globalSvg/Svgsvg2";
+import Svgsvg from "../../globalSvg/Svgsvg";
+import Svgsvg3 from "../../globalSvg/Svgsvg3";
 
-const shapesList = [
-  { name: "ROUND", imgUrl: ROUND },
-  { name: "EMERALD", imgUrl: EMERALD },
-  { name: "HEART", imgUrl: HEART },
-  { name: "MARQUISE", imgUrl: MARQUISE },
-  { name: "OVAL", imgUrl: OVAL },
-  { name: "PEAR", imgUrl: PEAR },
-  { name: "PRINCESS", imgUrl: PRINCESS },
-  { name: "RADIANT", imgUrl: RADIANT },
-  { name: "CUSHION", imgUrl: CUSHION },
-  { name: "E.CUSHION", imgUrl: ECUSHION },
+const collections = [
+  {
+    id: "gid://shopify/Collection/430466695386",
+    title: "Moissanite",
+    svg:<Svgsvg2 />,
+  },
+  {
+    id: "gid://shopify/Collection/430466728154",
+    title: "Sapphire",
+    svg:   <Svgsvg />,
+  },
+  {
+    id: "gid://shopify/Collection/430466793690",
+    title: "Emerald",
+    svg: <Svgsvg3 />,
+  },
 ];
 
+const shapesList = [
+  { name: "gemRound", imgUrl: ROUND },
+  { name: "gemPrincess", imgUrl: PRINCESS },
+  { name: "gemOval", imgUrl: OVAL },
+  { name: "gemEmrald", imgUrl: EMERALD },
+  { name: "gemPear", imgUrl: PEAR },
+  { name: "gemHeart", imgUrl: HEART },
+  { name: "gemMarquise", imgUrl: MARQUISE },
+  { name: "gemCushion", imgUrl: CUSHION },
+  { name: "gemAsscher", imgUrl: ASSCHER },
+  { name: "gemRadiant", imgUrl: RADIANT },
+];
 export default function Section2() {
-  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
+  const [selectedShapes, setSelectedShapes] = useState(["gemRound"]);
   const [caratRange, setCaratRange] = useState([0.5, 11.5]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(502086918);
+  const minCarat = caratRange[0];
+  const maxCarat = caratRange[1];
   const [value, setValue] = useState([]);
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
   const { state } = useLocation();
-  const typelabgrown = state ? state.labgrownValue : false;
+  
   const diamondApi = async (params) => {
     setLoading(true);
     try {
       const query = new URLSearchParams();
 
-      if (params.selectedShapes.length)
-        query.append("shapes", params.selectedShapes.join(","));
-      query.append("typelabgrown", params.typelabgrown);
-
+      if (params.selectedShapes.length > 0)
+        query.append("gemShapes", params.selectedShapes.join(","));
+      if (minCarat !== undefined && minCarat !== null)
+        query.append("minPrice", minCarat);
+      if (maxCarat !== undefined && maxCarat !== null)
+        query.append("maxPrice", maxCarat);
+      query.append("collectionId",collections);
+      query.append("tag", "your_tag_here");
       const queryString = query.toString();
-      const resp = await axios.get(
-        `${EXCHANGE_URLS}/nivodafilter?${queryString}`
-      );
+      const resp = await axios.get(`${EXCHANGE_URLS}/fetch?${queryString}`);
 
       if (resp?.status === 200) {
         setValue(resp?.data?.items);
-        const diamondIds = resp.data.items.map((item) => item);
-        dispatch(setDiamondIds(diamondIds));
+        const collectionIds = resp.data.items.map((item) => item.collectionId); // Assuming collectionId is available in API response
+        dispatch(setCollectionIds(collectionIds)); // Dispatching collectionIds
       }
     } catch (err) {
-      console.error("err", err);
+      console.error("Error fetching diamonds", err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (typelabgrown) {
-      dispatch(setDiamondType(typelabgrown));
-    }
-
     const params = {
       selectedShapes,
-      typelabgrown,
+      caratRange,
     };
 
     diamondApi(params);
-  }, [selectedShapes, typelabgrown, dispatch]);
+  }, [selectedShapes, caratRange, dispatch]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
@@ -174,6 +195,14 @@ export default function Section2() {
 
       <div className="carat_budget_certificate">
         <>
+          <div className="certificate_div">
+            <h5>Gemstone</h5>
+            <div className="btn">
+              <Sliderr  collections = {collections}/>
+            </div>
+          </div>
+        </>
+        <>
           <div className="carat_div">
             <h5>Carat</h5>
             <Slider
@@ -251,14 +280,6 @@ export default function Section2() {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-        </>
-        <>
-          <div className="certificate_div">
-            <h5>Gemstone</h5>
-            <div className="btn">
-              <Sliderr />
             </div>
           </div>
         </>
@@ -585,7 +606,7 @@ const Root = styled.section`
       width: 100%;
       flex: unset;
     }
-   
+
     .carat_budget_certificate .carat_div {
       gap: 15px;
       width: 100%;

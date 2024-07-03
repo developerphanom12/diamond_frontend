@@ -47,7 +47,7 @@ const shapesList = [
   { name: "RADIANT", imgUrl: RADIANT },
 ];
 
-const colorOptions = ["D","E","F","G", "H", "I","J",   ];
+const colorOptions = ["D", "E", "F", "G", "H", "I", "J"];
 const clarityOptions = [
   "FL",
   "IF",
@@ -141,17 +141,12 @@ export default function Section2() {
 
     const params = {
       selectedShapes,
-      typelabgrown,
       selectedColors,
       selectedClarity,
       selectedCut,
       selectedPolish,
       selectedSymmetry,
       caratRange,
-      // Include other parameters if needed
-      // selectedCarat,
-      // selectedBudget,
-      // selectedCertificate
     };
 
     diamondApi(params);
@@ -163,6 +158,7 @@ export default function Section2() {
     selectedPolish,
     selectedSymmetry,
     typelabgrown,
+    caratRange,
     dispatch,
   ]);
 
