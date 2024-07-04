@@ -34,17 +34,17 @@ import Svgsvg3 from "../../globalSvg/Svgsvg3";
 
 const collections = [
   {
-    id: "gid://shopify/Collection/430466695386",
+    id: "430466695386",
     title: "Moissanite",
-    svg:<Svgsvg2 />,
+    svg: <Svgsvg2 />,
   },
   {
-    id: "gid://shopify/Collection/430466728154",
+    id: "430466728154",
     title: "Sapphire",
-    svg:   <Svgsvg />,
+    svg: <Svgsvg />,
   },
   {
-    id: "gid://shopify/Collection/430466793690",
+    id: "430466793690",
     title: "Emerald",
     svg: <Svgsvg3 />,
   },
@@ -64,6 +64,9 @@ const shapesList = [
 ];
 export default function Section2() {
   const [selectedShapes, setSelectedShapes] = useState(["gemRound"]);
+  const [selectedCollection, setSelectedCollection] = useState(
+    collections[0].id
+  );
   const [caratRange, setCaratRange] = useState([0.5, 11.5]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(502086918);
@@ -73,30 +76,30 @@ export default function Section2() {
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
   const { state } = useLocation();
-  
+
   const diamondApi = async (params) => {
     setLoading(true);
     try {
       const query = new URLSearchParams();
 
       if (params.selectedShapes.length > 0)
-        query.append("gemShapes", params.selectedShapes.join(","));
+        query.append("tag", params.selectedShapes.join(","));
       if (minCarat !== undefined && minCarat !== null)
         query.append("minPrice", minCarat);
       if (maxCarat !== undefined && maxCarat !== null)
         query.append("maxPrice", maxCarat);
-      query.append("collectionId",collections);
-      query.append("tag", "your_tag_here");
+      query.append("collectionId", params.selectedCollection);
+
       const queryString = query.toString();
       const resp = await axios.get(`${EXCHANGE_URLS}/fetch?${queryString}`);
 
       if (resp?.status === 200) {
         setValue(resp?.data?.items);
-        const collectionIds = resp.data.items.map((item) => item.collectionId); // Assuming collectionId is available in API response
+        const collectionIds = resp.data.items.map((item) => item.collectionId);
         dispatch(setCollectionIds(collectionIds)); // Dispatching collectionIds
       }
     } catch (err) {
-      console.error("Error fetching diamonds", err);
+      console.error("Error fetching gem", err);
     } finally {
       setLoading(false);
     }
@@ -105,7 +108,9 @@ export default function Section2() {
   useEffect(() => {
     const params = {
       selectedShapes,
-      caratRange,
+      minCarat: caratRange[0],
+      maxCarat: caratRange[1],
+      selectedCollection,
     };
 
     diamondApi(params);
@@ -114,6 +119,9 @@ export default function Section2() {
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
     setSelectedShapes([shapeName]);
+  };
+  const handleCollectionChange = (collectionId) => {
+    setSelectedCollection(collectionId);
   };
 
   const minincrement = () => {
@@ -198,7 +206,10 @@ export default function Section2() {
           <div className="certificate_div">
             <h5>Gemstone</h5>
             <div className="btn">
-              <Sliderr  collections = {collections}/>
+              <Sliderr
+                collections={collections}
+                onCollectionChange={handleCollectionChange}
+              />
             </div>
           </div>
         </>

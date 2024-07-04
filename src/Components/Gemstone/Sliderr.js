@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-export default function Sliderr({collections}) {
+export default function Sliderr({ collections, onCollectionChange }) {
   const [selectedButton, setSelectedButton] = useState(1); // Initialize with 1
 
-  const handleButtonClick = (buttonIndex) => {
+  const handleButtonClick = (buttonIndex, collectionId) => {
     setSelectedButton(buttonIndex);
-    sliderRef.slickGoTo(buttonIndex - 1);
+    sliderRef.current.slickGoTo(buttonIndex - 1);
+    onCollectionChange(collectionId);
   };
 
   let sliderRef = useRef(null);
@@ -21,22 +22,26 @@ export default function Sliderr({collections}) {
   };
   return (
     <Root>
-      <Slider
-        ref={(slider) => {
-          sliderRef = slider;
-        }}
-        {...settings}
-      >
+      <Slider ref={sliderRef} {...settings}>
         {collections.map((collection, index) => (
           <div key={index + 1}>
             <button
               className={selectedButton === index + 1 ? "selected" : ""}
-              onClick={() => handleButtonClick(index + 1)}
+              onClick={() => handleButtonClick(index + 1, collection.id)}
               style={{ width: "84px" }}
             >
               {collection.svg}
             </button>
-            <div style={{fontSize:"13px",fontWeight:"600",textAlign:"center",padding:"5px"}}>{collection.title}</div>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: "600",
+                textAlign: "center",
+                padding: "5px",
+              }}
+            >
+              {collection.title}
+            </div>
           </div>
         ))}
       </Slider>
