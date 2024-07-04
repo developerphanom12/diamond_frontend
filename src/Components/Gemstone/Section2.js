@@ -96,7 +96,7 @@ export default function Section2() {
       if (resp?.status === 200) {
         setValue(resp?.data?.items);
         const collectionIds = resp.data.items.map((item) => item.collectionId);
-        dispatch(setCollectionIds(collectionIds)); // Dispatching collectionIds
+        dispatch(setCollectionIds(collectionIds));
       }
     } catch (err) {
       console.error("Error fetching gem", err);

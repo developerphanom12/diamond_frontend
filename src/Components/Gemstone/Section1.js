@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import ring from "../Images/Solitaire-removebg-preview.png";
-import ndia from "../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../Images/labgrowncopy-removebg.png";
+import {  ModalBody } from "reactstrap";
 import { CiCircleCheck } from "react-icons/ci";
 import { setDiamondType } from "../../redux/users/action";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +28,7 @@ export default function Section1() {
   return (
     <Root>
       <div className="container-fluid">
-        <div className="row">
+        {/* <div className="row">
           <div
             className="col-lg-4 col-md-4 col-4"
             onClick={() => setmodal1(true)}
@@ -85,7 +82,7 @@ export default function Section1() {
               <CiCircleCheck />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12">
             <div className="heading">

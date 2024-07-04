@@ -140,6 +140,7 @@ export default function Section2() {
     }
 
     const params = {
+      typelabgrown,
       selectedShapes,
       selectedColors,
       selectedClarity,
