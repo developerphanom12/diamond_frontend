@@ -1,15 +1,5 @@
 import styled from "styled-components";
-import React from "react";
-import round from "../Images/round-removebg-preview.png";
-import emerald from "../Images/emerald-removebg-preview.png";
-import heart from "../Images/heart-removebg-preview.png";
-import Marquise from "../Images/Marquise-removebg-preview.png";
-import oval from "../Images/oval-removebg-preview.png";
-import Pear from "../Images/Pear-removebg-preview.png";
-import Princess from "../Images/Princess-removebg-preview.png";
-import Radiant from "../Images/Radiant-removebg-preview.png";
-import cushionremovebg from "../Images/cushionremovebg.png";
-import ECusion from "../Images/ECusion-removebg-preview.png";
+import React, { useState } from "react";
 import aeroplane from "../Images/aeroplane.png";
 import badgess from "../Images/badgess.png";
 import moneyinhand from "../Images/moneyinhand.png";
@@ -17,15 +7,69 @@ import certifiedd from "../Images/certifiedd.png";
 import pinkimg from "../Images/pink.PNG";
 import modimg from "../Images/modimg.PNG";
 import images from "../Images/images.PNG";
-
 import { useLocation, useNavigate } from "react-router-dom";
 import RingShipReturn from "../DiamondDetails/RingShipReturn";
+import ROUND from "../Images/round-removebg-preview.png";
+import EMERALD from "../Images/emerald-removebg-preview.png";
+import HEART from "../Images/heart-removebg-preview.png";
+import MARQUISE from "../Images/Marquise-removebg-preview.png";
+import OVAL from "../Images/oval-removebg-preview.png";
+import PEAR from "../Images/Pear-removebg-preview.png";
+import PRINCESS from "../Images/Princess-removebg-preview.png";
+import RADIANT from "../Images/Radiant-removebg-preview.png";
+import CUSHION from "../Images/cushionremovebg.png";
+import ECUSHION from "../Images/ECusion-removebg-preview.png";
+import one from "../Images/1.png";
+import four from "../Images/4.png";
+import six from "../Images/6.png";
+import two from "../Images/2.png";
+import five from "../Images/5.png";
+import seven from "../Images/7.png";
+import three from "../Images/3.png";
+import {
+  setSelectedMaterialImage,
+  setSelectedShapeImage,
+} from "../../redux/users/action";
+import { useDispatch } from "react-redux";
+
+const shapesList = [
+  { name: "ROUND", imgUrl: ROUND },
+  { name: "EMERALD", imgUrl: EMERALD },
+  { name: "HEART", imgUrl: HEART },
+  { name: "MARQUISE", imgUrl: MARQUISE },
+  { name: "OVAL", imgUrl: OVAL },
+  { name: "PEAR", imgUrl: PEAR },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "RADIANT", imgUrl: RADIANT },
+  { name: "CUSHION", imgUrl: CUSHION },
+  { name: "E.CUSHION", imgUrl: ECUSHION },
+];
+const materialList = [
+  { name: "14k white gold", imgUrl: one },
+  { name: "14k yellow gold", imgUrl: four },
+  { name: "14k pink gold", imgUrl: six },
+  { name: "18k white gold", imgUrl: two },
+  { name: "18k yellow gold", imgUrl: five },
+  { name: "18k pink gold", imgUrl: seven },
+  { name: "Platinum", imgUrl: three },
+];
 
 export default function Section2() {
+  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
+  const [selectedMaterial, setSelectedMaterial] = useState(["14kWhite"]);
   const location = useLocation();
   const { products } = location.state || {};
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const handleShapeClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedShapeImage(shapeImageUrl));
+    setSelectedShapes([shapeName]); // Set the selected shape
+  };
+  const handleMaterialClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedMaterialImage(shapeImageUrl));
+    setSelectedMaterial([shapeName]); // Set the selected shape
+  };
   return (
     <Root>
       <div className="main_div">
@@ -73,6 +117,40 @@ export default function Section2() {
               <img src={Radiant} alt="Radiant_images" />
               <img src={cushionremovebg} alt="cushionremovebg_images" />
               <img src={ECusion} alt="ECusion_images" /> */}
+            </div>
+          </div>
+          <div className="ring_types mt-4">
+            <h4>Center Stone Shape: Round</h4>
+            <div>
+              {shapesList.map((shape) => (
+                <button
+                  key={shape.name}
+                  className={`btn_shapes ${
+                    selectedShapes.includes(shape.name) ? "selected" : ""
+                  }`}
+                  onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
+                >
+                  <img className="img" src={shape.imgUrl} alt={shape.name} />
+                  <p style={{ display: "none" }}>{shape.name}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="ring_types mt-4">
+            <h4>Material: 14k White Gold</h4>
+            <div>
+              {materialList.map((shape) => (
+                <button
+                  key={shape.name}
+                  className={`btn_shapes ${
+                    selectedMaterial.includes(shape.name) ? "selected" : ""
+                  }`}
+                  onClick={() => handleMaterialClick(shape.name, shape.imgUrl)}
+                >
+                  <img className="img" src={shape.imgUrl} alt={shape.name} />
+                  <p style={{ display: "none" }}>{shape.name}</p>
+                </button>
+              ))}
             </div>
           </div>
 
@@ -147,7 +225,7 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            <button>Book Appointment</button>
+            {/* <button>Book Appointment</button> */}
           </div>
         </div>
       </div>
@@ -218,7 +296,45 @@ const Root = styled.section`
           font-size: 13px;
         }
       }
+      .ring_types {
+        display: flex;
+        flex-direction: column;
 
+        h4 {
+          font-size: 14px;
+          color: #000000;
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
+        > div {
+          display: flex;
+          overflow-x: auto;
+          .btn_shapes {
+            width: 48px !important;
+            border: 2px solid transparent;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 12px;
+            line-height: 25px;
+            font-weight: 500;
+            .img {
+              width: 40px;
+              height: 40px;
+            }
+            &.selected {
+              border-bottom: 3px solid black;
+            }
+
+            &:hover {
+              background-color: rgba(247, 247, 247);
+            }
+          }
+        }
+      }
       .stone_shape {
         margin-top: 20px;
         h4 {
@@ -331,7 +447,7 @@ const Root = styled.section`
       padding: 20px;
       border-radius: 20px;
       margin-top: 25px;
-      /* margin-bottom:40px; */
+      /* / margin-bottom:40px; / */
       h5 {
         font-size: 1rem;
         font-weight: 600;
@@ -358,6 +474,7 @@ const Root = styled.section`
     padding: 10px 0px;
     .main_div {
       gap: 0px;
+      margin: 20px;
     }
 
     .main_div .image_div {
@@ -387,22 +504,28 @@ const Root = styled.section`
     .main_div .des_div .title h4 {
       font-size: 18px;
     }
+
+    .main_div .product_btn {
+      margin-top: 0;
+    }
+
+    .main_div .policy .policy_type p {
+      font-size: 10px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
     .main_div {
-      gap: 0px;
+      display: unset;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-      margin: 20px;
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      padding: 5px;
     }
     .main_div .des_div h2 {
       font-size: 18px;

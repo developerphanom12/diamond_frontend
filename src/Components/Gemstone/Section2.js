@@ -31,6 +31,7 @@ import Sliderr from "./Sliderr";
 import Svgsvg2 from "../../globalSvg/Svgsvg2";
 import Svgsvg from "../../globalSvg/Svgsvg";
 import Svgsvg3 from "../../globalSvg/Svgsvg3";
+import Section4 from "./Section4";
 
 const collections = [
   {
@@ -51,23 +52,23 @@ const collections = [
 ];
 
 const shapesList = [
-  { name: "gemRound", imgUrl: ROUND },
-  { name: "gemPrincess", imgUrl: PRINCESS },
-  { name: "gemOval", imgUrl: OVAL },
-  { name: "gemEmrald", imgUrl: EMERALD },
-  { name: "gemPear", imgUrl: PEAR },
-  { name: "gemHeart", imgUrl: HEART },
-  { name: "gemMarquise", imgUrl: MARQUISE },
-  { name: "gemCushion", imgUrl: CUSHION },
-  { name: "gemAsscher", imgUrl: ASSCHER },
-  { name: "gemRadiant", imgUrl: RADIANT },
+  { shape: "Round", name: "gemRound", imgUrl: ROUND },
+  { shape: "Princess", name: "gemPrincess", imgUrl: PRINCESS },
+  { shape: "Oval", name: "gemOval", imgUrl: OVAL },
+  { shape: "Emerald", name: "gemEmerald", imgUrl: EMERALD },
+  { shape: "Pear", name: "gemPear", imgUrl: PEAR },
+  { shape: "Heart", name: "gemHeart", imgUrl: HEART },
+  { shape: "Marquise", name: "gemMarquise", imgUrl: MARQUISE },
+  { shape: "Cushion", name: "gemCushion", imgUrl: CUSHION },
+  { shape: "Asscher", name: "gemAsscher", imgUrl: ASSCHER },
+  { shape: "Radiant", name: "gemRadiant", imgUrl: RADIANT },
 ];
 export default function Section2() {
   const [selectedShapes, setSelectedShapes] = useState(["gemRound"]);
   const [selectedCollection, setSelectedCollection] = useState(
     collections[0].id
   );
-  const [caratRange, setCaratRange] = useState([0.5, 11.5]);
+  const [caratRange, setCaratRange] = useState([1, 5]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(502086918);
   const minCarat = caratRange[0];
@@ -84,18 +85,20 @@ export default function Section2() {
 
       if (params.selectedShapes.length > 0)
         query.append("tag", params.selectedShapes.join(","));
-      if (minCarat !== undefined && minCarat !== null)
-        query.append("minPrice", minCarat);
-      if (maxCarat !== undefined && maxCarat !== null)
-        query.append("maxPrice", maxCarat);
+      // if (minCarat !== undefined && minCarat !== null)
+      //   query.append("minPrice", minCarat);
+      // if (maxCarat !== undefined && maxCarat !== null)
+      //   query.append("maxPrice", maxCarat);
       query.append("collectionId", params.selectedCollection);
 
       const queryString = query.toString();
       const resp = await axios.get(`${EXCHANGE_URLS}/fetch?${queryString}`);
 
       if (resp?.status === 200) {
-        setValue(resp?.data?.items);
-        const collectionIds = resp.data.items.map((item) => item.collectionId);
+        setValue(resp?.data?.products);
+        const collectionIds = resp.data.products.map(
+          (item) => item.collectionId
+        );
         dispatch(setCollectionIds(collectionIds));
       }
     } catch (err) {
@@ -114,7 +117,7 @@ export default function Section2() {
     };
 
     diamondApi(params);
-  }, [selectedShapes, caratRange, dispatch]);
+  }, [selectedShapes, selectedCollection, caratRange, dispatch]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
@@ -149,22 +152,22 @@ export default function Section2() {
   };
 
   const increaseMinimum = () => {
-    const newMin = Math.min(caratRange[0] + 0.1, caratRange[1]);
+    const newMin = Math.min(caratRange[0] + 0.5, caratRange[1]);
     setCaratRange([newMin, caratRange[1]]);
   };
 
   const decreaseMinimum = () => {
-    const newMin = Math.max(caratRange[0] - 0.1, 0.1);
+    const newMin = Math.max(caratRange[0] - 0.5, 0.5);
     setCaratRange([newMin, caratRange[1]]);
   };
 
   const increaseMaximum = () => {
-    const newMax = Math.min(caratRange[1] + 0.1, 11.5);
+    const newMax = Math.min(caratRange[1] + 0.5, 5);
     setCaratRange([caratRange[0], newMax]);
   };
 
   const decreaseMaximum = () => {
-    const newMax = Math.max(caratRange[1] - 0.1, caratRange[0]);
+    const newMax = Math.max(caratRange[1] - 0.5, caratRange[0]);
     setCaratRange([caratRange[0], newMax]);
   };
   const [isOpen, setIsOpen] = React.useState(false);
@@ -196,7 +199,7 @@ export default function Section2() {
             onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
             <img src={shape.imgUrl} alt={shape.name} />
-            <p>{shape.name}</p>
+            <p>{shape.shape}</p>
           </button>
         ))}
       </div>
@@ -221,9 +224,9 @@ export default function Section2() {
               onChange={handleChangeCarat}
               valueLabelDisplay="auto"
               disableSwap
-              min={0.5}
-              max={11.5}
-              step={0.1}
+              min={1}
+              max={5}
+              step={0.5}
             />
             <div className="carat_value_div">
               <div className="carat_min_max_div">
@@ -321,6 +324,7 @@ export default function Section2() {
           </Drawer>
         )}
       </div>
+      <Section4 value={value} />
     </Root>
   );
 }
@@ -330,7 +334,7 @@ const Root = styled.section`
   width: 100%;
   padding: 0px 10px;
   .drawer-content {
-    padding: 20px 0px;
+    padding: 0px 0px;
     width: 100%;
   }
   .drawer-toggle-button {
@@ -362,7 +366,6 @@ const Root = styled.section`
       display: block;
     }
     .drawer-content {
-      /* display: none; */
       .ring_types {
         justify-content: left;
         gap: 6px;
@@ -439,6 +442,7 @@ const Root = styled.section`
     display: flex;
     margin-top: 20px;
     flex-wrap: wrap;
+    gap: 40px;
     justify-content: space-between;
     .carat_div {
       display: flex;
@@ -449,7 +453,6 @@ const Root = styled.section`
         font-size: 15px;
         font-weight: 600;
         color: #000;
-        margin-bottom: 0;
         width: 100%;
       }
 
@@ -493,7 +496,6 @@ const Root = styled.section`
             }
           }
           .carat_btn_div {
-            /* width: 20%; */
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -579,7 +581,6 @@ const Root = styled.section`
     .certificate_div {
       display: flex;
       flex-direction: column;
-      flex: 1;
       padding: 0px 10px;
 
       h5 {
@@ -644,8 +645,17 @@ const Root = styled.section`
       padding: 10px 0px;
     }
   }
+
   span.MuiSlider-thumb.MuiSlider-thumbSizeMedium.MuiSlider-thumbColorPrimary.MuiSlider-thumb.MuiSlider-thumbSizeMedium.MuiSlider-thumbColorPrimary.css-cp2j25-MuiSlider-thumb {
     color: white;
     border: 2px solid black;
+    width: 27px;
+    height: 27px;
+  }
+  button.slick-arrow.slick-prev.slick-disabled {
+    display: none !important;
+  }
+  button.slick-arrow.slick-next.slick-disabled {
+    display: none !important;
   }
 `;

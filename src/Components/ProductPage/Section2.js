@@ -352,7 +352,7 @@ export default function Section2() {
 
           <div className="product_btn">
             <button className="secure_btn" onClick={handleCheckout}>
-              Secure Checkout
+              {selectedSize ? "Secure Checkout" : "Select Ring Size"}
             </button>
             <button className="cart_btn" onClick={toggleDrawer}>
               Add to Cart

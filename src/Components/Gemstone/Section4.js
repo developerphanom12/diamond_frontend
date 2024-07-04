@@ -1,107 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import dia from "../Images/handimg.webp";
 import { useNavigate } from "react-router-dom";
-import Drawer from "react-modern-drawer";
 
-export default function Section4() {
+export default function Section4({ value }) {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const drawerContent = (
-    <div className="main_div">
-      <div className={`subdiv ${isOpen ? "open" : ""}`}>
-        <img src={dia} alt="img" />
-        <div className={`hov_content ${isOpen ? "show" : ""}`}>
-          <div className="heading">
-            <h5>1Ct Marquise Keyzar Moissanite</h5>
-            <p>$502</p>
-          </div>
-          <div className="btn_div">
-            <button className="info_btn">More Info</button>
-            <button
-              className="add_btn"
-              onClick={() => {
-                navigate("/productgem");
-              }}
-            >
-              Add Setting
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
   return (
     <Root>
-      <button className="drawer-toggle-button" onClick={toggleDrawer}>
-        {drawerContent}
-      </button>
-      <div
-        className={`drawer-content ${
-          isOpen && screenWidth <= 567 ? "open" : ""
-        }`}
-      >
-        {screenWidth > 567 ? (
-          drawerContent
-        ) : (
-          <Drawer
-            open={isOpen}
-            onClose={toggleDrawer}
-            direction="bottom"
-            className="bla"
-          >
-            {drawerContent}
-          </Drawer>
-        )}
-      </div>
+      {value &&
+        value?.map((i, index) => (
+          <div className="main_div" key={index}>
+            <div className="subdiv">
+              <img src={i.images?.edges?.[0]?.node?.originalSrc} alt="img" />
+              <div className="hov_content">
+                <div className="heading">
+                  <h5>{i?.title}</h5>
+                  <p>${i?.priceRange?.maxVariantPrice?.amount}</p>
+                </div>
+                <div className="btn_div">
+                  <button className="info_btn">More Info</button>
+                  <button
+                    className="add_btn"
+                    onClick={() => {
+                      navigate("/productgem");
+                    }}
+                  >
+                    Add Setting
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
     </Root>
   );
 }
 
 const Root = styled.section`
   padding: 0 20px;
-  .drawer-content {
-    padding: 20px 0px;
-    width: 100%;
-  }
-  .drawer-toggle-button {
-    font-weight: 500;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: transparent;
-  }
-  @media (min-width: 568px) {
-    .drawer-toggle-button {
-      display: none;
-    }
-    .drawer-content {
-      display: block;
-    }
-  }
-  .EZDrawer__container {
-    overflow-y: scroll !important;
-    height: 70vh !important;
-    border-top-right-radius: 25px !important;
-    border-top-left-radius: 25px !important;
-    padding-bottom: 40px;
-  }
   .main_div {
     display: flex;
     flex-wrap: wrap;
@@ -120,6 +57,7 @@ const Root = styled.section`
 
       img {
         width: 100%;
+        height: 90%;
       }
 
       &:hover {

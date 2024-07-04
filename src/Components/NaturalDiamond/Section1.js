@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ring from "../Images/Solitaire-removebg-preview.png";
@@ -12,21 +12,26 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Section1() {
   const [selectedButton, setSelectedButton] = useState(false);
   const productIds = useSelector((state) => state.users.productIds);
+  const labgrownValue = useSelector((state) => state.users.diamondType);
 
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
-
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleModalNavigate = (labgrownValue, buttonIndex) => {
     console.log("Navigating with labgrownValue:", labgrownValue);
     dispatch(setDiamondType(labgrownValue));
     setSelectedButton(buttonIndex);
     setmodal(false);
-    navigate("/naturaldiamond", {
-      state: { labgrownValue },
-    });
   };
+
+  useEffect(() => {
+    if (labgrownValue !== undefined) {
+      setSelectedButton(labgrownValue);
+    }
+  }, [labgrownValue]);
 
   return (
     <Root>
@@ -99,18 +104,8 @@ export default function Section1() {
 
         <div className="row">
           <div className="two_btn">
-            <div className="col-lg-2  "></div>
+            <div className="col-lg-2"></div>
             <div className="col-lg-2 col-md-3 col-1"></div>
-
-            <div className="col-lg-2 col-md-3 col-5">
-              <button
-                className={selectedButton === true ? "selected" : ""}
-                onClick={() => handleModalNavigate(true, true)}
-              >
-                <img src={labgrown} alt="img of lab grown diamond" />
-                <h5>Lab Grown</h5>
-              </button>
-            </div>
             <div className="col-lg-2 col-md-3 col-5">
               <button
                 className={selectedButton === false ? "selected" : ""}
@@ -120,6 +115,16 @@ export default function Section1() {
                 <h5>Natural</h5>
               </button>
             </div>
+            <div className="col-lg-2 col-md-3 col-5">
+              <button
+                className={selectedButton === true ? "selected" : ""}
+                onClick={() => handleModalNavigate(true, true)}
+              >
+                <img src={labgrown} alt="img of lab grown diamond" />
+                <h5>Lab Grown</h5>
+              </button>
+            </div>
+
             <div className="col-lg-2 col-md-3 col-1"></div>
             <div className="col-lg-2   "></div>
           </div>

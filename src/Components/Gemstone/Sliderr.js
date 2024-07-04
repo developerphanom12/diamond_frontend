@@ -49,11 +49,11 @@ export default function Sliderr({ collections, onCollectionChange }) {
   );
 }
 const Root = styled.section`
-  padding-left: 50px;
+  
   .slick-list,
   .slick-slider,
   .slick-track {
-    width: 250px;
+    width: 255px;
   }
 
   .slick-next:before,
@@ -63,7 +63,6 @@ const Root = styled.section`
     opacity: 0.75;
     color: hsl(332.31deg 1.29% 66.5%);
     position: relative;
-    /* left: 30px; */
     z-index: 11111;
   }
   button {

@@ -99,8 +99,8 @@ export default function Section1() {
   );
 }
 const Root = styled.section`
-  padding: 20px 0px;
-  margin: 0px 10px;
+  padding: 10px 0px 0px;
+  margin: 0px;
 
   .container-fluid {
     text-align: center;
@@ -195,7 +195,6 @@ const Root = styled.section`
     color: #000;
     h3 {
       color: rgba(0, 0, 0);
-      /* font-size: 30px; */
       padding: 0px 20px;
       line-height: 2.25rem;
     }
@@ -272,6 +271,7 @@ const Root = styled.section`
     }
   }
   @media (max-width: 768px) {
+ 
     .column,
     .bord {
       height: 8vh;
@@ -288,6 +288,15 @@ const Root = styled.section`
     }
   }
   @media (max-width: 667px) {
+    .heading {
+      h3{
+        font-size:18px;
+      }
+      p{
+        font-size:12px;
+        line-height:1rem;
+      }
+}
     .column,
     .bord {
       padding: 5px;
