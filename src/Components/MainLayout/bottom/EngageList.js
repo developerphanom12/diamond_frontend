@@ -42,23 +42,26 @@ export default function EngageList() {
         <div className="row">
           <div className="col-lg-3 col-mg-6 col-12">
             <b>Design your engagement ring</b>
-            <ul>
-              <li>
-                {" "}
-                <img src={rinfWdiamond} alt="img" />
-                <a href="engagementring">Start with a setting</a>
-              </li>
-              <li>
-                {" "}
-                <img src={naturaldiamond} alt="img" />
-                <a href="naturaldiamond"> Start with a Natural Diamond</a>
-              </li>
-              <li>
-                <img src={labgrown} alt="img" />
-                <a href="naturaldiamond"> Start with a Lab-created Diamond</a>
-              </li>
-            </ul>
+            <div className="ring_space">
+              <ul>
+                <li className="d-flex">
+                  {" "}
+                  <img src={rinfWdiamond} alt="img" />
+                  <a href="engagementring">Start with a setting</a>
+                </li>
+                <li className="d-flex">
+                  {" "}
+                  <img src={naturaldiamond} alt="img" />
+                  <a href="naturaldiamond"> Start with a Natural Diamond</a>
+                </li>
+                <li className="d-flex">
+                  <img src={labgrown} alt="img" />
+                  <a href="naturaldiamond"> Start with a Lab-created Diamond</a>
+                </li>
+              </ul>
+            </div>
           </div>
+
           <div className="col-lg-3 col-mg-6 col-12 bord">
             <b>Present Engagement Rings</b>
             <div className="ring_space">
@@ -105,7 +108,7 @@ export default function EngageList() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-4 col-md-8 col-12 bord">
+          <div className="col-lg-3  col-md-6 col-12  bord">
             <b>Shop By Style</b>
             <div className="ring_space">
               <ul>
@@ -153,29 +156,36 @@ export default function EngageList() {
             </div>
           </div>
 
-          <div className="col-lg-2 col-md-4 col-12 bord">
+          <div className="col-lg-3  col-md-6 col-12  bord">
             <b>Shop By Metal</b>
-            <ul>
-              <li style={{ display: "flex", alignItems: "center" }}>
-                <img src={gold1} alt="img" />
-                <p style={{ margin: "0", padding: "0px 4px" }}> Yellow Gold</p>
-              </li>
-              <li style={{ display: "flex", alignItems: "center" }}>
-                <img src={gold2} alt="img" />
+            <div className="ring_space">
+              <ul>
+                <li style={{ display: "flex", alignItems: "center" }}>
+                  <img src={gold1} alt="img" />
+                  <p style={{ margin: "0", padding: "0px 4px" }}>
+                    {" "}
+                    Yellow Gold
+                  </p>
+                </li>
+                <li style={{ display: "flex", alignItems: "center" }}>
+                  <img src={gold2} alt="img" />
 
-                <p style={{ margin: "0", padding: "0px 4px" }}> Rose Gold</p>
-              </li>
-              <li style={{ display: "flex", alignItems: "center" }}>
-                <img src={gold3} alt="img" />
+                  <p style={{ margin: "0", padding: "0px 4px" }}> Rose Gold</p>
+                </li>
+              </ul>
+              <ul>
+                <li style={{ display: "flex", alignItems: "center" }}>
+                  <img src={gold3} alt="img" />
 
-                <p style={{ margin: "0", padding: "0px 4px" }}> White Gold</p>
-              </li>
-              <li style={{ display: "flex", alignItems: "center" }}>
-                <img src={gold4} alt="img" />
+                  <p style={{ margin: "0", padding: "0px 4px" }}> White Gold</p>
+                </li>
+                <li style={{ display: "flex", alignItems: "center" }}>
+                  <img src={gold4} alt="img" />
 
-                <p style={{ margin: "0", padding: "0px 4px" }}> Platinum</p>
-              </li>
-            </ul>
+                  <p style={{ margin: "0", padding: "0px 4px" }}> Platinum</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -183,44 +193,42 @@ export default function EngageList() {
   );
 }
 const Root = styled.section`
-  padding: 30px;
-
-  b {
-    font-size: 15px;
-    text-transform: uppercase;
+  .col-lg-3 {
+    margin: 20px 0px;
   }
-
+  b {
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 10px;
+  }
   ul {
-    padding: 0;
+    padding: 20px;
     list-style: none;
     li {
-      font-weight: 400;
-      font-size: 15px;
+      font-weight: 500;
+      font-size: 13px;
       margin: 10px 0px;
       cursor: pointer;
       a {
         text-decoration: none;
         color: black;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      &:hover {
-        text-decoration: underline;
+        display: flex;
+        flex-direction: row;
       }
     }
   }
+
   svg,
   img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     mix-blend-mode: multiply;
   }
 
   .ring_space {
     display: flex;
     justify-content: space-between;
-    padding: 0px 20px;
+    padding: 0px;
   }
 
   .bord {
@@ -228,12 +236,20 @@ const Root = styled.section`
   }
 
   @media (max-width: 567px) {
-    padding: 0px;
+    margin-left: 0;
 
+    .col-lg-3 {
+      margin: 0;
+      padding: 0;
+    }
+
+    padding: 0px;
+    .imgh {
+      display: none;
+    }
     .ring_space {
       padding: 0;
-      gap: 50px;
-      justify-content: unset;
+      gap: 10px;
     }
 
     ul li a {

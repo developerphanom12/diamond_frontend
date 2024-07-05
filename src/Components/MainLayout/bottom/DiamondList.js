@@ -21,22 +21,24 @@ export default function DiamondList() {
         <div className="row">
           <div className="col-lg-3 col-md-6 col-12">
             <b>Design your Diamond ring</b>
-            <ul>
-              <li>
-                {" "}
-                <img src={rinfWdiamond} alt="img" />
-                <a href="naturaldiamond">Start with a setting</a>
-              </li>
-              <li>
-                {" "}
-                <img src={naturaldiamond} alt="img" />
-                Start with a Natural Diamond
-              </li>
-              <li>
-                <img src={labgrown} alt="img" />
-                Start with a Lab-created Diamond
-              </li>
-            </ul>
+            <div className="ring_space">
+              <ul>
+                <li className="d-flex">
+                  {" "}
+                  <img src={rinfWdiamond} alt="img" />
+                  <a href="naturaldiamond">Start with a setting</a>
+                </li>
+                <li className="d-flex">
+                  {" "}
+                  <img src={naturaldiamond} alt="img" />
+                  <a href="naturaldiamond">Start with a Natural Diamond</a>
+                </li>
+                <li className="d-flex">
+                  <img src={labgrown} alt="img" />
+                  <a href="naturaldiamond">Start with a Lab-created Diamond</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="col-lg-3 col-md-6 col-12 bord">
             <b>Shop Natural Diamond By Shape</b>
@@ -44,7 +46,7 @@ export default function DiamondList() {
               <ul>
                 <li>
                   <img src={round} alt="img" />
-                  Round{" "}
+                  <span>Round</span>
                 </li>
                 <li>
                   {" "}
@@ -145,6 +147,7 @@ export default function DiamondList() {
             <img
               src={backimg}
               alt="img"
+              className="imgh"
               style={{ width: "100%", height: "100%" }}
             />
           </div>
@@ -154,12 +157,11 @@ export default function DiamondList() {
   );
 }
 const Root = styled.section`
-  margin-left: 10px;
   .col-lg-3 {
     margin: 20px 0px;
   }
   b {
-    font-size: 15px;
+    font-size: 13px;
     text-transform: uppercase;
     padding: 10px;
   }
@@ -167,28 +169,30 @@ const Root = styled.section`
     padding: 20px;
     list-style: none;
     li {
-      font-weight: 400;
-      font-size: 15px;
+      font-weight: 500;
+      font-size: 13px;
       margin: 10px 0px;
       cursor: pointer;
       a {
         text-decoration: none;
         color: black;
+        display: flex;
+        flex-direction: row;
       }
     }
   }
 
   svg,
   img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     mix-blend-mode: multiply;
   }
 
   .ring_space {
     display: flex;
     justify-content: space-between;
-    padding: 0px ;
+    padding: 0px;
   }
 
   .bord {
@@ -204,11 +208,12 @@ const Root = styled.section`
     }
 
     padding: 0px;
-
+    .imgh {
+      display: none;
+    }
     .ring_space {
       padding: 0;
       gap: 10px;
-      justify-content: unset;
     }
 
     ul li a {

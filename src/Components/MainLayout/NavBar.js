@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import EngageList from "./bottom/EngageList";
 import DiamondList from "./bottom/DiamondList";
 import EducationList from "./bottom/EducationList";
+import GemstoneList from "./bottom/GemstoneList";
 
 const Nav = styled.div`
   background: white;
@@ -241,10 +242,9 @@ const Root = styled.section`
   }
 
   @media (max-width: 567px) {
-
-  .ring_head{
-    font-size: 20px;
-} 
+    .ring_head {
+      font-size: 20px;
+    }
 
     .first_header {
       display: none;
@@ -259,12 +259,11 @@ const Root = styled.section`
     }
 
     .search_div_second {
-      width:100%;
-      margin:0;
-      justify-content:unset;
-      border-radius:0;
-      max-height:500px;
-
+      width: 100%;
+      margin: 0;
+      justify-content: unset;
+      border-radius: 0;
+      max-height: 500px;
     }
 
     .accor_heading {
@@ -498,7 +497,7 @@ export default function NavBar() {
                 <div className="row">
                   <div className="search_div_second">
                     {products.length > 0 &&
-                      products.map((product) =>(
+                      products.map((product) => (
                         <div
                           className="col-lg-5 col-md-5 col-sm-12"
                           key={product.node.id}
@@ -560,6 +559,22 @@ export default function NavBar() {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2-content"
+                    id="panel2-header"
+                  >
+                    <Typography>
+                      <div className="accor_heading">GEMSTONE</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <GemstoneList />
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
 
                 <Accordion>
                   <AccordionSummary
@@ -586,4 +601,3 @@ export default function NavBar() {
     </Root>
   );
 }
-

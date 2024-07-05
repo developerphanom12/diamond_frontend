@@ -78,94 +78,88 @@ export default function EducationList() {
   );
 }
 const Root = styled.section`
-  margin-left: 10px;
   .col-lg-3 {
-    margin:30px 0px;
+    margin: 20px 0px;
   }
   b {
-    font-size:15px;
-    text-transform:uppercase;
-    padding:10px;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 10px;
   }
   ul {
-    padding:20px;
-    list-style:none;
-    li{
-      font-weight: 400;
-      font-size: 15px;
+    padding: 20px;
+    list-style: none;
+    li {
+      font-weight: 500;
+      font-size: 13px;
       margin: 10px 0px;
       cursor: pointer;
-
+      a {
+        text-decoration: none;
+        color: black;
+        display: flex;
+        flex-direction: row;
+      }
     }
   }
+
   svg,
-  img{
-    width:30px;
-    height:30px;
-    mix-blend-mode:multiply;
+  img {
+    width: 25px;
+    height: 25px;
+    mix-blend-mode: multiply;
   }
 
-   
-  .ring_space{
+  .ring_space {
     display: flex;
-    justify-Content: space-between;
-    padding: 0px 20px
+    justify-content: space-between;
+    padding: 0px;
   }
 
-  .bord{
+  .bord {
     border-left: 1px solid #ededed;
   }
 
-
-
-
   @media (max-width: 567px) {
+    margin-left: 0;
 
-     margin-left:0; 
-     margin-bottom:70px;
-
- .col-lg-3 {
-    margin:0;
-    padding:0;
-} 
+    .col-lg-3 {
+      margin: 0;
+      padding: 0;
+    }
 
     padding: 0px;
+    .imgh {
+      display: none;
+    }
+    .ring_space {
+      padding: 0;
+      gap: 10px;
+    }
 
-    .ring_space{
-    padding:0;
-    gap: 50px;
-    justify-content:unset;
-}
+    ul li a {
+      font-size: 12px;
+    }
 
- ul li a {
-    font-size:12px
-}
+    .bord {
+      border-top: 1px solid #ededed;
+      border-left: unset;
+      padding-top: 20px;
+    }
 
-.bord{
-    border-top: 1px solid #ededed;
-    border-left: unset;
-    padding-top: 20px;
-  }
+    span {
+      font-size: 12px;
+    }
 
+    ul li {
+      font-size: 12px;
+      gap: 6px;
+      display: flex;
+      align-items: center;
+    }
 
-  span {
-    font-size: 12px;
-}
-
-
-ul li {
-    font-size: 12px;
-    gap: 6px;
-    display: flex;
-    align-items: center;
-}
-
- b {
-    font-size: 13px;
-}
-
-
-
-
+    b {
+      font-size: 13px;
+    }
   }
 `;

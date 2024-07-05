@@ -160,7 +160,7 @@ export default function Section2() {
           )}
         </div>
       </div>
-       
+
       <Section4 products={products} />
     </Root>
   );
@@ -222,11 +222,13 @@ const Root = styled.section`
 
   .ring_types {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    overflow-x: auto;
     justify-content: center;
     gap: 20px;
     button {
-      width: 93px !important;
+      width: 93px ;
       border: 2px solid transparent;
       background: #fff;
       display: flex;
@@ -290,11 +292,12 @@ const Root = styled.section`
       /* display: none; */
       .ring_types {
         justify-content: left;
+        flex-wrap: wrap;
         gap: 4px;
         margin: 20px 10px 0px;
         width: 100%;
         .btn_shapes {
-          width: 93px !important;
+          width: 84px ;
           border: 1px solid #d1d1d1;
           background-color: rgba(247, 247, 247);
           padding: 12px 42px;
@@ -303,33 +306,23 @@ const Root = styled.section`
     }
 
     .heading {
-    padding: 10px 0px;
-    h2 {
-      font-size: 18px;
+      padding: 10px 0px;
+      h2 {
+        font-size: 18px;
+      }
+      p {
+        font-size: 12px;
+        line-height: 1rem;
+      }
     }
-    p {
-      font-size: 12px;
-      line-height: 1rem;
-    }
-  }
-
-  .main_div {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    gap: 4px;
-     margin-top: 0; 
-}
-  }
 
   
+  }
+
   @media (min-width: 567px) and (max-width: 992px) {
-     .drawer-toggle-button {
-display:none
-}
+    .drawer-toggle-button {
+      display: none;
+    }
   }
-  /* @media(max-width: 567px){
-  
-
-  } */
+ 
 `;
