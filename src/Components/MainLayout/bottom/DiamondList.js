@@ -93,7 +93,7 @@ export default function DiamondList() {
             </div>
           </div>
           <div className="col-lg-3 col-md-6 col-12 bord">
-            <b>Shop Natural Diamond By Shape</b>
+            <b>Shop Lab Diamond By Shape</b>
             <div className="ring_space">
               <ul>
                 <li>
@@ -178,7 +178,13 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
+        &:hover{
+          text-decoration: underline;
+        }
       }
+      &:hover{
+          text-decoration: underline;
+        }
     }
   }
 

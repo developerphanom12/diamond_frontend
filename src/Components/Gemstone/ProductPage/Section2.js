@@ -266,9 +266,9 @@ export default function Section2() {
               </div>
             </button>
 
-            <div className="plus_sign">
+            {/* <div className="plus_sign">
               <span>+</span>
-            </div>
+            </div> */}
 
             <button
               className={selectedButton === 2 ? "selected" : ""}
@@ -541,7 +541,7 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            <button>Book Appointment</button>
+            {/* <button>Book Appointment</button> */}
           </div>
         </div>
       </div>
@@ -625,6 +625,7 @@ const Root = styled.section`
         flex-direction: column;
         align-items: center;
         padding-top: 20px;
+        height: 50vh;
         &.selected {
           border: 2px solid black;
           background-color: white;
@@ -674,7 +675,7 @@ const Root = styled.section`
         }
       }
 
-      .plus_sign {
+      /* .plus_sign {
         position: absolute;
         z-index: 1111;
         transform: translate(265px, 0);
@@ -690,7 +691,7 @@ const Root = styled.section`
         @media (max-width: 999px) {
           display: none;
         }
-      }
+      } */
     }
 
     .ring_size {
@@ -811,7 +812,7 @@ const Root = styled.section`
         font-size: 13px;
         margin-bottom: 0;
       }
-      button {
+      /* button {
         font-size: 0.875rem;
         letter-spacing: 0;
         line-height: 1.2;
@@ -821,7 +822,7 @@ const Root = styled.section`
         margin-top: 10px;
         padding: 0;
         color: #000000;
-      }
+      } */
     }
   }
   img {
@@ -994,15 +995,59 @@ const Root = styled.section`
     }
   }
 
+  @media (max-width: 567px){
+    .main_div .complete_info_container button {
+      padding-top: 10px 0;
+      height: 35vh;
+    }
+
+    .main_div .policy .policy_type p {
+      font-size: 11px;
+    }
+
+    .main_div {
+      flex-direction: column;
+      gap:20px;
+    }
+
+    .main_div .image_div {
+      width:100%;
+      height:355px;
+    }
+
+    .main_div .des_div {
+      width: 100%;
+      padding-left:0;
+    }
+
+   .main_div .des_div .title h2 {
+    font-size: 18px;
+  
+}
+
+   .main_div .image_div .img_container {
+    height:unset;
+}
+
+ .main_div .image_div .slick-list,  .main_div .image_div .slick-slider,  .main_div .image_div .slick-track {
+    height: 300px;
+}
+
+  }
+
   @media (min-width: 567px) and (max-width: 992px) {
     .prod_main_div {
       height: 890px;
     }
-  }
-  @media (max-width: 1024px) {
+
+    .main_div .complete_info_container button {
+      padding-top: 10px 0;
+      height: 18vh;
+    }
+
     .main_div .image_div .slick-slider,
     .gMiibD .main_div .image_div .slick-track {
-      height: 362px;
+      /* height: 362px; */
       iframe {
         width: 90vw;
         height: 40vh;

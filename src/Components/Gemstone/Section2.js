@@ -384,7 +384,6 @@ const Root = styled.section`
           background-color: rgba(247, 247, 247);
           padding: 12px 42px;
           p {
-            width: 100%;
             font-size: 11px;
             line-height: 1.25;
             margin: 0px;

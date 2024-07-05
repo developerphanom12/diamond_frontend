@@ -17,6 +17,7 @@ import certifiedd from "../../Images/certifiedd.png";
 import pinkimg from "../../Images/pink.PNG";
 import modimg from "../../Images/modimg.PNG";
 import images from "../../Images/images.PNG";
+import slideimg2 from "../../Images/slideimg2.webp";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import RingShipReturn from "../../DiamondDetails/RingShipReturn";
@@ -30,7 +31,8 @@ export default function Section2() {
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <img src={products?.mainImage && products.mainImage} alt="img" />
+          {/* <img src={products?.mainImage && products.mainImage} alt="img" /> */}
+          <img src={slideimg2} />
           <div
             style={{
               textAlign: "center",
@@ -40,11 +42,6 @@ export default function Section2() {
             }}
           >
             <button className="button">
-              <img
-                src={images}
-                alt="images"
-                style={{ width: "35px", height: "35px" }}
-              />
               <span>Image</span>
             </button>
           </div>
@@ -147,7 +144,6 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            <button>Book Appointment</button>
           </div>
         </div>
       </div>
@@ -166,7 +162,7 @@ const Root = styled.section`
     .image_div {
       flex: 1;
       border: 1px solid #d3d3d3;
-      padding: 20px 20px 0px 20px;
+      padding: 20px 20px 20px 20px;
       height: 613px;
       border-radius: 20px;
       flex-direction: column;
@@ -340,7 +336,7 @@ const Root = styled.section`
         font-size: 13px;
         margin-bottom: 0;
       }
-      button {
+      /* button {
         font-size: 0.875rem;
         letter-spacing: 0;
         line-height: 1.2;
@@ -350,7 +346,7 @@ const Root = styled.section`
         margin-top: 10px;
         padding: 0;
         color: #000000;
-      }
+      } */
     }
   }
 
@@ -362,42 +358,62 @@ const Root = styled.section`
 
     .main_div .image_div {
       width: 100%;
-      height: unset;
-      padding: 5px;
+      height: 400px;
       margin: 10px;
+      padding: 40px 5px 40px;
     }
+
     .main_div .des_div .prod_spec {
       display: none;
     }
+
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
       padding: 5px;
     }
+
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
     }
+
     .main_div .des_div .prod_spec .spec {
       padding: 0px 14px;
     }
+
     .main_div .des_div .prod_spec {
       gap: 20px;
     }
+
     .main_div .des_div .title h2,
     .main_div .des_div .title h4 {
       font-size: 18px;
     }
+    .main_div .policy .policy_type p {
+      font-size: 10px;
+    }
+
+    .main_div .image_div img {
+    width: 80vw;
+}
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
+
+    .main_div .image_div img {
+    width:80vw;
+}
+
     .main_div {
       gap: 0px;
+      flex-direction:column
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-      margin: 20px;
+      padding: 40px 5px 40px;
+
     }
     .main_div .des_div {
       width: 100%;

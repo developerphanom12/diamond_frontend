@@ -26,7 +26,7 @@ export default function GemstoneList() {
                 <li style={{ display: "flex" }}>
                   {" "}
                   <Svgsvg2 />
-                  <a href="naturaldiamond">Start with a Moissanite </a>
+                  <a href="gemstone">Start with a Moissanite </a>
                 </li>
                 <li style={{ display: "flex" }}>
                   {" "}
@@ -112,7 +112,10 @@ export default function GemstoneList() {
             <div className="ring_space">
               <ul>
                 <li>
-                  <img src={round} alt="img" /> <span>Moissanite Rings</span>
+                  <img src={round} alt="img" />{" "}
+                  <a href="gemstone">
+                    <span>Moissanite Rings</span>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -152,6 +155,9 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }

@@ -99,6 +99,9 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }
