@@ -13,8 +13,27 @@ import Cushion from "../../Images/cushionremovebg.png";
 import Svgsvg from "../../../globalSvg/Svgsvg";
 import Svgsvg2 from "../../../globalSvg/Svgsvg2";
 import Svgsvg3 from "../../../globalSvg/Svgsvg3";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  setSelectedCollectionId,
+  setSelectedCollectionTitle,
+  setSelectedShapeNames,
+} from "../../../redux/users/action";
 
 export default function GemstoneList() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleShapeClick = (names) => {
+    dispatch(setSelectedShapeNames(names));
+    navigate("/gemstone");
+  };
+
+  const handleTitleClick = (id) => {
+    dispatch(setSelectedCollectionId(id));
+    navigate("/gemstone");
+  };
   return (
     <Root>
       <div className="container-fluid">
@@ -23,20 +42,29 @@ export default function GemstoneList() {
             <b>Design your Gemstone ring</b>
             <div className="ring_space">
               <ul>
-                <li style={{ display: "flex" }}>
+                <li
+                  style={{ display: "flex" }}
+                  onClick={() => handleTitleClick("430466695386")}
+                >
                   {" "}
                   <Svgsvg2 />
-                  <a href="gemstone">Start with a Moissanite </a>
+                  Start with a Moissanite
                 </li>
-                <li style={{ display: "flex" }}>
+                <li
+                  style={{ display: "flex" }}
+                  onClick={() => handleTitleClick("430466728154")}
+                >
                   {" "}
                   <Svgsvg />
-                  <a href="naturaldiamond">Start with Sapphire </a>
+                  Start with Sapphire
                 </li>
-                <li style={{ display: "flex" }}>
+                <li
+                  style={{ display: "flex" }}
+                  onClick={() => handleTitleClick("430466793690")}
+                >
                   {" "}
                   <Svgsvg3 />
-                  <a href="naturaldiamond">Start with Emerald </a>
+                  Start with Emerald
                 </li>
                 <li>
                   <svg
@@ -56,7 +84,7 @@ export default function GemstoneList() {
           </div>
 
           <div className="col-lg-3 col-md-6 col-12 bord">
-            <b>Shop Natural Gemstone By Shape</b>
+            <b>Shop Gemstone By Shape</b>
             <div className="ring_space">
               <ul>
                 <li>
@@ -111,7 +139,7 @@ export default function GemstoneList() {
             <b>PRESET GEMSTONE RING</b>
             <div className="ring_space">
               <ul>
-                <li>
+                <li style={{ display: "flex" }}>
                   <img src={round} alt="img" />{" "}
                   <a href="gemstone">
                     <span>Moissanite Rings</span>
@@ -155,7 +183,7 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }

@@ -12,6 +12,15 @@ export const SET_UNIQUE_PRODUCT = "SET_UNIQUE_PRODUCT";
 export const SET_SELECTED_MATERIAL_IMAGE = "SET_SELECTED_MATERIAL_IMAGE";
 
 // Action creator
+export const setSelectedCollectionId = (id) => ({
+  type: 'SET_SELECTED_COLLECTION_ID',
+  payload: id,
+});
+
+export const setSelectedShapeNames = (names) => ({
+  type: 'SET_SELECTED_SHAPE_NAMES',
+  payload: names,
+});
 export const setSelectedMaterialImage = (shape, imageUrl) => ({
   type: "SET_SELECTED_MATERIAL_IMAGE",
   payload: { shape, imageUrl },

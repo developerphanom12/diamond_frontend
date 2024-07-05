@@ -26,7 +26,7 @@ import Halo from "../../Images/Halo-removebg-preview.png";
 import HiddenHalo from "../../Images/HiddenHalo-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setSelectedShape } from "../../../redux/users/action";
+import { setDiamondType, setSelectedShape } from "../../../redux/users/action";
 
 export default function EngageList() {
   const navigate = useNavigate();
@@ -35,6 +35,10 @@ export default function EngageList() {
   const handleShapeClick = (shapeName) => {
     dispatch(setSelectedShape(shapeName));
     navigate("/uniquering");
+  };
+  const handleDiamondTypeClick = (diamondType) => {
+    dispatch(setDiamondType(diamondType));
+    navigate("/naturaldiamond");
   };
   return (
     <Root>
@@ -49,14 +53,17 @@ export default function EngageList() {
                   <img src={rinfWdiamond} alt="img" />
                   <a href="engagementring">Start with a setting</a>
                 </li>
-                <li className="d-flex">
+                <li className="d-flex"  onClick={() => handleDiamondTypeClick(false)}>
                   {" "}
                   <img src={naturaldiamond} alt="img" />
-                  <a href="naturaldiamond"> Start with a Natural Diamond</a>
+                  Start with a Natural Diamond 
                 </li>
-                <li className="d-flex">
+                <li
+                  className="d-flex"
+                  onClick={() => handleDiamondTypeClick(true)}
+                >
                   <img src={labgrown} alt="img" />
-                  <a href="naturaldiamond"> Start with a Lab-created Diamond</a>
+                  Start with a Lab-created Diamond
                 </li>
               </ul>
             </div>

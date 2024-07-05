@@ -10,7 +10,10 @@ import {
   setCollectionIds,
   setDiamondIds,
   setDiamondType,
+  setSelectedCollectionId,
+  setSelectedCollectionTitle,
   setSelectedShapeImage,
+  setSelectedShapeNames,
 } from "../../redux/users/action";
 import ROUND from "../Images/round-removebg-preview.png";
 import EMERALD from "../Images/emerald-removebg-preview.png";
@@ -100,6 +103,16 @@ export default function Section2() {
           (item) => item.collectionId
         );
         dispatch(setCollectionIds(collectionIds));
+        const selectedCollectionId = collections.find(
+          (collection) => collection.id === params.selectedCollection
+        )?.id;
+
+        const selectedShapeNames = params.selectedShapes.map((shape) => 
+          shapesList.find((s) => s.name === shape)?.shape
+        );
+
+        dispatch(setSelectedCollectionId(selectedCollectionId));
+        dispatch(setSelectedShapeNames(selectedShapeNames));
       }
     } catch (err) {
       console.error("Error fetching gem", err);

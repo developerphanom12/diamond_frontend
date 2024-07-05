@@ -30,6 +30,8 @@ export default function Sliderr({ collections, onCollectionChange }) {
               onClick={() => handleButtonClick(index + 1, collection.id)}
               style={{ width: "84px" }}
             >
+              <span style={{ display: "none" }}>{collection.id}</span>
+
               {collection.svg}
             </button>
             <div
@@ -49,7 +51,6 @@ export default function Sliderr({ collections, onCollectionChange }) {
   );
 }
 const Root = styled.section`
-  
   .slick-list,
   .slick-slider,
   .slick-track {

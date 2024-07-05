@@ -13,8 +13,22 @@ import pear from "../../Images/Pear-removebg-preview.png";
 import princess from "../../Images/Princess-removebg-preview.png";
 import Radiant from "../../Images/Radiant-removebg-preview.png";
 import Cushion from "../../Images/cushionremovebg.png";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setDiamondType, setSelectedShape } from "../../../redux/users/action";
 
 export default function DiamondList() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleShapeClick = (shapeName) => {
+    dispatch(setSelectedShape(shapeName));
+    navigate("/uniquering");
+  };
+  const handleDiamondTypeClick = (diamondType) => {
+    dispatch(setDiamondType(diamondType));
+    navigate("/naturaldiamond");
+  };
   return (
     <Root>
       <div className="container-fluid">
@@ -28,14 +42,14 @@ export default function DiamondList() {
                   <img src={rinfWdiamond} alt="img" />
                   <a href="naturaldiamond">Start with a setting</a>
                 </li>
-                <li className="d-flex">
+                <li className="d-flex"  onClick={() => handleDiamondTypeClick(false)}>
                   {" "}
                   <img src={naturaldiamond} alt="img" />
-                  <a href="naturaldiamond">Start with a Natural Diamond</a>
+                  Start with a Natural Diamond 
                 </li>
-                <li className="d-flex">
+                <li className="d-flex"  onClick={() => handleDiamondTypeClick(true)}>
                   <img src={labgrown} alt="img" />
-                  <a href="naturaldiamond">Start with a Lab-created Diamond</a>
+                   Start with a Lab-created Diamond
                 </li>
               </ul>
             </div>
@@ -44,48 +58,48 @@ export default function DiamondList() {
             <b>Shop Natural Diamond By Shape</b>
             <div className="ring_space">
               <ul>
-                <li>
+                <li  onClick={() => handleShapeClick("ROUND")}>
                   <img src={round} alt="img" />
                   <span>Round</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("EMERALD")}>
                   {" "}
                   <img src={emerald} alt="img" />
                   <span>Emerald</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapeClick("HEART")}>
                   <img src={heart} alt="img" />
 
                   <span>Heart</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("MARQUISE")}>
                   <img src={marquise} alt="img" />
 
                   <span>Marquise</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("OVAL")}>
                   <img src={oval} alt="img" />
 
                   <span>Oval</span>
                 </li>
               </ul>
               <ul>
-                <li>
+                <li  onClick={() => handleShapeClick("PEAR")}>
                   <img src={pear} alt="img" />
 
                   <span>Pear</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapeClick("PRINCESS")}>
                   <img src={princess} alt="img" />
 
                   <span>Princess</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("RADIANT")}>
                   <img src={Radiant} alt="img" />
 
                   <span>Radiant</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapeClick("CUSHION")}>
                   <img src={Cushion} alt="img" />
                   <span>Cushion</span>
                 </li>
@@ -178,13 +192,13 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }
-      &:hover{
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

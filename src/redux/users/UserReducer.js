@@ -33,14 +33,26 @@ const initialState = {
     carat: null,
     size: null,
   },
-  collectionIds:null,
+  collectionIds: null,
   selectedMaterialImage: {
     shape: null,
     imageUrl: null,
   },
+  selectedCollectionId: "",
+  selectedShapeNames: null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_SELECTED_COLLECTION_ID":
+      return {
+        ...state,
+        selectedCollectionId: action.payload,
+      };
+    case "SET_SELECTED_SHAPE_NAMES":
+      return {
+        ...state,
+        selectedShapeNames: action.payload,
+      };
     case SET_SELECTED_MATERIAL_IMAGE:
       return {
         ...state,
@@ -63,7 +75,7 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         uniqueProduct: action.payload,
       };
-      case 'SET_COLLECTION_IDS':
+    case "SET_COLLECTION_IDS":
       return {
         ...state,
         collectionIds: action.payload,
