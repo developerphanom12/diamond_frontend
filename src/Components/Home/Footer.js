@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-4 col-md-12 col-12">
-            <h2>RING-BUILDER</h2>
+            <h2>The Precious Earth</h2>
             <p>
               We’re A Team Of Creatives, Programmers, And Jewelry Experts. Our
               Mission Is To Change Online Jewelry Shopping. We Understand That
@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <p>580 Fifth Ave. Suite #1706, New York, NY 10036</p>
             <p>+1 (888) 346-0787 - Toll Free</p>
-            <p>contact@RingBuilderjewelry.com</p>
+            <p>contact@thepreciousearth.com</p>
             <img src={insta} alt="img" />
           </div>
           <div className="col-lg-2 col-md-4 col-4">

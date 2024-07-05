@@ -112,5 +112,12 @@ const Root = styled.section`
     .col-lg-4 {
       margin: 20px 0px;
     }
+    input {
+      font-size:10px;
+    }
+
+    button {
+      font-size: 10px;
+    }
   }
 `;

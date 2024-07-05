@@ -94,20 +94,20 @@ export default function Section2() {
               alignItems: "center",
             }}
           >
-            <button className="button">
+            {/* <button className="button">
               {diamondById?.diamond?.image ? (
-                <img
-                  src={diamondById?.diamond?.image}
-                  title="Diamond image"
-                  alt="img"
-                  style={{ width: "50px", height: "50px" }}
-                />
+                // <img
+                //   src={diamondById?.diamond?.image}
+                //   title="Diamond image"
+                //   alt="img"
+                //   style={{ width: "50px", height: "50px" }}
+                // />
               ) : (
                 "No image"
               )}
 
               <span>Image</span>
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="des_div">
@@ -277,7 +277,7 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            <button>Book Appointment</button>
+            {/* <button>Book Appointment</button> */}
           </div>
         </div>
       </div>
@@ -296,7 +296,7 @@ const Root = styled.section`
     .image_div {
       flex: 1;
       border: 1px solid #d3d3d3;
-      padding: 20px 20px 0px 20px;
+      padding: 20px 20px 20px 20px;
       border-radius: 20px;
       display: flex;
       height: 630px;
@@ -496,19 +496,21 @@ const Root = styled.section`
     .main_div {
       gap: 0px;
       flex-direction: column;
+      margin:20px;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-      padding: 5px;
+      padding:20px;
     }
     .main_div .des_div .prod_spec {
       display: none;
     }
     .main_div .des_div {
       width: 100%;
-      margin-top: 20px;
+      margin: 20px 0 0 0;
+      padding: 5px;
      
     }
     .main_div .setting_detail .setting_info .setting_div {
@@ -524,11 +526,17 @@ const Root = styled.section`
     .main_div .des_div .title h4 {
       font-size: 18px;
     }
+
+    
+ .main_div .policy .policy_type p {
+    font-size: 10px;
+}
+
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
     .main_div {
-      gap: 0px;
+      display: unset;
     }
 
     .main_div .image_div {

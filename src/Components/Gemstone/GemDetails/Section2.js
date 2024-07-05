@@ -1,25 +1,25 @@
 import styled from "styled-components";
 import React from "react";
-// import round from "../Images/round-removebg-preview.png";
-// import emerald from "../Images/emerald-removebg-preview.png";
-// import heart from "../Images/heart-removebg-preview.png";
-// import Marquise from "../Images/Marquise-removebg-preview.png";
-// import oval from "../Images/oval-removebg-preview.png";
-// import Pear from "../Images/Pear-removebg-preview.png";
-// import Princess from "../Images/Princess-removebg-preview.png";
-// import Radiant from "../Images/Radiant-removebg-preview.png";
-// import cushionremovebg from "../Images/cushionremovebg.png";
-// import ECusion from "../Images/ECusion-removebg-preview.png";
-import aeroplane from "../Images/aeroplane.png";
-import badgess from "../Images/badgess.png";
-import moneyinhand from "../Images/moneyinhand.png";
-import certifiedd from "../Images/certifiedd.png";
-import pinkimg from "../Images/pink.PNG";
-import modimg from "../Images/modimg.PNG";
-// import images from "../Images/images.PNG";
+import round from "../../Images/round-removebg-preview.png";
+import emerald from "../../Images/emerald-removebg-preview.png";
+import heart from "../../Images/heart-removebg-preview.png";
+import Marquise from "../../Images/Marquise-removebg-preview.png";
+import oval from "../../Images/oval-removebg-preview.png";
+import Pear from "../../Images/Pear-removebg-preview.png";
+import Princess from "../../Images/Princess-removebg-preview.png";
+import Radiant from "../../Images/Radiant-removebg-preview.png";
+import cushionremovebg from "../../Images/cushionremovebg.png";
+import ECusion from "../../Images/ECusion-removebg-preview.png";
+import aeroplane from "../../Images/aeroplane.png";
+import badgess from "../../Images/badgess.png";
+import moneyinhand from "../../Images/moneyinhand.png";
+import certifiedd from "../../Images/certifiedd.png";
+import pinkimg from "../../Images/pink.PNG";
+import modimg from "../../Images/modimg.PNG";
+import images from "../../Images/images.PNG";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import RingShipReturn from "../DiamondDetails/RingShipReturn";
+import RingShipReturn from "../../DiamondDetails/RingShipReturn";
 
 export default function Section2() {
   const location = useLocation();
@@ -30,7 +30,7 @@ export default function Section2() {
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <img src={products?.mainImage && products.mainImage} alt="img"/>
+          <img src={products?.mainImage && products.mainImage} alt="img" />
           <div
             style={{
               textAlign: "center",
@@ -40,11 +40,11 @@ export default function Section2() {
             }}
           >
             <button className="button">
-              {/* <img
+              <img
                 src={images}
                 alt="images"
                 style={{ width: "35px", height: "35px" }}
-              /> */}
+              />
               <span>Image</span>
             </button>
           </div>
@@ -147,7 +147,7 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            {/* <button>Book Appointment</button> */}
+            <button>Book Appointment</button>
           </div>
         </div>
       </div>
@@ -358,7 +358,6 @@ const Root = styled.section`
     padding: 10px 0px;
     .main_div {
       gap: 0px;
-      margin:20px;
     }
 
     .main_div .image_div {
@@ -388,37 +387,22 @@ const Root = styled.section`
     .main_div .des_div .title h4 {
       font-size: 18px;
     }
-
-
- .main_div .product_btn {
-      margin-top:0;
-}
-
-
- .main_div .policy .policy_type p {
-    font-size: 10px;
-}
-
-
-
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-
-
-    .main_div{
-      display:unset;
+    .main_div {
+      gap: 0px;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-    
+      margin: 20px;
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      
+      padding: 5px;
     }
     .main_div .des_div h2 {
       font-size: 18px;

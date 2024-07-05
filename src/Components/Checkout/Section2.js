@@ -87,7 +87,7 @@ export default function Section2() {
     const { name, value } = e.target;
 
     // Check if the entered phone number is exactly 10 digits
-    if (name === "phone" && value.length > 10  && value.length < 10) {
+    if (name === "phone" && value.length > 10 && value.length < 10) {
       toast.error("Phone number must be exactly 10 digits.");
     } else {
       setPostValue({
@@ -109,7 +109,7 @@ export default function Section2() {
           alignItems: "center",
         }}
       >
-        <header>Ring-Builder</header>
+        <header>The Precious Earth</header>
         <input type="range" style={{ width: "52%" }} />
         <p>
           <span>information</span>
@@ -117,17 +117,19 @@ export default function Section2() {
           <span>payment</span>
         </p>
       </div>
+
       <div
         style={{
-          padding: "20px",
-          border: "1px solid #f5f5f5",
-          margin: "0px 40px",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          flexDirection: "column",
+          padding:"20px",
+          border:"1px solid #f5f5f5",
+          margin:"0px 40px",
+          display:"flex",
+          flexWrap:"wrap",
+          justifyContent:"center",
+          flexDirection:"column",
         }}
       >
+
         <h6>Express check out</h6>
         <ul>
           <li style={{ background: " #5a31f4 ", borderColor: "#5a31f4 " }}>
@@ -157,6 +159,7 @@ export default function Section2() {
             <h6>Contact</h6>
             <input type="email" placeholder="Email" className="input1" />
             <span style={{ display: "flex", gap: "5px", padding: "10px 0px" }}>
+
               <input
                 type="checkbox"
                 style={{
@@ -165,7 +168,9 @@ export default function Section2() {
                   height: "18px",
                 }}
               />
+
               <label>Email me with newsand offers.</label>
+
             </span>
           </div>
           <div className="shipping_address">
@@ -245,6 +250,7 @@ export default function Section2() {
             />
           </div>
           <div style={{ display: "flex", padding: "10px 0px", gap: "10px" }}>
+
             <input
               type="text"
               placeholder="City"
@@ -253,6 +259,11 @@ export default function Section2() {
               onChange={handleAddressChange}
               value={postValue.address.city}
             />
+
+          </div>
+
+          <div style={{ display: "flex", padding: "10px 0px", gap: "10px" }}>
+
             <input
               type="number"
               placeholder="Postal code (optional)"
@@ -261,7 +272,10 @@ export default function Section2() {
               onChange={handleAddressChange}
               value={postValue.address.zip}
             />
+
           </div>
+
+
           <div style={{ display: "flex", padding: "10px 0px" }}>
             <input
               type="number"
@@ -300,9 +314,11 @@ const Check = styled.section`
   display: flex;
   flex-direction: column;
   /* width: 100vw; */
+
   header {
     padding: 20px 20px 40px;
     font-size: 25px;
+    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
 
   p {
@@ -389,8 +405,10 @@ const Check = styled.section`
     font-size: 14px;
   }
   .button_div {
-    width: 80%;
+    width: 90%;
     margin: 10px 0px 10px 40px;
+    display: flex;
+    justify-content: end;
     button {
       padding: 16px 32px;
       color: #fff;
@@ -404,4 +422,21 @@ const Check = styled.section`
       }
     }
   }
+
+  @media (max-width: 567px) {
+
+.button_div {
+width: 80%;
+margin-top:40px;
+justify-content: center;
+}
+
+ .shipping_address {
+    padding: 0;
+    margin:0 20;
+}
+
+}
+
+
 `;

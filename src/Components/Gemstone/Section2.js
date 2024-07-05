@@ -308,10 +308,10 @@ export default function Section2() {
       </button>
       <div
         className={`drawer-content ${
-          isOpen && screenWidth <= 876 ? "open" : ""
+          isOpen && screenWidth <= 567 ? "open" : ""
         }`}
       >
-        {screenWidth > 876 ? (
+        {screenWidth > 567 ? (
           drawerContent
         ) : (
           <Drawer
@@ -345,7 +345,7 @@ const Root = styled.section`
     font-size: 14px;
     background-color: transparent;
   }
-  @media (min-width: 877px) {
+  @media (min-width: 568px) {
     .drawer-toggle-button {
       display: none;
     }
@@ -361,7 +361,7 @@ const Root = styled.section`
     padding-bottom: 40px;
   }
 
-  @media (max-width: 876px) {
+  @media (max-width: 567px) {
     .drawer-toggle-button {
       display: block;
     }
@@ -369,7 +369,7 @@ const Root = styled.section`
       .ring_types {
         justify-content: left;
         gap: 6px;
-        margin: 0px 20px;
+        margin: 0px;
         width: 100%;
         padding-bottom: 10px;
         h5 {
@@ -379,12 +379,12 @@ const Root = styled.section`
           color: #000;
         }
         .btn_shapes {
-          width: 84px !important;
           height: 93px;
           border: 1px solid transparent;
           background-color: rgba(247, 247, 247);
           padding: 12px 42px;
           p {
+            width: 100%;
             font-size: 11px;
             line-height: 1.25;
             margin: 0px;
@@ -402,12 +402,14 @@ const Root = styled.section`
     width: 100%;
     overflow-x: auto;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
     h5 {
       display: none;
     }
     .btn_shapes {
-      width: 93px !important;
+      width: 93px ;
       border: 2px solid transparent;
       background: #fff;
       display: flex;
@@ -423,6 +425,7 @@ const Root = styled.section`
       &.selected {
         border: 2px solid black;
         border-radius: 10px;
+        width: 100px !important;
       }
 
       &:hover {

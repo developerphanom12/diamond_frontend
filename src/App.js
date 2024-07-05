@@ -24,6 +24,7 @@ import UniqueRing from "./Components/uniqueProducts/UniqueRing/UniqueRing";
 import UniqueRingDetails from "./Components/uniqueProducts/UniqueRingDetails/UniqueRingDetails";
 import Gemstone from "./Components/Gemstone/Gemstone";
 import ProductGem from "./Components/Gemstone/ProductPage/ProductGem";
+import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
 
 function App() {
   // useEffect(() => {
@@ -63,6 +64,8 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
+              <Route path="/gemdetails" element={<GemDetails />} />
+
             </>
           </Routes>
         </Layout>

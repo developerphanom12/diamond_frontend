@@ -19,7 +19,14 @@ export default function Section4({ value }) {
                   <p>${i?.priceRange?.maxVariantPrice?.amount}</p>
                 </div>
                 <div className="btn_div">
-                  <button className="info_btn">More Info</button>
+                  <button
+                    className="info_btn"
+                    onClick={() => {
+                      navigate("/gemdetails");
+                    }}
+                  >
+                    More Info
+                  </button>
                   <button
                     className="add_btn"
                     onClick={() => {

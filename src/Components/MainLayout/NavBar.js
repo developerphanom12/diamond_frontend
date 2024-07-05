@@ -76,6 +76,7 @@ const Root = styled.section`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
+    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
 
   .icon {
@@ -240,6 +241,11 @@ const Root = styled.section`
   }
 
   @media (max-width: 567px) {
+
+  .ring_head{
+    font-size: 20px;
+} 
+
     .first_header {
       display: none;
     }
@@ -580,3 +586,4 @@ export default function NavBar() {
     </Root>
   );
 }
+

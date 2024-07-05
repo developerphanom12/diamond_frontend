@@ -179,19 +179,22 @@ const Root = styled.section`
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
+      padding: 15px;
       img {
-        width: 95%;
-        height: 95%;
+        width:100%;
+        height:88%;
       }
       &:hover {
         border: 3px solid black;
         overflow: unset;
-        transform: scale(1.1);
-        z-index: 1;
+        /* transform: scale(1.1); */
+        /* z-index: 1; */
+        padding: 15px;
       }
       .hov_content {
         display: flex;
         flex-wrap: wrap;
+        margin-top: 20px;
         .flex-column {
           display: flex;
           width: 100%;
@@ -279,9 +282,13 @@ const Root = styled.section`
       }
     }
   }
-  @media (max-width: 867px) {
+
+  @media (max-width: 567px) {
     padding: 0px 10px;
+    
     .main_div {
+      gap:15px;
+      margin-top:0;
       .subdiv {
         width: 45vw;
         height: 36vh;
@@ -311,6 +318,48 @@ const Root = styled.section`
         }
       }
     }
+  }
+
+  @media (min-width: 567px) and (max-width: 992px){
+    padding: 0px 10px;
+    
+    .main_div {
+      padding:0 20px;
+      gap:15px;
+      .subdiv {
+        width: 45vw;
+        height: 36vh;
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px;
+        }
+        .prd_name {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .prd_price {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .white_color,
+        .golden_color,
+        .red_color {
+          height: 10px;
+          width: 10px;
+        }
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
+        }
+      }
+    }
+
+ .main_div .subdiv img {
+    width: 100%;
+    height: 92%;
+}
   }
 `;
 const CustomModalBody = styled(ModalBody)`
@@ -347,4 +396,10 @@ const CustomModalBody = styled(ModalBody)`
   .modal-dialog {
     margin-top: 82px !important;
   }
+
+  @media (max-width: 567px) {
+    padding:20px 0;
+
+  }
+  
 `;

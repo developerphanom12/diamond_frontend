@@ -65,7 +65,7 @@ export default function Section1() {
                 <div className="icon_content">
                   <>
                     <img
-                      style={{ width: "20px", height: "20px" }}
+                      style={{ width: "25px", height: "25px"}}
                       src={selectedShapeImage}
                       alt="img"
                     />
@@ -80,6 +80,7 @@ export default function Section1() {
                     {diamondType === true ? "Lab Grown" : "Natural"} Diamond
                   </p>
                 </div>
+
                 <div className="icon_content">
                   <div style={{ width: "25px", height: "25px" }}>
                     <img
@@ -90,6 +91,7 @@ export default function Section1() {
                   </div>
                   <p>14k White Gold</p>
                 </div>
+
                 <div className="icon_content">
                   <div style={{ width: "25px", height: "25px" }}>
                     <img
@@ -157,6 +159,7 @@ const Root = styled.section`
         text-transform: uppercase;
         text-align: center;
       }
+
     }
 
     .product_checkout {
@@ -200,8 +203,10 @@ const Root = styled.section`
               display: flex;
               gap: 2px;
               img {
-                width: 20px;
-                height: 20px;
+                width: 20px!important;
+                height: 20px!important;
+                object-fit: contain;
+                
               }
               p {
                 font-size: 11px;
@@ -260,6 +265,8 @@ const Root = styled.section`
         }
         img {
           margin-top: 20px;
+          width:214px;
+          height: 42px;
         }
       }
 
@@ -310,5 +317,46 @@ const Root = styled.section`
         }
       }
     }
+  }
+
+
+    @media (max-width: 567px) {
+
+    .main_div .form_div{
+      width:100%;
+      flex:unset;
+    }
+
+    .button_div{
+    width:80%;
+    margin-top:40px;
+    justify-content:center;
+}
+
+.main_div .product_checkout .desc_div .image_content {
+    flex-direction: column;
+}
+
+ ul li {
+    width: 100%;
+}
+
+
+  }
+
+  @media (min-width: 567px) and (max-width: 992px) {
+    .main_div .form_div{
+      width:100%;
+      flex:unset;
+    }
+
+    .button_div{
+    width:90%;
+    margin-top:40px;
+    justify-content:end;
+}
+
+
+  
   }
 `;

@@ -106,7 +106,7 @@ export default function Section2() {
 
   const drawerContent = (
     <>
-      <div className="ring_types mt-4">
+      <div className="ring_types">
         {shapesList.map((shape, index) => (
           <button
             key={index}
@@ -143,10 +143,10 @@ export default function Section2() {
         </button>
         <div
           className={`drawer-content ${
-            isOpen && screenWidth <= 876 ? "open" : ""
+            isOpen && screenWidth <= 567 ? "open" : ""
           }`}
         >
-          {screenWidth > 876 ? (
+          {screenWidth > 567 ? (
             drawerContent
           ) : (
             <Drawer
@@ -282,7 +282,7 @@ const Root = styled.section`
     border-top-left-radius: 25px !important;
     padding-bottom: 40px;
   }
-  @media (max-width: 876px) {
+  @media (max-width: 567px) {
     .drawer-toggle-button {
       display: block;
     }
@@ -291,7 +291,7 @@ const Root = styled.section`
       .ring_types {
         justify-content: left;
         gap: 4px;
-        margin: 0px 10px;
+        margin: 20px 10px 0px;
         width: 100%;
         .btn_shapes {
           width: 93px !important;
@@ -301,5 +301,35 @@ const Root = styled.section`
         }
       }
     }
+
+    .heading {
+    padding: 10px 0px;
+    h2 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 12px;
+      line-height: 1rem;
+    }
   }
+
+  .main_div {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 4px;
+     margin-top: 0; 
+}
+  }
+
+  
+  @media (min-width: 567px) and (max-width: 992px) {
+     .drawer-toggle-button {
+display:none
+}
+  }
+  /* @media(max-width: 567px){
+  
+
+  } */
 `;
