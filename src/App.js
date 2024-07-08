@@ -23,8 +23,8 @@ import EngageList from "./Components/MainLayout/bottom/EngageList";
 import UniqueRing from "./Components/uniqueProducts/UniqueRing/UniqueRing";
 import UniqueRingDetails from "./Components/uniqueProducts/UniqueRingDetails/UniqueRingDetails";
 import Gemstone from "./Components/Gemstone/Gemstone";
-import ProductGem from "./Components/Gemstone/ProductPage/ProductGem";
 import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
+import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 
 function App() {
   // useEffect(() => {
@@ -55,13 +55,13 @@ function App() {
               />
               <Route path="/naturaldiamond" element={<NaturalDiamond />} />
               <Route path="/productpage" element={<ProductPage />} />
-              <Route path="/productgem" element={<ProductGem />} />
               <Route path="/ringdetails" element={<RingDetails />} />
               <Route path="/diamonddetails" element={<DiamondDetails />} />
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/engagelist" element={<EngageList />} />
               <Route path="/section2" element={<Section2 />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkoutgem" element={<CheckoutGem />} />
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
               <Route path="/gemdetails" element={<GemDetails />} />

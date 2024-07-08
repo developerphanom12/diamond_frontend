@@ -10,12 +10,10 @@ import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { EXCHANGE_URLS } from "../URLS";
-import { useSelector } from "react-redux";
 import { useLoading } from "../LoadingContext";
 
 export default function Section2() {
   const { setLoading } = useLoading();
-  const userDetails = useSelector((state) => state?.users.user);
   const location = useLocation();
   const { selectedVariantId, productId, diamondId, totalPrice } =
     location.state || {};

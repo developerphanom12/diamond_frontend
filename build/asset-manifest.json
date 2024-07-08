@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a860e73c.css",
-    "main.js": "/static/js/main.1608a6b8.js",
+    "main.js": "/static/js/main.68c3e434.js",
     "static/js/453.0cded5a1.chunk.js": "/static/js/453.0cded5a1.chunk.js",
     "static/media/Diamond-2.jpg": "/static/media/Diamond-2.758c0743dc998eee9c7d.jpg",
     "static/media/Diamondweqw.jpg": "/static/media/Diamondweqw.96c0bbb7e59e2c0c170b.jpg",
@@ -11,7 +11,7 @@
     "static/media/girlbanner.webp": "/static/media/girlbanner.84282e4ccc4a6738911e.webp",
     "static/media/bannerimggg.webp": "/static/media/bannerimggg.d19518f4c06ffa750e2a.webp",
     "static/media/EducationBanner.jpg": "/static/media/EducationBanner.6f772103bcae9df216f9.jpg",
-    "static/media/handimg.webp": "/static/media/handimg.75d918c338b0ca492a79.webp",
+    "static/media/noimagefound.jpg": "/static/media/noimagefound.0d4c0def62f5dc080737.jpg",
     "static/media/couple3.webp": "/static/media/couple3.397847f64d0add043813.webp",
     "static/media/slideimg5.webp": "/static/media/slideimg5.b951e8cfe1270fffa711.webp",
     "static/media/couple1.webp": "/static/media/couple1.a0ff32962d1f901fd12e.webp",
@@ -66,6 +66,7 @@
     "static/media/eligantPacking.png": "/static/media/eligantPacking.d5ea603944e81c5e0cf1.png",
     "static/media/Tension-removebg-preview.png": "/static/media/Tension-removebg-preview.fe9c994fd52e2cac9f63.png",
     "static/media/Pave-removebg-preview.png": "/static/media/Pave-removebg-preview.6fffc3dd1d23097a5e38.png",
+    "static/media/product-not-found.jpg": "/static/media/product-not-found.f96eec329d0cf1188bbb.jpg",
     "static/media/certifiedd.png": "/static/media/certifiedd.0c384681c322fc9a1545.png",
     "static/media/Halo-removebg-preview.png": "/static/media/Halo-removebg-preview.85b879648b2c2014ccad.png",
     "static/media/verify.svg": "/static/media/verify.a76e3821f0cc2984d312137000e00cdb.svg",
@@ -81,17 +82,16 @@
     "index.html": "/index.html",
     "static/media/diamo.PNG": "/static/media/diamo.8269a3554ca8304e5f6e.PNG",
     "static/media/color.PNG": "/static/media/color.81eb1d3e17325ac4bca6.PNG",
-    "static/media/images.PNG": "/static/media/images.0b191c3c6df4402936ff.PNG",
     "static/media/carat.PNG": "/static/media/carat.ff1464017b2bfdc37d8d.PNG",
     "static/media/pink.PNG": "/static/media/pink.d446d72da288531d7e0c.PNG",
     "static/media/clarity.PNG": "/static/media/clarity.23136e27488ea7a47546.PNG",
     "static/media/delete.PNG": "/static/media/delete.7f4c2931d8ff1d56a75e.PNG",
     "main.a860e73c.css.map": "/static/css/main.a860e73c.css.map",
-    "main.1608a6b8.js.map": "/static/js/main.1608a6b8.js.map",
+    "main.68c3e434.js.map": "/static/js/main.68c3e434.js.map",
     "453.0cded5a1.chunk.js.map": "/static/js/453.0cded5a1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a860e73c.css",
-    "static/js/main.1608a6b8.js"
+    "static/js/main.68c3e434.js"
   ]
 }

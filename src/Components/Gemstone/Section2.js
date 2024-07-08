@@ -8,12 +8,9 @@ import { useDispatch } from "react-redux";
 import { IoFilterOutline } from "react-icons/io5";
 import {
   setCollectionIds,
-  setDiamondIds,
-  setDiamondType,
   setSelectedCollectionId,
-  setSelectedCollectionTitle,
-  setSelectedShapeImage,
-  setSelectedShapeNames,
+  setSelectedShape,
+  setSelectedShapeImageGem,
 } from "../../redux/users/action";
 import ROUND from "../Images/round-removebg-preview.png";
 import EMERALD from "../Images/emerald-removebg-preview.png";
@@ -25,7 +22,7 @@ import PRINCESS from "../Images/Princess-removebg-preview.png";
 import RADIANT from "../Images/Radiant-removebg-preview.png";
 import CUSHION from "../Images/cushionremovebg.png";
 import ASSCHER from "../Images/ECusion-removebg-preview.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { EXCHANGE_URLS } from "../URLS";
@@ -71,7 +68,7 @@ export default function Section2() {
   const [selectedCollection, setSelectedCollection] = useState(
     collections[0].id
   );
-  const [caratRange, setCaratRange] = useState([1, 5]);
+  const [caratRange, setCaratRange] = useState([10000, 8500000]);
   const [mincount, setminCount] = useState(181);
   const [maxcount, setmaxCount] = useState(502086918);
   const minCarat = caratRange[0];
@@ -79,6 +76,8 @@ export default function Section2() {
   const [value, setValue] = useState([]);
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { state } = useLocation();
 
   const diamondApi = async (params) => {
@@ -88,10 +87,10 @@ export default function Section2() {
 
       if (params.selectedShapes.length > 0)
         query.append("tag", params.selectedShapes.join(","));
-      // if (minCarat !== undefined && minCarat !== null)
-      //   query.append("minPrice", minCarat);
-      // if (maxCarat !== undefined && maxCarat !== null)
-      //   query.append("maxPrice", maxCarat);
+      if (minCarat !== undefined && minCarat !== null)
+        query.append("minPrice", minCarat);
+      if (maxCarat !== undefined && maxCarat !== null)
+        query.append("maxPrice", maxCarat);
       query.append("collectionId", params.selectedCollection);
 
       const queryString = query.toString();
@@ -99,6 +98,8 @@ export default function Section2() {
 
       if (resp?.status === 200) {
         setValue(resp?.data?.products);
+        console.log("concoo", resp?.data?.products);
+
         const collectionIds = resp.data.products.map(
           (item) => item.collectionId
         );
@@ -107,12 +108,13 @@ export default function Section2() {
           (collection) => collection.id === params.selectedCollection
         )?.id;
 
-        const selectedShapeNames = params.selectedShapes.map((shape) => 
-          shapesList.find((s) => s.name === shape)?.shape
+        const selectedShapeImageGem = params.selectedShapes.map(
+          (shape) => shapesList.find((s) => s.name === shape)?.shape
         );
 
         dispatch(setSelectedCollectionId(selectedCollectionId));
-        dispatch(setSelectedShapeNames(selectedShapeNames));
+        console.log("concocnconcncco", selectedCollectionId);
+        dispatch(setSelectedShapeImageGem(selectedShapeImageGem));
       }
     } catch (err) {
       console.error("Error fetching gem", err);
@@ -133,59 +135,51 @@ export default function Section2() {
   }, [selectedShapes, selectedCollection, caratRange, dispatch]);
 
   const handleShapeClick = (shapeName, shapeImageUrl) => {
-    dispatch(setSelectedShapeImage(shapeImageUrl));
+    dispatch(setSelectedShapeImageGem(shapeImageUrl));
     setSelectedShapes([shapeName]);
+    dispatch(setSelectedShape(shapeName)); // Set the selected shape
+    navigate("/gemstone", { state: { selectedShape: shapeName } });
   };
+
   const handleCollectionChange = (collectionId) => {
     setSelectedCollection(collectionId);
   };
-
   const minincrement = () => {
     setminCount(mincount + 2100);
   };
-
   const mindecrement = () => {
     setminCount(mincount - 2100);
   };
-
   const formatNumber = (number) => {
     return number.toLocaleString();
   };
-
   const maxincrement = () => {
     setmaxCount(maxcount + 2100);
   };
-
   const maxdecrement = () => {
     setmaxCount(maxcount - 2100);
   };
-
   const handleChangeCarat = (event, newValue) => {
     setCaratRange(newValue);
   };
-
   const increaseMinimum = () => {
-    const newMin = Math.min(caratRange[0] + 0.5, caratRange[1]);
+    const newMin = Math.min(caratRange[0] + 10000, caratRange[1]);
     setCaratRange([newMin, caratRange[1]]);
   };
-
   const decreaseMinimum = () => {
-    const newMin = Math.max(caratRange[0] - 0.5, 0.5);
+    const newMin = Math.max(caratRange[0] - 1000, 10000);
     setCaratRange([newMin, caratRange[1]]);
   };
-
   const increaseMaximum = () => {
-    const newMax = Math.min(caratRange[1] + 0.5, 5);
+    const newMax = Math.min(caratRange[1] + 1000, 8500000);
     setCaratRange([caratRange[0], newMax]);
   };
-
   const decreaseMaximum = () => {
-    const newMax = Math.max(caratRange[1] - 0.5, caratRange[0]);
+    const newMax = Math.max(caratRange[1] - 1000, caratRange[0]);
     setCaratRange([caratRange[0], newMax]);
   };
   const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -196,7 +190,6 @@ export default function Section2() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -237,9 +230,9 @@ export default function Section2() {
               onChange={handleChangeCarat}
               valueLabelDisplay="auto"
               disableSwap
-              min={1}
-              max={5}
-              step={0.5}
+              min={10000}
+              max={500000}
+              step={1000}
             />
             <div className="carat_value_div">
               <div className="carat_min_max_div">
@@ -276,19 +269,29 @@ export default function Section2() {
         </>
         <>
           <div className="budget_div">
-            <h5>Budget</h5>
+            <h5
+              value={caratRange}
+              onChange={handleChangeCarat}
+              valueLabelDisplay="auto"
+              disableSwap
+              min={10000}
+              max={8500000}
+              step={1000}
+            >
+              Budget
+            </h5>
             <div className="budget_value_div">
               <div className="min_max_div">
                 <div className="value_div">
                   <h6>Minimum</h6>
-                  <p>${formatNumber(mincount)}</p>
+                  <p>${caratRange[0]}</p>
                 </div>
                 <div className="btn_div">
-                  <button>
-                    <IoIosArrowUp onClick={minincrement} />
+                  <button onClick={increaseMinimum}>
+                    <IoIosArrowUp />
                   </button>
-                  <button>
-                    <IoIosArrowDown onClick={mindecrement} />
+                  <button onClick={decreaseMinimum}>
+                    <IoIosArrowDown />
                   </button>
                 </div>
               </div>
@@ -296,14 +299,14 @@ export default function Section2() {
               <div className="min_max_div">
                 <div className="value_div">
                   <h6>Maximum</h6>
-                  <p>${formatNumber(maxcount)}</p>
+                  <p>${caratRange[1]}</p>
                 </div>
                 <div className="btn_div">
-                  <button>
-                    <IoIosArrowUp onClick={maxincrement} />
+                  <button onClick={increaseMaximum}>
+                    <IoIosArrowUp />
                   </button>
-                  <button>
-                    <IoIosArrowDown onClick={maxdecrement} />
+                  <button onClick={decreaseMaximum}>
+                    <IoIosArrowDown />
                   </button>
                 </div>
               </div>
@@ -421,7 +424,7 @@ const Root = styled.section`
       display: none;
     }
     .btn_shapes {
-      width: 93px ;
+      width: 93px;
       border: 2px solid transparent;
       background: #fff;
       display: flex;

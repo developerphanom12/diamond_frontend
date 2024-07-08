@@ -17,21 +17,20 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   setSelectedCollectionId,
-  setSelectedCollectionTitle,
-  setSelectedShapeNames,
+  setSelectedShapeImageGem,
 } from "../../../redux/users/action";
 
 export default function GemstoneList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const handleShapeClick = (names) => {
-    dispatch(setSelectedShapeNames(names));
+  
+  const handleShapeClick = (shapeName) => {
+    dispatch(setSelectedShapeImageGem(shapeName));
     navigate("/gemstone");
   };
 
-  const handleTitleClick = (id) => {
-    dispatch(setSelectedCollectionId(id));
+  const handleTitleClick = (collections) => {
+    dispatch(setSelectedCollectionId(collections));
     navigate("/gemstone");
   };
   return (
@@ -66,7 +65,11 @@ export default function GemstoneList() {
                   <Svgsvg3 />
                   Start with Emerald
                 </li>
-                <li>
+                <li
+                  onClick={() => {
+                    navigate("/gemstone");
+                  }}
+                >
                   <svg
                     viewBox="0 0 14 17"
                     fill="none"
@@ -87,48 +90,48 @@ export default function GemstoneList() {
             <b>Shop Gemstone By Shape</b>
             <div className="ring_space">
               <ul>
-                <li>
+                <li onClick={() => handleShapeClick("Round")}>
                   <img src={round} alt="img" />
-                  <span> Round </span>
+                  <span>Round</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Emerald")}>
                   {" "}
                   <img src={emerald} alt="img" />
                   <span>Emerald</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Heart")}>
                   <img src={heart} alt="img" />
 
                   <span>Heart</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Marquise")}>
                   <img src={marquise} alt="img" />
 
                   <span>Marquise</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Oval")}>
                   <img src={oval} alt="img" />
 
                   <span>Oval</span>
                 </li>
               </ul>
               <ul>
-                <li>
+                <li onClick={() => handleShapeClick("Pear")}>
                   <img src={pear} alt="img" />
 
                   <span>Pear</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Princess")}>
                   <img src={princess} alt="img" />
 
                   <span>Princess</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Radiant")}>
                   <img src={Radiant} alt="img" />
 
                   <span>Radiant</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapeClick("Cushion")}>
                   <img src={Cushion} alt="img" />
                   <span>Cushion</span>
                 </li>
@@ -183,10 +186,10 @@ const Root = styled.section`
         color: black;
         display: flex;
         flex-direction: row;
+      }
         &:hover {
           text-decoration: underline;
         }
-      }
     }
   }
   svg {

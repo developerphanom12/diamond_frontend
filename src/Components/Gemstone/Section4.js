@@ -1,18 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import dia from "../Images/handimg.webp";
 import { useNavigate } from "react-router-dom";
+import { setProductGemId, setUniqueProductGem } from "../../redux/users/action";
+import { useDispatch, useSelector } from "react-redux";
+import { EXCHANGE_URLS } from "../URLS";
+import axios from "axios";
+import { useLoading } from "../LoadingContext";
+import noimagefound from "../Images/noimagefound.jpg";
+import nopro from "../Images/product-not-found.jpg";
+
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const handleUniqueRingDetail = (product) => {
+    dispatch(setUniqueProductGem(product));
+    console.log("Navigating with product:", product);
+    navigate("/gemdetails", { state: { product } });
+  };
+
+  const handleAddSetting = (product) => {
+    dispatch(setProductGemId(product.id));
+    navigate("/checkoutgem", { state: { product } });
+  };
+  const uniqueProductGem = useSelector((state) => state.users.uniqueProductGem);
+  const [unique, setUnique] = useState(null);
+  const { setLoading } = useLoading();
+
+  const fetchUniqueData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/fetchpredefione?productId=${uniqueProductGem}`
+      );
+      if (response.status === 200) {
+        setUnique(response.data.data);
+        console.log("shdgfhsproduct Gemgggd", response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUniqueData();
+  }, [uniqueProductGem]);
   return (
     <Root>
-      {value &&
-        value?.map((i, index) => (
+      {value && value.length > 0 ? (
+        value.map((i, index) => (
           <div className="main_div" key={index}>
             <div className="subdiv">
-              <img src={i.images?.edges?.[0]?.node?.originalSrc} alt="img" />
+              <img src={i.images?.edges?.[0]?.node?.originalSrc  || nopro} alt="img" />
               <div className="hov_content">
                 <div className="heading">
                   <h5>{i?.title}</h5>
@@ -21,25 +63,26 @@ export default function Section4({ value }) {
                 <div className="btn_div">
                   <button
                     className="info_btn"
-                    onClick={() => {
-                      navigate("/gemdetails");
-                    }}
+                    onClick={() => handleUniqueRingDetail(i.id)}
                   >
                     More Info
                   </button>
                   <button
                     className="add_btn"
-                    onClick={() => {
-                      navigate("/productgem");
-                    }}
+                    onClick={() => handleAddSetting(i)}
                   >
-                    Add Setting
+                    Add To Cart
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div style={{ width: "100vw",height:"80vh" }}>
+          <img style={{ width: "95%",height:"95%" }} src={noimagefound} alt="No Data Found" />
+        </div>
+      )}
     </Root>
   );
 }

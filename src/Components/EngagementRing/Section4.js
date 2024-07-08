@@ -73,7 +73,7 @@ export default function Section4({ products }) {
                         backgroundColor: "#ccc",
                       }}
                     >
-                      <img src={noimg} alt="Image not available" />
+                      <img src={noimg} alt="img not available" />
                     </div>
                   )}
                 </>

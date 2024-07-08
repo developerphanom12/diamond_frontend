@@ -88,7 +88,7 @@ export default function Section1() {
             <div className="heading">
               <h3>Select Gemstone</h3>
               <p>
-                Browse and explore Ring-Builder's extenstive collection of
+                Browse and explore The Precious Earth's extenstive collection of
                 conflict free diamonds
               </p>
             </div>

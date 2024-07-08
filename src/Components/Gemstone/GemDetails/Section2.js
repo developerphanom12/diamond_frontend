@@ -1,38 +1,60 @@
 import styled from "styled-components";
-import React from "react";
-import round from "../../Images/round-removebg-preview.png";
-import emerald from "../../Images/emerald-removebg-preview.png";
-import heart from "../../Images/heart-removebg-preview.png";
-import Marquise from "../../Images/Marquise-removebg-preview.png";
-import oval from "../../Images/oval-removebg-preview.png";
-import Pear from "../../Images/Pear-removebg-preview.png";
-import Princess from "../../Images/Princess-removebg-preview.png";
-import Radiant from "../../Images/Radiant-removebg-preview.png";
-import cushionremovebg from "../../Images/cushionremovebg.png";
-import ECusion from "../../Images/ECusion-removebg-preview.png";
+import React, { useEffect, useState } from "react";
 import aeroplane from "../../Images/aeroplane.png";
 import badgess from "../../Images/badgess.png";
 import moneyinhand from "../../Images/moneyinhand.png";
 import certifiedd from "../../Images/certifiedd.png";
 import pinkimg from "../../Images/pink.PNG";
 import modimg from "../../Images/modimg.PNG";
-import images from "../../Images/images.PNG";
 import slideimg2 from "../../Images/slideimg2.webp";
-
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RingShipReturn from "../../DiamondDetails/RingShipReturn";
+import { useLoading } from "../../LoadingContext";
+import axios from "axios";
+import { EXCHANGE_URLS } from "../../URLS";
+import { useSelector } from "react-redux";
+import nopro from "../../Images/product-not-found.jpg";
+
 
 export default function Section2() {
-  const location = useLocation();
-  const { products } = location.state || {};
+  const uniqueProductGem = useSelector((state) => state.users.uniqueProductGem);
+  const [unique, setUnique] = useState(null);
   const navigate = useNavigate();
+  const { setLoading } = useLoading();
 
+  const fetchUniqueData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS}/fetchpredefione?productId=${uniqueProductGem}`
+      );
+      if (response.status === 200) {
+        setUnique(response.data.data);
+        console.log("shdgfhsproduct Gemgd", response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUniqueData();
+  }, [uniqueProductGem]);
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
-          {/* <img src={products?.mainImage && products.mainImage} alt="img" /> */}
-          <img src={slideimg2} />
+          {unique && unique?.images ? (
+            <img
+              src={unique?.images?.edges?.[0]?.node?.originalSrc || nopro}
+              alt="no img"
+            />
+          ) : (
+            <img src={slideimg2} alt="img" />
+          )}
+
           <div
             style={{
               textAlign: "center",
@@ -49,11 +71,11 @@ export default function Section2() {
 
         <div className="des_div">
           <div className="title">
-            <h2>{products?.title}</h2>
-            <h4>${products?.variants?.edges?.[0]?.node?.price}</h4>
+            <h2>{unique?.title}</h2>
+            <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
             <p>
-              {products?.description && products.description}
-              {!products?.description && "No Description About Product"}
+              {unique?.description && unique.description}
+              {!unique?.description && "No Description About Product"}
             </p>
           </div>
 
@@ -77,10 +99,10 @@ export default function Section2() {
             <button
               className="btn"
               onClick={() => {
-                navigate("/naturaldiamond");
+                navigate("/checkoutgem", { state: { product: unique } });
               }}
             >
-              Add Central Stone
+              Add To Cart
             </button>
           </div>
 
@@ -394,26 +416,24 @@ const Root = styled.section`
     }
 
     .main_div .image_div img {
-    width: 80vw;
-}
+      width: 80vw;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-
     .main_div .image_div img {
-    width:80vw;
-}
+      width: 80vw;
+    }
 
     .main_div {
       gap: 0px;
-      flex-direction:column
+      flex-direction: column;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
       padding: 40px 5px 40px;
-
     }
     .main_div .des_div {
       width: 100%;

@@ -150,7 +150,7 @@ export default function Section2() {
 
   useEffect(() => {
     fetchUniqueData();
-  }, [uniqueProduct]);
+  },[uniqueProduct]);
 
   useEffect(() => {
     if (size && !isNaN(carat)) {

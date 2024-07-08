@@ -3,7 +3,11 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import Section4 from "./Section4";
-import { setProductIds, setSelectedRingSvg } from "../../redux/users/action";
+import {
+  setProductIds,
+  setSelectedRingShape,
+  setSelectedRingSvg,
+} from "../../redux/users/action";
 import solitaire from "../Images/Solitaire-removebg-preview.png";
 import pave from "../Images/Pave-removebg-preview.png";
 import halo from "../Images/Halo-removebg-preview.png";
@@ -25,7 +29,7 @@ const shapesList = [
   { title: "Halo", imgUrl: halo },
   { title: "Nature", imgUrl: nature },
   { title: "Hidden Halo", imgUrl: hiddenhalo },
-  { title: "Sidestone", imgUrl: sidestone },
+  { title: "Side Stone", imgUrl: sidestone },
   { title: "Three Stone", imgUrl: threestone },
   { title: "Vintage", imgUrl: vintage },
   { title: "Tension", imgUrl: tension },
@@ -37,10 +41,13 @@ export default function Section2() {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { setLoading } = useLoading();
-  const handleButtonClick = (buttonIndex, selectedRingSvg) => {
+
+  const handleButtonClick = (buttonIndex, selectedRingSvg, shapeTitle) => {
     setSelectedButton(buttonIndex);
     dispatch(setSelectedRingSvg(selectedRingSvg));
+    dispatch(setSelectedRingShape(shapeTitle));
   };
+
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -63,7 +70,7 @@ export default function Section2() {
 
   useEffect(() => {
     const fetchProductsDetails = async () => {
-      if (collection.length > 0) {
+      if (collection.length > 0 && selectedButton >= 0) {
         const collectionId = collection[selectedButton]?.id;
         try {
           const res = await axios.get(
@@ -111,11 +118,13 @@ export default function Section2() {
           <button
             key={index}
             className={selectedButton === index + 1 ? "selected" : ""}
-            onClick={() => handleButtonClick(index + 1, shape.imgUrl)}
+            onClick={() =>
+              handleButtonClick(index + 1, shape.imgUrl, shape.title)
+            }
           >
             <img
               src={shape.imgUrl}
-              alt={`img of ring ${index + 1}`}
+              alt={`img of ring ${shape.title}`}
               style={{ width: "52px" }}
             />
             <span>{shape.title}</span>
@@ -228,7 +237,7 @@ const Root = styled.section`
     justify-content: center;
     gap: 20px;
     button {
-      width: 93px ;
+      width: 93px;
       border: 2px solid transparent;
       background: #fff;
       display: flex;
@@ -297,7 +306,7 @@ const Root = styled.section`
         margin: 20px 10px 0px;
         width: 100%;
         .btn_shapes {
-          width: 84px ;
+          width: 84px;
           border: 1px solid #d1d1d1;
           background-color: rgba(247, 247, 247);
           padding: 12px 42px;
@@ -315,8 +324,6 @@ const Root = styled.section`
         line-height: 1rem;
       }
     }
-
-  
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
@@ -324,5 +331,4 @@ const Root = styled.section`
       display: none;
     }
   }
- 
 `;

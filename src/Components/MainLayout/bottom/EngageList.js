@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import gold1 from "../../Images/4.png";
 import gold2 from "../../Images/6.png";
@@ -19,6 +19,7 @@ import Cushion from "../../Images/cushionremovebg.png";
 import Solitaire from "../../Images/Solitaire-removebg-preview.png";
 import Natural from "../../Images/Nature-removebg-preview.png";
 import Vintage from "../../Images/Vintage-removebg-preview.png";
+import Tension from "../../Images/Tension-removebg-preview.png";
 import SideStones from "../../Images/SideStone-removebg-preview.png";
 import Pave from "../../Images/Pave-removebg-preview.png";
 import ThreeStones from "../../Images/ThreeStones-removebg-preview.png";
@@ -26,11 +27,16 @@ import Halo from "../../Images/Halo-removebg-preview.png";
 import HiddenHalo from "../../Images/HiddenHalo-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setDiamondType, setSelectedShape } from "../../../redux/users/action";
+import {
+  setDiamondType,
+  setSelectedRingShape,
+  setSelectedShape,
+} from "../../../redux/users/action";
 
 export default function EngageList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+ 
 
   const handleShapeClick = (shapeName) => {
     dispatch(setSelectedShape(shapeName));
@@ -39,6 +45,11 @@ export default function EngageList() {
   const handleDiamondTypeClick = (diamondType) => {
     dispatch(setDiamondType(diamondType));
     navigate("/naturaldiamond");
+  };
+  const handleRing = (shapeTitle) => {
+    console.log(`Selected ring shape: ${shapeTitle}`); // Debug log
+    dispatch(setSelectedRingShape(shapeTitle));
+    navigate("/engagementring");
   };
   return (
     <Root>
@@ -53,10 +64,13 @@ export default function EngageList() {
                   <img src={rinfWdiamond} alt="img" />
                   <a href="engagementring">Start with a setting</a>
                 </li>
-                <li className="d-flex"  onClick={() => handleDiamondTypeClick(false)}>
+                <li
+                  className="d-flex"
+                  onClick={() => handleDiamondTypeClick(false)}
+                >
                   {" "}
                   <img src={naturaldiamond} alt="img" />
-                  Start with a Natural Diamond 
+                  Start with a Natural Diamond
                 </li>
                 <li
                   className="d-flex"
@@ -119,43 +133,48 @@ export default function EngageList() {
             <b>Shop By Style</b>
             <div className="ring_space">
               <ul>
-                <li>
+                <li onClick={() => handleRing("Solitaire")}>
                   <img src={Solitaire} alt="img" />
                   Solitaire{" "}
                 </li>
-                <li>
+                <li onClick={() => handleRing("Nature")}>
                   {" "}
                   <img src={Natural} alt="img" />
-                  <span>Natural</span>
+                  <span>Nature</span>
                 </li>
-                <li>
+                <li onClick={() => handleRing("Tension")}>
+                  {" "}
+                  <img src={Tension} alt="img" />
+                  <span>Tension</span>
+                </li>
+                <li onClick={() => handleRing("Vintage")}>
                   <img src={Vintage} alt="img" />
 
                   <span>Vintage</span>
                 </li>
-                <li>
+                <li onClick={() => handleRing("Side Stone")}>
                   <img src={SideStones} alt="img" />
 
                   <span>Side Stones</span>
                 </li>
               </ul>
               <ul>
-                <li>
+                <li onClick={() => handleRing("Pave")}>
                   <img src={Pave} alt="img" />
 
                   <span>Pave</span>
                 </li>
-                <li>
+                <li onClick={() => handleRing("Three Stone")}>
                   <img src={ThreeStones} alt="img" />
 
                   <span>Three Stones</span>
                 </li>
-                <li>
+                <li onClick={() => handleRing("Halo")}>
                   <img src={Halo} alt="img" />
 
                   <span>Halo</span>
                 </li>
-                <li>
+                <li onClick={() => handleRing("Hidden Halo")}>
                   <img src={HiddenHalo} alt="img" />
                   <span>Hidden Halo</span>
                 </li>

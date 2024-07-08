@@ -21,14 +21,22 @@ export default function DiamondList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleShapelabClick = (shapeName) => {
+    dispatch(setSelectedShape(shapeName));
+    dispatch(setDiamondType(true));
+    navigate("/uniquering");
+  };
+
   const handleShapeClick = (shapeName) => {
     dispatch(setSelectedShape(shapeName));
+    dispatch(setDiamondType(false));
     navigate("/uniquering");
   };
   const handleDiamondTypeClick = (diamondType) => {
     dispatch(setDiamondType(diamondType));
     navigate("/naturaldiamond");
   };
+  
   return (
     <Root>
       <div className="container-fluid">
@@ -110,47 +118,48 @@ export default function DiamondList() {
             <b>Shop Lab Diamond By Shape</b>
             <div className="ring_space">
               <ul>
-                <li>
-                  <img src={round} alt="img" /> <span>Round</span>
+                <li  onClick={() => handleShapelabClick("ROUND")}>
+                  <img src={round} alt="img" />
+                  <span>Round</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapelabClick("EMERALD")}>
                   {" "}
                   <img src={emerald} alt="img" />
                   <span>Emerald</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapelabClick("HEART")}>
                   <img src={heart} alt="img" />
 
                   <span>Heart</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapelabClick("MARQUISE")}>
                   <img src={marquise} alt="img" />
 
                   <span>Marquise</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapelabClick("OVAL")}>
                   <img src={oval} alt="img" />
 
                   <span>Oval</span>
                 </li>
               </ul>
               <ul>
-                <li>
+                <li  onClick={() => handleShapelabClick("PEAR")}>
                   <img src={pear} alt="img" />
 
                   <span>Pear</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapelabClick("PRINCESS")}>
                   <img src={princess} alt="img" />
 
                   <span>Princess</span>
                 </li>
-                <li>
+                <li onClick={() => handleShapelabClick("RADIANT")}>
                   <img src={Radiant} alt="img" />
 
                   <span>Radiant</span>
                 </li>
-                <li>
+                <li  onClick={() => handleShapelabClick("CUSHION")}>
                   <img src={Cushion} alt="img" />
                   <span>Cushion</span>
                 </li>

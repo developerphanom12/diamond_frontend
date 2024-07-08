@@ -58,7 +58,6 @@ export default function Section2() {
     }
   };
 
-
   useEffect(() => {
     const shape =
       selectedShape ||
