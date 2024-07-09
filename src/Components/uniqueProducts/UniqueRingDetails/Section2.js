@@ -150,7 +150,7 @@ export default function Section2() {
 
   useEffect(() => {
     fetchUniqueData();
-  },[uniqueProduct]);
+  }, [uniqueProduct]);
 
   useEffect(() => {
     if (size && !isNaN(carat)) {
@@ -425,7 +425,8 @@ export default function Section2() {
                 style={{ width: "50px", height: "50px" }}
               />
               <p>
-                Lifetime <br></br>Warranty
+                Lifetime <br />
+                Warranty
               </p>
             </div>
 
@@ -993,7 +994,7 @@ const Root = styled.section`
     display: none;
   }
   .total_price_div {
-    padding:0px 16px;
+    padding: 0px 16px;
     display: flex;
     justify-content: space-between;
 
@@ -1039,7 +1040,7 @@ const Root = styled.section`
       height: unset;
       padding: 5px;
       margin: 10px;
-      img{
+      img {
         width: 90vw;
       }
     }

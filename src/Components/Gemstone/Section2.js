@@ -193,6 +193,16 @@ export default function Section2() {
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+
+  const handleInputChange = (index, event) => {
+    const newValue = Number(event.target.value);
+    if (index === 0) {
+      setCaratRange([Math.min(newValue, caratRange[1]), caratRange[1]]);
+    } else {
+      setCaratRange([caratRange[0], Math.max(newValue, caratRange[0])]);
+    }
+  };
   const drawerContent = (
     <>
       <div className="ring_types mt-4">
@@ -237,7 +247,12 @@ export default function Section2() {
             <div className="carat_value_div">
               <div className="carat_min_max_div">
                 <div className="value">
-                  <p>{caratRange[0]}</p>
+                  {/* <p>{caratRange[0]}</p> */}
+                  <input
+                    type="number"
+                    value={caratRange[0]}
+                    onChange={(e) => handleInputChange(0, e)}
+                  />
                   <h6>Minimum</h6>
                 </div>
                 <div className="carat_btn_div">
@@ -252,7 +267,12 @@ export default function Section2() {
               <hr />
               <div className="carat_min_max_div">
                 <div className="value">
-                  <p>{caratRange[1]}</p>
+                  {/* <p>{caratRange[1]}</p> */}
+                  <input
+                    type="number"
+                    value={caratRange[1]}
+                    onChange={(e) => handleInputChange(1, e)}
+                  />
                   <h6>Maximum</h6>
                 </div>
                 <div className="carat_btn_div">
@@ -284,7 +304,11 @@ export default function Section2() {
               <div className="min_max_div">
                 <div className="value_div">
                   <h6>Minimum</h6>
-                  <p>${caratRange[0]}</p>
+                  <input
+                    type="number"
+                    value={caratRange[0]}
+                    onChange={(e) => handleInputChange(0, e)}
+                  />
                 </div>
                 <div className="btn_div">
                   <button onClick={increaseMinimum}>
@@ -299,7 +323,11 @@ export default function Section2() {
               <div className="min_max_div">
                 <div className="value_div">
                   <h6>Maximum</h6>
-                  <p>${caratRange[1]}</p>
+                  <input
+                    type="number"
+                    value={caratRange[1]}
+                    onChange={(e) => handleInputChange(1, e)}
+                  />
                 </div>
                 <div className="btn_div">
                   <button onClick={increaseMaximum}>
@@ -507,10 +535,13 @@ const Root = styled.section`
               margin-bottom: 0;
               font-size: 10px;
             }
-            p {
+            input {
               color: #000000;
-              font-size: 13px;
+              font-size: 11px;
               margin: 0;
+              outline: none;
+              border: none;
+              width: 90%;
             }
           }
           .carat_btn_div {
@@ -564,13 +595,16 @@ const Root = styled.section`
             padding: 6px;
             h6 {
               color: rgba(102, 102, 102);
-              margin-bottom: 14px;
+              margin-bottom: 7px;
               font-size: 10px;
             }
-            p {
+            input {
               color: #000000;
-              font-size: 13px;
-              margin: 2px;
+              font-size: 11px;
+              margin: 0;
+              outline: none;
+              border: none;
+              width: 90%;
             }
           }
           .btn_div {

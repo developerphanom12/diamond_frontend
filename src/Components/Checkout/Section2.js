@@ -70,7 +70,7 @@ export default function Section2() {
     try {
       const res = await axios.post(`${EXCHANGE_URLS}/ordercreate`, postValue);
       if (res?.status === 201) {
-        navigate("/home");
+        navigate("/allorder");
         toast.success("Order successfully Done");
       }
     } catch (err) {

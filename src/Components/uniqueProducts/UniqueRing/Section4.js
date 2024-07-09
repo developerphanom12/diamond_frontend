@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { ModalBody } from "reactstrap";
 import { useDispatch } from "react-redux";
-
 import noimg from "../../Images/eligantPacking.png";
 import { setUniqueProduct } from "../../../redux/users/action";
 
@@ -11,14 +9,10 @@ export default function Section4({ data }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleAddToCart = (product) => {
-    // Placeholder for add to cart functionality
-  };
-
   const handleUniqueRingDetail = (product) => {
     dispatch(setUniqueProduct(product));
     console.log("Navigating with product:", product);
-    navigate('/uniqueringdetails', { state: { product } });
+    navigate("/uniqueringdetails", { state: { product } });
   };
   return (
     <Root>
@@ -70,7 +64,7 @@ export default function Section4({ data }) {
                     </button>
                     <button
                       className="add_btn"
-                      onClick={() => handleAddToCart(i.id)}
+                      onClick={() => handleUniqueRingDetail(i.id)}
                     >
                       Add To Cart
                     </button>
@@ -87,6 +81,8 @@ export default function Section4({ data }) {
             );
           })}
       </div>
+
+     
     </Root>
   );
 }
@@ -209,6 +205,7 @@ const Root = styled.section`
       }
     }
   }
+  
   @media (max-width: 867px) {
     padding: 0px 10px;
     .main_div {
@@ -243,38 +240,4 @@ const Root = styled.section`
     }
   }
 `;
-const CustomModalBody = styled(ModalBody)`
-  padding: 30px 85px 50px;
-  text-align: center;
 
-  h2 {
-    font-size: 25px;
-    margin-top: 20px;
-    color: #000000;
-    font-weight: 700;
-  }
-  .choose_option {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
-    margin-top: 20px;
-    .ring_pandet {
-      flex-direction: column;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      svg {
-        width: 56px;
-        height: 56px;
-      }
-      span {
-        font-size: 14px;
-      }
-    }
-  }
-  .modal-dialog {
-    margin-top: 82px !important;
-  }
-`;
