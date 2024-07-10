@@ -22,13 +22,9 @@ export default function Section4({ value }) {
   const location = useLocation();
   const { products } = location.state || {};
   //  ------------------------------------
-  const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState);
-  };
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -70,11 +66,8 @@ export default function Section4({ value }) {
   const handleClickDiamondDetail = (products, diamond) => {
     apiDetail(diamond);
     setSelectedProduct({ diamond, products });
-    if (screenWidth <= 567) {
-      setIsOpen(true);
-    } else {
-      navigate("/diamonddetails", { state: { products, diamond } });
-    }
+
+    navigate("/diamonddetails", { state: { products, diamond } });
   };
   const handleNavigate = (diamond, products) => {
     if (productIds && productIds?.id) {
@@ -84,137 +77,57 @@ export default function Section4({ value }) {
     }
   };
 
-  const drawerContent = (
-    <div className="main_div">
-      {selectedProduct ? (
-        <div className="subdiv" >
-          <img
-            src={selectedProduct.diamond?.image || noimg}
-            alt="diamond images"
-          />
-          <div className="hov_content">
-            <div className="heading">
-              <h5>{selectedProduct.diamond?.certificate?.shape}</h5>
-              <p>${selectedProduct.diamond?.price}</p>
-            </div>
-            <div className="var">
-              <div className="var_types">
-                <h5>{selectedProduct.diamond?.certificate?.carats}</h5>
-                <p>carats</p>
-              </div>
-              <div className="var_types">
-                <h5>{selectedProduct.diamond?.certificate?.color}</h5>
-                <p>color</p>
-              </div>
-              <div className="var_types">
-                <h5>{selectedProduct.diamond?.certificate?.clarity}</h5>
-                <p>Clarity</p>
-              </div>
-              <div className="var_types">
-                <h5>{selectedProduct.diamond?.certificate?.cut}</h5>
-                <p>Cut</p>
-              </div>
-            </div>
-            <div className="btn_div">
-              <button
-                className="info_btn"
-                onClick={() =>
-                  handleClickDiamondDetail(
-                    selectedProduct.products,
-                    selectedProduct.diamond
-                  )
-                }
-              >
-                More Info
-              </button>
-              <button
-                className="add_btn"
-                onClick={() => {
-                  handleNavigate(
-                    selectedProduct.diamond,
-                    selectedProduct.products
-                  );
-                }}
-              >
-                Complete your ring
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        value &&
-        value.map((i, index) => (
-          <div key={index} className="subdiv">
-            <img src={i?.diamond?.image || noimg} alt="diamond images" />
-            <div className="hov_content">
-              <div className="heading">
-                <h5>{i?.diamond?.certificate?.shape}</h5>
-                <p>${i?.price}</p>
-              </div>
-              <div className="var">
-                <div className="var_types">
-                  <h5>{i?.diamond?.certificate?.carats}</h5>
-                  <p>carats</p>
-                </div>
-                <div className="var_types">
-                  <h5>{i?.diamond?.certificate?.color}</h5>
-                  <p>color</p>
-                </div>
-                <div className="var_types">
-                  <h5>{i?.diamond?.certificate?.clarity}</h5>
-                  <p>Clarity</p>
-                </div>
-                <div className="var_types">
-                  <h5>{i?.diamond?.certificate?.cut}</h5>
-                  <p>Cut</p>
-                </div>
-              </div>
-              <div className="btn_div">
-                <button
-                  className="info_btn"
-                  onClick={() =>
-                    handleClickDiamondDetail(i.products, i.diamond)
-                  }
-                >
-                  More Info
-                </button>
-                <button
-                  className="add_btn"
-                  onClick={() => {
-                    handleNavigate(i.diamond, i.products);
-                  }}
-                >
-                  Complete your ring
-                </button>
-              </div>
-            </div>
-          </div>
-        ))
-      )}
-    </div>
-  );
   return (
     <Root>
-      <button className="drawer-toggle-button" onClick={toggleDrawer}>
-        {drawerContent}
-      </button>
-      <div
-        className={`drawer-content ${
-          isOpen && screenWidth <= 567 ? "open" : ""
-        }`}
-      >
-        {screenWidth > 567 ? (
-          drawerContent
-        ) : (
-          <Drawer
-            open={isOpen}
-            onClose={toggleDrawer}
-            direction="bottom"
-            className="bla"
-          >
-            {drawerContent}
-          </Drawer>
-        )}
+      <div className="main_div">
+        {value &&
+          value.map((i, index) => (
+            <div key={index} className="subdiv">
+              <img src={i?.diamond?.image || noimg} alt="diamond images" />
+              <div className="hov_content">
+                <div className="heading">
+                  <h5>{i?.diamond?.certificate?.shape}</h5>
+                  <p>${i?.price}</p>
+                </div>
+                <div className="var">
+                  <div className="var_types">
+                    <h5>{i?.diamond?.certificate?.carats}</h5>
+                    <p>carats</p>
+                  </div>
+                  <div className="var_types">
+                    <h5>{i?.diamond?.certificate?.color}</h5>
+                    <p>color</p>
+                  </div>
+                  <div className="var_types">
+                    <h5>{i?.diamond?.certificate?.clarity}</h5>
+                    <p>Clarity</p>
+                  </div>
+                  <div className="var_types">
+                    <h5>{i?.diamond?.certificate?.cut}</h5>
+                    <p>Cut</p>
+                  </div>
+                </div>
+                <div className="btn_div">
+                  <button
+                    className="info_btn"
+                    onClick={() =>
+                      handleClickDiamondDetail(i.products, i.diamond)
+                    }
+                  >
+                    More Info
+                  </button>
+                  <button
+                    className="add_btn"
+                    onClick={() => {
+                      handleNavigate(i.diamond, i.products);
+                    }}
+                  >
+                    Complete your ring
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
       <Modal
         isOpen={modal1}
@@ -249,33 +162,7 @@ export default function Section4({ value }) {
 }
 const Root = styled.section`
   padding: 0 10px;
-  .drawer-content {
-    padding: 20px 0px;
-    width: 100%;
-  }
-  .drawer-toggle-button {
-    font-weight: 500;
-    padding: 5px 10px;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: transparent;
-  }
-  @media (min-width: 568px) {
-    .drawer-toggle-button {
-      display: none;
-    }
-    .drawer-content {
-      display: block;
-    }
-  }
-  .EZDrawer__container {
-    overflow-y: scroll !important;
-    height: 70vh !important;
-    border-top-right-radius: 25px !important;
-    border-top-left-radius: 25px !important;
-    padding-bottom: 40px;
-  }
+
   .main_div {
     display: flex;
     flex-wrap: wrap;

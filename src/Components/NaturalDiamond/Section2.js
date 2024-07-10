@@ -90,7 +90,6 @@ export default function Section2() {
     setLoading(true);
     try {
       const query = new URLSearchParams();
-
       if (params.selectedShapes.length)
         query.append("shapes", params.selectedShapes.join(","));
       query.append("typelabgrown", params.typelabgrown);
@@ -108,14 +107,6 @@ export default function Section2() {
         query.append("minPrice", minCarat);
       if (maxCarat !== undefined && maxCarat !== null)
         query.append("maxPrice", maxCarat);
-
-      // If any optional parameters are needed, add them here
-      // if (params.selectedCarat.length) query.append('carat', params.selectedCarat.join(','));
-      // if (params.selectedBudget.length) query.append('Budget', params.selectedBudget.join(','));
-      // const selectedCertificate = Object.keys(params.selectedCertificate)
-      //   .filter((key) => params.selectedCertificate[key])
-      //   .join(',');
-      // if (selectedCertificate) query.append('lab', selectedCertificate);
 
       const queryString = query.toString();
       const resp = await axios.get(
@@ -375,7 +366,7 @@ export default function Section2() {
             <div className="carat_value_div">
               <div className="carat_min_max_div">
                 <div className="value">
-                <input
+                  <input
                     type="number"
                     value={caratRange[0]}
                     onChange={(e) => handleInputChange(0, e)}
@@ -394,7 +385,7 @@ export default function Section2() {
               <hr />
               <div className="carat_min_max_div">
                 <div className="value">
-                <input
+                  <input
                     type="number"
                     value={caratRange[1]}
                     onChange={(e) => handleInputChange(1, e)}
@@ -754,13 +745,13 @@ const Root = styled.section`
                 font-size: 10px;
               }
               input {
-              color: #000000;
-              font-size: 11px;
-              margin: 0;
-              outline: none;
-              border: none;
-              width: 90%;
-            }
+                color: #000000;
+                font-size: 11px;
+                margin: 0;
+                outline: none;
+                border: none;
+                width: 90%;
+              }
             }
             .carat_btn_div {
               /* width: 20%; */
@@ -816,13 +807,13 @@ const Root = styled.section`
                 font-size: 10px;
               }
               input {
-              color: #000000;
-              font-size: 11px;
-              margin: 0;
-              outline: none;
-              border: none;
-              width: 90%;
-            }
+                color: #000000;
+                font-size: 11px;
+                margin: 0;
+                outline: none;
+                border: none;
+                width: 90%;
+              }
             }
             .btn_div {
               display: flex;
