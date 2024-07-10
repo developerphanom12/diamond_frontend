@@ -399,6 +399,10 @@ const Root = styled.section`
     font-size: 10px;
 }
 
+ .main_div .image_div img {
+    width: 75vw;
+    padding-top: 15px;
+}
 
 
   }
@@ -426,5 +430,9 @@ const Root = styled.section`
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
     }
+
+    .main_div .image_div img {
+    width: 90vw;
+}
   }
 `;

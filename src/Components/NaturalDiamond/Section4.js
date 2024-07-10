@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
-import noimg from "../Images/s6.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import { setDiamondById } from "../../redux/users/action";
@@ -9,7 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoading } from "../LoadingContext";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ring from "../Images/Solitaire-removebg-preview.png";
-import Drawer from "react-modern-drawer";
+import noimagefound from "../Images/noimagefound.jpg";
+import nopro from "../Images/product-not-found.jpg";
+
 
 export default function Section4({ value }) {
   const [modal1, setModal1] = useState(false);
@@ -80,10 +81,10 @@ export default function Section4({ value }) {
   return (
     <Root>
       <div className="main_div">
-        {value &&
+        {value && value.length > 0 ? (
           value.map((i, index) => (
             <div key={index} className="subdiv">
-              <img src={i?.diamond?.image || noimg} alt="diamond images" />
+              <img src={i?.diamond?.image || nopro} alt="diamond images" />
               <div className="hov_content">
                 <div className="heading">
                   <h5>{i?.diamond?.certificate?.shape}</h5>
@@ -127,7 +128,16 @@ export default function Section4({ value }) {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div style={{ width: "100vw", height: "80vh" }}>
+            <img
+              style={{ width: "95%", height: "95%" }}
+              src={noimagefound}
+              alt="No Data Found"
+            />
+          </div>
+        )}
       </div>
       <Modal
         isOpen={modal1}
@@ -175,7 +185,7 @@ const Root = styled.section`
       height: 57vh;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
-      padding: 5px;
+      padding: 15px;
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
@@ -282,8 +292,8 @@ const Root = styled.section`
       padding-bottom: 10px;
 
       .info_btn {
-        flex: 1;
-        padding: 12px 21px;
+        flex: unset;
+        padding: 12px 13px;
         border-radius: 25px;
         font-size: 13px;
         background-color: #fff;
@@ -331,8 +341,9 @@ const Root = styled.section`
         .btn_div .info_btn,
         .btn_div .add_btn {
           font-size: 11px;
-          padding: 3px 10px;
+          padding: 10px 10px;
           border-radius: 15px;
+          flex: 1;
         }
         &:hover .hov_content {
           width: 44vw;

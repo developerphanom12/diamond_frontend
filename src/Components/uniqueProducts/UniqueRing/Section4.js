@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import noimg from "../../Images/eligantPacking.png";
 import { setUniqueProduct } from "../../../redux/users/action";
+import noimagefound from "../../Images/noimagefound.jpg";
+import nopro from "../../Images/product-not-found.jpg";
 
 export default function Section4({ data }) {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ export default function Section4({ data }) {
   return (
     <Root>
       <div className="main_div">
-        {data &&
+        {data && data.length > 0 ? (
+
+        
           data.map((i, index) => {
             return (
               <div key={index} className="subdiv">
@@ -37,7 +40,7 @@ export default function Section4({ data }) {
                         backgroundColor: "#ccc",
                       }}
                     >
-                      <img src={noimg} alt="img" />
+                      <img src={nopro} alt="img" />
                     </div>
                   )}
                 </>
@@ -79,7 +82,15 @@ export default function Section4({ data }) {
                 </div>
               </div>
             );
-          })}
+          })):(
+            <div style={{ width: "100vw", height: "80vh" }}>
+            <img
+              style={{ width: "99%", height: "100%" }}
+              src={noimagefound}
+              alt="No Data Found"
+            />
+          </div>
+          )}
       </div>
 
      
@@ -101,7 +112,7 @@ const Root = styled.section`
       height: 50vh;
       border: 3px solid #f7f7f7;
       border-radius: 20px;
-      padding: 5px;
+      padding: 15px;
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
@@ -233,7 +244,7 @@ const Root = styled.section`
         .btn_div .info_btn,
         .btn_div .add_btn {
           font-size: 11px;
-          padding: 3px 10px;
+          padding: 10px 10px;
           border-radius: 15px;
         }
       }

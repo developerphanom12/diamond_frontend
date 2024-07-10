@@ -47,9 +47,15 @@ const initialState = {
   },
   selectedCollectionId: "",
   selectedShapeNames: null,
+  predefineData: null,
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_PREDEFINE_DATA':
+      return {
+        ...state,
+        predefineData: action.payload,
+      };
     case 'SET_PRODUCT_GEM_ID':
       return {
         ...state,

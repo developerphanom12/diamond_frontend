@@ -21,12 +21,13 @@ export default function Section1() {
   const selectedShapeImage = useSelector(
     (state) => state.users.selectedShapeImage
   );
-
+  const predefineData = useSelector((state) => state.users.predefineData);
   const selectedRingSvg = useSelector((state) => state.users.selectedRingSvg);
   const productIds = useSelector((state) => state.users.productIds);
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log(
-    "Checkout state:",
+    "Checkout state newww:",
+    predefineData,
     selectedOptions,
     selectedSize,
     diamond,
@@ -49,7 +50,10 @@ export default function Section1() {
             <div className="image_content">
               {productIds?.images?.edges?.length > 0 && (
                 <img
-                  src={productIds.images.edges[0].node.originalSrc}
+                  src={
+                    productIds.images.edges[0].node.originalSrc ||
+                    predefineData?.image?.originalSrc
+                  }
                   alt={
                     productIds.images.edges[0].node.altText || "Product Image"
                   }
@@ -57,28 +61,51 @@ export default function Section1() {
               )}
               <div className="ring_content">
                 <h2>
-                  {productIds?.title} with a {diamond?.certificate?.carats}
-                  carat {diamond?.certificate?.color}{" "}
-                  {diamond?.certificate?.clarity} {diamond?.certificate?.shape}{" "}
-                  {diamondType === true ? "Lab Grown" : "Natural"} Diamond
+                  {productIds && diamond ? (
+                    <>
+                      {productIds?.title} with a {diamond?.certificate?.carats}{" "}
+                      carat {diamond?.certificate?.color}{" "}
+                      {diamond?.certificate?.clarity}{" "}
+                      {diamond?.certificate?.shape}{" "}
+                      {diamondType ? "Lab Grown" : "Natural"} Diamond
+                    </>
+                  ) : (
+                    <>
+                      {predefineData?.title}{" "}
+                      {predefineData?.selectedOptions?.map((option, index) => (
+                        <span key={index}>
+                          {option.name}: {option.value}{" "}
+                        </span>
+                      ))}
+                    </>
+                  )}
                 </h2>
                 <div className="icon_content">
                   <>
                     <img
-                      style={{ width: "25px", height: "25px"}}
+                      style={{ width: "25px", height: "25px" }}
                       src={selectedShapeImage}
                       alt="img"
                     />
                   </>
-
-                  <p>
-                    {" "}
-                    {diamond?.certificate?.carats}
-                    carat {diamond?.certificate?.color}{" "}
-                    {diamond?.certificate?.clarity}{" "}
-                    {diamond?.certificate?.shape}{" "}
-                    {diamondType === true ? "Lab Grown" : "Natural"} Diamond
-                  </p>
+                  {diamond && diamond.length > 0 ? (
+                    <p>
+                      {diamond?.certificate?.carats} carat{" "}
+                      {diamond?.certificate?.color}{" "}
+                      {diamond?.certificate?.clarity}{" "}
+                      {diamond?.certificate?.shape}{" "}
+                      {diamondType === true ? "Lab Grown" : "Natural"} Diamond
+                    </p>
+                  ) : (
+                    <p>
+                      {predefineData?.title}{" "}
+                      {predefineData?.selectedOptions?.map((option, index) => (
+                        <span key={index}>
+                          {option.name}: {option.value}{" "}
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </div>
 
                 <div className="icon_content">
@@ -159,7 +186,6 @@ const Root = styled.section`
         text-transform: uppercase;
         text-align: center;
       }
-
     }
 
     .product_checkout {
@@ -203,10 +229,7 @@ const Root = styled.section`
               display: flex;
               gap: 2px;
               img {
-                width: 20px!important;
-                height: 20px!important;
                 object-fit: contain;
-                
               }
               p {
                 font-size: 11px;
@@ -265,7 +288,7 @@ const Root = styled.section`
         }
         img {
           margin-top: 20px;
-          width:214px;
+          width: 214px;
           height: 42px;
         }
       }
@@ -319,44 +342,37 @@ const Root = styled.section`
     }
   }
 
-
-    @media (max-width: 567px) {
-
-    .main_div .form_div{
-      width:100%;
-      flex:unset;
+  @media (max-width: 567px) {
+    .main_div .form_div {
+      width: 100%;
+      flex: unset;
     }
 
-    .button_div{
-    width:80%;
-    margin-top:40px;
-    justify-content:center;
-}
+    .button_div {
+      width: 80%;
+      margin-top: 40px;
+      justify-content: center;
+    }
 
-.main_div .product_checkout .desc_div .image_content {
-    flex-direction: column;
-}
+    .main_div .product_checkout .desc_div .image_content {
+      flex-direction: column;
+    }
 
- ul li {
-    width: 100%;
-}
-
-
+    ul li {
+      width: 100%;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-    .main_div .form_div{
-      width:100%;
-      flex:unset;
+    .main_div .form_div {
+      width: 100%;
+      flex: unset;
     }
 
-    .button_div{
-    width:90%;
-    margin-top:40px;
-    justify-content:end;
-}
-
-
-  
+    .button_div {
+      width: 90%;
+      margin-top: 40px;
+      justify-content: end;
+    }
   }
 `;

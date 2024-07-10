@@ -15,6 +15,10 @@ export const SET_SELECTED_SHAPE_IMAGE_GEM = 'SET_SELECTED_SHAPE_IMAGE_GEM';
 export const SET_UNIQUE_PRODUCT_GEM = 'SET_UNIQUE_PRODUCT_GEM';
 
 // Action creator
+export const fetchPredefineData = (data) => ({
+  type: 'FETCH_PREDEFINE_DATA',
+  payload: data,
+});
 export const setSelectedRingShape = (shapeTitle) => ({
   type: SET_SELECTED_RING_SHAPE,
   payload: shapeTitle,

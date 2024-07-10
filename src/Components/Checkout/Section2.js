@@ -21,7 +21,7 @@ export default function Section2() {
     variant_id: selectedVariantId,
     price: totalPrice,
     customerId: "7352326586586",
-    diamondid: diamondId,
+    diamondid: diamondId ,
     address: {
       first_name: "",
       last_name: "",
@@ -34,12 +34,15 @@ export default function Section2() {
       country: "",
     },
   });
+
+  
   console.log(
     "Checkout state:",
     selectedVariantId,
     productId,
     diamondId,
-    totalPrice
+    totalPrice,
+   
   );
   const [countries, setCountries] = useState([]);
   const navigate = useNavigate();

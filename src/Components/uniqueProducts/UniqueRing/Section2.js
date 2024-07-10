@@ -117,10 +117,10 @@ export default function Section2() {
       </button>
       <div
         className={`drawer-content ${
-          isOpen && screenWidth <= 876 ? "open" : ""
+          isOpen && screenWidth <= 567 ? "open" : ""
         }`}
       >
-        {screenWidth > 876 ? (
+        {screenWidth > 567 ? (
           drawerContent
         ) : (
           <Drawer
@@ -240,7 +240,7 @@ const Root = styled.section`
     font-size: 14px;
     background-color: transparent;
   }
-  @media (min-width: 877px) {
+  @media (min-width: 568px) {
     .drawer-toggle-button {
       display: none;
     }
@@ -255,17 +255,17 @@ const Root = styled.section`
     border-top-left-radius: 25px !important;
     padding-bottom: 40px;
   }
-  @media (max-width: 876px) {
+  @media (max-width: 567px) {
     .drawer-toggle-button {
       display: block;
     }
     .drawer-content {
-      /* display: none; */
       .ring_types {
         justify-content: left;
         gap: 4px;
         margin: 0px 10px;
         width: 100%;
+
         .btn_shapes {
           width: 93px !important;
           border: 1px solid #d1d1d1;
@@ -275,4 +275,5 @@ const Root = styled.section`
       }
     }
   }
+ 
 `;

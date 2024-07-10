@@ -247,8 +247,9 @@ export default function Section2() {
             <div>
               <img
                 src={selectedRingSvg}
-                alt="img of stone"
+                alt="img"
                 style={{ width: "50px", height: "50px" }}
+                
               />
 
               <div className="prod_name">
@@ -269,9 +270,7 @@ export default function Section2() {
             </div>
           </button>
 
-          {/* <div className="plus_sign">
-            <span>+</span>
-          </div> */}
+          
 
           <button
             className={selectedButton === 2 ? "selected" : ""}
@@ -283,7 +282,7 @@ export default function Section2() {
             <div>
               <img
                 src={selectedShapeImage}
-                alt="img of stone"
+                alt="img"
                 style={{ width: "40px", height: "40px" }}
               />
 
@@ -373,7 +372,7 @@ export default function Section2() {
                 <div className="prod">
                   <div className="bg-img">
                     <div className="dia_img">
-                      <img src={dia} />
+                      <img src={dia} alt="img" />
                     </div>
                   </div>
 
@@ -385,7 +384,7 @@ export default function Section2() {
 
                   <div className="prod_spec">
                     <div className="icon_content">
-                      <img src={ring} />
+                      <img src={ring} alt="img" />
                       <div className="content_head">
                         <h4>The Ashley </h4>
                         <p>14k White Gold </p>
@@ -398,7 +397,7 @@ export default function Section2() {
 
                   <div className="prod_spec">
                     <div className="icon_content">
-                      <img src={diamondd} />
+                      <img src={diamondd} alt="img" />
                       <div className="content_head">
                         <h4>Round </h4>
                         <p>0.5 Carat J VS1</p>
@@ -414,7 +413,7 @@ export default function Section2() {
                       Total: <span style={{ color: "#000000" }}>$1,413</span>
                     </p>
                     <div className="delete_icon">
-                      <img src={deleteicon} />
+                      <img src={deleteicon}  alt="img"/>
                     </div>
                   </div>
                 </div>
@@ -423,7 +422,7 @@ export default function Section2() {
                 <div className="prod">
                   <div className="bg-img">
                     <div className="dia_img">
-                      <img src={dia} />
+                      <img src={dia} alt="img" />
                     </div>
                   </div>
 
@@ -435,7 +434,7 @@ export default function Section2() {
 
                   <div className="prod_spec">
                     <div className="icon_content">
-                      <img src={ring} />
+                      <img src={ring} alt="img" />
                       <div className="content_head">
                         <h4>The Ashley </h4>
                         <p>14k White Gold </p>
@@ -448,7 +447,7 @@ export default function Section2() {
 
                   <div className="prod_spec">
                     <div className="icon_content">
-                      <img src={diamondd} />
+                      <img src={diamondd} alt="img" />
                       <div className="content_head">
                         <h4>Round </h4>
                         <p>0.5 Carat J VS1</p>
@@ -464,7 +463,7 @@ export default function Section2() {
                       Total: <span style={{ color: "#000000" }}>$1,413</span>
                     </p>
                     <div className="delete_icon">
-                      <img src={deleteicon} />
+                      <img src={deleteicon}  alt="img"/>
                     </div>
                   </div>
                 </div>

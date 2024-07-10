@@ -63,9 +63,7 @@ export default function Section2() {
               alignItems: "center",
             }}
           >
-            <button className="button">
-              <span>Image</span>
-            </button>
+          
           </div>
         </div>
 

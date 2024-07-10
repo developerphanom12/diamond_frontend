@@ -385,6 +385,14 @@ const Root = styled.section`
         display: none;
       }
     }
+     .heading h3 {
+    font-size: 18px;
+    line-height: 20px;
+    
+}
+.heading p {
+    font-size: 12px;
+}
   }
   @media (max-width: 667px) {
     .column,

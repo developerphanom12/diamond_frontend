@@ -144,6 +144,16 @@ const Root = styled.section`
         display: none;
       }
     }
+   .container-fluid .heading {
+    padding: 10px 0px;
+}
+     .container-fluid .heading h2 {
+    font-size: 18px;
+}
+.container-fluid .heading p {
+    font-size: 12px;
+
+}
   }
   @media (max-width: 667px) {
     .column,

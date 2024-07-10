@@ -36,17 +36,22 @@ export default function Section2() {
     height: 100% !important;
     object-fit: contain;
     background-position: 100% 100%;
-    @media (max-width: 768px) {
+    @media (max-width: 567px) {
       height: 100%;
       width: 100%;
-      min-height: 50vh;
-      min-width: 50vh;
+      iframe {
+        height: 50vh;
+      }
     }
     iframe {
-      height: 100%;
+      height: 80vh;
       width: 100%;
+      img {
+        width: auto;
+        height: auto;
+      }
       > div {
-        width: 100%;
+        width: 50%;
         height: 100%;
         > div {
           width: 100%;
@@ -60,8 +65,11 @@ export default function Section2() {
     width: 100%;
     height: 100%;
     > div {
-      width: 100%;
+      width: 50%;
       height: 100%;
+    }
+    @media (max-width: 765px) {
+      height: 60vh;
     }
   `;
 
@@ -75,7 +83,6 @@ export default function Section2() {
                 <VideoFrame
                   src={diamondById?.diamond.video}
                   title="Diamond Video"
-                  allowFullScreen
                 />
               </VideoContainer>
             ) : (
@@ -93,22 +100,7 @@ export default function Section2() {
               justifyContent: "center",
               alignItems: "center",
             }}
-          >
-            {/* <button className="button">
-              {diamondById?.diamond?.image ? (
-                // <img
-                //   src={diamondById?.diamond?.image}
-                //   title="Diamond image"
-                //   alt="img"
-                //   style={{ width: "50px", height: "50px" }}
-                // />
-              ) : (
-                "No image"
-              )}
-
-              <span>Image</span>
-            </button> */}
-          </div>
+          ></div>
         </div>
         <div className="des_div">
           <div className="title">
@@ -277,7 +269,6 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            {/* <button>Book Appointment</button> */}
           </div>
         </div>
       </div>
@@ -496,13 +487,13 @@ const Root = styled.section`
     .main_div {
       gap: 0px;
       flex-direction: column;
-      margin:20px;
+      margin: 20px;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-      padding:20px;
+      padding: 20px;
     }
     .main_div .des_div .prod_spec {
       display: none;
@@ -511,7 +502,6 @@ const Root = styled.section`
       width: 100%;
       margin: 20px 0 0 0;
       padding: 5px;
-     
     }
     .main_div .setting_detail .setting_info .setting_div {
       flex: 1;
@@ -527,11 +517,9 @@ const Root = styled.section`
       font-size: 18px;
     }
 
-    
- .main_div .policy .policy_type p {
-    font-size: 10px;
-}
-
+    .main_div .policy .policy_type p {
+      font-size: 10px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {

@@ -139,6 +139,8 @@ export default function Section2() {
       selectedPolish,
       selectedSymmetry,
       caratRange,
+      minCarat,
+      maxCarat
     };
 
     diamondApi(params);
@@ -580,7 +582,7 @@ const Root = styled.section`
   }
   .EZDrawer__container {
     overflow-y: scroll !important;
-    height: 350px !important;
+    height: 50vh !important;
     border-top-right-radius: 25px !important;
     border-top-left-radius: 25px !important;
     padding-bottom: 40px;

@@ -21,6 +21,7 @@ import deleteicon from "../../Images/delete.PNG";
 import ww from "../../Images/ww.webp";
 import Drawer from "react-modern-drawer";
 import {
+  fetchPredefineData,
   setSelectedMaterialImage,
   setSelectedOptions,
   setSelectedShapeImage,
@@ -133,7 +134,9 @@ export default function Section2() {
       );
       if (response.status === 200) {
         setPreDefineData(response.data.data);
-        console.log("Predefined Data:", response.data.data);
+        const data = response.data.data 
+        dispatch(fetchPredefineData(data));
+        console.log("Predefined neww Data:", data);
         dispatch(setSelectedOptions(uniqueProduct, carat, size));
         console.log("storing_or_not", setSelectedOptions);
       }
@@ -163,6 +166,8 @@ export default function Section2() {
         uniqueProduct: uniqueProduct,
         size: size,
         carat: carat,
+        unique:unique
+
       },
     });
   };
@@ -175,7 +180,7 @@ export default function Section2() {
     dispatch(setSelectedMaterialImage(shapeImageUrl));
     setSelectedMaterial([shapeName]); // Set the selected shape
   };
-
+  const imageUrl = unique?.images?.edges?.[0]?.node?.originalSrc;
   return (
     <Root>
       <div className="main_div">
@@ -201,22 +206,7 @@ export default function Section2() {
               justifyContent: "center",
               alignItems: "center",
             }}
-          >
-            <button className="button">
-              {unique?.images?.edges?.[0]?.node?.originalSrc ? (
-                <img
-                  src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                  title="Diamond image"
-                  alt="img"
-                  style={{ width: "50px", height: "50px" }}
-                />
-              ) : (
-                "No image"
-              )}
-
-              <span>Image</span>
-            </button>
-          </div>
+          ></div>
         </div>
         <div className="des_div">
           <div className="title">
@@ -292,7 +282,7 @@ export default function Section2() {
           </div>
           <div className="product_btn">
             <button className="btn" onClick={toggleDrawer}>
-              Add to Cart
+            {size ? "Add to Cart" : "Select Ring Size"} 
             </button>
             <Drawer
               open={isOpen}
@@ -308,7 +298,13 @@ export default function Section2() {
               <div className="prod_main_div">
                 <div className="prod_div">
                   <div className="prod">
-                    <div className="bg-img">
+                    <div
+                      className="bg-img"
+                      style={{
+                        height: "180px",
+                        backgroundImage: `url(${imageUrl})`,
+                      }}
+                    >
                       <div className="dia_img">
                         {unique?.images?.edges?.[0]?.node?.originalSrc ? (
                           <img
@@ -404,7 +400,9 @@ export default function Section2() {
               </div>
 
               <div className="but_div">
-                <button onClick={handleCheckout}>Checkout Now</button>
+                <button onClick={handleCheckout}>
+                {size ? "Add to Cart" : "Select Ring Size"} 
+                </button>
               </div>
             </Drawer>
           </div>
@@ -433,14 +431,16 @@ export default function Section2() {
             <div className="policy_type">
               <img src={moneyinhand} alt="moneyinhand_images" />
               <p>
-                30 Days <br></br>Free Return
+                30 Days <br />
+                Free Return
               </p>
             </div>
 
             <div className="policy_type">
               <img src={certifiedd} alt="certifiedd_images" />
               <p>
-                Certificate<br></br>& Appraisal
+                Certificate
+                <br />& Appraisal
               </p>
             </div>
           </div>
@@ -471,9 +471,8 @@ export default function Section2() {
                 <p className="para">Only stacks with a chevron/curved band</p>
               </div>
             </div>
-
+            subdiv
             <h4>Your Diamond Info</h4>
-
             <div className="diamond_info">
               <div className="setting_div">
                 <div className="profile_cont">
@@ -539,7 +538,6 @@ export default function Section2() {
               Explore engagement rings, diamonds, and fine jewelry in person
               through your device.
             </p>
-            <button>Book Appointment</button>
           </div>
         </div>
       </div>
@@ -1086,6 +1084,7 @@ const Root = styled.section`
       width: 100%;
       height: unset;
       margin: 20px;
+      flex: unset;
     }
     .main_div .des_div {
       width: 100%;

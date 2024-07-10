@@ -258,7 +258,7 @@ const Root = styled.section`
           border: 2px solid black;
         }
         .add_btn {
-          flex: 1;
+          /* flex: 1; */
           background-color: black;
           border: 2px solid black;
           color: white;
@@ -312,6 +312,7 @@ const Root = styled.section`
         }
         .btn_div .info_btn,
         .btn_div .add_btn {
+          flex: 1;
           font-size: 11px;
           padding: 3px 10px;
           border-radius: 15px;
@@ -349,6 +350,7 @@ const Root = styled.section`
         }
         .btn_div .info_btn,
         .btn_div .add_btn {
+          flex: 1;
           font-size: 11px;
           padding: 10px 10px;
           border-radius: 15px;
