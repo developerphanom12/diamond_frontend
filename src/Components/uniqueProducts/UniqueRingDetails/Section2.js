@@ -73,15 +73,19 @@ export default function Section2() {
   const [caratOptions, setCaratOptions] = useState([]);
   const [carat, setCarat] = useState("");
   const [preDefineData, setPreDefineData] = useState(null);
-  const [selectedShapes, setSelectedShapes] = useState(["ROUND"]);
-  const [selectedMaterial, setSelectedMaterial] = useState(["14kWhite"]);
+  const [selectedShapes, setSelectedShapes] = useState("ROUND");
+  const [selectedMaterial, setSelectedMaterial] = useState({
+    name: "14kWhite",
+    color: "white",
+  });
+  const [fingerSize, setFingerSize] = useState([]);
+  const [selectedVariant, setSelectedVariant] = useState(null);
 
   const location = useLocation();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = location.state;
-  console.log("uniqueProduct", product, uniqueProduct);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const fetchUniqueData = async () => {
@@ -92,17 +96,19 @@ export default function Section2() {
       );
       if (response.status === 200) {
         setUnique(response.data.data);
-        console.log("shdgfhsgd", response.data.data);
-        const uniqueSizes = [];
+        const uniqueColors = [];
         const uniqueCarats = [];
 
         response.data.data?.variants?.edges?.forEach((variant) => {
           variant?.node?.selectedOptions?.forEach((option) => {
-            if (option.name === "size" && !uniqueSizes.includes(option.value)) {
-              uniqueSizes.push(option.value);
+            if (
+              option.name === "Colors" &&
+              !uniqueColors.includes(option.value)
+            ) {
+              uniqueColors.push(option.value);
             }
             if (
-              option.name === "carat" &&
+              option.name === "CENTRE STONE SIZE" &&
               !uniqueCarats.includes(option.value)
             ) {
               uniqueCarats.push(option.value);
@@ -110,11 +116,11 @@ export default function Section2() {
           });
         });
 
-        setSizeOptions(uniqueSizes);
+        setSizeOptions(uniqueColors);
         setCaratOptions(uniqueCarats);
 
-        if (!size && uniqueSizes.length > 0) {
-          setSize(uniqueSizes[0]);
+        if (!size && uniqueColors.length > 0) {
+          setSize(uniqueColors[0]);
         }
         if (!carat && uniqueCarats.length > 0) {
           setCarat(uniqueCarats[0]);
@@ -130,11 +136,11 @@ export default function Section2() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${EXCHANGE_URLS}/productPredefine?productId=${uniqueProduct}&size=${size}&carat=${carat}`
+        `${EXCHANGE_URLS}/productPredefine?productId=${uniqueProduct}&colors=${size}&carat=${carat}`
       );
       if (response.status === 200) {
         setPreDefineData(response.data.data);
-        const data = response.data.data 
+        const data = response.data.data;
         dispatch(fetchPredefineData(data));
         console.log("Predefined neww Data:", data);
         dispatch(setSelectedOptions(uniqueProduct, carat, size));
@@ -151,6 +157,44 @@ export default function Section2() {
     setIsOpen((prevState) => !prevState);
   };
 
+  const handleCheckout = () => {
+    navigate("/checkout", {
+      state: {
+        uniqueProduct: uniqueProduct,
+        size: size,
+        carat: carat,
+        unique: unique,
+      },
+    });
+  };
+
+  const handleShapeClick = (shapeName, shapeImageUrl) => {
+    dispatch(setSelectedShapeImage(shapeImageUrl));
+    setSelectedShapes(shapeName);
+  };
+  const handleMaterialClick = (materialName, materialImageUrl) => {
+    const selectedMaterialVariant = unique?.variants?.edges?.find((variant) =>
+      variant?.node?.selectedOptions?.some(
+        (option) => option.name === "Colors" && option.value === materialName
+      )
+    );
+
+    const selectedColor = selectedMaterialVariant?.node?.selectedOptions?.find(
+      (option) => option.name === "Colors"
+    )?.value;
+
+    dispatch(setSelectedMaterialImage(materialImageUrl));
+    setSelectedMaterial({
+      name: materialName,
+      color: selectedColor || "default",
+    });
+    setSelectedVariant(selectedMaterialVariant);
+  };
+
+  const imageUrl =
+    preDefineData?.image?.originalSrc ||
+    unique?.images?.edges?.[0]?.node?.originalSrc;
+
   useEffect(() => {
     fetchUniqueData();
   }, [uniqueProduct]);
@@ -160,44 +204,15 @@ export default function Section2() {
       fetchPreDefineApi();
     }
   }, [size, carat]);
-  const handleCheckout = () => {
-    navigate("/checkout", {
-      state: {
-        uniqueProduct: uniqueProduct,
-        size: size,
-        carat: carat,
-        unique:unique
-
-      },
-    });
-  };
-
-  const handleShapeClick = (shapeName, shapeImageUrl) => {
-    dispatch(setSelectedShapeImage(shapeImageUrl));
-    setSelectedShapes([shapeName]); // Set the selected shape
-  };
-  const handleMaterialClick = (shapeName, shapeImageUrl) => {
-    dispatch(setSelectedMaterialImage(shapeImageUrl));
-    setSelectedMaterial([shapeName]); // Set the selected shape
-  };
-  const imageUrl = unique?.images?.edges?.[0]?.node?.originalSrc;
   return (
     <Root>
       <div className="main_div">
         <div className="image_div">
           <ImageContainer>
-            {preDefineData && preDefineData.image.length > 0 ? (
-              <img
-                src={preDefineData.image.originalSrc}
-                title="Diamond Image"
-                alt="Diamond"
-              />
+            {imageUrl ? (
+              <img src={imageUrl} title="Product Image" alt="Product" />
             ) : (
-              <img
-                src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                title="Diamond Image"
-                alt="Diamond"
-              />
+              <p>No image available</p>
             )}
           </ImageContainer>
           <div
@@ -213,7 +228,7 @@ export default function Section2() {
             <h2>
               {unique?.title} -{unique?.variants?.edges?.[0]?.node?.title}
             </h2>
-            <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
+            <h4>${selectedVariant?.node?.price}</h4>
             <p>
               {unique?.description && unique.description}
               {!unique?.description && "No Description About Product"}
@@ -237,7 +252,7 @@ export default function Section2() {
             </div>
           </div>
           <div className="ring_types mt-4">
-            <h4>Center Stone Shape: Round</h4>
+            <h4>Center Stone Shape: {selectedShapes}</h4>
             <div>
               {shapesList.map((shape) => (
                 <button
@@ -254,35 +269,44 @@ export default function Section2() {
             </div>
           </div>
           <div className="ring_types mt-4">
-            <h4>Material: 14k White Gold</h4>
+            <h4>Material: {selectedMaterial.name} </h4>
             <div>
-              {materialList.map((shape) => (
+              {materialList.map((material) => (
                 <button
-                  key={shape.name}
+                  key={material.name}
                   className={`btn_shapes ${
-                    selectedMaterial.includes(shape.name) ? "selected" : ""
+                    sizeOptions.name === material.name ? "selected" : ""
                   }`}
-                  onClick={() => handleMaterialClick(shape.name, shape.imgUrl)}
+                  onClick={() =>
+                    handleMaterialClick(material.name, material.imgUrl)
+                  }
                 >
-                  <img className="img" src={shape.imgUrl} alt={shape.name} />
-                  <p style={{ display: "none" }}>{shape.name}</p>
+                  <img
+                    className="img"
+                    src={material.imgUrl}
+                    alt={material.name}
+                  />
+                  <p style={{ display: "none" }}>{material.name}</p>
                 </button>
               ))}
             </div>
           </div>
           <div className="ring_size">
-            <select value={size} onChange={(e) => setSize(e.target.value)}>
+            <select
+              value={fingerSize}
+              onChange={(e) => setFingerSize(e.target.value)}
+            >
               <option value="">Select Ring Size</option>
-              {sizeOptions.map((sizeOption, index) => (
-                <option key={index} value={sizeOption}>
-                  {sizeOption}
+              {fingerSize?.map((fingerSize, index) => (
+                <option key={index} value={fingerSize}>
+                  {fingerSize}
                 </option>
               ))}
             </select>
           </div>
           <div className="product_btn">
             <button className="btn" onClick={toggleDrawer}>
-            {size ? "Add to Cart" : "Select Ring Size"} 
+              {size ? "Add to Cart" : "Select Ring Size"}
             </button>
             <Drawer
               open={isOpen}
@@ -401,7 +425,7 @@ export default function Section2() {
 
               <div className="but_div">
                 <button onClick={handleCheckout}>
-                {size ? "Add to Cart" : "Select Ring Size"} 
+                  {size ? "Add to Cart" : "Select Ring Size"}
                 </button>
               </div>
             </Drawer>
@@ -648,10 +672,10 @@ const Root = styled.section`
           display: flex;
           flex-direction: column;
           padding: 10px;
-          width: 40px;
-          height: 40px;
+          width: 55px;
+          height:50px;
           justify-content: center;
-          border-radius: 7px;
+          border-radius: 11px;
           background: transparent;
           align-items: center;
           cursor: pointer;
