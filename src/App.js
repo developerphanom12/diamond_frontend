@@ -26,6 +26,8 @@ import Gemstone from "./Components/Gemstone/Gemstone";
 import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
 import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 import AllOrders from "./Components/AllOrders/AllOrders";
+import TestCall from "./Components/TestCall";
+
 
 function App() {
   // useEffect(() => {
@@ -42,6 +44,7 @@ function App() {
         <Layout>
           <Routes>
             <>
+            <Route path="/testcall" element={<TestCall/>} />
               <Route path="/" element={<Home />} />
               <Route path="/allorder" element={<AllOrders />} />
               <Route path="/home" element={<Home />} />

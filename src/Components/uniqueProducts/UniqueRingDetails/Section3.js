@@ -177,5 +177,9 @@ const Root = styled.section`
     box-shadow: unset;
     position: unset;
     border-bottom: 1px solid #d3d3d366;
+    
+  }
+  .css-1086bdv-MuiPaper-root-MuiAccordion-root::before{
+    background-color: #fff;
   }
 `;

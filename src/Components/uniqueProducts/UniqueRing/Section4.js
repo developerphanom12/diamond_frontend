@@ -14,6 +14,7 @@ export default function Section4({ data }) {
     dispatch(setUniqueProduct(product));
     console.log("Navigating with product:", product);
     navigate("/uniqueringdetails", { state: { product } });
+
   };
   return (
     <Root>

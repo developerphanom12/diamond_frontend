@@ -1,3 +1,10 @@
+import { EXCHANGE_URLS } from "../../URLS";
+import {
+  fetchPredefineData,
+  setSelectedMaterialImage,
+  setSelectedOptions,
+  setSelectedShapeImage,
+} from "../../../redux/users/action";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import aeroplane from "../../Images/aeroplane.png";
@@ -6,26 +13,17 @@ import moneyinhand from "../../Images/moneyinhand.png";
 import certifiedd from "../../Images/certifiedd.png";
 import pinkimg from "../../Images/pink.PNG";
 import modimg from "../../Images/modimg.PNG";
-import color from "../../Images/color.PNG";
 import clarity from "../../Images/clarity.PNG";
 import diamo from "../../Images/diamo.PNG";
 import j from "../../Images/j.jpg";
 import vs from "../../Images/vs.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { EXCHANGE_URLS } from "../../URLS";
 import axios from "axios";
 import { useLoading } from "../../LoadingContext";
-import Section3 from "./Section3";
 import deleteicon from "../../Images/delete.PNG";
 import ww from "../../Images/ww.webp";
 import Drawer from "react-modern-drawer";
-import {
-  fetchPredefineData,
-  setSelectedMaterialImage,
-  setSelectedOptions,
-  setSelectedShapeImage,
-} from "../../../redux/users/action";
 import ROUND from "../../Images/round-removebg-preview.png";
 import EMERALD from "../../Images/emerald-removebg-preview.png";
 import HEART from "../../Images/heart-removebg-preview.png";
@@ -36,13 +34,14 @@ import PRINCESS from "../../Images/Princess-removebg-preview.png";
 import RADIANT from "../../Images/Radiant-removebg-preview.png";
 import CUSHION from "../../Images/cushionremovebg.png";
 import ECUSHION from "../../Images/ECusion-removebg-preview.png";
-import one from "../../Images/1.png";
-import four from "../../Images/4.png";
-import six from "../../Images/6.png";
-import two from "../../Images/2.png";
-import five from "../../Images/5.png";
-import seven from "../../Images/7.png";
-import three from "../../Images/3.png";
+import one_four_k_white_gold from "../../Images/1.png";
+import one_four_k_yellow_gold from "../../Images/4.png";
+import one_four_k_pink_gold from "../../Images/6.png";
+import one_eight_k_white_gold from "../../Images/2.png";
+import one_eight_k_yellow_gold from "../../Images/5.png";
+import one_eight_k_red from "../../Images/7.png";
+import Platinum from "../../Images/3.png";
+import Section3 from "./Section3";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -57,36 +56,31 @@ const shapesList = [
   { name: "E.CUSHION", imgUrl: ECUSHION },
 ];
 const materialList = [
-  { name: "14k white gold", imgUrl: one },
-  { name: "14k yellow gold", imgUrl: four },
-  { name: "14k pink gold", imgUrl: six },
-  { name: "18k white gold", imgUrl: two },
-  { name: "18k yellow gold", imgUrl: five },
-  { name: "18k pink gold", imgUrl: seven },
-  { name: "Platinum", imgUrl: three },
+  { value: "14ct White Gold", imgUrl: one_four_k_white_gold },
+  { value: "14ct Yellow Gold", imgUrl: one_four_k_yellow_gold },
+  { value: "14ct Pink Gold", imgUrl: one_four_k_pink_gold },
+  { value: "18ct White Gold", imgUrl: one_eight_k_white_gold },
+  { value: "18ct Yellow Gold", imgUrl: one_eight_k_yellow_gold },
+  { value: "18ct Red", imgUrl: one_eight_k_red },
+  { value: "Platinum", imgUrl: Platinum },
 ];
 export default function Section2() {
   const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
   const [unique, setUnique] = useState(null);
-  const [sizeOptions, setSizeOptions] = useState([]);
-  const [size, setSize] = useState("");
+  const [colorOptions, setColorOptions] = useState([]);
+  const [color, setColor] = useState("");
   const [caratOptions, setCaratOptions] = useState([]);
+  const [fingerSizeList, setFingerSizeList] = useState([]);
   const [carat, setCarat] = useState("");
   const [preDefineData, setPreDefineData] = useState(null);
   const [selectedShapes, setSelectedShapes] = useState("ROUND");
-  const [selectedMaterial, setSelectedMaterial] = useState({
-    name: "14kWhite",
-    color: "white",
-  });
+  const [selectedShapesImg, setSelectedShapesImg] = useState([]);
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [fingerSize, setFingerSize] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState(null);
-
-  const location = useLocation();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const product = location.state;
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const fetchUniqueData = async () => {
     setLoading(true);
@@ -96,13 +90,15 @@ export default function Section2() {
       );
       if (response.status === 200) {
         setUnique(response.data.data);
+        console.log("PredefinedData:", response);
+
         const uniqueColors = [];
         const uniqueCarats = [];
-
+        const uniqueFingers = [];
         response.data.data?.variants?.edges?.forEach((variant) => {
           variant?.node?.selectedOptions?.forEach((option) => {
             if (
-              option.name === "Colors" &&
+              option.name === "Colours" &&
               !uniqueColors.includes(option.value)
             ) {
               uniqueColors.push(option.value);
@@ -113,17 +109,26 @@ export default function Section2() {
             ) {
               uniqueCarats.push(option.value);
             }
+            if (
+              option.name === "FINGER SIZE" &&
+              !uniqueFingers.includes(option.value)
+            ) {
+              uniqueFingers.push(option.value);
+            }
           });
         });
 
-        setSizeOptions(uniqueColors);
+        setColorOptions(uniqueColors);
         setCaratOptions(uniqueCarats);
-
-        if (!size && uniqueColors.length > 0) {
-          setSize(uniqueColors[0]);
+        setFingerSizeList(uniqueFingers);
+        if (!color && uniqueColors.length > 0) {
+          setColor(uniqueColors[0]);
         }
         if (!carat && uniqueCarats.length > 0) {
           setCarat(uniqueCarats[0]);
+        }
+        if (!fingerSize && uniqueFingers.length > 0) {
+          setFingerSize(uniqueFingers[0]);
         }
       }
     } catch (error) {
@@ -132,19 +137,20 @@ export default function Section2() {
       setLoading(false);
     }
   };
+
   const fetchPreDefineApi = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${EXCHANGE_URLS}/productPredefine?productId=${uniqueProduct}&colors=${size}&carat=${carat}`
+        `${EXCHANGE_URLS}/productPredefine?productId=${uniqueProduct}&colours=${color}&carat=${carat}`
       );
       if (response.status === 200) {
         setPreDefineData(response.data.data);
         const data = response.data.data;
         dispatch(fetchPredefineData(data));
-        console.log("Predefined neww Data:", data);
-        dispatch(setSelectedOptions(uniqueProduct, carat, size));
-        console.log("storing_or_not", setSelectedOptions);
+        console.log("Predefined neww Data:", response);
+        dispatch(setSelectedOptions(uniqueProduct, carat, color));
+        dispatch(setSelectedMaterialImage(imageUrl));
       }
     } catch (error) {
       console.error("Error fetching", error);
@@ -161,7 +167,7 @@ export default function Section2() {
     navigate("/checkout", {
       state: {
         uniqueProduct: uniqueProduct,
-        size: size,
+        color: color,
         carat: carat,
         unique: unique,
       },
@@ -171,42 +177,41 @@ export default function Section2() {
   const handleShapeClick = (shapeName, shapeImageUrl) => {
     dispatch(setSelectedShapeImage(shapeImageUrl));
     setSelectedShapes(shapeName);
+    setSelectedShapesImg(shapeImageUrl);
   };
-  const handleMaterialClick = (materialName, materialImageUrl) => {
-    const selectedMaterialVariant = unique?.variants?.edges?.find((variant) =>
-      variant?.node?.selectedOptions?.some(
-        (option) => option.name === "Colors" && option.value === materialName
-      )
+
+  const handleMaterialClick = (selectedMaterialValue) => {
+    const selectedMaterial = materialList.find(
+      (material) => material.value === selectedMaterialValue
     );
+    setColor(selectedMaterialValue);
+    setSelectedMaterial(selectedMaterial);
+  };
+  const isMaterialAvailable = (materialValue) => {
+    return colorOptions.includes(materialValue);
+  };
 
-    const selectedColor = selectedMaterialVariant?.node?.selectedOptions?.find(
-      (option) => option.name === "Colors"
-    )?.value;
-
-    dispatch(setSelectedMaterialImage(materialImageUrl));
-    setSelectedMaterial({
-      name: materialName,
-      color: selectedColor || "default",
-    });
-    setSelectedVariant(selectedMaterialVariant);
+  const getSelectedMaterial = () => {
+    return materialList.find((material) => material.name === color);
   };
 
   const imageUrl =
     preDefineData?.image?.originalSrc ||
-    unique?.images?.edges?.[0]?.node?.originalSrc;
+    unique?.image?.originalSrc ||
+    "No Product Variant Available";
 
   useEffect(() => {
     fetchUniqueData();
   }, [uniqueProduct]);
 
   useEffect(() => {
-    if (size && !isNaN(carat)) {
-      fetchPreDefineApi();
-    }
-  }, [size, carat]);
+    fetchPreDefineApi();
+  }, [color, carat]);
+
+   
   return (
     <Root>
-      <div className="main_div">
+      <div className="main_wrapper">
         <div className="image_div">
           <ImageContainer>
             {imageUrl ? (
@@ -215,20 +220,12 @@ export default function Section2() {
               <p>No image available</p>
             )}
           </ImageContainer>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          ></div>
+          
         </div>
         <div className="des_div">
           <div className="title">
-            <h2>
-              {unique?.title} -{unique?.variants?.edges?.[0]?.node?.title}
-            </h2>
-            <h4>${selectedVariant?.node?.price}</h4>
+            <h2>{unique?.title}</h2>
+            <h4>${preDefineData?.price}</h4>
             <p>
               {unique?.description && unique.description}
               {!unique?.description && "No Description About Product"}
@@ -269,26 +266,33 @@ export default function Section2() {
             </div>
           </div>
           <div className="ring_types mt-4">
-            <h4>Material: {selectedMaterial.name} </h4>
+            <h4>Material: {selectedMaterial?.name} </h4>
+
             <div>
-              {materialList.map((material) => (
-                <button
-                  key={material.name}
-                  className={`btn_shapes ${
-                    sizeOptions.name === material.name ? "selected" : ""
-                  }`}
-                  onClick={() =>
-                    handleMaterialClick(material.name, material.imgUrl)
-                  }
-                >
-                  <img
-                    className="img"
-                    src={material.imgUrl}
-                    alt={material.name}
-                  />
-                  <p style={{ display: "none" }}>{material.name}</p>
-                </button>
-              ))}
+              {colorOptions &&
+                materialList.map((material) => (
+                  <button
+                    key={material.value}
+                    className={`btn_shapes ${
+                      color === material.value ? "selected" : ""
+                    }`}
+                    onClick={() => handleMaterialClick(material.value)}
+                    disabled={!isMaterialAvailable(material.value)}
+                    style={{
+                      opacity: isMaterialAvailable(material.value) ? 1 : 0.5,
+                      cursor: isMaterialAvailable(material.value)
+                        ? "pointer"
+                        : "not-allowed",
+                    }}
+                  >
+                    <img
+                      className="img"
+                      src={material.imgUrl}
+                      alt={material.value}
+                    />
+                    <p style={{ display: "none" }}>{material.value}</p>
+                  </button>
+                ))}
             </div>
           </div>
           <div className="ring_size">
@@ -297,16 +301,16 @@ export default function Section2() {
               onChange={(e) => setFingerSize(e.target.value)}
             >
               <option value="">Select Ring Size</option>
-              {fingerSize?.map((fingerSize, index) => (
-                <option key={index} value={fingerSize}>
-                  {fingerSize}
+              {fingerSizeList.map((size) => (
+                <option key={size} value={size}>
+                  {size}
                 </option>
               ))}
             </select>
           </div>
           <div className="product_btn">
             <button className="btn" onClick={toggleDrawer}>
-              {size ? "Add to Cart" : "Select Ring Size"}
+              {color ? "Add to Cart" : "Select Ring Size"}
             </button>
             <Drawer
               open={isOpen}
@@ -316,7 +320,7 @@ export default function Section2() {
               size="300px"
             >
               <div className="cart_heading">
-                <h2>My Shopping Bag</h2>
+                <h2>My Shopping Bag </h2>
               </div>
 
               <div className="prod_main_div">
@@ -330,17 +334,17 @@ export default function Section2() {
                       }}
                     >
                       <div className="dia_img">
-                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                        {selectedShapesImg ? (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={selectedShapesImg}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         ) : (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={imageUrl}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         )}
                       </div>
@@ -355,51 +359,51 @@ export default function Section2() {
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                        {selectedShapesImg ? (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={selectedShapesImg}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         ) : (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={imageUrl}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         )}
                         <div className="content_head">
                           <h4> {unique?.title} </h4>
-                          <p>14k White Gold </p>
+                          {color ? <p>{color}</p> : <p>Platinum</p>}
                         </div>
                       </div>
                       <div className="prod_price">
-                        <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
+                        <h4>${preDefineData?.price}</h4>
                       </div>
                     </div>
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        {unique?.images?.edges?.[0]?.node?.originalSrc ? (
+                        {selectedShapesImg ? (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={selectedShapesImg}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         ) : (
                           <img
-                            src={unique?.images?.edges?.[0]?.node?.originalSrc}
-                            title="Diamond Image"
-                            alt="Diamond"
+                            src={imageUrl}
+                            title="Selected Shape Image"
+                            alt="Selected Shape"
                           />
                         )}
                         <div className="content_head">
-                          <h4>Round </h4>
-                          <p>0.5 Carat J VS1</p>
+                          <h4>{selectedShapes} </h4>
+                          <p> {unique?.variants?.edges?.[0]?.node?.title}</p>
                         </div>
                       </div>
                       <div className="prod_price">
-                        <h4>$713</h4>
+                        <h4>${preDefineData?.price}</h4>
                       </div>
                     </div>
 
@@ -407,7 +411,7 @@ export default function Section2() {
                       <p>
                         Total:{" "}
                         <span style={{ color: "#000000" }}>
-                          ${unique?.variants?.edges?.[0]?.node?.price}
+                          <h4>${preDefineData?.price}</h4>
                         </span>
                       </p>
                       <div className="delete_icon">
@@ -420,12 +424,12 @@ export default function Section2() {
 
               <div className="total_price_div">
                 <p>Total:</p>
-                <h4>${unique?.variants?.edges?.[0]?.node?.price}</h4>
+                <h4>${preDefineData?.price}</h4>
               </div>
 
               <div className="but_div">
                 <button onClick={handleCheckout}>
-                  {size ? "Add to Cart" : "Select Ring Size"}
+                  {fingerSize ? "Add to Cart" : "Select Ring Size"}
                 </button>
               </div>
             </Drawer>
@@ -495,7 +499,7 @@ export default function Section2() {
                 <p className="para">Only stacks with a chevron/curved band</p>
               </div>
             </div>
-            subdiv
+             
             <h4>Your Diamond Info</h4>
             <div className="diamond_info">
               <div className="setting_div">
@@ -572,13 +576,20 @@ export default function Section2() {
 const Root = styled.section`
   padding: 20px;
   margin: 20px 0px;
-  .main_div {
+  position: relative;
+
+  .main_wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
     justify-content: space-between;
+    position: relative;
+
     .image_div {
       flex: 1;
+      /* position: absolute; */
+      /* position: sticky; */
+      top: 20px; 
       border: 1px solid #d3d3d3;
       padding: 20px 20px 0px 20px;
       height: 600px;
@@ -608,29 +619,30 @@ const Root = styled.section`
         }
       }
     }
-    .ring_size {
-      display: flex;
-      justify-content: start;
-      margin-top: 20px;
-      select {
-        font-size: 14px;
-        font-weight: 400;
-        border-radius: 6px;
-        background-color: #fff;
-        border: 1px solid lightgray;
-        border: 1px solid #e0e0e0;
-        padding: 0.75rem 3rem 0.75rem 0.75rem;
-        cursor: pointer;
-        transition: 0.5s;
-        &:hover {
-          box-shadow: 0 0 5px #cacaca;
-        }
-      }
-    }
 
     .des_div {
       flex: 1;
+      overflow: auto;
+      position: relative;
       padding: 10px 30px;
+      .ring_size {
+        display: flex;
+        justify-content: start;
+        margin-top: 20px;
+        select {
+          font-size: 14px;
+          font-weight: 400;
+          border-radius: 6px;
+          background-color: #fff;
+          border: 1px solid #e0e0e0;
+          padding: 0.75rem 3rem 0.75rem 0.75rem;
+          cursor: pointer;
+          transition: 0.5s;
+          &:hover {
+            box-shadow: 0 0 5px #cacaca;
+          }
+        }
+      }
       .title {
         h2 {
           font-size: 23px;
@@ -673,13 +685,16 @@ const Root = styled.section`
           flex-direction: column;
           padding: 10px;
           width: 55px;
-          height:50px;
+          height: 50px;
           justify-content: center;
           border-radius: 11px;
           background: transparent;
           align-items: center;
           cursor: pointer;
           border: 1px solid #bbb9b9;
+          &.selected {
+            border: 2px solid #000;
+          }
 
           p {
             color: #666666;
@@ -1048,16 +1063,14 @@ const Root = styled.section`
       width: 100%;
     }
   }
-  @media (min-width: 567px) and (max-width: 992px) {
-  }
 
   @media (max-width: 567px) {
     padding: 10px 0px;
-    .main_div {
+    .main_wrapper {
       gap: 0px;
     }
 
-    .main_div .image_div {
+    .main_wrapper .image_div {
       width: 100%;
       height: unset;
       padding: 5px;
@@ -1066,7 +1079,7 @@ const Root = styled.section`
         width: 90vw;
       }
     }
-    .main_div .des_div .prod_spec {
+    .main_wrapper .des_div .prod_spec {
       width: 90vw;
       .carattt {
         width: 100%;
@@ -1077,48 +1090,48 @@ const Root = styled.section`
         padding-bottom: 10px;
       }
     }
-    .main_div .ring_size select {
+    .main_wrapper .ring_size select {
       width: 100%;
     }
-    .main_div .des_div {
+    .main_wrapper .des_div {
       width: 100%;
       margin-top: 20px;
       padding: 5px;
     }
-    .main_div .setting_detail .diamond_info .setting_div {
+    .main_wrapper .setting_detail .diamond_info .setting_div {
       flex: 1;
     }
-    .main_div .des_div .prod_spec .spec {
+    .main_wrapper .des_div .prod_spec .spec {
       padding: 0px 14px;
     }
-    .main_div .des_div .prod_spec {
+    .main_wrapper .des_div .prod_spec {
       gap: 20px;
     }
-    .main_div .des_div .title h2,
-    .main_div .des_div .title h4 {
+    .main_wrapper .des_div .title h2,
+    .main_wrapper .des_div .title h4 {
       font-size: 18px;
     }
   }
   @media (min-width: 567px) and (max-width: 992px) {
-    .main_div {
+    .main_wrapper {
       gap: 0px;
     }
 
-    .main_div .image_div {
+    .main_wrapper .image_div {
       width: 100%;
       height: unset;
       margin: 20px;
       flex: unset;
     }
-    .main_div .des_div {
+    .main_wrapper .des_div {
       width: 100%;
       margin-top: 20px;
       padding: 5px;
     }
-    .main_div .des_div h2 {
+    .main_wrapper .des_div h2 {
       font-size: 18px;
     }
-    .main_div .setting_detail .diamond_info .setting_div {
+    .main_wrapper .setting_detail .diamond_info .setting_div {
       flex: 1;
     }
   }
@@ -1128,7 +1141,6 @@ const ImageContainer = styled.div`
   height: 100%;
 
   @media (max-width: 768px) {
-    /* height: auto; // Adjust height for mobile */
   }
 
   img {

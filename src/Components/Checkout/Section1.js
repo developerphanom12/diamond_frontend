@@ -27,14 +27,14 @@ export default function Section1() {
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log(
     "Checkout state newww:",
-    predefineData,
-    selectedOptions,
-    selectedSize,
-    diamond,
-    diamondId,
-    totalPrice,
-    selectedVariantId,
-    productId
+    predefineData
+    // selectedOptions,
+    // selectedSize,
+    // diamond,
+    // diamondId,
+    // totalPrice,
+    // selectedVariantId,
+    // productId
   );
 
   return (
@@ -70,21 +70,16 @@ export default function Section1() {
                       {diamondType ? "Lab Grown" : "Natural"} Diamond
                     </>
                   ) : (
-                    <>
-                      {predefineData?.title}{" "}
-                      {predefineData?.selectedOptions?.map((option, index) => (
-                        <span key={index}>
-                          {option.name}: {option.value}{" "}
-                        </span>
-                      ))}
-                    </>
+                    <>{predefineData?.title} </>
                   )}
                 </h2>
                 <div className="icon_content">
                   <>
                     <img
                       style={{ width: "25px", height: "25px" }}
-                      src={selectedShapeImage}
+                      src={
+                        selectedShapeImage || predefineData?.image?.originalSrc
+                      }
                       alt="img"
                     />
                   </>
@@ -112,25 +107,33 @@ export default function Section1() {
                   <div style={{ width: "25px", height: "25px" }}>
                     <img
                       style={{ width: "25px", height: "25px" }}
-                      src={selectedRingSvg}
+                      src={selectedRingSvg || predefineData?.image?.originalSrc}
                       alt="img"
                     />
                   </div>
-                  <p>14k White Gold</p>
+                  <p>
+                    {predefineData?.selectedOptions?.[1]?.value ||
+                      "material quality"}
+                  </p>
                 </div>
 
                 <div className="icon_content">
                   <div style={{ width: "25px", height: "25px" }}>
                     <img
                       style={{ width: "25px", height: "25px" }}
-                      src={selectedRingSvg}
+                      src={selectedRingSvg || predefineData?.image?.originalSrc}
                       alt="img"
                     />
                   </div>
-                  <p>Ring Size: {selectedSize}</p>
+                  <p>
+                    Ring Size:{" "}
+                    {selectedSize ||
+                      predefineData?.selectedOptions?.[2]?.value ||
+                      "N"}
+                  </p>
                 </div>
                 <div className="price">
-                  <h5>${price} </h5>
+                  <h5>${price || predefineData?.price} </h5>
                 </div>
               </div>
             </div>
@@ -153,7 +156,7 @@ export default function Section1() {
 
             <div className="subtotal">
               <h5>Subtotal</h5>
-              <p>${totalPrice}</p>
+              <p>${totalPrice  || predefineData?.price}</p>
             </div>
 
             <div className="shipping">
@@ -163,7 +166,7 @@ export default function Section1() {
 
             <div className="total">
               <h5>Total</h5>
-              <p>USD ${totalPrice}</p>
+              <p>USD ${totalPrice  || predefineData?.price}</p>
             </div>
           </div>
         </div>

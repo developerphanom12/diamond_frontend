@@ -38,7 +38,7 @@ const initialState = {
   selectedOptions: {
     uniqueProduct: null,
     carat: null,
-    size: null,
+    color: null,
   },
   collectionIds: null,
   selectedMaterialImage: {
@@ -90,7 +90,7 @@ const UserReducer = (state = initialState, action) => {
         selectedOptions: {
           uniqueProduct: action.payload.uniqueProduct,
           carat: action.payload.carat,
-          size: action.payload.size,
+          color: action.payload.color,
         },
       };
     case SET_UNIQUE_PRODUCT:
