@@ -58,7 +58,7 @@ console.log("wwwwwwwwwww",product)
                   <p>Ring Size: {selectedSize}</p>
                 </div> */}
                    <div className="price">
-                  <h5>${product?.variants?.edges?.[0]?.node?.price || "Price"}</h5>
+                  <h5>${product?.priceRange?.maxVariantPrice?.amount || "Price not showing"}</h5>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@ console.log("wwwwwwwwwww",product)
 
             <div className="subtotal">
               <h5>Subtotal</h5>
-              <p>${product?.variants?.edges?.[0]?.node?.price || "Price"}</p>
+              <p>${product?.priceRange?.maxVariantPrice?.amount || "Price not showing"}</p>
             </div>
 
             <div className="shipping">
@@ -91,7 +91,7 @@ console.log("wwwwwwwwwww",product)
 
             <div className="total">
               <h5>Total</h5>
-              <p>USD ${product?.variants?.edges?.[0]?.node?.price || "Price"}</p>
+              <p>USD ${product?.priceRange?.maxVariantPrice?.amount || "Price not showing"}</p>
             </div>
           </div>
         </div>

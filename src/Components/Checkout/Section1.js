@@ -15,8 +15,10 @@ export default function Section1() {
     diamondId,
     totalPrice,
     diamond,
+    priceDiamond,
     selectedSize,
     price,
+    productTitle,
   } = location.state || {};
   const selectedShapeImage = useSelector(
     (state) => state.users.selectedShapeImage
@@ -27,14 +29,17 @@ export default function Section1() {
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log(
     "Checkout state newww:",
-    predefineData,
-    selectedOptions,
-    selectedSize,
     diamond,
+    priceDiamond,
+    productId,
+    productTitle,
+    diamondType,
+    selectedRingSvg,
+    selectedSize,
     diamondId,
     totalPrice,
     selectedVariantId,
-    productId
+ 
   );
 
   return (
@@ -70,11 +75,11 @@ export default function Section1() {
                       {diamondType ? "Lab Grown" : "Natural"} Diamond
                     </>
                   ) : (
-                    <>{predefineData?.title} </>
+                    <>{predefineData?.title || productTitle} </>
                   )}
                 </h2>
                 <div className="icon_content">
-                  <>
+                <div style={{ width: "25px", height: "25px" }}>
                     <img
                       style={{ width: "25px", height: "25px" }}
                       src={
@@ -82,8 +87,8 @@ export default function Section1() {
                       }
                       alt="img"
                     />
-                  </>
-                  {diamond && diamond.length > 0 ? (
+                  </div>
+                  {diamond && productIds ? (
                     <p>
                       {diamond?.certificate?.carats} carat{" "}
                       {diamond?.certificate?.color}{" "}
@@ -133,7 +138,7 @@ export default function Section1() {
                   </p>
                 </div>
                 <div className="price">
-                  <h5>${price || predefineData?.price} </h5>
+                  <h5>${price || predefineData?.price || totalPrice} </h5>
                 </div>
               </div>
             </div>
@@ -233,6 +238,7 @@ const Root = styled.section`
               gap: 2px;
               img {
                 object-fit: contain;
+              
               }
               p {
                 font-size: 11px;

@@ -99,10 +99,11 @@ export default function Section2() {
     }
     navigate("/checkout", {
       state: {
-        diamond: diamond?.diamond,
-        price: diamond?.price,
+        diamond: diamond,
+        priceDiamond: diamond?.price,
         selectedVariantId: selectedVariantId,
         productId: productIds.id,
+        productTitle: productIds.title,
         diamondId: diamond?.id,
         totalPrice: totalPrice.toFixed(2),
         selectedSize: selectedSize,
