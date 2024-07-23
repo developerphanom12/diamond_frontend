@@ -99,7 +99,7 @@ console.log("wwwwwwwwwww",product)
     </Root>
   );
 }
-
+    
 const Root = styled.section`
   .main_div {
     display: flex;
