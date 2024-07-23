@@ -1,22 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-// import round from "../Images/round-removebg-preview.png";
-// import emerald from "../Images/emerald-removebg-preview.png";
-// import heart from "../Images/heart-removebg-preview.png";
-// import Marquise from "../Images/Marquise-removebg-preview.png";
-// import oval from "../Images/oval-removebg-preview.png";
-// import Pear from "../Images/Pear-removebg-preview.png";
-// import Princess from "../Images/Princess-removebg-preview.png";
-// import Radiant from "../Images/Radiant-removebg-preview.png";
-// import cushionremovebg from "../Images/cushionremovebg.png";
-// import ECusion from "../Images/ECusion-removebg-preview.png";
 import aeroplane from "../Images/aeroplane.png";
 import badgess from "../Images/badgess.png";
 import moneyinhand from "../Images/moneyinhand.png";
 import certifiedd from "../Images/certifiedd.png";
 import pinkimg from "../Images/pink.PNG";
 import modimg from "../Images/modimg.PNG";
-// import images from "../Images/images.PNG";
 import noimg from "../Images/eligantPacking.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -31,7 +20,7 @@ export default function Section2() {
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <img src={products?.mainImage ||  noimg } alt="img"/>
+          <img src={products?.mainImage || noimg} alt="img" />
           <div
             style={{
               textAlign: "center",
@@ -40,14 +29,7 @@ export default function Section2() {
               alignItems: "center",
             }}
           >
-            <button className="button">
-              {/* <img
-                src={images}
-                alt="images"
-                style={{ width: "35px", height: "35px" }}
-              /> */}
-              {/* <span>Image</span> */}
-            </button>
+            <button className="button"></button>
           </div>
         </div>
 
@@ -59,22 +41,6 @@ export default function Section2() {
               {products?.description && products.description}
               {!products?.description && "No Description About Product"}
             </p>
-          </div>
-
-          <div className="stone_shape">
-            {/* <h4>Center Stone Shape</h4> */}
-            <div className="stone_images">
-              {/* <img src={round} alt="round_images" />
-              <img src={emerald} alt="emerald_images" />
-              <img src={heart} alt="heart_images" />
-              <img src={Marquise} alt="Marquise_images" />
-              <img src={oval} alt="oval" />
-              <img src={Pear} alt="Pear_images" />
-              <img src={Princess} alt="Princess_images" />
-              <img src={Radiant} alt="Radiant_images" />
-              <img src={cushionremovebg} alt="cushionremovebg_images" />
-              <img src={ECusion} alt="ECusion_images" /> */}
-            </div>
           </div>
 
           <div className="product_btn">
@@ -359,7 +325,7 @@ const Root = styled.section`
     padding: 10px 0px;
     .main_div {
       gap: 0px;
-      margin:20px;
+      margin: 20px;
     }
 
     .main_div .image_div {
@@ -390,40 +356,32 @@ const Root = styled.section`
       font-size: 18px;
     }
 
+    .main_div .product_btn {
+      margin-top: 0;
+    }
 
- .main_div .product_btn {
-      margin-top:0;
-}
+    .main_div .policy .policy_type p {
+      font-size: 10px;
+    }
 
-
- .main_div .policy .policy_type p {
-    font-size: 10px;
-}
-
- .main_div .image_div img {
-    width: 75vw;
-    padding-top: 15px;
-}
-
-
+    .main_div .image_div img {
+      width: 75vw;
+      padding-top: 15px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-
-
-    .main_div{
-      display:unset;
+    .main_div {
+      display: unset;
     }
 
     .main_div .image_div {
       width: 100%;
       height: unset;
-    
     }
     .main_div .des_div {
       width: 100%;
       margin-top: 20px;
-      
     }
     .main_div .des_div h2 {
       font-size: 18px;
@@ -433,7 +391,7 @@ const Root = styled.section`
     }
 
     .main_div .image_div img {
-    width: 90vw;
-}
+      width: 90vw;
+    }
   }
 `;

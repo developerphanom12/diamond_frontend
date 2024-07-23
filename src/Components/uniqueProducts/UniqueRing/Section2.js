@@ -67,8 +67,8 @@ export default function Section2() {
 
   const handleShapeClick = (shapeName) => {
     setSelectedShapes([shapeName]);
-    dispatch(setSelectedShape(shapeName)); // Set the selected shape
-    navigate("/uniquering", { state: { selectedShape: shapeName } }); // Navigate with selected shape
+    dispatch(setSelectedShape(shapeName)); 
+    navigate("/uniquering", { state: { selectedShape: shapeName } }); 
   };
 
   const [isOpen, setIsOpen] = useState(false);
