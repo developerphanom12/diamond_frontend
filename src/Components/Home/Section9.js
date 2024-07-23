@@ -5,7 +5,7 @@ import ringg1 from "../Images/couple1.webp";
 import ringg3 from "../Images/Couple_4.webp";
 import ringg2 from "../Images/couple3.webp";
 import ringg4 from "../Images/Couple_2.webp";
-import ringg5 from "../Images/couple5.webp";
+import ringg5 from "../Images/couple5.webp";     
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
