@@ -1,88 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-import {  ModalBody } from "reactstrap";
-import { CiCircleCheck } from "react-icons/ci";
-import { setDiamondType } from "../../redux/users/action";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function Section1() {
-  const [selectedButton, setSelectedButton] = useState(false);
-  const productIds = useSelector((state) => state.users.productIds);
-
-  const [modal, setmodal] = useState(false);
-  const [modal1, setmodal1] = useState(false);
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const handleModalNavigate = (labgrownValue, buttonIndex) => {
-    console.log("Navigating with labgrownValue:", labgrownValue);
-    dispatch(setDiamondType(labgrownValue));
-    setSelectedButton(buttonIndex);
-    setmodal(false);
-    navigate("/naturaldiamond", {
-      state: { labgrownValue },
-    });
-  };
 
   return (
     <Root>
       <div className="container-fluid">
-        {/* <div className="row">
-          <div
-            className="col-lg-4 col-md-4 col-4"
-            onClick={() => setmodal1(true)}
-          >
-            <div className="column">
-              <div className="d-flex ">
-                <h2>1</h2>
-                <div className="flex-column">
-                  <span>Select your</span>
-                  <h6>Setting</h6>
-                </div>
-              </div>
-
-              <div className="view_cont">
-                <h5>{productIds?.title}</h5>
-                <div className="view_btn">
-                  <h5>View</h5>
-                  <p>${productIds?.priceRange?.minVariantPrice?.amount}</p>
-                </div>
-              </div>
-              <CiCircleCheck />
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-4 col-4">
-            <div
-              id="container"
-              className="column bord"
-              onClick={() => setmodal(true)}
-            >
-              <div className="d-flex">
-                <h2>2</h2>
-                <div className="flex-column">
-                  <span>Select your</span>
-                  <h6>Stone</h6>
-                </div>
-              </div>
-              <CiCircleCheck />
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-4 col-4">
-            <div className="column">
-              <div className="d-flex ">
-                <h2>3</h2>
-                <div className="flex-column">
-                  <span>Complete</span>
-                  <h6>Ring</h6>
-                </div>
-              </div>
-              <CiCircleCheck />
-            </div>
-          </div>
-        </div> */}
+       
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12">
             <div className="heading">
@@ -342,50 +266,4 @@ const Root = styled.section`
   }
 `;
 
-const CustomModalBody = styled(ModalBody)`
-  position: relative;
-  z-index: 1212121;
-  padding: 30px 85px 50px;
-  text-align: center;
 
-  h2 {
-    font-size: 25px;
-    margin-top: 20px;
-    color: #000000;
-    font-weight: 700;
-  }
-  .choose_option {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    z-index: 1111;
-    justify-content: center;
-    margin-top: 20px;
-
-    .ring_pandet {
-      flex-direction: column;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      &.selected {
-        border: 2px solid black;
-        border-radius: 10px;
-        font-weight: 600;
-      }
-      svg {
-        width: 56px;
-        height: 56px;
-        cursor: pointer;
-      }
-      span {
-        cursor: pointer;
-        font-size: 14px;
-      }
-    }
-  }
-  .modal-dialog {
-    margin-top: 82px !important;
-    top: 26% !important;
-  }
-`;

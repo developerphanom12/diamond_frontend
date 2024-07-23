@@ -69,7 +69,7 @@ function BottomBar() {
             onMouseLeave={handleMouseLeave2}
             id="graphic"
           >
-            <Nav.Link href="/engagementring">Engagement rings</Nav.Link>
+            <Nav.Link >Engagement rings</Nav.Link>
             {isListOpen2 && (
               <div className="option_list_list">
                 {/* <ProgrammingTech /> */}
@@ -83,7 +83,7 @@ function BottomBar() {
             onMouseLeave={handleMouseLeave4}
             id="diamond"
           >
-            <Nav.Link href="/naturaldiamond">diamonds</Nav.Link>
+            <Nav.Link>diamonds</Nav.Link>
             {isListOpen4 && (
               <div className="option_list_list">
                 <DiamondList />
@@ -95,7 +95,7 @@ function BottomBar() {
             onMouseLeave={handleMouseLeave6}
             id="graphic"
           >
-            <Nav.Link href="/gemstone">Gemstone</Nav.Link>
+            <Nav.Link >Gemstone</Nav.Link>
             {isListOpen6 && <div className="option_list_list"><GemstoneList/></div>}
           </div>
 

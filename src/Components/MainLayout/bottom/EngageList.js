@@ -55,7 +55,7 @@ export default function EngageList() {
     <Root>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-3 col-mg-6 col-12">
+          <div className="col-lg-3 col-mg-6 col-6">
             <b>Design your engagement ring</b>
             <div className="ring_space">
               <ul>
@@ -83,7 +83,7 @@ export default function EngageList() {
             </div>
           </div>
 
-          <div className="col-lg-3 col-mg-6 col-12 bord">
+          <div className="col-lg-3 col-mg-6 col-6 bord">
             <b>Present Engagement Rings</b>
             <div className="ring_space">
               <ul>

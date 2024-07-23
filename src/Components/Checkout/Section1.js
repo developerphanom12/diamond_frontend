@@ -27,14 +27,14 @@ export default function Section1() {
   const diamondType = useSelector((state) => state.users.diamondType);
   console.log(
     "Checkout state newww:",
-    predefineData
-    // selectedOptions,
-    // selectedSize,
-    // diamond,
-    // diamondId,
-    // totalPrice,
-    // selectedVariantId,
-    // productId
+    predefineData,
+    selectedOptions,
+    selectedSize,
+    diamond,
+    diamondId,
+    totalPrice,
+    selectedVariantId,
+    productId
   );
 
   return (

@@ -42,6 +42,8 @@ import one_eight_k_yellow_gold from "../../Images/5.png";
 import one_eight_k_red from "../../Images/7.png";
 import Platinum from "../../Images/3.png";
 import Section3 from "./Section3";
+import noimg from "../../Images/eligantPacking.png";
+
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -217,7 +219,7 @@ export default function Section2() {
             {imageUrl ? (
               <img src={imageUrl} title="Product Image" alt="Product" />
             ) : (
-              <p>No image available</p>
+              <img src={noimg} alt="img not available" />
             )}
           </ImageContainer>
           

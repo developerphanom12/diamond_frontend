@@ -17,6 +17,7 @@ import certifiedd from "../Images/certifiedd.png";
 import pinkimg from "../Images/pink.PNG";
 import modimg from "../Images/modimg.PNG";
 // import images from "../Images/images.PNG";
+import noimg from "../Images/eligantPacking.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import RingShipReturn from "../DiamondDetails/RingShipReturn";
@@ -30,7 +31,7 @@ export default function Section2() {
     <Root>
       <div className="main_div">
         <div className="image_div">
-          <img src={products?.mainImage && products.mainImage} alt="img"/>
+          <img src={products?.mainImage ||  noimg } alt="img"/>
           <div
             style={{
               textAlign: "center",
@@ -45,7 +46,7 @@ export default function Section2() {
                 alt="images"
                 style={{ width: "35px", height: "35px" }}
               /> */}
-              <span>Image</span>
+              {/* <span>Image</span> */}
             </button>
           </div>
         </div>

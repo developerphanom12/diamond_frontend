@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ring from "../Images/Solitaire-removebg-preview.png";
@@ -16,7 +16,6 @@ export default function Section1() {
 
   const [modal, setmodal] = useState(false);
   const [modal1, setmodal1] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

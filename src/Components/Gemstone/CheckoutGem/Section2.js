@@ -99,7 +99,7 @@ export default function Section2() {
         }}
       >
         <header>The Precious Earth</header>
-        <input type="range" style={{ width: "52%" }} />
+        {/* <input type="range" style={{ width: "52%" }} /> */}
         <p>
           <span>information</span>
           <span>confirmation</span>
@@ -297,13 +297,13 @@ const Check = styled.section`
   /* width: 100vw; */
 
   header {
-    padding: 20px 20px 40px;
+    padding: 20px 20px ;
     font-size: 25px;
     font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
 
   p {
-    padding: 20px 40px;
+    padding: 20px ;
     display: flex;
     width: 100%;
     flex: 1;

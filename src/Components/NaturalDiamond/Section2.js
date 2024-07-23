@@ -71,8 +71,8 @@ export default function Section2() {
   const minCarat = caratRange[0];
   const maxCarat = caratRange[1];
   const [selectedCut, setSelectedCut] = useState([]);
-  const [selectedCarat, setSelectedCarat] = useState([]);
-  const [selectedBudget, setSelectedBudget] = useState([]);
+  // const [selectedCarat, setSelectedCarat] = useState([]);
+  // const [selectedBudget, setSelectedBudget] = useState([]);
   const [selectedCertificate, setSelectedCertificate] = useState({
     1: false,
     2: false,

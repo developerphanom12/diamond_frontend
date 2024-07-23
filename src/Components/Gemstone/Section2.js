@@ -22,7 +22,7 @@ import PRINCESS from "../Images/Princess-removebg-preview.png";
 import RADIANT from "../Images/Radiant-removebg-preview.png";
 import CUSHION from "../Images/cushionremovebg.png";
 import ASSCHER from "../Images/ECusion-removebg-preview.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { EXCHANGE_URLS } from "../URLS";
@@ -69,16 +69,14 @@ export default function Section2() {
     collections[0].id
   );
   const [caratRange, setCaratRange] = useState([10000, 8500000]);
-  const [mincount, setminCount] = useState(181);
-  const [maxcount, setmaxCount] = useState(502086918);
+  // const [mincount, setminCount] = useState(181);
+  // const [maxcount, setmaxCount] = useState(502086918);
   const minCarat = caratRange[0];
   const maxCarat = caratRange[1];
   const [value, setValue] = useState([]);
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { state } = useLocation();
 
   const diamondApi = async (params) => {
     setLoading(true);
@@ -130,7 +128,6 @@ export default function Section2() {
       maxCarat: caratRange[1],
       selectedCollection,
     };
-
     diamondApi(params);
   }, [selectedShapes, selectedCollection, caratRange, dispatch]);
 
@@ -144,21 +141,21 @@ export default function Section2() {
   const handleCollectionChange = (collectionId) => {
     setSelectedCollection(collectionId);
   };
-  const minincrement = () => {
-    setminCount(mincount + 2100);
-  };
-  const mindecrement = () => {
-    setminCount(mincount - 2100);
-  };
-  const formatNumber = (number) => {
-    return number.toLocaleString();
-  };
-  const maxincrement = () => {
-    setmaxCount(maxcount + 2100);
-  };
-  const maxdecrement = () => {
-    setmaxCount(maxcount - 2100);
-  };
+  // const minincrement = () => {
+  //   setminCount(mincount + 2100);
+  // };
+  // const mindecrement = () => {
+  //   setminCount(mincount - 2100);
+  // };
+  // const formatNumber = (number) => {
+  //   return number.toLocaleString();
+  // };
+  // const maxincrement = () => {
+  //   setmaxCount(maxcount + 2100);
+  // };
+  // const maxdecrement = () => {
+  //   setmaxCount(maxcount - 2100);
+  // };
   const handleChangeCarat = (event, newValue) => {
     setCaratRange(newValue);
   };

@@ -26,7 +26,10 @@ export default function Footer() {
             <p>BLOG</p>
             <p>FAQ</p>
             <p>REVIEWS</p>
-            <p>EDUCATION</p>
+            <p>
+              {" "}
+              <a href="/education">EDUCATION</a>
+            </p>
           </div>
           <div className="col-lg-3 col-md-4 col-4">
             <p>Information</p>
@@ -39,13 +42,13 @@ export default function Footer() {
             <p>ACCESSIBILITY</p>
           </div>
           <div className="col-lg-3 col-md-4 col-4">
-            <p> Jewelry</p>
-            <p>ENGAGEMENT RINGS</p>
+            <p>Jewelry</p>
+            <p>
+              <a href="/engagementring">ENGAGEMENT RINGS</a>
+            </p>
             <p>WEDDING BANDS</p>
-            <p>PENDANTS</p>
             <p>MOISSANITE</p>
             <p>ETERNITY RINGS</p>
-            <p>DIAMONDS NECKLACES</p>
           </div>
         </div>
       </div>
@@ -65,19 +68,23 @@ const Root = styled.section`
     p {
       font-size: 14px;
     }
+    img{
+      cursor: pointer;
+    }
   }
   .col-lg-2,
   .col-lg-3 {
     padding: 20px 50px;
     p {
       font-size: 15px;
+      cursor: pointer;
     }
     border-bottom: 1px solid #fff;
   }
   @media (max-width: 767px) {
     .col-lg-2,
     .col-lg-3 {
-      padding: 10px  ;
+      padding: 10px;
       p {
         font-size: 10px;
       }
