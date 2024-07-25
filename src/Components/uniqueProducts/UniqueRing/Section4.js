@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUniqueProduct } from "../../../redux/users/action";
-import noimagefound from "../../Images/noimagefound.jpg";
 import nopro from "../../Images/product-not-found.jpg";
+import { NoProduct } from "../../NoProduct";
 
 export default function Section4({ data }) {
   const navigate = useNavigate();
@@ -85,11 +85,7 @@ export default function Section4({ data }) {
             );
           })):(
             <div style={{ width: "100vw", height: "80vh" }}>
-            <img
-              style={{ width: "99%", height: "100%" }}
-              src={noimagefound}
-              alt="No Data Found"
-            />
+                 <NoProduct/>
           </div>
           )}
       </div>

@@ -1,10 +1,82 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ring from "../Images/ring.png";
+import ring1 from "../Images/bestseller1.jpg";
+import ring2 from "../Images/bestseller2.jpg";
+import ring3 from "../Images/bestseller3.jpg";
+import ring4 from "../Images/bestseller4.jpg";
+import ring7 from "../Images/bestseller3.jpg";
+import ring8 from "../Images/bestseller4.jpg";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+const products = [
+  {
+    id: 1,
+    name: "The Pave Eleanor Set With A 2 Carat Elongated Cushion Lab Diamond",
+    price: "$3800",
+    imgSrc: ring1,
+    colors: ["white_color", "golden_color", "red_color"],
+  },
+  {
+    id: 2,
+    name: "The Eleanor Set With A 2 Carat Round Lab Diamond",
+    price: "$3000",
+    imgSrc: ring2,
+    colors: ["blue_color", "green_color", "yellow_color"],
+  },
+  {
+    id: 3,
+    name: "The Razor Kamellie Set With A 2 Carat Round Lab Diamond",
+    price: "$3250",
+    imgSrc: ring3,
+    colors: ["white_color", "golden_color", "red_color"],
+  },
+  {
+    id: 4,
+    name: "The Pave Lily Set With A 2 Carat Cushion Lab Diamond",
+    price: "$4150",
+    imgSrc: ring4,
+    colors: ["blue_color", "green_color", "yellow_color"],
+  },
+  {
+    id: 5,
+    name: "The Pave Eleanor Set With A 2 Carat Elongated Cushion Lab Diamond",
+    price: "$3800",
+    imgSrc: ring1,
+    colors: ["white_color", "golden_color", "red_color"],
+  },
+  {
+    id: 6,
+    name: "The Razor Kamellie Set With A 2 Carat Round Lab Diamond",
+    price: "$3250",
+    imgSrc: ring7,
+    colors: ["white_color", "golden_color", "red_color"],
+  },
+  {
+    id: 7,
+    name: "The Eleanor Set With A 2 Carat Round Lab Diamond",
+    price: "$3000",
+    imgSrc: ring2,
+    colors: ["blue_color", "green_color", "yellow_color"],
+  },
+  {
+    id: 8,
+    name: "The Pave Lily Set With A 2 Carat Cushion Lab Diamond",
+    price: "$4150",
+    imgSrc: ring8,
+    colors: ["blue_color", "green_color", "yellow_color"],
+  },
+  {
+    id: 9,
+    name: "The Razor Kamellie Set With A 2 Carat Round Lab Diamond",
+    price: "$3250",
+    imgSrc: ring3,
+    colors: ["white_color", "golden_color", "red_color"],
+  },
+];
 
 export default function Section7() {
   var settings = {
@@ -61,289 +133,51 @@ export default function Section7() {
         <div className="row">
           <div className="col-lg-12 pt-4">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h2> OUR Best Sellers</h2>{" "}
-              <div style={{ padding: "20px 0px" }}>
+              <h2>OUR Best Sellers</h2>
+              <div style={{ padding: "20px 0" }}>
                 <button onClick={goToPrevSlide}>
-                  {" "}
                   <IoIosArrowBack />
                 </button>
                 <button onClick={goToNextSlide}>
-                  {" "}
                   <IoIosArrowForward />
                 </button>
               </div>
             </div>
             <Slider ref={sliderRef} {...settings}>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  style={{
+                    textAlign: "center",
+                    width: "280px",
+                    height: "191px",
+                  }}
+                >
+                  <div className="d_flex">
+                    <img
+                      src={product.imgSrc}
+                      alt={product.name}
+                      style={{
+                        width: "100%",
+                        border: "1px solid #ededed",
+                        borderRadius: "15px",
+                      }}
+                    />
+                    <div className="mainn">
+                      <div className="d-flex flex-column">
+                        <h5 className="prd_name">{product.name}</h5>
+                        <p className="prd_price">{product.price}</p>
+                      </div>
+                      <div className="d-flex">
+                        {product.colors.map((color, index) => (
+                          <span key={index} className={color}></span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ textAlign: "center", width: "280px", height: "191px" }}
-              >
-                <div className="d_flex">
-                  <img
-                    src={ring}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      border: "1px solid #ededed",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <div className="mainn">
-                    <div className="d-flex flex-column">
-                      <h5 className="prd_name">The Riley</h5>
-                      <p className="prd_price">$450</p>
-                    </div>
-                    <div className="d-flex">
-                      <span className="white_color"></span>
-                      <span className="golden_color"></span>
-                      <span className="red_color"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </Slider>
-            <div
-              style={{
-                width: "100%",
-                textAlign: "center",
-                marginBottom: "20px",
-              }}
-            >
-              {/* <button className="btn">View More</button> */}
-            </div>
           </div>
         </div>
       </div>
@@ -374,7 +208,7 @@ const Root = styled.section`
   h2 {
     padding: 20px 0px;
     text-transform: uppercase;
-    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
+    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
   button {
     background-color: #fff;
@@ -428,8 +262,7 @@ const Root = styled.section`
 
   @media (max-width: 567px) {
     h2 {
-    font-size: 20px;
-}
+      font-size: 20px;
+    }
   }
-
 `;

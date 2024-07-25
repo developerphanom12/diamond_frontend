@@ -10,6 +10,7 @@ import labgrown from "../Images/labgrowncopy-removebg.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import noimg from "../Images/eligantPacking.png";
+import { NoProduct } from "../NoProduct";
 
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
@@ -73,7 +74,7 @@ export default function Section4({ products }) {
                         backgroundColor: "#ccc",
                       }}
                     >
-                      <img src={noimg} alt="img not available" />
+                      <NoProduct />
                     </div>
                   )}
                 </>
@@ -181,8 +182,8 @@ const Root = styled.section`
       margin-bottom: 20px;
       padding: 15px;
       img {
-        width:100%;
-        height:88%;
+        width: 100%;
+        height: 88%;
       }
       &:hover {
         border: 3px solid black;
@@ -285,10 +286,10 @@ const Root = styled.section`
 
   @media (max-width: 567px) {
     padding: 0px 10px;
-    
+
     .main_div {
-      gap:15px;
-      margin-top:0;
+      gap: 15px;
+      margin-top: 0;
       .subdiv {
         width: 45vw;
         height: 36vh;
@@ -321,12 +322,12 @@ const Root = styled.section`
     }
   }
 
-  @media (min-width: 567px) and (max-width: 992px){
+  @media (min-width: 567px) and (max-width: 992px) {
     padding: 0px 10px;
-    
+
     .main_div {
-      padding:0 20px;
-      gap:15px;
+      padding: 0 20px;
+      gap: 15px;
       .subdiv {
         width: 45vw;
         height: 36vh;
@@ -358,10 +359,10 @@ const Root = styled.section`
       }
     }
 
- .main_div .subdiv img {
-    width: 100%;
-    height: 92%;
-}
+    .main_div .subdiv img {
+      width: 100%;
+      height: 92%;
+    }
   }
 `;
 const CustomModalBody = styled(ModalBody)`
@@ -400,8 +401,6 @@ const CustomModalBody = styled(ModalBody)`
   }
 
   @media (max-width: 567px) {
-    padding:20px 0;
-
+    padding: 20px 0;
   }
-  
 `;

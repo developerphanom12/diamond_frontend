@@ -1,5 +1,4 @@
 import React from "react";
-import ThreeSixtyViewer from "./ThreeSixtyViewer";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import SliderComponent from "./ThreeSixtyViewer";

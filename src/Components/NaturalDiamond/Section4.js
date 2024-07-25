@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoading } from "../LoadingContext";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ring from "../Images/Solitaire-removebg-preview.png";
-import noimagefound from "../Images/noimagefound.jpg";
 import nopro from "../Images/product-not-found.jpg";
+import { NoProduct } from "../NoProduct";
 
 
 export default function Section4({ value }) {
@@ -131,11 +131,7 @@ export default function Section4({ value }) {
           ))
         ) : (
           <div style={{ width: "100vw", height: "80vh" }}>
-            <img
-              style={{ width: "95%", height: "95%" }}
-              src={noimagefound}
-              alt="No Data Found"
-            />
+            <NoProduct/>
           </div>
         )}
       </div>

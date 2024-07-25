@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ringg1 from "../Images/couple1.webp";
-import ringg3 from "../Images/Couple_4.webp";
-import ringg2 from "../Images/couple3.webp";
-import ringg4 from "../Images/Couple_2.webp";
-import ringg5 from "../Images/couple5.webp";     
+import ringg1 from "../Images/couples1.jpg";
+import ringg3 from "../Images/couples2.jpg";
+import ringg2 from "../Images/couples3.jpg";
+import ringg4 from "../Images/couples4.jpg";
+import ringg5 from "../Images/couples5.jpg";
+import ringg6 from "../Images/couples6.jpg";
+import ringg7 from "../Images/couples7.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -95,6 +97,32 @@ export default function Section9() {
                   </div>
                 </div>
               </div>
+              <div className="col-lg-3 col7">
+                <div className="content_div">
+                  <h3>Shea & Josh Schmidt</h3>
+                  <p>
+                    Our day was so special filled with family and so much love!
+                    My fiancé Josh told me we were going to...
+                  </p>
+                  <div style={{ color: "#fff" }}>
+                    Read More
+                    <IoIosArrowForward />
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col6">
+                <div className="content_div">
+                  <h3>Shea & Josh Schmidt</h3>
+                  <p>
+                    Our day was so special filled with family and so much love!
+                    My fiancé Josh told me we were going to...
+                  </p>
+                  <div style={{ color: "#fff" }}>
+                    Read More
+                    <IoIosArrowForward />
+                  </div>
+                </div>
+              </div>
               <div className="col-lg-3 col1">
                 <div className="content_div">
                   <h3>Sarah & Jalen Bailey</h3>
@@ -134,19 +162,7 @@ export default function Section9() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col5">
-                <div className="content_div">
-                  <h3>Grace Anne & Chad Byrd</h3>
-                  <p>
-                    We had talked about getting engaged for a while and Chad
-                    wanted to surprise me. He knew...
-                  </p>
-                  <div style={{ color: "#fff" }}>
-                    Read More
-                    <IoIosArrowForward />
-                  </div>
-                </div>
-              </div>
+
               <div className="col-lg-3 col4">
                 <div className="content_div">
                   <h3>Baylee & Colin Trach</h3>
@@ -157,18 +173,6 @@ export default function Section9() {
                   <div style={{ color: "#fff" }}>
                     Read More
                     <IoIosArrowForward />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col1">
-                <div className="content_div">
-                  <h3>Grace Anne & Chad Byrd</h3>
-                  <p>
-                    We had talked about getting engaged for a while and Chad
-                    wanted to surprise me. He knew...
-                  </p>
-                  <div style={{ color: "#fff" }}>
-                    Read More <IoIosArrowForward />
                   </div>
                 </div>
               </div>
@@ -206,16 +210,24 @@ const Root = styled.section`
   .col-lg-3.col5 {
     background-image: url(${ringg5});
   }
+  .col-lg-3.col6 {
+    background-image: url(${ringg6});
+  }
+  .col-lg-3.col7 {
+    background-image: url(${ringg7});
+  }
   h2 {
     padding: 20px 0px;
     text-transform: uppercase;
-    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
+    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
   .col-lg-3.col4,
   .col-lg-3.col3,
   .col-lg-3.col2,
   .col-lg-3.col1,
-  .col-lg-3.col5 {
+  .col-lg-3.col5,
+  .col-lg-3.col6,
+  .col-lg-3.col7 {
     width: 90% !important;
     height: 380px;
     background-size: 100% 100%;
@@ -274,7 +286,7 @@ const Root = styled.section`
 
   @media (max-width: 567px) {
     h2 {
-    font-size: 20px;
-}
+      font-size: 20px;
+    }
   }
 `;

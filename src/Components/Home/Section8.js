@@ -1,11 +1,15 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ringg1 from "../Images/slideimg1.webp";
-import ringg3 from "../Images/slideimg2.webp";
-import ringg2 from "../Images/slideimg3.webp";
-import ringg4 from "../Images/slideimg4.webp";
-import ringg5 from "../Images/slideimg5.webp";
+import ringg1 from "../Images/jewelryblog.jpg";
+import ringg3 from "../Images/jewelryblog1.jpg";
+import ringg2 from "../Images/jewelryblog2.jpg";
+import ringg4 from "../Images/jewelryblog3.jpg";
+import ringg5 from "../Images/jewelryblog4.jpg";
+import ringg6 from "../Images/jewelryblog5.jpg";
+import ringg7 from "../Images/jewelryblog6.jpg";
+import ringg8 from "../Images/jewelryblog7.jpg";
+import ringg9 from "../Images/jewelryblogg.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -82,7 +86,29 @@ export default function Section8() {
               </div>
             </div>
             <Slider ref={sliderRef} {...settings}>
-              <div className="col-lg-3 col5">
+              <div className="col-lg-3 col7">
+                <div className="content_div">
+                  <h3>
+                    Customize Your Commitment: Personalized Add-Ons for <br />{" "}
+                    Engagement Rings
+                  </h3>
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col8">
+                <div className="content_div">
+                  <h3>
+                    Customize Your Commitment: Personalized Add-Ons for <br />{" "}
+                    Engagement Rings
+                  </h3>
+                  <div style={{ color: "#fff" }}>
+                    Read More <IoIosArrowForward />
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col9">
                 <div className="content_div">
                   <h3>
                     Customize Your Commitment: Personalized Add-Ons for <br />{" "}
@@ -136,7 +162,7 @@ export default function Section8() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col1">
+              <div className="col-lg-3 col6">
                 <div className="content_div">
                   <h3>
                     The Ultimate Guide to 'Love is Blind'
@@ -156,15 +182,7 @@ export default function Section8() {
               min={0}
               max={4}
             />
-            <div
-              style={{
-                width: "100%",
-                textAlign: "center",
-                marginBottom: "20px",
-              }}
-            >
-              {/* <button className="btn">Visit the Blog</button> */}
-            </div>
+             
           </div>
         </div>
       </div>
@@ -188,6 +206,18 @@ const Root = styled.section`
   .col-lg-3.col5 {
     background-image: url(${ringg5});
   }
+  .col-lg-3.col6 {
+    background-image: url(${ringg6});
+  }
+  .col-lg-3.col7 {
+    background-image: url(${ringg7});
+  }
+  .col-lg-3.col9 {
+    background-image: url(${ringg9});
+  }
+  .col-lg-3.col8 {
+    background-image: url(${ringg8});
+  }
   h2 {
     padding: 20px 0px;
     text-transform: uppercase;
@@ -197,7 +227,7 @@ const Root = styled.section`
   .col-lg-3.col3,
   .col-lg-3.col2,
   .col-lg-3.col1,
-  .col-lg-3.col5 {
+  .col-lg-3.col5, .col-lg-3.col6 , .col-lg-3.col7 , .col-lg-3.col8 , .col-lg-3.col9  {
     width: 90% !important;
     height: 340px;
     background-size: 100% 100%;

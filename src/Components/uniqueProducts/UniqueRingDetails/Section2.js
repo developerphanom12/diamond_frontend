@@ -11,12 +11,15 @@ import aeroplane from "../../Images/aeroplane.png";
 import badgess from "../../Images/badgess.png";
 import moneyinhand from "../../Images/moneyinhand.png";
 import certifiedd from "../../Images/certifiedd.png";
-import pinkimg from "../../Images/pink.PNG";
+import pinkimg from "../../Images/svgviewer-png-output (1).png";
 import modimg from "../../Images/modimg.PNG";
-import clarity from "../../Images/clarity.PNG";
-import diamo from "../../Images/diamo.PNG";
-import j from "../../Images/j.jpg";
-import vs from "../../Images/vs.png";
+import wid from "../../Images/svgviewer-png-output.png";
+import met from "../../Images/svgviewer-png-output (3).png";
+import que from "../../Images/svgviewer-png-output (7).png";
+import circle from "../../Images/Screenshot from 2024-07-25 17-29-15.png";
+import car from "../../Images/svgviewer-png-output (4).png";
+import col from "../../Images/svgviewer-png-output (5).png";
+import cla from "../../Images/svgviewer-png-output (6).png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -43,7 +46,6 @@ import one_eight_k_red from "../../Images/7.png";
 import Platinum from "../../Images/3.png";
 import Section3 from "./Section3";
 import noimg from "../../Images/eligantPacking.png";
-
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -210,7 +212,6 @@ export default function Section2() {
     fetchPreDefineApi();
   }, [color, carat]);
 
-   
   return (
     <Root>
       <div className="main_wrapper">
@@ -222,7 +223,6 @@ export default function Section2() {
               <img src={noimg} alt="img not available" />
             )}
           </ImageContainer>
-          
         </div>
         <div className="des_div">
           <div className="title">
@@ -475,86 +475,141 @@ export default function Section2() {
             </div>
           </div>
           <div className="setting_detail">
-            <h4>Setting details</h4>
-            <div className="setting_info">
-              <div className="setting_div">
-                <div className="profile_cont">
-                  <img src={carat} alt="carat" />
-                  <p>width</p>
+            <h4 className="seting_content">Setting Details</h4>
+
+            <div className="setting_main_div">
+              <div className="subfirst_detail">
+                <div className="profile_div">
+                  <div className="profile_cont">
+                    <img src={wid} alt="pinkimg" />
+                    <p>WIDTH</p>
+                  </div>
+
+                  <h4>1.8mm</h4>
+
+                  <div className="img_div" style={{ visibility: "hidden" }}>
+                    <img src={circle} alt="img" />
+                  </div>
+                  <p className="para">Measured at the base of the ring</p>
                 </div>
-                <h4>18mm</h4>
-                <img
-                  src={j}
-                  alt="j"
-                  className="ring_img"
-                  style={{ visibility: "Hidden" }}
-                />
-                <p className="para">Universal measurement unit for diamonds</p>
               </div>
-              <div className="setting_div">
-                <div className="profile_cont">
-                  <img src={pinkimg} alt="pinkimg" />
-                  <p>profile</p>
+
+              <div className="subsecond_detail">
+                <div className="profile_div">
+                  <div className="profile_cont">
+                    <img src={met} alt="pinkimg" />
+                    <p>METAL</p>
+                  </div>
+
+                  <h4>14k White Gold</h4>
+
+                  <div className="img_div">
+                    <img src={circle} alt="img" />
+
+                    <div className="quality_content">
+                      <div className="color_content">
+                        <div
+                          className="color_box"
+                          style={{ backgroundColor: "#F0E68C" }}
+                        ></div>
+                        <h5>58.5% Gold</h5>
+                      </div>
+                      <div className="color_content">
+                        <div
+                          className="color_box"
+                          style={{ backgroundColor: "#BAC4C8" }}
+                        ></div>
+                        <h5>8.7% Zinc</h5>
+                      </div>
+                    </div>
+
+                    <div className="quality_content">
+                      <div className="color_content">
+                        <div
+                          className="color_box"
+                          style={{ backgroundColor: "#B87333" }}
+                        ></div>
+                        <h5>25.4% Copper</h5>
+                      </div>
+                      <div className="color_content">
+                        <div
+                          className="color_box"
+                          style={{ backgroundColor: "#BDBAAE" }}
+                        ></div>
+                        <h5>7.3% Nickel</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="para">
+                      The secret sauce that makes this piece.
+                    </p>
+                    <p className="para">
+                      *All white gold pieces are Rhodium plated
+                    </p>
+                  </div>
                 </div>
-                <h4>Medium</h4>
-                <img src={modimg} alt="modimg" className="ring_img2" />
-                <p className="para">Only stacks with a chevron/curved band</p>
               </div>
             </div>
-             
-            <h4>Your Diamond Info</h4>
-            <div className="diamond_info">
-              <div className="setting_div">
-                <div className="profile_cont">
-                  <img src={carat} alt="carat" />
-                  <p>CARAT</p>
-                </div>
 
-                <h4> carat</h4>
-                <img
-                  src={j}
-                  alt="j"
-                  className="ring_img"
-                  style={{ visibility: "Hidden" }}
-                />
-                <p className="para">Universal measurement unit for diamonds</p>
-              </div>
-
-              <div className="setting_div">
+            <div className="setting_detail" style={{ width: "35%" }}>
+              <div className="profile_div">
                 <div className="profile_cont">
-                  <img src={color} alt="color" />
-                  <p>COLOR</p>
+                  <img src={pinkimg} alt="pinkimg" />
+                  <p>{unique?.metafields?.edges?.[0]?.node?.key}</p>
                 </div>
-                <h4> color</h4>
-                <img src={j} alt="j" className="ring_img" />
-                <p className="para">Slightly tinted</p>
-              </div>
-
-              <div className="setting_div">
-                <div className="profile_cont">
-                  <img src={clarity} alt="clarity" />
-                  <p>CLARITY</p>
-                </div>
-                <h4>clarity</h4>
-                <img src={vs} alt="vs" className="ring_img" />
+                <h4>{unique?.metafields?.edges?.[0]?.node?.value}</h4>
+                <img src={modimg} alt="modimg" className="ring_img" />
                 <p className="para">
-                  Visible inclusion under 10x magnification
+                  {unique?.metafields?.edges?.[0]?.node?.namespace}
                 </p>
               </div>
+            </div>
 
-              <div className="setting_div">
-                <div className="profile_cont">
-                  <img src={diamo} alt="diamo" />
-                  <p>CUT</p>
+            <h4 className="seting_content mt-5">Center Stone Details</h4>
+            <div className="setting_Stone">
+              <div className="sub_stone">
+                <div className="cont_ques">
+                  <div className="icon_cont">
+                    <img src={car} alt="img" />
+                    <p>{unique?.metafields?.edges?.[1]?.node?.key}</p>
+                  </div>
+                  <img src={que} alt="img" style={{ width: "16px" }} />
                 </div>
-                <h4>cut</h4>
-                <img
-                  src={j}
-                  alt="j"
-                  className="ring_img"
-                  style={{ visibility: "Hidden" }}
-                />
-                <p className="para">Incredible fire and brilliance</p>
+                <h4>{unique?.metafields?.edges?.[1]?.node?.value}</h4>
+                <div className="head_cont">
+                  <p>{unique?.metafields?.edges?.[1]?.node?.namespace}</p>
+                </div>
+              </div>
+
+              <div className="sub_stone">
+                <div className="cont_ques">
+                  <div className="icon_cont">
+                    <img src={col} alt="img" />
+                    <p>{unique?.metafields?.edges?.[2]?.node?.key}</p>
+                  </div>
+                  <img src={que} alt="img" style={{ width: "16px" }} />
+                </div>
+
+                <h4>{unique?.metafields?.edges?.[2]?.node?.value}</h4>
+                <div className="head_cont">
+                  <p>{unique?.metafields?.edges?.[2]?.node?.namespace}</p>
+                </div>
+              </div>
+
+              <div className="sub_stone">
+                <div className="cont_ques">
+                  <div className="icon_cont">
+                    <img src={cla} alt="img" />
+                    <p>{unique?.metafields?.edges?.[3]?.node?.key}</p>
+                  </div>
+                  <img src={que} alt="img" style={{ width: "16px" }} />
+                </div>
+
+                <h4>{unique?.metafields?.edges?.[3]?.node?.value}</h4>
+                <div className="head_cont">
+                  <p>{unique?.metafields?.edges?.[3]?.node?.namespace}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -591,7 +646,7 @@ const Root = styled.section`
       flex: 1;
       /* position: absolute; */
       /* position: sticky; */
-      top: 20px; 
+      top: 20px;
       border: 1px solid #d3d3d3;
       padding: 20px 20px 0px 20px;
       height: 600px;
@@ -761,6 +816,133 @@ const Root = styled.section`
         }
       }
     }
+    .setting_main_div {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .subfirst_detail {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 35%;
+
+        .profile_div {
+          background: #fff;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 10px;
+          display: flex;
+          gap: 8px;
+          flex-direction: column;
+          .profile_cont {
+            display: flex;
+            align-items: center;
+            p {
+              font-size: 12px;
+              color: #bbb9b9;
+              font-weight: 600;
+              text-transform: uppercase;
+              margin-bottom: 0;
+            }
+          }
+          h4 {
+            color: #000000;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 0;
+          }
+          .ring_img {
+            width: 70px;
+          }
+          .img_div {
+            display: flex;
+            gap: 15px;
+            visibility: hidden;
+          }
+
+          .para {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666666;
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .subsecond_detail {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 60%;
+
+        .profile_div {
+          background: #fff;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 10px;
+          display: flex;
+          gap: 8px;
+          flex-direction: column;
+
+          .profile_cont {
+            display: flex;
+            align-items: center;
+            p {
+              font-size: 12px;
+              color: #bbb9b9;
+              font-weight: 600;
+              text-transform: uppercase;
+              margin-bottom: 0;
+            }
+          }
+
+          h4 {
+            font-size: 24px;
+            color: #000000;
+            font-weight: 700;
+            margin-bottom: 0%;
+          }
+
+          .ring_img {
+            width: 70px;
+          }
+
+          .img_div {
+            display: flex;
+            gap: 15px;
+            .quality_content {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 8px;
+              .color_content {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                .color_box {
+                  height: 16px;
+                  width: 16px;
+                  border-radius: 30px;
+                }
+                h5 {
+                  font-size: 11px;
+                  font-weight: 500;
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+
+          .para {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666666;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
 
     .policy {
       display: flex;
@@ -789,95 +971,101 @@ const Root = styled.section`
       }
     }
 
+    .seting_content {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
     .setting_detail {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 10px;
       h4 {
         font-size: 16px;
         color: #000000;
         font-weight: 700;
       }
-      .diamond_info {
+      .profile_div {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 10px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        .setting_div {
-          width: 47%;
-          background: #fff;
-          border: 1px solid #e0e0e0;
-          border-radius: 12px;
-          padding: 10px;
+        gap: 8px;
+        flex-direction: column;
+        .profile_cont {
           display: flex;
-          gap: 8px;
-          flex-direction: column;
-          .profile_cont {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            p {
-              font-size: 12px;
-              color: #bbb9b9;
-              font-weight: 600;
-              text-transform: uppercase;
-              margin-bottom: 0;
-            }
-          }
-          h4 {
-            font-size: 24px;
-          }
-          .ring_img {
-            width: 100%;
-          }
-          .ring_img2 {
-            width: auto;
-            max-width: 70px;
-          }
-          .para {
-            font-size: 13px;
-            color: #666666;
+          gap: 2px;
+          align-items: center;
+          p {
+            font-size: 12px;
+            color: #bbb9b9;
+            font-weight: 600;
+            text-transform: uppercase;
             margin-bottom: 0;
           }
         }
+        h4 {
+          font-size: 24px;
+        }
+        .ring_img {
+          width: 70px;
+        }
+        .para {
+          font-size: 12px;
+          font-weight: 500;
+          color: #666666;
+          margin-bottom: 0;
+        }
       }
-      .setting_info {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        .setting_div {
-          width: 37%;
-          background: #fff;
-          border: 1px solid #e0e0e0;
-          border-radius: 12px;
-          padding: 10px;
-          display: flex;
+    }
 
-          flex-direction: column;
-          .profile_cont {
+    .setting_Stone {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      .sub_stone {
+        width: 47%;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 10px;
+        height: 160px;
+        background: #fff;
+        .cont_ques {
+          display: flex;
+          justify-content: space-between;
+          .icon_cont {
             display: flex;
-            gap: 10px;
             align-items: center;
             p {
-              font-size: 12px;
-              color: #bbb9b9;
+              font-size: 0.7em;
               font-weight: 600;
               text-transform: uppercase;
+              line-height: 1;
+              color: #000;
+              opacity: 0.3;
               margin-bottom: 0;
+              gap: 0px;
             }
           }
-          h4 {
-            font-size: 24px;
-          }
-          .ring_img {
-            width: 100%;
-          }
-          .ring_img2 {
-            width: auto;
-            max-width: 70px;
-          }
-          .para {
-            font-size: 13px;
+        }
+
+        h4 {
+          font-size: 24px;
+          color: #000000;
+          font-weight: 700;
+          margin-top: 10px;
+          margin-left: 5px;
+        }
+
+        .head_cont {
+          margin-top: 40px;
+          p {
+            font-size: 12px;
+            font-weight: 500;
             color: #666666;
             margin-bottom: 0;
           }
@@ -1112,6 +1300,22 @@ const Root = styled.section`
     .main_wrapper .des_div .title h2,
     .main_wrapper .des_div .title h4 {
       font-size: 18px;
+    }
+
+    .main_wrapper .setting_main_div .subfirst_detail .profile_div .para {
+      margin-bottom: 15px;
+    }
+    .main_wrapper .setting_main_div .subfirst_detail {
+      width: 100%;
+    }
+    .main_wrapper .setting_main_div .subsecond_detail {
+      width: 100%;
+    }
+    .main_wrapper .setting_detail {
+      width: 100%;
+    }
+    .main_wrapper .setting_Stone .sub_stone .head_cont {
+      margin-top: 25px;
     }
   }
   @media (min-width: 567px) and (max-width: 992px) {

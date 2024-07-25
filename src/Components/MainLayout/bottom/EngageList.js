@@ -231,7 +231,7 @@ const Root = styled.section`
     padding: 20px;
     list-style: none;
     li {
-      font-weight: 500;
+      font-weight: 550;
       font-size: 13px;
       margin: 10px 0px;
       cursor: pointer;

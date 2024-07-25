@@ -460,7 +460,7 @@ const Root = styled.section`
       padding: 12px 0;
       font-size: 12px;
       line-height: 25px;
-      font-weight: 500;
+      font-weight: 550;
 
       &.selected {
         border: 2px solid black;
@@ -472,7 +472,7 @@ const Root = styled.section`
         background-color: rgba(247, 247, 247);
       }
       p {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 1.25;
         margin: 10px 0px 0px;
       }

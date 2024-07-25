@@ -210,7 +210,7 @@ const Root = styled.section`
       padding: 12px 0;
       font-size: 12px;
       line-height: 25px;
-      font-weight: 500;
+      font-weight: 550;
       &.selected {
         border: 2px solid black;
         border-radius: 10px;

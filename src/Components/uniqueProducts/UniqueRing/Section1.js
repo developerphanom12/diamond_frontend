@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalBody } from "reactstrap";
+
 
 export default function Section1() {
   return (
@@ -201,41 +201,41 @@ const Root = styled.section`
   }
 `;
 
-const CustomModalBody = styled(ModalBody)`
-  padding: 30px 85px 50px;
-  text-align: center;
-  /* *{text-align:center;
-  } */
+// const CustomModalBody = styled(ModalBody)`
+//   padding: 30px 85px 50px;
+//   text-align: center;
+//   /* *{text-align:center;
+//   } */
 
-  h2 {
-    font-size: 25px;
-    margin-top: 20px;
-    color: #000000;
-    font-weight: 700;
-  }
-  .choose_option {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    z-index: 1111;
-    justify-content: center;
-    margin-top: 20px;
-    .ring_pandet {
-      flex-direction: column;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      svg {
-        width: 56px;
-        height: 56px;
-      }
-      span {
-        font-size: 14px;
-      }
-    }
-  }
-  .modal-dialog {
-    margin-top: 82px !important;
-  }
-`;
+//   h2 {
+//     font-size: 25px;
+//     margin-top: 20px;
+//     color: #000000;
+//     font-weight: 700;
+//   }
+//   .choose_option {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 40px;
+//     z-index: 1111;
+//     justify-content: center;
+//     margin-top: 20px;
+//     .ring_pandet {
+//       flex-direction: column;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       cursor: pointer;
+//       svg {
+//         width: 56px;
+//         height: 56px;
+//       }
+//       span {
+//         font-size: 14px;
+//       }
+//     }
+//   }
+//   .modal-dialog {
+//     margin-top: 82px !important;
+//   }
+// `;

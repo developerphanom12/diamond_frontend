@@ -8,7 +8,7 @@ import axios from "axios";
 import { useLoading } from "../LoadingContext";
 import noimagefound from "../Images/noimagefound.jpg";
 import nopro from "../Images/product-not-found.jpg";
-
+import { NoProduct } from "../NoProduct";
 
 export default function Section4({ value }) {
   const navigate = useNavigate();
@@ -54,7 +54,10 @@ export default function Section4({ value }) {
         value.map((i, index) => (
           <div className="main_div" key={index}>
             <div className="subdiv">
-              <img src={i.images?.edges?.[0]?.node?.originalSrc  || nopro} alt="img" />
+              <img
+                src={i.images?.edges?.[0]?.node?.originalSrc || nopro}
+                alt="img"
+              />
               <div className="hov_content">
                 <div className="heading">
                   <h5>{i?.title}</h5>
@@ -79,8 +82,8 @@ export default function Section4({ value }) {
           </div>
         ))
       ) : (
-        <div style={{ width: "100vw",height:"80vh" }}>
-          <img style={{ width: "95%",height:"95%" }} src={noimagefound} alt="No Data Found" />
+        <div style={{ width: "100vw", height: "80vh" }}>
+          <NoProduct />
         </div>
       )}
     </Root>
