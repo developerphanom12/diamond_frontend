@@ -229,7 +229,7 @@ const Root = styled.section`
   }
 
   .drawer-content {
-    padding: 20px 0px;
+    padding:0px 20px 10px;
     width: 100%;
   }
   .drawer-toggle-button {

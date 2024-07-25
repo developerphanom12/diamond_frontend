@@ -23,7 +23,7 @@ export default function Section1() {
 }
 
 const Root = styled.section`
-  padding: 20px 0px;
+  padding: 20px 0px 0px;
   margin: 0px 10px;
 
   .container-fluid {

@@ -26,6 +26,7 @@ import Gemstone from "./Components/Gemstone/Gemstone";
 import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
 import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 import AllOrders from "./Components/AllOrders/AllOrders";
+import HomePage from "./Components/threeSixty/HomePage";
 
 
 function App() {

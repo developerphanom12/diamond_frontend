@@ -191,6 +191,7 @@ const Root = styled.section`
           font-size: 13px;
           background-color: #fff;
           border: 2px solid black;
+          cursor: pointer;
         }
         .add_btn {
           flex: 1;
@@ -200,6 +201,8 @@ const Root = styled.section`
           padding: 5px 17px;
           border-radius: 25px;
           font-size: 13px;
+          cursor: pointer;
+
         }
       }
 
