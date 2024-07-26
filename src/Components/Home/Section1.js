@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import bgg from "../Images/bannerimggg.webp";
+import bgg from "../Images/newban.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Section1() {
@@ -24,6 +24,7 @@ export default function Section1() {
           <h4>lab diamonds</h4>
         </div>
         <div>
+          <div className="but_div">
           <button
             onClick={() => {
               navigate("/engagementring");
@@ -38,6 +39,7 @@ export default function Section1() {
           >
             shop lab diamonds
           </button>
+          </div>
           <h6>
             apply code <b> earth </b> at checkout
           </h6>
@@ -101,7 +103,7 @@ const Root = styled.section`
     button {
       background-color: #000;
       color: #fff;
-      border: 1px solid #fff;
+      border: 1px solid transparent;
       border-radius: 50px;
       padding: 13px 18px;
       font-size: 18px;
@@ -129,7 +131,7 @@ const Root = styled.section`
     }
   }
   @media (max-width: 567px) {
-    height: 291px;
+    height: 195px;
     padding: 0;
     display: flex;
     align-items: flex-end;
@@ -143,38 +145,53 @@ const Root = styled.section`
       display: none;
     }
 
-    .main_content {
-      width: 100vw;
-      padding: 0px;
-      text-align: start;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .main_content{
+      width:100vw;
+      padding:0px;
+      text-align:start;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      padding-left:15px;
+      gap:5px;
+
       .everyday {
         margin-bottom: 5px;
       }
 
       b {
-        font-size:16px;
+        font-size:11px;
         display:flex;
         flex-wrap:wrap;
         letter-spacing:2px;
       }
+
       h1 {
         font-size:18px;
       }
+
       h4 {
         letter-spacing:0;
         margin:0;
         font-size:15px;
       }
+
       h6{
         margin-top:5px;
+        justify-content:flex-start;
       }
+
+      .but_div{
+      display:flex;
+      gap:5px;
+    }
+
       button {
         padding:8px 10px;
-        font-size:12px;
+        font-size:9px;
+        margin:0;
       }
+    
     }
   }
 
