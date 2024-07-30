@@ -85,6 +85,10 @@ export default function Section2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  // const [videoUrl, setVideoUrl] = useState(null);
+
+
+  // const [videoUrl, setVideoUrl] = useState(null);
 
   const fetchUniqueData = async () => {
     setLoading(true);
@@ -211,6 +215,15 @@ export default function Section2() {
   useEffect(() => {
     fetchPreDefineApi();
   }, [color, carat]);
+  // const videoUrl ="gid://shopify/Video/34989581926618"
+  const videoMetafield = "gid://shopify/Video/34989581926618"
+  let videoUrl = null;
+
+  if (videoMetafield) {
+    const videoId = videoMetafield
+    // Assuming a pattern to generate the video URL, adjust accordingly
+    videoUrl = `https://cdn.shopify.com/videos/${videoId}.mp4`;
+  }
 
   return (
     <Root>
@@ -218,9 +231,9 @@ export default function Section2() {
         <div className="image_div">
           <ImageContainer>
             {imageUrl ? (
-              <img src={imageUrl} title="Product Image" alt="Product" />
+              <img src={imageUrl} title="Product Image" alt="Product"/>
             ) : (
-              <img src={noimg} alt="img not available" />
+              <img src={noimg} alt="img not available"/>
             )}
           </ImageContainer>
         </div>
@@ -261,7 +274,7 @@ export default function Section2() {
                   }`}
                   onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
                 >
-                  <img className="img" src={shape.imgUrl} alt={shape.name} />
+                  <img className="img" src={shape.imgUrl} alt={shape.name}/>
                   <p style={{ display: "none" }}>{shape.name}</p>
                 </button>
               ))}
@@ -310,6 +323,8 @@ export default function Section2() {
               ))}
             </select>
           </div>
+
+
           <div className="product_btn">
             <button className="btn" onClick={toggleDrawer}>
               {color ? "Add to Cart" : "Select Ring Size"}
@@ -436,10 +451,14 @@ export default function Section2() {
               </div>
             </Drawer>
           </div>
+
+
+
+
+
           <div className="policy">
             <div className="policy_type">
-              <img src={aeroplane} alt="aeroplane_images" />
-
+              <img src={aeroplane} alt="aeroplane_images"/>
               <p>
                 Overnight <br />
                 Shipping
@@ -474,6 +493,8 @@ export default function Section2() {
               </p>
             </div>
           </div>
+
+
           <div className="setting_detail">
             <h4 className="seting_content">Setting Details</h4>
 
@@ -517,7 +538,7 @@ export default function Section2() {
                       <div className="color_content">
                         <div
                           className="color_box"
-                          style={{ backgroundColor: "#BAC4C8" }}
+                          style={{backgroundColor:"#BAC4C8"}}
                         ></div>
                         <h5>8.7% Zinc</h5>
                       </div>
@@ -552,7 +573,7 @@ export default function Section2() {
               </div>
             </div>
 
-            <div className="setting_detail" style={{ width: "35%" }}>
+            <div className="setting_detail siz_div" >
               <div className="profile_div">
                 <div className="profile_cont">
                   <img src={pinkimg} alt="pinkimg" />
@@ -566,6 +587,8 @@ export default function Section2() {
               </div>
             </div>
 
+
+   
             <h4 className="seting_content mt-5">Center Stone Details</h4>
             <div className="setting_Stone">
               <div className="sub_stone">
@@ -611,11 +634,30 @@ export default function Section2() {
                   <p>{unique?.metafields?.edges?.[3]?.node?.namespace}</p>
                 </div>
               </div>
+
+              
+              <div className="sub_stone">
+                <div className="cont_ques">
+                  <div className="icon_cont">
+                    <img src={cla} alt="img" />
+                    <p>{unique?.metafields?.edges?.[6]?.node?.key}</p>
+                  </div>
+                  <img src={que} alt="img" style={{ width: "16px" }} />
+                </div>
+
+                <h4>{unique?.metafields?.edges?.[6]?.node?.value}</h4>
+                <div className="head_cont">
+                  <p>{unique?.metafields?.edges?.[6]?.node?.namespace}</p>
+                </div>
+              </div>
             </div>
           </div>
+
+
           <div>
-            <Section3 />
+            <Section3/>
           </div>
+
           <div className="appointment">
             <h5>Virtual Appointment</h5>
             <p>
@@ -624,6 +666,8 @@ export default function Section2() {
               through your device.
             </p>
           </div>
+
+
         </div>
       </div>
     </Root>
@@ -816,6 +860,10 @@ const Root = styled.section`
         }
       }
     }
+
+    .siz_div {
+    width:35%;
+}
     .setting_main_div {
       display: flex;
       gap: 10px;
@@ -1258,10 +1306,11 @@ const Root = styled.section`
     padding: 10px 0px;
     .main_wrapper {
       gap: 0px;
+      display: unset;
     }
 
     .main_wrapper .image_div {
-      width: 100%;
+      /* width: 100%; */
       height: unset;
       padding: 5px;
       margin: 10px;
@@ -1317,7 +1366,23 @@ const Root = styled.section`
     .main_wrapper .setting_Stone .sub_stone .head_cont {
       margin-top: 25px;
     }
+    .siz_div {
+    width:100%;
+}
+
+ .main_wrapper .policy .policy_type p {
+    font-size: 11px;
+}
   }
+
+
+  /* @media (min-width: 430px) and (max-width: 932px) {
+    display:unset;
+  } */
+
+
+
+
   @media (min-width: 567px) and (max-width: 992px) {
     .main_wrapper {
       gap: 0px;

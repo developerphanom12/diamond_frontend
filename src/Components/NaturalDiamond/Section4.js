@@ -322,7 +322,7 @@ const Root = styled.section`
         width: 44vw;
         height: 30vh;
         img {
-          height: 84%;
+          height: 90%;
           width: 100%;
         }
         .heading .h5 {
