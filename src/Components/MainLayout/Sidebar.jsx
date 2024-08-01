@@ -345,7 +345,6 @@ const Root = styled.section`
 
     .accor_heading {
       margin: 0;
-      font-family: ProximaNova, sans-serif;
       font-weight: 500;
       font-size: 16px;
       line-height: 1.5;

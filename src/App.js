@@ -27,6 +27,7 @@ import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
 import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 import AllOrders from "./Components/AllOrders/AllOrders";
 import HomePage from "./Components/threeSixty/HomePage";
+import Test from "./Components/Test/Test"
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
               <Route path="/gemdetails" element={<GemDetails />} />
+              <Route path="/test" element={<Test/>} />
 
             </>
           </Routes>

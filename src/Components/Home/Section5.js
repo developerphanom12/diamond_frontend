@@ -92,7 +92,6 @@ const Root = styled.section`
       font-size: 1.75rem;
       line-height: 1;
       text-transform: uppercase;
-      font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
     }
     p {
       margin: 20px 0px;

@@ -92,8 +92,6 @@ const Root = styled.section`
       line-height: 1;
       font-weight: 700;
       color: #000;
-      font-family: "TheSeasons", "ProximaNova", "roboto", -apple-sysytem,
-        "sans-serif" !important;
     }
     h4 {
       letter-spacing: 0.2em;

@@ -150,7 +150,6 @@ const Root = styled.section`
     text-align: center;
     font-weight: 400;
     width: 100%;
-    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
 
   }
   h4 {

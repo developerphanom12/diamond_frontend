@@ -47,6 +47,8 @@ const shapesList = [
   { name: "RADIANT", imgUrl: RADIANT },
 ];
 
+
+
 const colorOptions = ["D", "E", "F", "G", "H", "I", "J"];
 const clarityOptions = [
   "FL",
@@ -56,6 +58,7 @@ const clarityOptions = [
   "VS1",
   "VS2",
   "I2",
+  "I3",
   "SI2",
   "SI1",
 ];
@@ -284,7 +287,7 @@ export default function Section2() {
           <button
             key={shape.name}
             className={`btn_shapes ${
-              selectedShapes.includes(shape.name) ? "selected" : ""
+              selectedShapes.includes(shape.name) ?"selected" : ""
             }`}
             onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
@@ -593,7 +596,7 @@ const Root = styled.section`
       display: block;
     }
     .drawer-content {
-      /* display: none; */
+      /* display: none;  */
       .ring_types {
         justify-content: left;
         gap: 4px;
@@ -650,7 +653,7 @@ const Root = styled.section`
       display: flex;
       flex-wrap: wrap;
       margin-top: 40px;
-      gap: 40px;
+      gap: 20px;
 
       .var_kind {
         flex: 1;
@@ -677,11 +680,11 @@ const Root = styled.section`
           background-color: rgba(247, 247, 247, 1);
           border: 0.3px solid #d1d1d1;
           border-radius: 7px;
-
+          overflow-x: auto;
           button {
             border: none;
             flex: 1;
-            padding: 10px 0;
+            padding: 10px;
             font-size: 14px;
             background-color: transparent;
             font-weight: 600;
@@ -756,7 +759,7 @@ const Root = styled.section`
               }
             }
             .carat_btn_div {
-              /* width: 20%; */
+              /*  width: 20%;  */
               display: flex;
               flex-direction: column;
               align-items: flex-end;
@@ -875,7 +878,7 @@ const Root = styled.section`
     }
 
     .advance_quality {
-      /* border-top:1px solid black; */
+       /* border-top:1px solid black;  */
       margin-top: 30px;
 
       .css-1086bdv-MuiPaper-root-MuiAccordion-root {
@@ -911,7 +914,7 @@ const Root = styled.section`
               color: #000;
             }
             svg {
-              /* color:#e9e4e4; */
+            /* color:#e9e4e4;  */
               height: 14px;
               margin-top: -9px;
               color: #d7d4d4;

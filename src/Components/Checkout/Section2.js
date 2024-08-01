@@ -319,7 +319,6 @@ const Check = styled.section`
   header {
     padding: 20px 20px ;
     font-size: 25px;
-    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
 
   p {

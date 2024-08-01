@@ -865,7 +865,6 @@ const Root = styled.section`
       font-size: 16px;
       color: #000000;
       font-weight: 400;
-      font-family: ProximaNova, sans-serif;
     }
   }
 
@@ -909,7 +908,6 @@ const Root = styled.section`
             font-size: 15px;
             color: #000000;
             font-weight: 400;
-            font-family: ProximaNova, sans-serif;
           }
         }
         .prod_spec {
@@ -931,7 +929,6 @@ const Root = styled.section`
               h4 {
                 font-size: 14px;
                 color: #000000;
-                font-family: ProximaNova, sans-serif;
                 margin-bottom: 0;
                 font-weight: 500;
               }
@@ -939,7 +936,6 @@ const Root = styled.section`
                 font-size: 13px;
                 color: #808080;
                 margin-bottom: 0;
-                font-family: ProximaNova, sans-serif;
               }
             }
           }
@@ -947,7 +943,6 @@ const Root = styled.section`
             h4 {
               font-weight: 500;
               font-size: 14px;
-              font-family: ProximaNova, sans-serif;
               margin-bottom: 0;
             }
           }
@@ -983,13 +978,11 @@ const Root = styled.section`
     p {
       font-size: 21px;
       color: #666666;
-      font-family: ProximaNova, sans-serif;
     }
 
     h4 {
       font-weight: 500;
       font-size: 21px;
-      font-family: ProximaNova, sans-serif;
       color: #000000;
     }
   }

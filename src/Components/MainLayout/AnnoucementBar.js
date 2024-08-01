@@ -39,7 +39,6 @@ const Root = styled.section`
     text-align: center;
     margin: 0;
     font-size: 16px;
-    font-family: "proximaNova", "sans-serif";
     opacity: 0;
     animation: rotateIn 0.5s forwards, vibrate 2s infinite; 
     text-transform: uppercase;

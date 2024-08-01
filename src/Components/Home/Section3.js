@@ -98,7 +98,6 @@ const Root = styled.section`
     margin-bottom: 50px;
     font-weight: 400;
     text-transform: uppercase;
-    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
   }
   .col-lg-8 {
     padding: 20px;

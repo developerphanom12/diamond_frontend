@@ -37,15 +37,18 @@ import PRINCESS from "../../Images/Princess-removebg-preview.png";
 import RADIANT from "../../Images/Radiant-removebg-preview.png";
 import CUSHION from "../../Images/cushionremovebg.png";
 import ECUSHION from "../../Images/ECusion-removebg-preview.png";
-import one_four_k_white_gold from "../../Images/1.png";
-import one_four_k_yellow_gold from "../../Images/4.png";
-import one_four_k_pink_gold from "../../Images/6.png";
-import one_eight_k_white_gold from "../../Images/2.png";
-import one_eight_k_yellow_gold from "../../Images/5.png";
-import one_eight_k_red from "../../Images/7.png";
-import Platinum from "../../Images/3.png";
+import one_four_k_white_gold from "../../Images/fourone.png";
+import one_four_k_yellow_gold from "../../Images/fourtwo.png";
+import one_four_k_pink_gold from "../../Images/fourthree.png";
+import one_eight_k_white_gold from "../../Images/eightone.png";
+import one_eight_k_yellow_gold from "../../Images/eighttwo.png";
+import one_eight_k_red from "../../Images/eightthree.png";
+import Platinum from "../../Images/pt.png";
 import Section3 from "./Section3";
 import noimg from "../../Images/eligantPacking.png";
+
+import solitare_img from "../../Images/Solitaire-removebg-preview.png";
+import pave_img from "../../Images/Pave-removebg-preview.png";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -59,6 +62,7 @@ const shapesList = [
   { name: "CUSHION", imgUrl: CUSHION },
   { name: "E.CUSHION", imgUrl: ECUSHION },
 ];
+
 const materialList = [
   { value: "14ct White Gold", imgUrl: one_four_k_white_gold },
   { value: "14ct Yellow Gold", imgUrl: one_four_k_yellow_gold },
@@ -68,6 +72,12 @@ const materialList = [
   { value: "18ct Red", imgUrl: one_eight_k_red },
   { value: "Platinum", imgUrl: Platinum },
 ];
+
+const styleList = [
+  { value:"Solitare", imgUrl: solitare_img },
+  { value:"pave", imgUrl: pave_img },
+];
+
 export default function Section2() {
   const uniqueProduct = useSelector((state) => state.users.uniqueProduct);
   const [unique, setUnique] = useState(null);
@@ -86,7 +96,6 @@ export default function Section2() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   // const [videoUrl, setVideoUrl] = useState(null);
-
 
   // const [videoUrl, setVideoUrl] = useState(null);
 
@@ -195,6 +204,7 @@ export default function Section2() {
     setColor(selectedMaterialValue);
     setSelectedMaterial(selectedMaterial);
   };
+
   const isMaterialAvailable = (materialValue) => {
     return colorOptions.includes(materialValue);
   };
@@ -216,11 +226,11 @@ export default function Section2() {
     fetchPreDefineApi();
   }, [color, carat]);
   // const videoUrl ="gid://shopify/Video/34989581926618"
-  const videoMetafield = "gid://shopify/Video/34989581926618"
+  const videoMetafield = "gid://shopify/Video/34989581926618";
   let videoUrl = null;
 
   if (videoMetafield) {
-    const videoId = videoMetafield
+    const videoId = videoMetafield;
     // Assuming a pattern to generate the video URL, adjust accordingly
     videoUrl = `https://cdn.shopify.com/videos/${videoId}.mp4`;
   }
@@ -231,9 +241,9 @@ export default function Section2() {
         <div className="image_div">
           <ImageContainer>
             {imageUrl ? (
-              <img src={imageUrl} title="Product Image" alt="Product"/>
+              <img src={imageUrl} title="Product Image" alt="Product" />
             ) : (
-              <img src={noimg} alt="img not available"/>
+              <img src={noimg} alt="img not available" />
             )}
           </ImageContainer>
         </div>
@@ -274,15 +284,15 @@ export default function Section2() {
                   }`}
                   onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
                 >
-                  <img className="img" src={shape.imgUrl} alt={shape.name}/>
+                  <img className="img" src={shape.imgUrl} alt={shape.name} />
                   <p style={{ display: "none" }}>{shape.name}</p>
                 </button>
               ))}
             </div>
           </div>
-          <div className="ring_types mt-4">
-            <h4>Material: {selectedMaterial?.name} </h4>
 
+          <div className="ring_types mt-4">
+            <h4>Material:{selectedMaterial?.name}</h4>
             <div>
               {colorOptions &&
                 materialList.map((material) => (
@@ -301,7 +311,7 @@ export default function Section2() {
                     }}
                   >
                     <img
-                      className="img"
+                      className="img color_div"
                       src={material.imgUrl}
                       alt={material.value}
                     />
@@ -310,6 +320,37 @@ export default function Section2() {
                 ))}
             </div>
           </div>
+
+          <div className="ring_types mt-4">
+            <h4>Style:</h4>
+            <div>
+              {colorOptions &&
+                styleList.map((style) => (
+            <button
+              key={style.value}
+              className={`btn_shapes ${
+                color === style.value ? "selected" : ""
+              }`}
+              onClick={() => handleMaterialClick(style.value)}
+              disabled={!isMaterialAvailable(style.value)}
+              style={{
+                opacity: isMaterialAvailable(style.value) ? 1 : 0.5,
+                cursor: isMaterialAvailable(style.value)
+                  ? "pointer"
+                  : "not-allowed",
+              }}
+            >
+              <img
+                className="img color_div"
+                src={style.imgUrl}
+                alt={style.value}
+              />
+              <p style={{display:"none"}}>{style.value}</p>
+            </button>
+            ))}
+            </div>
+          </div>
+
           <div className="ring_size">
             <select
               value={fingerSize}
@@ -323,7 +364,6 @@ export default function Section2() {
               ))}
             </select>
           </div>
-
 
           <div className="product_btn">
             <button className="btn" onClick={toggleDrawer}>
@@ -452,13 +492,9 @@ export default function Section2() {
             </Drawer>
           </div>
 
-
-
-
-
           <div className="policy">
             <div className="policy_type">
-              <img src={aeroplane} alt="aeroplane_images"/>
+              <img src={aeroplane} alt="aeroplane_images" />
               <p>
                 Overnight <br />
                 Shipping
@@ -493,7 +529,6 @@ export default function Section2() {
               </p>
             </div>
           </div>
-
 
           <div className="setting_detail">
             <h4 className="seting_content">Setting Details</h4>
@@ -538,7 +573,7 @@ export default function Section2() {
                       <div className="color_content">
                         <div
                           className="color_box"
-                          style={{backgroundColor:"#BAC4C8"}}
+                          style={{ backgroundColor: "#BAC4C8" }}
                         ></div>
                         <h5>8.7% Zinc</h5>
                       </div>
@@ -573,7 +608,7 @@ export default function Section2() {
               </div>
             </div>
 
-            <div className="setting_detail siz_div" >
+            <div className="setting_detail siz_div">
               <div className="profile_div">
                 <div className="profile_cont">
                   <img src={pinkimg} alt="pinkimg" />
@@ -587,8 +622,6 @@ export default function Section2() {
               </div>
             </div>
 
-
-   
             <h4 className="seting_content mt-5">Center Stone Details</h4>
             <div className="setting_Stone">
               <div className="sub_stone">
@@ -635,7 +668,6 @@ export default function Section2() {
                 </div>
               </div>
 
-              
               <div className="sub_stone">
                 <div className="cont_ques">
                   <div className="icon_cont">
@@ -653,9 +685,8 @@ export default function Section2() {
             </div>
           </div>
 
-
           <div>
-            <Section3/>
+            <Section3 />
           </div>
 
           <div className="appointment">
@@ -666,8 +697,6 @@ export default function Section2() {
               through your device.
             </p>
           </div>
-
-
         </div>
       </div>
     </Root>
@@ -862,8 +891,8 @@ const Root = styled.section`
     }
 
     .siz_div {
-    width:35%;
-}
+      width: 35%;
+    }
     .setting_main_div {
       display: flex;
       gap: 10px;
@@ -1160,7 +1189,6 @@ const Root = styled.section`
       font-size: 16px;
       color: #000000;
       font-weight: 400;
-      font-family: ProximaNova, sans-serif;
     }
   }
   .prod_main_div {
@@ -1204,7 +1232,6 @@ const Root = styled.section`
             font-size: 13px;
             color: #000000;
             font-weight: 400;
-            font-family: ProximaNova, sans-serif;
           }
         }
         .prod_spec {
@@ -1226,7 +1253,6 @@ const Root = styled.section`
               h4 {
                 font-size: 12px;
                 color: #000000;
-                font-family: ProximaNova, sans-serif;
                 margin-bottom: 0;
                 font-weight: 500;
               }
@@ -1234,7 +1260,6 @@ const Root = styled.section`
                 font-size: 12px;
                 color: #808080;
                 margin-bottom: 0;
-                font-family: ProximaNova, sans-serif;
               }
             }
           }
@@ -1242,7 +1267,6 @@ const Root = styled.section`
             h4 {
               font-weight: 500;
               font-size: 14px;
-              font-family: ProximaNova, sans-serif;
               margin-bottom: 0;
             }
           }
@@ -1268,6 +1292,7 @@ const Root = styled.section`
   .element-with-scroll::-webkit-scrollbar {
     display: none;
   }
+
   .total_price_div {
     padding: 0px 16px;
     display: flex;
@@ -1276,13 +1301,11 @@ const Root = styled.section`
     p {
       font-size: 18px;
       color: #666666;
-      font-family: ProximaNova, sans-serif;
     }
 
     h4 {
       font-weight: 500;
       font-size: 18px;
-      font-family: ProximaNova, sans-serif;
       color: #000000;
     }
   }
@@ -1367,21 +1390,17 @@ const Root = styled.section`
       margin-top: 25px;
     }
     .siz_div {
-    width:100%;
-}
+      width: 100%;
+    }
 
- .main_wrapper .policy .policy_type p {
-    font-size: 11px;
-}
+    .main_wrapper .policy .policy_type p {
+      font-size: 11px;
+    }
   }
-
 
   /* @media (min-width: 430px) and (max-width: 932px) {
     display:unset;
   } */
-
-
-
 
   @media (min-width: 567px) and (max-width: 992px) {
     .main_wrapper {

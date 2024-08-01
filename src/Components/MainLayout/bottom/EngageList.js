@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import gold1 from "../../Images/4.png";
-import gold2 from "../../Images/6.png";
-import gold3 from "../../Images/1.png";
-import gold4 from "../../Images/1.png";
+import gold1 from "../../Images/fourtwo.png";
+import gold2 from "../../Images/fourthree.png";
+import gold3 from "../../Images/fourone.png";
+import gold4 from "../../Images/pt.png";
 import rinfWdiamond from "../../Images/ringwithdiamond.png";
 import naturaldiamond from "../../Images/naturaldiamond-removebg-preview.png";
 import labgrown from "../../Images/labgrowncopy-removebg-preview.png";
@@ -187,26 +187,26 @@ export default function EngageList() {
             <div className="ring_space">
               <ul>
                 <li style={{ display: "flex", alignItems: "center" }}>
-                  <img src={gold1} alt="img" />
+                  <img src={gold1} alt="img"  className="color_img"/>
                   <p style={{ margin: "0", padding: "0px 4px" }}>
                     {" "}
                     Yellow Gold
                   </p>
                 </li>
                 <li style={{ display: "flex", alignItems: "center" }}>
-                  <img src={gold2} alt="img" />
+                  <img src={gold2} alt="img"  className="color_img"/>
 
                   <p style={{ margin: "0", padding: "0px 4px" }}> Rose Gold</p>
                 </li>
               </ul>
               <ul>
                 <li style={{ display: "flex", alignItems: "center" }}>
-                  <img src={gold3} alt="img" />
+                  <img src={gold3} alt="img"  className="color_img"/>
 
                   <p style={{ margin: "0", padding: "0px 4px" }}> White Gold</p>
                 </li>
                 <li style={{ display: "flex", alignItems: "center" }}>
-                  <img src={gold4} alt="img" />
+                  <img src={gold4} alt="img"  className="color_img"/>
 
                   <p style={{ margin: "0", padding: "0px 4px" }}> Platinum</p>
                 </li>
@@ -258,9 +258,9 @@ const Root = styled.section`
   }
 
   .ring_space {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px;
+    display:flex;
+    justify-content:space-between;
+    padding:0px;
   }
 
   .bord {

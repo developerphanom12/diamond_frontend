@@ -64,7 +64,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Root = styled.section`
-  font-family: "ProximaNova", "sans-serif";
   border-bottom: 1px solid #f2f2f2;
   z-index: 11110011;
   position: sticky;
@@ -77,7 +76,6 @@ const Root = styled.section`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
-    font-family: "Playfair Display", "Proxima Nova", "ui-sans-serif" !important;
   }
 
   .icon {
@@ -268,7 +266,6 @@ const Root = styled.section`
 
     .accor_heading {
       margin: 0;
-      font-family: ProximaNova, sans-serif;
       font-weight: 500;
       font-size: 16px;
       line-height: 1.5;

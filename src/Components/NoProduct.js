@@ -28,14 +28,12 @@ const Root = styled.section`
     }
     h3 {
       font-size: 30px;
-      font-family: ProxiNova, sans-serif;
       font-weight: 500;
       color: #000000;
       margin-bottom: 0;
     }
     p {
       font-size: 18px;
-      font-family: ProxiNova, sans-serif;
       font-weight: 500;
       color: #666666;
     }

@@ -155,7 +155,6 @@ const Root = styled.section`
     font-weight: 400;
     width: 100%;
     text-transform: capitalize;
-    font-family: "Playfair Display","Proxima Nova","ui-sans-serif"!important;
   }
   h4 {
     text-align: center;

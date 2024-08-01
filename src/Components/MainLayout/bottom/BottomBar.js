@@ -8,11 +8,11 @@ import EducationList from "./EducationList";
 import GemstoneList from "./GemstoneList";
 
 function BottomBar() {
-  const [isListOpen2, setIsListOpen2] = useState(false);
+
+  const [isListOpen2, setIsListOpen2] = useState(true);
   const [isListOpen4, setIsListOpen4] = useState(false);
   const [isListOpen6, setIsListOpen6] = useState(false);
   const [isListOpen8, setIsListOpen8] = useState(false);
-
 
   const handleMouseEnter2 = () => {
     setIsListOpen2(true);
@@ -46,7 +46,6 @@ function BottomBar() {
     setIsListOpen8(false);
   };
 
-
   return (
     <Root>
       <ContainerFluid
@@ -69,7 +68,7 @@ function BottomBar() {
             onMouseLeave={handleMouseLeave2}
             id="graphic"
           >
-            <Nav.Link >Engagement rings</Nav.Link>
+            <Nav.Link>Engagement rings</Nav.Link>
             {isListOpen2 && (
               <div className="option_list_list">
                 {/* <ProgrammingTech /> */}
@@ -95,8 +94,12 @@ function BottomBar() {
             onMouseLeave={handleMouseLeave6}
             id="graphic"
           >
-            <Nav.Link >Gemstone</Nav.Link>
-            {isListOpen6 && <div className="option_list_list"><GemstoneList/></div>}
+            <Nav.Link>Gemstone</Nav.Link>
+            {isListOpen6 && (
+              <div className="option_list_list">
+                <GemstoneList />
+              </div>
+            )}
           </div>
 
           <div
@@ -105,9 +108,12 @@ function BottomBar() {
             id="graphic"
           >
             <Nav.Link href="/education">education</Nav.Link>
-            {isListOpen8 && <div className="option_list_list"><EducationList/></div>}
+            {isListOpen8 && (
+              <div className="option_list_list">
+                <EducationList />
+              </div>
+            )}
           </div>
-
         </Nav>
       </ContainerFluid>
     </Root>
@@ -127,11 +133,10 @@ const Root = styled.section`
     border: 1px solid #e4e5e7;
   }
   a.nav-link {
-    font-family: "ProximaNova", "sans-serif";
     color: #000;
     display: block;
     font-size: 14px;
-    font-weight: 100 !important;
+    font-weight: 500 !important;
     text-transform: uppercase;
     word-spacing: 1px;
     line-height: 24px;
