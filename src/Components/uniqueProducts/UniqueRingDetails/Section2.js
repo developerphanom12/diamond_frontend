@@ -36,7 +36,7 @@ import PEAR from "../../Images/Pear-removebg-preview.png";
 import PRINCESS from "../../Images/Princess-removebg-preview.png";
 import RADIANT from "../../Images/Radiant-removebg-preview.png";
 import CUSHION from "../../Images/cushionremovebg.png";
-import ECUSHION from "../../Images/ECusion-removebg-preview.png";
+import ASSCHER from "../../Images/ECusion-removebg-preview.png";
 import one_four_k_white_gold from "../../Images/fourone.png";
 import one_four_k_yellow_gold from "../../Images/fourtwo.png";
 import one_four_k_pink_gold from "../../Images/fourthree.png";
@@ -52,15 +52,15 @@ import pave_img from "../../Images/Pave-removebg-preview.png";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
+  { name: "PRINCESS", imgUrl: PRINCESS },
+  { name: "OVAL", imgUrl: OVAL },
   { name: "EMERALD", imgUrl: EMERALD },
+  { name: "PEAR", imgUrl: PEAR },
   { name: "HEART", imgUrl: HEART },
   { name: "MARQUISE", imgUrl: MARQUISE },
-  { name: "OVAL", imgUrl: OVAL },
-  { name: "PEAR", imgUrl: PEAR },
-  { name: "PRINCESS", imgUrl: PRINCESS },
-  { name: "RADIANT", imgUrl: RADIANT },
   { name: "CUSHION", imgUrl: CUSHION },
-  { name: "E.CUSHION", imgUrl: ECUSHION },
+  { name: "ASSCHER", imgUrl: ASSCHER },
+  { name: "RADIANT", imgUrl: RADIANT },
 ];
 
 const materialList = [
@@ -74,8 +74,8 @@ const materialList = [
 ];
 
 const styleList = [
-  { value:"Solitare", imgUrl: solitare_img },
-  { value:"pave", imgUrl: pave_img },
+  { value: "Solitare", imgUrl: solitare_img },
+  { value: "Pave", imgUrl: pave_img },
 ];
 
 export default function Section2() {
@@ -88,6 +88,8 @@ export default function Section2() {
   const [carat, setCarat] = useState("");
   const [preDefineData, setPreDefineData] = useState(null);
   const [selectedShapes, setSelectedShapes] = useState("ROUND");
+  const [selectedStyle, setSelectedStyle] = useState("");
+  const [selectedStyleImg, setSelectedStyleImg] = useState([]);
   const [selectedShapesImg, setSelectedShapesImg] = useState([]);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [fingerSize, setFingerSize] = useState([]);
@@ -196,6 +198,10 @@ export default function Section2() {
     setSelectedShapes(shapeName);
     setSelectedShapesImg(shapeImageUrl);
   };
+  const handleStyleClick = (shapeName, shapeImageUrl) => {
+    setSelectedStyle(shapeName);
+    setSelectedStyleImg(shapeImageUrl);
+  };
 
   const handleMaterialClick = (selectedMaterialValue) => {
     const selectedMaterial = materialList.find(
@@ -257,7 +263,7 @@ export default function Section2() {
             </p>
           </div>
           <div className="prod_spec">
-            <h4>Carat Weight</h4>
+            <h4>Carat Weight </h4>
             <div className="carattt">
               {caratOptions.map((caratOption, index) => (
                 <div key={index} className="spec">
@@ -322,32 +328,25 @@ export default function Section2() {
           </div>
 
           <div className="ring_types mt-4">
-            <h4>Style:</h4>
+            <h4>Style : {selectedStyle}</h4>
             <div>
-              {colorOptions &&
+              {styleList &&
                 styleList.map((style) => (
-            <button
-              key={style.value}
-              className={`btn_shapes ${
-                color === style.value ? "selected" : ""
-              }`}
-              onClick={() => handleMaterialClick(style.value)}
-              disabled={!isMaterialAvailable(style.value)}
-              style={{
-                opacity: isMaterialAvailable(style.value) ? 1 : 0.5,
-                cursor: isMaterialAvailable(style.value)
-                  ? "pointer"
-                  : "not-allowed",
-              }}
-            >
-              <img
-                className="img color_div"
-                src={style.imgUrl}
-                alt={style.value}
-              />
-              <p style={{display:"none"}}>{style.value}</p>
-            </button>
-            ))}
+                  <button
+                    key={style.value}
+                    className={`btn_shapes ${
+                      selectedStyle.includes(style.value) ? "selected" : ""
+                    }`}
+                    onClick={() => handleStyleClick(style.value)}
+                  >
+                    <img
+                      className="img color_div"
+                      src={style.imgUrl}
+                      alt={style.value}
+                    />
+                    <p style={{ display: "none" }}>{style.value}</p>
+                  </button>
+                ))}
             </div>
           </div>
 
@@ -717,8 +716,6 @@ const Root = styled.section`
 
     .image_div {
       flex: 1;
-      /* position: absolute; */
-      /* position: sticky; */
       top: 20px;
       border: 1px solid #d3d3d3;
       padding: 20px 20px 0px 20px;
@@ -848,7 +845,7 @@ const Root = styled.section`
           display: flex;
           overflow-x: auto;
           .btn_shapes {
-            width: 48px !important;
+            width: 52px !important;
             border: 2px solid transparent;
             background: #fff;
             display: flex;

@@ -16,7 +16,6 @@ export default function AllOrders() {
             <th>Customer Name</th>
             <th>Status</th>
             <th>Date</th>
-            <th>View</th>
           </tr>
           <tr>
             <td>Jill</td>
@@ -28,7 +27,6 @@ export default function AllOrders() {
             <td>50</td>
             <td>50</td>
             <td>50</td>
-            <td><a href="/"> View</a></td>
           </tr>
         </table>
       </div>
@@ -61,11 +59,11 @@ const Root = styled.section`
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
+  }
 
-  @media (min-width : 567px) and (max-width: 992px){
-    th{
-        font-size:10px;
+  @media (min-width: 567px) and (max-width: 992px) {
+    th {
+      font-size: 10px;
     }
   }
 `;
