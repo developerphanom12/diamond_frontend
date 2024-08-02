@@ -11,6 +11,8 @@ import nopro from "../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
 
 export default function Section4({ value }) {
+  const [visibleProducts, setVisibleProducts] = useState(20);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -48,10 +50,15 @@ export default function Section4({ value }) {
   useEffect(() => {
     fetchUniqueData();
   }, [uniqueProductGem]);
+
+  const handleLoadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 1);
+  };
+
   return (
     <Root>
       {value && value.length > 0 ? (
-        value.map((i, index) => (
+        value.slice(0, visibleProducts).map((i, index) => (
           <div className="main_div" key={index}>
             <div className="subdiv">
               <img
@@ -86,6 +93,12 @@ export default function Section4({ value }) {
           <NoProduct />
         </div>
       )}
+
+<div className="load_btn">
+        {visibleProducts < value.length && (
+          <button onClick={handleLoadMore}>Load More</button>
+        )}
+      </div>
     </Root>
   );
 }
@@ -178,6 +191,20 @@ const Root = styled.section`
       }
     }
   }
+  .load_btn {
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+    button{
+      border:2px solid black;
+      background-color:transparent;
+      font-size:16px;
+      color:#000000;
+      font-weight:500;
+      padding:10px 30px;
+      border-radius: 50px;
+    }
+}
   @media (max-width: 567px) {
     padding: 0px;
     .main_div {

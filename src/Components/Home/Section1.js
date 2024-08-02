@@ -52,7 +52,7 @@ const Root = styled.section`
   background-image: url(${bgg});
   background-size: 100% 100%;
   object-fit: contain;
-  height: 450px;
+  height: 480px;
   padding: 20px;
   position: relative;
   color: #000;

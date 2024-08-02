@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,8 @@ import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../../NoProduct";
 
 export default function Section4({ data }) {
+  const [visibleProducts, setVisibleProducts] = useState(20);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,15 +16,16 @@ export default function Section4({ data }) {
     dispatch(setUniqueProduct(product));
     console.log("Navigating with product:", product);
     navigate("/uniqueringdetails", { state: { product } });
+  };
 
+  const handleLoadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 20);
   };
   return (
     <Root>
       <div className="main_div">
         {data && data.length > 0 ? (
-
-        
-          data.map((i, index) => {
+          data.slice(0, visibleProducts).map((i, index) => {
             return (
               <div key={index} className="subdiv">
                 <>
@@ -83,14 +86,20 @@ export default function Section4({ data }) {
                 </div>
               </div>
             );
-          })):(
-            <div style={{ width: "100vw", height: "80vh" }}>
-                 <NoProduct/>
+          })
+        ) : (
+          <div style={{ width: "100vw", height: "80vh" }}>
+            <NoProduct />
           </div>
-          )}
+        )}
       </div>
 
-     
+
+      <div className="load_btn">
+        {visibleProducts < data.length && (
+          <button onClick={handleLoadMore}>Load More</button>
+        )}
+      </div>
     </Root>
   );
 }
@@ -198,7 +207,6 @@ const Root = styled.section`
           border-radius: 25px;
           font-size: 13px;
           cursor: pointer;
-
         }
       }
 
@@ -216,7 +224,22 @@ const Root = styled.section`
       }
     }
   }
-  
+
+.load_btn {
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+    button{
+      border:2px solid black;
+      background-color:transparent;
+      font-size:16px;
+      color:#000000;
+      font-weight:500;
+      padding:10px 30px;
+      border-radius: 50px;
+    }
+}
+
   @media (max-width: 867px) {
     padding: 0px 10px;
     .main_div {
@@ -251,4 +274,3 @@ const Root = styled.section`
     }
   }
 `;
-

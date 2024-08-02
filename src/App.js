@@ -41,19 +41,19 @@ function App() {
   return (
     <div>
       <LoadingProvider>
-        <LoaderDot />
+        <LoaderDot/>
         <Layout>
           <Routes>
             <>
               <Route path="/" element={<Home />} />
               <Route path="/allorder" element={<AllOrders />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/password" element={<ForgetPassword />} />
-              <Route path="/education" element={<Education />} />
-              <Route path="/engagementring" element={<EngagementRing />} />
-              <Route path="/uniquering" element={<UniqueRing />} />
+              <Route path="/login" element={<Login />}/>
+              <Route path="/register" element={<Register />}/>
+              <Route path="/password" element={<ForgetPassword />}/>
+              <Route path="/education" element={<Education />}/>
+              <Route path="/engagementring" element={<EngagementRing />}/>
+              <Route path="/uniquering" element={<UniqueRing />}/>
               <Route
                 path="/uniqueringdetails"
                 element={<UniqueRingDetails />}

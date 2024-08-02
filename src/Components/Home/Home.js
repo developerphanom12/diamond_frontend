@@ -13,16 +13,15 @@ import Section9 from "./Section9";
 export default function Home() {
   return (
     <div>
-      <Section1 />
-      <Section2 />
-      <Section3 />
-      <Section4 />
-      <Section5 />
-      <Section6 />
-      <Section7 />
-      <Section8 />
-      <Section9 />
-    
+      <Section1/>
+      <Section2/>
+      <Section3/>
+      <Section4/>
+      <Section5/>
+      <Section6/>
+      <Section7/>
+      <Section8/>
+      <Section9/>
     </div>
   );
 }

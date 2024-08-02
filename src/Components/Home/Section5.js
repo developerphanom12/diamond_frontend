@@ -6,10 +6,10 @@ import ss3 from "../Images/s3.png";
 import ss4 from "../Images/s4.png";
 import ss5 from "../Images/s5.png";
 import ss6 from "../Images/s6.png";
-import Gbgimg from "../Images/girlbanner.webp";
+import Gbgimg from "../Images/ban.jpg";
 import { useNavigate } from "react-router-dom";
 
-export default function Section5() {
+export default function Section5(){
   const navigate = useNavigate();
   return (
     <Root>
@@ -89,7 +89,7 @@ const Root = styled.section`
       }
     }
     h1 {
-      font-size: 1.75rem;
+      font-size: 40px;
       line-height: 1;
       text-transform: uppercase;
     }
@@ -155,5 +155,20 @@ const Root = styled.section`
     margin-bottom: 10px;
 }
 
+
+ .col-lg-6 h1 {
+    font-size: 1.75rem;
+    line-height: 1;
+    text-transform: uppercase;
+}
   }
+
+  @media (min-width: 567px) and (max-width: 992px){
+    .col-lg-6 h1 {
+    font-size: 40px;
+    font-weight:400;
+}
+
+  }
+  
 `;

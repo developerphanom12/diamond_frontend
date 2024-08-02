@@ -16,6 +16,7 @@ export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
   const [productById, setProductById] = useState("");
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [visibleProducts, setVisibleProducts] = useState(20);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -51,12 +52,18 @@ export default function Section4({ products }) {
     }
   };
 
+  const handleLoadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 20);
+  };
+
+
   return (
     <Root>
       <div className="main_div">
         {products &&
-          products.map((i, index) => {
+          products.slice(0, visibleProducts).map((i, index) => {
             return (
+
               <div key={index} className="subdiv">
                 <>
                   {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
@@ -107,6 +114,7 @@ export default function Section4({ products }) {
                     >
                       More Info
                     </button>
+                    
                     <button
                       className="add_btn"
                       onClick={() => handleAddDiamondClick(i?.node)}
@@ -122,10 +130,24 @@ export default function Section4({ products }) {
                     </p>
                   </div>
                 </div>
+
+
+
+
+
               </div>
+
             );
           })}
       </div>
+
+      <div className="load_btn">
+        {visibleProducts < products.length && (
+          <button onClick={handleLoadMore}>Load More</button>
+        )}
+      </div>
+
+
       <Modal isOpen={modal} toggle={() => setModal(!modal)}>
         <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
 
@@ -158,6 +180,7 @@ export default function Section4({ products }) {
           </div>
         </CustomModalBody>
       </Modal>
+
     </Root>
   );
 }
@@ -283,6 +306,21 @@ const Root = styled.section`
       }
     }
   }
+
+  .load_btn {
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+    button{
+      border:2px solid black;
+      background-color:transparent;
+      font-size:16px;
+      color:#000000;
+      font-weight:500;
+      padding:10px 30px;
+      border-radius: 50px;
+    }
+}
 
   @media (max-width: 567px) {
     padding: 0px 10px;

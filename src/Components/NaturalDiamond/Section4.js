@@ -11,7 +11,6 @@ import ring from "../Images/Solitaire-removebg-preview.png";
 import nopro from "../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
 
-
 export default function Section4({ value }) {
   const [modal1, setModal1] = useState(false);
   const navigate = useNavigate();
@@ -25,6 +24,8 @@ export default function Section4({ value }) {
   //  ------------------------------------
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const [visibleProducts, setVisibleProducts] = useState(20);
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,6 +71,7 @@ export default function Section4({ value }) {
 
     navigate("/diamonddetails", { state: { products, diamond } });
   };
+  
   const handleNavigate = (diamond, products) => {
     if (productIds && productIds?.id) {
       navigate("/productpage", { state: { diamond, products } });
@@ -78,11 +80,15 @@ export default function Section4({ value }) {
     }
   };
 
+  const handleLoadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 20);
+  };
+
   return (
     <Root>
       <div className="main_div">
         {value && value.length > 0 ? (
-          value.map((i, index) => (
+          value.slice(0, visibleProducts).map((i, index) => (
             <div key={index} className="subdiv">
               <img src={i?.diamond?.image || nopro} alt="diamond images" />
               <div className="hov_content">
@@ -131,10 +137,18 @@ export default function Section4({ value }) {
           ))
         ) : (
           <div style={{ width: "100vw", height: "80vh" }}>
-            <NoProduct/>
+            <NoProduct />
           </div>
         )}
       </div>
+
+      {/* <button>Load More</button> */}
+      <div className="load_btn">
+        {visibleProducts < value.length && (
+          <button onClick={handleLoadMore}>Load More</button>
+        )}
+      </div>
+
       <Modal
         isOpen={modal1}
         toggle={() => setModal1(!modal1)}
@@ -166,6 +180,7 @@ export default function Section4({ value }) {
     </Root>
   );
 }
+
 const Root = styled.section`
   padding: 0 10px;
 
@@ -306,6 +321,21 @@ const Root = styled.section`
       }
     }
   }
+
+  .load_btn {
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+    button{
+      border:2px solid black;
+      background-color:transparent;
+      font-size:16px;
+      color:#000000;
+      font-weight:500;
+      padding:10px 30px;
+      border-radius: 50px;
+    }
+}
   @media (max-width: 1025px) {
     .main_div {
       gap: 0px;
