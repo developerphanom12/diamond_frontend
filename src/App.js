@@ -1,16 +1,15 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import NaturalDiamond from "./Components/NaturalDiamond/Naturaldiamond";
 import ProductPage from "./Components/ProductPage/ProductPage";
 import Checkout from "./Components/Checkout/Checkout";
 import EngagementRing from "./Components/EngagementRing/EngagementRing";
-import Layout from "./Components/MainLayout/Layout";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Login/Register";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/Login/ForgetPassword";
 import Education from "./Components/Edu/Education";
 import RingDetails from "./Components/RingDetails/RingDetails";
@@ -19,15 +18,17 @@ import { LoadingProvider } from "./Components/LoadingContext";
 import LoaderDot from "./Components/LoaderDot";
 import ContactUs from "./Components/AllOrders/ContactUs";
 import Section2 from "./Components/uniqueProducts/UniqueRing/Section2";
-import EngageList from "./Components/MainLayout/bottom/EngageList";
+import EngageList from "./MainLayout/bottom/EngageList";
 import UniqueRing from "./Components/uniqueProducts/UniqueRing/UniqueRing";
 import UniqueRingDetails from "./Components/uniqueProducts/UniqueRingDetails/UniqueRingDetails";
 import Gemstone from "./Components/Gemstone/Gemstone";
 import GemDetails from "./Components/Gemstone/GemDetails/GemDetails";
 import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 import AllOrders from "./Components/AllOrders/AllOrders";
-import HomePage from "./Components/threeSixty/HomePage";
-import Test from "./Components/Test/Test"
+import Layout from "./MainLayout/Layout";
+import WeddingBands from "./Components/WeddingBands/WeddingBands";
+// import HomePage from "./Components/threeSixty/HomePage";
+// import Test from "./Components/Test/Test"
 
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
                 path="/uniqueringdetails"
                 element={<UniqueRingDetails />}
               />
+              
+              <Route path="/weddingbands" element={<WeddingBands />} />
               <Route path="/naturaldiamond" element={<NaturalDiamond />} />
               <Route path="/productpage" element={<ProductPage />} />
               <Route path="/ringdetails" element={<RingDetails />} />
@@ -70,7 +73,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
               <Route path="/gemdetails" element={<GemDetails />} />
-              <Route path="/test" element={<Test/>} />
+              {/* <Route path="/test" element={<Test/>} /> */}
 
             </>
           </Routes>

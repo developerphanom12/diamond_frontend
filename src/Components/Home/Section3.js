@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import ringg1 from "../Images/ringgg1.webp";
-import ringg3 from "../Images/ringgg3.webp";
-import ringg2 from "../Images/ringgg2.webp";
-import ringg4 from "../Images/ringgg4.webp";
+import ringg1 from "../../Images/ringgg1.webp";
+import ringg3 from "../../Images/ringgg3.webp";
+import ringg2 from "../../Images/ringgg2.webp";
+import ringg4 from "../../Images/ringgg4.webp";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 

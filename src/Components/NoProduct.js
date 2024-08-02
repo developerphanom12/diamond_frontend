@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import pro from "../Components/Images/stock.webp";
+import pro from "../Images/stock.webp";
+ 
 
 export const NoProduct = () => {
   return (

@@ -10,37 +10,37 @@ import {
   setSelectedRingShape,
   setSelectedRingSvg,
 } from "../../redux/users/action";
-import solitaire from "../Images/Solitaire-removebg-preview.png";
-import pave from "../Images/Pave-removebg-preview.png";
-import halo from "../Images/Halo-removebg-preview.png";
-import nature from "../Images/Nature-removebg-preview.png";
-import hiddenhalo from "../Images/HiddenHalo-removebg-preview.png";
-import sidestone from "../Images/SideStone-removebg-preview.png";
-import threestone from "../Images/ThreeStones-removebg-preview.png";
-import vintage from "../Images/Vintage-removebg-preview.png";
-import tension from "../Images/Tension-removebg-preview.png";
+import solitaire from "../../Images/Solitaire-removebg-preview.png";
+import pave from "../../Images/Pave-removebg-preview.png";
+import halo from "../../Images/Halo-removebg-preview.png";
+import nature from "../../Images/Nature-removebg-preview.png";
+import hiddenhalo from "../../Images/HiddenHalo-removebg-preview.png";
+import sidestone from "../../Images/SideStone-removebg-preview.png";
+import threestone from "../../Images/ThreeStones-removebg-preview.png";
+import vintage from "../../Images/Vintage-removebg-preview.png";
+import tension from "../../Images/Tension-removebg-preview.png";
 import { EXCHANGE_URLS } from "../URLS";
 import { useLoading } from "../LoadingContext";
 import { IoFilterOutline } from "react-icons/io5";
 import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
-import WhiteGold14 from "../Images/fourone.png";
-import YellowGold14 from "../Images/fourtwo.png";
-import RoseGold14 from "../Images/fourthree.png";
-import WhiteGold18 from "../Images/eightone.png";
-import YellowGold18 from "../Images/eighttwo.png";
-import RoseGold18 from "../Images/eightthree.png";
-import Platinum from "../Images/pt.png";
-import ROUND from "../Images/round-removebg-preview.png";
-import EMERALD from "../Images/emerald-removebg-preview.png";
-import HEART from "../Images/heart-removebg-preview.png";
-import MARQUISE from "../Images/Marquise-removebg-preview.png";
-import OVAL from "../Images/oval-removebg-preview.png";
-import PEAR from "../Images/Pear-removebg-preview.png";
-import PRINCESS from "../Images/Princess-removebg-preview.png";
-import RADIANT from "../Images/Radiant-removebg-preview.png";
-import CUSHION from "../Images/cushionremovebg.png";
-import ASSCHER from "../Images/ECusion-removebg-preview.png";
+import WhiteGold14 from "../../Images/fourone.png";
+import YellowGold14 from "../../Images/fourtwo.png";
+import RoseGold14 from "../../Images/fourthree.png";
+import WhiteGold18 from "../../Images/eightone.png";
+import YellowGold18 from "../../Images/eighttwo.png";
+import RoseGold18 from "../../Images/eightthree.png";
+import Platinum from "../../Images/pt.png";
+import ROUND from "../../Images/round-removebg-preview.png";
+import EMERALD from "../../Images/emerald-removebg-preview.png";
+import HEART from "../../Images/heart-removebg-preview.png";
+import MARQUISE from "../../Images/Marquise-removebg-preview.png";
+import OVAL from "../../Images/oval-removebg-preview.png";
+import PEAR from "../../Images/Pear-removebg-preview.png";
+import PRINCESS from "../../Images/Princess-removebg-preview.png";
+import RADIANT from "../../Images/Radiant-removebg-preview.png";
+import CUSHION from "../../Images/cushionremovebg.png";
+import ASSCHER from "../../Images/ECusion-removebg-preview.png";
 
 const metals = [
   { id: 1, label: "White Gold", imgUrl: WhiteGold14 },

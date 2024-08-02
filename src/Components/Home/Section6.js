@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import shape9 from "../Images/shape-round.webp";
-import shape8 from "../Images/shape-radiant.webp";
-import shape7 from "../Images/shape-princess.webp";
-import shape6 from "../Images/shape-pear.webp";
-import shape5 from "../Images/shape-oval.webp";
-import shape4 from "../Images/shape-marquise.webp";
-import shape3 from "../Images/shape-heart.webp";
-import shape2 from "../Images/shape-emerald.webp";
-import shape1 from "../Images/shape-cushion.webp";
+import shape9 from "../../Images/shape-round.webp";
+import shape8 from "../../Images/shape-radiant.webp";
+import shape7 from "../../Images/shape-princess.webp";
+import shape6 from "../../Images/shape-pear.webp";
+import shape5 from "../../Images/shape-oval.webp";
+import shape4 from "../../Images/shape-marquise.webp";
+import shape3 from "../../Images/shape-heart.webp";
+import shape2 from "../../Images/1.png";
+import shape1 from "../../Images/shape-cushion.webp";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 

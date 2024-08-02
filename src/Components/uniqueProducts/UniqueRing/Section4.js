@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUniqueProduct } from "../../../redux/users/action";
-import nopro from "../../Images/product-not-found.jpg";
+import nopro from "../../../Images/product-not-found.jpg";
 import { NoProduct } from "../../NoProduct";
 
 export default function Section4({ data }) {

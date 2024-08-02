@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import { useLoading } from "../LoadingContext";
-import noimagefound from "../Images/noimagefound.jpg";
-import nopro from "../Images/product-not-found.jpg";
+import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
 
 export default function Section4({ value }) {

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import s1 from "../Images/sliderimg1.svg";
-import s2 from "../Images/sliderimg2.svg";
-import s3 from "../Images/sliderimg3.svg";
-import s4 from "../Images/sliderimg4.svg";
+import s1 from "../../Images/sliderimg1.svg";
+import s2 from "../../Images/sliderimg2.svg";
+import s3 from "../../Images/sliderimg3.svg";
+import s4 from "../../Images/sliderimg4.svg";
 
 export default function Section2() {
   // Duplicate the image array to create a loop effect

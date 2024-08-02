@@ -7,48 +7,47 @@ import {
 } from "../../../redux/users/action";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import aeroplane from "../../Images/aeroplane.png";
-import badgess from "../../Images/badgess.png";
-import moneyinhand from "../../Images/moneyinhand.png";
-import certifiedd from "../../Images/certifiedd.png";
-import pinkimg from "../../Images/svgviewer-png-output (1).png";
-import modimg from "../../Images/modimg.PNG";
-import wid from "../../Images/svgviewer-png-output.png";
-import met from "../../Images/svgviewer-png-output (3).png";
-import que from "../../Images/svgviewer-png-output (7).png";
-import circle from "../../Images/Screenshot from 2024-07-25 17-29-15.png";
-import car from "../../Images/svgviewer-png-output (4).png";
-import col from "../../Images/svgviewer-png-output (5).png";
-import cla from "../../Images/svgviewer-png-output (6).png";
+import axios from "axios";
+import aeroplane from "../../../Images/aeroplane.png";
+import badgess from "../../../Images/badgess.png";
+import moneyinhand from "../../../Images/moneyinhand.png";
+import certifiedd from "../../../Images/certifiedd.png";
+import pinkimg from "../../../Images/svgviewer-png-output (1).png";
+import modimg from "../../../Images/modimg.PNG";
+import wid from "../../../Images/svgviewer-png-output.png";
+import met from "../../../Images/svgviewer-png-output (3).png";
+import que from "../../../Images/svgviewer-png-output (7).png";
+import circle from "../../../Images/Screenshot from 2024-07-25 17-29-15.png";
+import car from "../../../Images/svgviewer-png-output (4).png";
+import col from "../../../Images/svgviewer-png-output (5).png";
+import cla from "../../../Images/svgviewer-png-output (6).png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { useLoading } from "../../LoadingContext";
-import deleteicon from "../../Images/delete.PNG";
-import ww from "../../Images/ww.webp";
+import deleteicon from "../../../Images/delete.PNG";
+import ww from "../../../Images/ww.webp";
 import Drawer from "react-modern-drawer";
-import ROUND from "../../Images/round-removebg-preview.png";
-import EMERALD from "../../Images/emerald-removebg-preview.png";
-import HEART from "../../Images/heart-removebg-preview.png";
-import MARQUISE from "../../Images/Marquise-removebg-preview.png";
-import OVAL from "../../Images/oval-removebg-preview.png";
-import PEAR from "../../Images/Pear-removebg-preview.png";
-import PRINCESS from "../../Images/Princess-removebg-preview.png";
-import RADIANT from "../../Images/Radiant-removebg-preview.png";
-import CUSHION from "../../Images/cushionremovebg.png";
-import ASSCHER from "../../Images/ECusion-removebg-preview.png";
-import one_four_k_white_gold from "../../Images/fourone.png";
-import one_four_k_yellow_gold from "../../Images/fourtwo.png";
-import one_four_k_pink_gold from "../../Images/fourthree.png";
-import one_eight_k_white_gold from "../../Images/eightone.png";
-import one_eight_k_yellow_gold from "../../Images/eighttwo.png";
-import one_eight_k_red from "../../Images/eightthree.png";
-import Platinum from "../../Images/pt.png";
+import ROUND from "../../../Images/round-removebg-preview.png";
+import EMERALD from "../../../Images/emerald-removebg-preview.png";
+import HEART from "../../../Images/heart-removebg-preview.png";
+import MARQUISE from "../../../Images/Marquise-removebg-preview.png";
+import OVAL from "../../../Images/oval-removebg-preview.png";
+import PEAR from "../../../Images/Pear-removebg-preview.png";
+import PRINCESS from "../../../Images/Princess-removebg-preview.png";
+import RADIANT from "../../../Images/Radiant-removebg-preview.png";
+import CUSHION from "../../../Images/cushionremovebg.png";
+import ASSCHER from "../../../Images/ECusion-removebg-preview.png";
+import one_four_k_white_gold from "../../../Images/fourone.png";
+import one_four_k_yellow_gold from "../../../Images/fourtwo.png";
+import one_four_k_pink_gold from "../../../Images/fourthree.png";
+import one_eight_k_white_gold from "../../../Images/eightone.png";
+import one_eight_k_yellow_gold from "../../../Images/eighttwo.png";
+import one_eight_k_red from "../../../Images/eightthree.png";
+import Platinum from "../../../Images/pt.png";
 import Section3 from "./Section3";
-import noimg from "../../Images/eligantPacking.png";
-
-import solitare_img from "../../Images/Solitaire-removebg-preview.png";
-import pave_img from "../../Images/Pave-removebg-preview.png";
+import noimg from "../../../Images/eligantPacking.png";
+import solitare_img from "../../../Images/Solitaire-removebg-preview.png";
+import pave_img from "../../../Images/Pave-removebg-preview.png";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -97,9 +96,7 @@ export default function Section2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  // const [videoUrl, setVideoUrl] = useState(null);
-
-  // const [videoUrl, setVideoUrl] = useState(null);
+ 
 
   const fetchUniqueData = async () => {
     setLoading(true);

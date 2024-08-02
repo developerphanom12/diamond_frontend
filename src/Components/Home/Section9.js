@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ringg1 from "../Images/couples1.jpg";
-import ringg3 from "../Images/couples2.jpg";
-import ringg2 from "../Images/couples3.jpg";
-import ringg4 from "../Images/couples4.jpg";
-import ringg5 from "../Images/couples5.jpg";
-import ringg6 from "../Images/couples6.jpg";
-import ringg7 from "../Images/couples7.jpg";
+import ringg1 from "../../Images/couples1.jpg";
+import ringg3 from "../../Images/couples2.jpg";
+import ringg2 from "../../Images/couples3.jpg";
+import ringg4 from "../../Images/couples4.jpg";
+import ringg5 from "../../Images/couples5.jpg";
+import ringg6 from "../../Images/couples6.jpg";
+import ringg7 from "../../Images/couples7.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

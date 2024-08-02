@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ringg1 from "../Images/jewelryblog.jpg";
-import ringg3 from "../Images/jewelryblog1.jpg";
-import ringg2 from "../Images/jewelryblog2.jpg";
-import ringg4 from "../Images/jewelryblog3.jpg";
-import ringg5 from "../Images/jewelryblog4.jpg";
-import ringg6 from "../Images/jewelryblog5.jpg";
-import ringg7 from "../Images/jewelryblog6.jpg";
-import ringg8 from "../Images/jewelryblog7.jpg";
-import ringg9 from "../Images/jewelryblogg.jpg";
+import ringg1 from "../../Images/jewelryblog.jpg";
+import ringg3 from "../../Images/jewelryblog1.jpg";
+import ringg2 from "../../Images/jewelryblog2.jpg";
+import ringg4 from "../../Images/jewelryblog3.jpg";
+import ringg5 from "../../Images/jewelryblog4.jpg";
+import ringg6 from "../../Images/jewelryblog5.jpg";
+import ringg7 from "../../Images/jewelryblog6.jpg";
+import ringg8 from "../../Images/jewelryblog7.jpg";
+import ringg9 from "../../Images/jewelryblogg.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

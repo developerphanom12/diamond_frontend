@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import React from "react";
-import aeroplane from "../Images/aeroplane.png";
-import badgess from "../Images/badgess.png";
-import moneyinhand from "../Images/moneyinhand.png";
-import certifiedd from "../Images/certifiedd.png";
-import pinkimg from "../Images/pink.PNG";
-import modimg from "../Images/modimg.PNG";
-import noimg from "../Images/eligantPacking.png";
+import aeroplane from "../../Images/aeroplane.png";
+import badgess from "../../Images/badgess.png";
+import moneyinhand from "../../Images/moneyinhand.png";
+import certifiedd from "../../Images/certifiedd.png";
+import pinkimg from "../../Images/pink.PNG";
+import modimg from "../../Images/modimg.PNG";
+import noimg from "../../Images/eligantPacking.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import RingShipReturn from "../DiamondDetails/RingShipReturn";

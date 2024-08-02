@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import edubanner from "../Images/EducationBanner.jpg";
-import eduDia from "../Images/Diamondweqw.jpg";
-import diamond from "../Images/Diamond-2.jpg";
+import edubanner from "../../Images/EducationBanner.jpg";
+import eduDia from "../../Images/Diamondweqw.jpg";
+import diamond from "../../Images/Diamond-2.jpg";
 
 export default function Education() {
   return (

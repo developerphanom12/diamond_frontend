@@ -4,8 +4,8 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiCircleCheck } from "react-icons/ci";
-import ndia from "../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../Images/labgrowncopy-removebg.png";
+import ndia from "../../Images/naturaldiamond-removebg-preview.png";
+import labgrown from "../../Images/labgrowncopy-removebg.png";
 import { useDispatch } from "react-redux";
 import { setDiamondType } from "../../redux/users/action";
 

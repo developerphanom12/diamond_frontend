@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import s1 from "../Images/rr1.webp";
-import s2 from "../Images/rr2.webp";
-import s3 from "../Images/rr3.webp";
-import s4 from "../Images/rr4.webp";
-import s5 from "../Images/rr5.webp";
+import s1 from "../../Images/rr1.webp";
+import s2 from "../../Images/rr2.webp";
+import s3 from "../../Images/rr3.webp";
+import s4 from "../../Images/rr4.webp";
+import s5 from "../../Images/rr5.webp";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function Section4() {

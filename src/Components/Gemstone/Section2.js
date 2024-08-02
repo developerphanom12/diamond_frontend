@@ -12,16 +12,16 @@ import {
   setSelectedShape,
   setSelectedShapeImageGem,
 } from "../../redux/users/action";
-import ROUND from "../Images/round-removebg-preview.png";
-import EMERALD from "../Images/emerald-removebg-preview.png";
-import HEART from "../Images/heart-removebg-preview.png";
-import MARQUISE from "../Images/Marquise-removebg-preview.png";
-import OVAL from "../Images/oval-removebg-preview.png";
-import PEAR from "../Images/Pear-removebg-preview.png";
-import PRINCESS from "../Images/Princess-removebg-preview.png";
-import RADIANT from "../Images/Radiant-removebg-preview.png";
-import CUSHION from "../Images/cushionremovebg.png";
-import ASSCHER from "../Images/ECusion-removebg-preview.png";
+import ROUND from "../../Images/round-removebg-preview.png";
+import EMERALD from "../../Images/emerald-removebg-preview.png";
+import HEART from "../../Images/heart-removebg-preview.png";
+import MARQUISE from "../../Images/Marquise-removebg-preview.png";
+import OVAL from "../../Images/oval-removebg-preview.png";
+import PEAR from "../../Images/Pear-removebg-preview.png";
+import PRINCESS from "../../Images/Princess-removebg-preview.png";
+import RADIANT from "../../Images/Radiant-removebg-preview.png";
+import CUSHION from "../../Images/cushionremovebg.png";
+import ASSCHER from "../../Images/ECusion-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";

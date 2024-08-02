@@ -7,8 +7,8 @@ import { setDiamondById } from "../../redux/users/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoading } from "../LoadingContext";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import ring from "../Images/Solitaire-removebg-preview.png";
-import nopro from "../Images/product-not-found.jpg";
+import ring from "../../Images/Solitaire-removebg-preview.png";
+import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
 
 export default function Section4({ value }) {

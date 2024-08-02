@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import aeroplane from "../../Images/aeroplane.png";
-import badgess from "../../Images/badgess.png";
-import moneyinhand from "../../Images/moneyinhand.png";
-import certifiedd from "../../Images/certifiedd.png";
-import pinkimg from "../../Images/pink.PNG";
-import modimg from "../../Images/modimg.PNG";
-import slideimg2 from "../../Images/slideimg2.webp";
+import aeroplane from "../../../Images/aeroplane.png";
+import badgess from "../../../Images/badgess.png";
+import moneyinhand from "../../../Images/moneyinhand.png";
+import certifiedd from "../../../Images/certifiedd.png";
+import pinkimg from "../../../Images/pink.PNG";
+import modimg from "../../../Images/modimg.PNG";
+import slideimg2 from "../../../Images/slideimg2.webp";
 import { useNavigate } from "react-router-dom";
 import RingShipReturn from "../../DiamondDetails/RingShipReturn";
 import { useLoading } from "../../LoadingContext";
 import axios from "axios";
 import { EXCHANGE_URLS } from "../../URLS";
 import { useSelector } from "react-redux";
-import nopro from "../../Images/product-not-found.jpg";
+import nopro from "../../../Images/product-not-found.jpg";
 
 
 export default function Section2() {

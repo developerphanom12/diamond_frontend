@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import backgroundImage from "../Images/girl.webp";
-import verify from "../Images/verify.svg";
+import backgroundImage from "../../Images/girl.webp";
+import verify from "../../Images/verify.svg";
 import { useLocation } from "react-router-dom";
 import Section2 from "./Section2";
 import { useSelector } from "react-redux";

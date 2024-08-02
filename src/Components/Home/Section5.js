@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import ss1 from "../Images/s1.png";
-import ss2 from "../Images/s2.png";
-import ss3 from "../Images/s3.png";
-import ss4 from "../Images/s4.png";
-import ss5 from "../Images/s5.png";
-import ss6 from "../Images/s6.png";
-import Gbgimg from "../Images/ban.jpg";
+import ss1 from "../../Images/s1.png";
+import ss2 from "../../Images/s2.png";
+import ss3 from "../../Images/s3.png";
+import ss4 from "../../Images/s4.png";
+import ss5 from "../../Images/s5.png";
+import ss6 from "../../Images/s6.png";
+import Gbgimg from "../../Images/ban.jpg";
 import { useNavigate } from "react-router-dom";
 
 export default function Section5(){

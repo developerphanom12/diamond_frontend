@@ -5,7 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector } from "react-redux";
-import diam from "../Images/diamondwithoutring.png";
+import diam from "../../Images/diamondwithoutring.png";
 
 export default function RingShipReturn() {
   const diamondById = useSelector((state) => state.users.diamondById);

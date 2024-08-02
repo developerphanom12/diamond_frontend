@@ -5,11 +5,10 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setDiamondType, setProductIds } from "../../redux/users/action";
-import ndia from "../Images/naturaldiamond-removebg-preview.png";
-import labgrown from "../Images/labgrowncopy-removebg.png";
+import ndia from "../../Images/naturaldiamond-removebg-preview.png";
+import labgrown from "../../Images/labgrowncopy-removebg.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
-import noimg from "../Images/eligantPacking.png";
 import { NoProduct } from "../NoProduct";
 
 export default function Section4({ products }) {

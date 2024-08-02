@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ring1 from "../Images/bestseller1.jpg";
-import ring2 from "../Images/bestseller2.jpg";
-import ring3 from "../Images/bestseller3.jpg";
-import ring4 from "../Images/bestseller4.jpg";
-import ring7 from "../Images/bestseller3.jpg";
-import ring8 from "../Images/bestseller4.jpg";
+import ring1 from "../../Images/bestseller1.jpg";
+import ring2 from "../../Images/bestseller2.jpg";
+import ring3 from "../../Images/bestseller3.jpg";
+import ring4 from "../../Images/bestseller4.jpg";
+import ring7 from "../../Images/bestseller3.jpg";
+import ring8 from "../../Images/bestseller4.jpg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

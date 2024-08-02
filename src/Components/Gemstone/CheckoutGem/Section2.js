@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import shoppay from "../../Images/shoppay.png";
-import paypal from "../../Images/paypal.png";
-import gpay from "../../Images/gpay.png";
+import shoppay from "../../../Images/shoppay.png";
+import paypal from "../../../Images/paypal.png";
+import gpay from "../../../Images/gpay.png";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbTruckReturn } from "react-icons/tb";
 import { IoIosArrowForward } from "react-icons/io";
