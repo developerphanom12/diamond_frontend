@@ -31,6 +31,8 @@ import { IoFilterOutline } from "react-icons/io5";
 import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
 import { NoProduct } from "../NoProduct";
+import { EXCHANGE_URLS } from "../URLS";
+import axios from "axios";
 
 const ForHerList = [
   { id: 1, title: "Nature", imgUrl: natureForHer },
