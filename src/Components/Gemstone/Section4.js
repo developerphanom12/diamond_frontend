@@ -8,6 +8,8 @@ import axios from "axios";
 import { useLoading } from "../LoadingContext";
 import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
+import Slider from "react-slick";
+import a from "../../Images/a.jpg";
 
 export default function Section4({ value }) {
   const [visibleProducts, setVisibleProducts] = useState(20);
@@ -15,6 +17,40 @@ export default function Section4({ value }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   const handleUniqueRingDetail = (product) => {
     dispatch(setUniqueProductGem(product));
     console.log("Navigating with product:", product);
@@ -60,10 +96,20 @@ export default function Section4({ value }) {
         value.slice(0, visibleProducts).map((i, index) => (
           <div className="main_div" key={index}>
             <div className="subdiv">
-              <img
-                src={i.images?.edges?.[0]?.node?.originalSrc || nopro}
-                alt="img"
-              />
+              <div className="slider-container">
+                <Slider {...settings}>
+                  <div>
+                    <img
+                      src={i.images?.edges?.[0]?.node?.originalSrc || nopro}
+                      alt="img"
+                    />
+                  </div>
+
+                  <div>
+                    <img src={a} alt="img" />
+                  </div>
+                </Slider>
+              </div>
               <div className="hov_content">
                 <div className="heading">
                   <h5>{i?.title}</h5>
@@ -93,7 +139,7 @@ export default function Section4({ value }) {
         </div>
       )}
 
-<div className="load_btn">
+      <div className="load_btn">
         {visibleProducts < value.length && (
           <button onClick={handleLoadMore}>Load More</button>
         )}
@@ -119,6 +165,24 @@ const Root = styled.section`
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
+
+        /* slider changes */
+        .slick-prev {
+        left: -2px;
+        z-index: 111;
+      }
+
+      .slick-next {
+        right: -2px;
+        z-index: 111;
+      }
+
+      /* slider changes */
+      .slick-prev:before,
+      .slick-next:before {
+        background: rgb(185 179 179);
+        border-radius: 50px;
+      }
 
       img {
         width: 100%;
@@ -191,19 +255,19 @@ const Root = styled.section`
     }
   }
   .load_btn {
-    display:flex;
-    justify-content:center;
-    padding:20px 0;
-    button{
-      border:2px solid black;
-      background-color:transparent;
-      font-size:16px;
-      color:#000000;
-      font-weight:500;
-      padding:10px 30px;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    button {
+      border: 2px solid black;
+      background-color: transparent;
+      font-size: 16px;
+      color: #000000;
+      font-weight: 500;
+      padding: 10px 30px;
       border-radius: 50px;
     }
-}
+  }
   @media (max-width: 567px) {
     padding: 0px;
     .main_div {

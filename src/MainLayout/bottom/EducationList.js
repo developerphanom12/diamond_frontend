@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import backimg from "../../Images/Diamond-2-removebg-preview.png";
+import backimg from "../../Images/educationaboutdiamond.png";
 
 
 export default function EducationList() {
@@ -69,7 +69,7 @@ export default function EducationList() {
             <img
               src={backimg}
               alt="img"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "70%", height: "80%" }}
             />
           </div>
         </div>

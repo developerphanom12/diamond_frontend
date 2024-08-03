@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 import {
   setForHerHim,
   setHerHimProductIds,
@@ -58,6 +59,40 @@ const metals = [
   { id: 7, label: "Platinum", imgUrl: Platinum },
 ];
 
+var settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: false,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 export default function WeddingBands() {
   const [show, setShow] = useState(false);
   const [selectedButton, setSelectedButton] = useState(1);
@@ -84,9 +119,9 @@ export default function WeddingBands() {
         setSelectedHimImgTitle(ForHimList[0].title, ForHimList[0].imgUrl)
       );
     }
-    navigate("/naturaldiamond", {
-      state: { forHer, herHimProducts: selectedHerHimProductId },
-    });
+    // navigate("/naturaldiamond", {
+    //   state: { forHer, herHimProducts: selectedHerHimProductId },
+    // });
   };
   const handleButtonDropClick = (buttonIndex) => {
     setSelectedDropButton(buttonIndex);
@@ -228,23 +263,43 @@ export default function WeddingBands() {
     dispatch(setHerHimProductIds(herHimProductIds));
   };
 
-  const handleNavigateDetail = async (products) => {
-    const productId = products?.node?.id;
-    console.log("products", productId);
-    try {
-      const response = await axios.get(
-        `${EXCHANGE_URLS}/fetchproductsbyid?productId=${productId}`
-      );
-      if (response?.status === 200) {
-        const productData = response?.data?.data;
-        console.log("nikeee", productData);
-        setHerHimBandProduct(productData);
-        navigate("/ringdetails", { state: { products: productData } });
+  // const handleNavigateDetail = async (products) => {
+  //   const productId = products?.node?.id;
+  //   console.log("products", productId);
+  //   try {
+  //     const response = await axios.get(
+  //       `${EXCHANGE_URLS}/weddingdata?collectionId=432312975578&tags=forher,nature`
+  //     );
+  //     if (response?.status === 200) {
+  //       const productData = response?.data?.data;
+  //       console.log("nikeee", productData);
+  //       setHerHimBandProduct(productData);
+  //       // navigate("/ringdetails", { state: { products: productData } });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching diamond details:", error);
+  //   }
+  // };
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const response = await axios.get(
+          `${EXCHANGE_URLS}/weddingdata?collectionId=432312975578&tags=forher,nature`
+        );
+        if (response?.status === 200) {
+          const herHimBandProduct = response?.data?.products;
+          console.log("nikeee", herHimBandProduct);
+          setHerHimBandProduct(herHimBandProduct);
+          // navigate("/ringdetails", { state: { products: productData } });
+        }
+      } catch (error) {
+        console.error("Error fetching diamond details:", error);
       }
-    } catch (error) {
-      console.error("Error fetching diamond details:", error);
-    }
-  };
+    };
+
+    fetchCollections();
+  }, []);
 
   return (
     <Root>
@@ -318,77 +373,83 @@ export default function WeddingBands() {
       <>
         <div className="main_div">
           {herHimBandProduct &&
-            herHimBandProduct.slice(0, visibleProducts).map((i, index) => {
-              return (
-                <div key={index} className="subdiv">
-                  <>
-                    {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
-                      <img
-                        src={i.node.images.edges[0].node.originalSrc}
-                        alt={i.node.images.edges[0].node.altText || "img"}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "https://via.placeholder.com/283";
-                        }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          backgroundColor: "#ccc",
-                        }}
-                      >
-                        <NoProduct />
-                      </div>
-                    )}
-                  </>
+            herHimBandProduct
+              .slice(0, visibleProducts)
+              .map((product, index) => {
+                return (
+                  <div key={index} className="subdiv">
+                    <>
+                      <Slider {...settings}>
+                        {product?.images?.edges?.length > 0 ? (
+                          product.images.edges.map((image, imageIndex) => (
+                            <img
+                              style={{ height: "250px !important" }}
+                              key={imageIndex}
+                              src={image?.node?.originalSrc}
+                              alt={image?.node?.altText || "Product Image"}
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src =
+                                  "https://via.placeholder.com/283";
+                              }}
+                            />
+                          ))
+                        ) : (
+                          <div
+                            style={{
+                              backgroundColor: "#ccc",
+                            }}
+                          >
+                            <NoProduct />
+                          </div>
+                        )}
+                      </Slider>
+                    </>
 
-                  <div className="hov_content">
-                    <div className="d-flex   flex-column">
-                      <div className="d-flex flex justify-content-between">
-                        <h5 className="prd_name">{i?.node.title}</h5>
-                        <div className="d-flex">
-                          <span className="white_color"></span>
-                          <span className="golden_color"></span>
-                          <span className="red_color"></span>
+                    <div className="hov_content">
+                      <div className="d-flex   flex-column">
+                        <div className="d-flex flex justify-content-between">
+                          <h5 className="prd_name">{product?.title}</h5>
+                          <div className="d-flex">
+                            <span className="white_color"></span>
+                            <span className="golden_color"></span>
+                            <span className="red_color"></span>
+                          </div>
                         </div>
+                        <>
+                          <p className="prd_price pt-1 pb-1">
+                            max- ${product?.priceRange?.maxVariantPrice?.amount}{" "}
+                            min- {product?.priceRange?.minVariantPrice?.amount}{" "}
+                          </p>
+                        </>
                       </div>
-                      <>
-                        <p className="prd_price pt-1 pb-1">
-                          max-{" "}
-                          {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
-                          {i?.node?.priceRange?.maxVariantPrice?.amount} min-{" "}
-                          {i?.node?.priceRange?.maxVariantPrice?.currencyCode}:
-                          {i?.node?.priceRange?.minVariantPrice?.amount}{" "}
+
+                      <div className="btn_div">
+                        <button
+                          className="info_btn"
+                          onClick={() => handleNavigateDetail(product)}
+                        >
+                          More Info
+                        </button>
+
+                        <button
+                          className="add_btn"
+                          onClick={() => handleHerHimBandClick(product)}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+
+                      <div className="note">
+                        <p className="note">
+                          Pay in 12 interest-free installments of $
+                          <span>Learn more</span>
                         </p>
-                      </>
-                    </div>
-
-                    <div className="btn_div">
-                      <button
-                        className="info_btn"
-                        onClick={() => handleNavigateDetail(i)}
-                      >
-                        More Info
-                      </button>
-
-                      <button
-                        className="add_btn"
-                        onClick={() => handleHerHimBandClick(i?.node)}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-
-                    <div className="note">
-                      <p className="note">
-                        Pay in 12 interest-free installments of $
-                        <span>Learn more</span>
-                      </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       </>
       <div className="load_btn">

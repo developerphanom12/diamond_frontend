@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import backimg from "../../Images/Diamond-2-removebg-preview.png";
 import round from "../../Images/round-removebg-preview.png";
 import emerald from "../../Images/emerald-removebg-preview.png";
 import heart from "../../Images/heart-removebg-preview.png";
@@ -152,12 +151,7 @@ export default function GemstoneList() {
             </div>
           </div>
           <div className="col-lg-3 col-md-6 col-12 ">
-            <img
-              src={backimg}
-              alt="img"
-              className="imgh"
-              style={{ width: "100%", height: "100%" }}
-            />
+           
           </div>
         </div>
       </div>

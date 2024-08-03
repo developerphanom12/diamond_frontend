@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setUniqueProduct } from "../../../redux/users/action";
 import nopro from "../../../Images/product-not-found.jpg";
 import { NoProduct } from "../../NoProduct";
+import Slider from "react-slick";
+import ww from "../../../Images/ww.webp";
 
 export default function Section4({ data }) {
   const [visibleProducts, setVisibleProducts] = useState(20);
@@ -12,6 +14,40 @@ export default function Section4({ data }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   const handleUniqueRingDetail = (product) => {
     dispatch(setUniqueProduct(product));
     console.log("Navigating with product:", product);
@@ -28,26 +64,34 @@ export default function Section4({ data }) {
           data.slice(0, visibleProducts).map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                <>
-                  {i?.images?.edges?.[0]?.node?.src ? (
-                    <img
-                      src={i.images.edges[0].node.src}
-                      alt="img"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/283";
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        backgroundColor: "#ccc",
-                      }}
-                    >
-                      <img src={nopro} alt="img" />
+                <div className="slider-container">
+                  <Slider {...settings}>
+                    <div>
+                      {i?.images?.edges?.[0]?.node?.src ? (
+                        <img
+                          src={i.images.edges[0].node.src}
+                          alt="img"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://via.placeholder.com/283";
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            backgroundColor: "#ccc",
+                          }}
+                        >
+                          <img src={nopro} alt="img" />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </>
+
+                    <div>
+                      <img src={ww} alt="img" />
+                    </div>
+                  </Slider>
+                </div>
 
                 <div className="hov_content">
                   <div className="d-flex   flex-column">
@@ -94,7 +138,6 @@ export default function Section4({ data }) {
         )}
       </div>
 
-
       <div className="load_btn">
         {visibleProducts < data.length && (
           <button onClick={handleLoadMore}>Load More</button>
@@ -122,6 +165,24 @@ const Root = styled.section`
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
+
+       /* slider changes */
+       .slick-prev {
+        left: -2px;
+        z-index: 111;
+      }
+
+      .slick-next {
+        right: -2px;
+        z-index: 111;
+      }
+
+      /* slider changes */
+      .slick-prev:before,
+      .slick-next:before {
+        background: rgb(185 179 179);
+        border-radius: 50px;
+      }
       img {
         width: 95%;
         height: 86%;
@@ -225,20 +286,20 @@ const Root = styled.section`
     }
   }
 
-.load_btn {
-    display:flex;
-    justify-content:center;
-    padding:20px 0;
-    button{
-      border:2px solid black;
-      background-color:transparent;
-      font-size:16px;
-      color:#000000;
-      font-weight:500;
-      padding:10px 30px;
+  .load_btn {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    button {
+      border: 2px solid black;
+      background-color: transparent;
+      font-size: 16px;
+      color: #000000;
+      font-weight: 500;
+      padding: 10px 30px;
       border-radius: 50px;
     }
-}
+  }
 
   @media (max-width: 867px) {
     padding: 0px 10px;

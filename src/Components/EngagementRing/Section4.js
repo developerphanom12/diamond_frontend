@@ -1,3 +1,4 @@
+/* rngagementring */
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,8 @@ import labgrown from "../../Images/labgrowncopy-removebg.png";
 import { EXCHANGE_URLS } from "../URLS";
 import axios from "axios";
 import { NoProduct } from "../NoProduct";
+import Slider from "react-slick";
+import ww from "../../Images/a.jpg";
 
 export default function Section4({ products }) {
   const [modal, setModal] = useState(false);
@@ -18,6 +21,41 @@ export default function Section4({ products }) {
   const [visibleProducts, setVisibleProducts] = useState(20);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   const handleAddDiamondClick = (productIds) => {
     setSelectedProductId(productIds);
@@ -62,26 +100,38 @@ export default function Section4({ products }) {
           products.slice(0, visibleProducts).map((i, index) => {
             return (
               <div key={index} className="subdiv">
-                <>
-                  {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
-                    <img
-                      src={i.node.images.edges[0].node.originalSrc}
-                      alt={i.node.images.edges[0].node.altText || "img"}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/283";
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        backgroundColor: "#ccc",
-                      }}
-                    >
-                      <NoProduct />
+                <div className="slider-container">
+
+                  <Slider {...settings}>
+
+                    <div>
+                      {i?.node?.images?.edges?.[0]?.node?.originalSrc ? (
+                        <img
+                          src={i.node.images.edges[0].node.originalSrc}
+                          alt={i.node.images.edges[0].node.altText || "img"}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://via.placeholder.com/283";
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            backgroundColor: "#ccc",
+                          }}
+                        >
+                          <NoProduct />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </>
+
+                    <div>
+                      <img src={ww} alt="img"/>
+                    </div>
+
+                  </Slider>
+                  
+                </div>
 
                 <div className="hov_content">
                   <div className="d-flex   flex-column">
@@ -184,19 +234,45 @@ const Root = styled.section`
     gap: 4px;
     margin-top: 20px;
     .subdiv {
-      width: 24vw;
-      height: 55vh;
-      border: 3px solid #f7f7f7;
-      border-radius: 20px;
-      padding: 5px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 20px;
-      padding: 15px;
+      width:24vw;
+      height:58vh; /* slider changes */
+      border:3px solid #f7f7f7;
+      border-radius:20px;
+      padding:5px;
+      overflow:hidden;
+      position:relative;
+      margin-bottom:20px;
+      padding:15px;
+      /* slider changes */
+      .slick-track {
+        /* height:220px; */
+        /* height: 88%; */
+      }
+       /* slider changes */
+       .slick-prev {
+        left: -2px;
+        z-index: 111;
+      }
+
+      .slick-next {
+        right: -2px;
+        z-index: 111;
+      }
+
+      /* slider changes */
+      .slick-prev:before,
+      .slick-next:before {
+        background: rgb(185 179 179);
+        border-radius: 50px;
+      }
+
       img {
         width: 100%;
         height: 88%;
+        /*height: 220px;  slider changes */
+        object-fit: cover;
       }
+
       &:hover {
         border: 3px solid black;
         overflow: unset;
@@ -299,7 +375,7 @@ const Root = styled.section`
   .load_btn {
     display: flex;
     justify-content: center;
-    padding: 20px 0;
+    padding:20px 0;
     button {
       border: 2px solid black;
       background-color: transparent;
@@ -318,12 +394,13 @@ const Root = styled.section`
       gap: 15px;
       margin-top: 0;
       .subdiv {
-        width: 45vw;
-        height: 36vh;
-        &:hover .hov_content {
-          width: 45vw;
-          padding: 0px 10px;
+        width:45vw;
+        height:36vh;
+        &:hover .hov_content{
+          width:45vw;
+          padding:0px 10px;
         }
+
         .prd_name {
           font-size: 12px;
           margin-bottom: 9px;

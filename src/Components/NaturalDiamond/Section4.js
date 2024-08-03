@@ -10,6 +10,9 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ring from "../../Images/Solitaire-removebg-preview.png";
 import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
+import Slider from "react-slick";
+import ww from "../../Images/a.jpg";
+
 
 export default function Section4({ value }) {
   const [modal1, setModal1] = useState(false);
@@ -26,6 +29,43 @@ export default function Section4({ value }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const [visibleProducts, setVisibleProducts] = useState(20);
+  
+
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -90,7 +130,17 @@ export default function Section4({ value }) {
         {value && value.length > 0 ? (
           value.slice(0, visibleProducts).map((i, index) => (
             <div key={index} className="subdiv">
-              <img src={i?.diamond?.image || nopro} alt="diamond images" />
+                <div className="slider-container">
+                <Slider {...settings}>
+                <div>
+                   <img src={i?.diamond?.image || nopro} alt="diamond images" />
+                </div>
+                <div>
+                      <img src={ww} alt="img"/>
+                </div>
+
+                </Slider>
+                </div>
               <div className="hov_content">
                 <div className="heading">
                   <h5>{i?.diamond?.certificate?.shape}</h5>
@@ -200,10 +250,31 @@ const Root = styled.section`
       overflow: hidden;
       position: relative;
       margin-bottom: 20px;
+       /* slider changes */
+       .slick-prev {
+        left: -2px;
+        z-index: 111;
+      }
+
+      .slick-next {
+        right: -2px;
+        z-index: 111;
+      }
+
+      /* slider changes */
+      .slick-prev:before,
+      .slick-next:before {
+        background: rgb(185 179 179);
+        border-radius: 50px;
+      }
+
       .aws_wrapper {
         height: 244px !important;
         width: 262px !important;
       }
+
+    
+
       img {
         width: 100%;
         height: 88%;
