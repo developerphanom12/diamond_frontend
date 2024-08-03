@@ -12,8 +12,12 @@ import {
   SET_UNIQUE_PRODUCT_GEM,
   SET_SELECTED_MATERIAL_IMAGE,
   SET_SELECTED_RING_SHAPE,
-  SET_SELECTED_SHAPE_IMAGE_GEM
-} from "./action";
+  SET_SELECTED_SHAPE_IMAGE_GEM,
+  SET_FOR_HER_HIM,
+  SET_SELECTED_HIM_IMG_TITLE,
+  SET_SELECTED_HER_IMG_TITLE,
+  SET_HER_HIM_PRODUCT_IDS,
+} from "./type";
 
 const initialState = {
   user: {},
@@ -27,7 +31,7 @@ const initialState = {
   diamondType: "",
   selectedShapeImage: null,
   selectedShapeImageGem: null,
-  selectedRingShape: null, 
+  selectedRingShape: null,
   selectedRingSvg: null,
   diamondById: null,
   selectedShape: "null",
@@ -48,24 +52,54 @@ const initialState = {
   selectedCollectionId: "",
   selectedShapeNames: null,
   predefineData: null,
+  herHimProductIds: null,
+  her: {
+    selectedTitle: "",
+    selectedImg: "",
+  },
+  him: {
+    selectedTitle: "",
+    selectedImg: "",
+  },
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_PREDEFINE_DATA':
+    case SET_HER_HIM_PRODUCT_IDS:
+      return {
+        ...state,
+        herHimProductIds: action.payload,
+      };
+    case SET_SELECTED_HER_IMG_TITLE:
+      return {
+        ...state,
+        her: {
+          selectedTitle: action.payload.selectedTitle,
+          selectedImg: action.payload.selectedImg,
+        },
+      };
+    case SET_SELECTED_HIM_IMG_TITLE:
+      return {
+        ...state,
+        him: {
+          selectedTitle: action.payload.selectedTitle,
+          selectedImg: action.payload.selectedImg,
+        },
+      };
+    case "FETCH_PREDEFINE_DATA":
       return {
         ...state,
         predefineData: action.payload,
       };
-    case 'SET_PRODUCT_GEM_ID':
+    case "SET_PRODUCT_GEM_ID":
       return {
         ...state,
         productGemId: action.payload,
       };
-    case SET_SELECTED_RING_SHAPE:  // Add this case
-    return {
-      ...state,
-      selectedRingShape: action.payload,
-    };
+    case SET_SELECTED_RING_SHAPE: // Add this case
+      return {
+        ...state,
+        selectedRingShape: action.payload,
+      };
     case "SET_SELECTED_COLLECTION_ID":
       return {
         ...state,
@@ -98,7 +132,7 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         uniqueProduct: action.payload,
       };
-      case SET_UNIQUE_PRODUCT_GEM:
+    case SET_UNIQUE_PRODUCT_GEM:
       return {
         ...state,
         uniqueProductGem: action.payload,
@@ -133,7 +167,7 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         selectedShapeImage: action.payload,
       };
-      case SET_SELECTED_SHAPE_IMAGE_GEM:
+    case SET_SELECTED_SHAPE_IMAGE_GEM:
       return {
         ...state,
         selectedShapeImageGem: action.payload,
@@ -142,6 +176,11 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         diamondType: action.payload,
+      };
+    case SET_FOR_HER_HIM:
+      return {
+        ...state,
+        forHerHim: action.payload,
       };
     case SET_SELECTED_VARIANT_ID:
       return {

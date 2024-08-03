@@ -125,7 +125,7 @@ export default function Section1() {
             </div>
 
             <div className="col-lg-2 col-md-3 col-1"></div>
-            <div className="col-lg-2   "></div>
+            <div className="col-lg-2"></div>
           </div>
         </div>
       </div>
@@ -384,14 +384,13 @@ const Root = styled.section`
         display: none;
       }
     }
-     .heading h3 {
-    font-size: 18px;
-    line-height: 20px;
-    
-}
-.heading p {
-    font-size: 12px;
-}
+    .heading h3 {
+      font-size: 18px;
+      line-height: 20px;
+    }
+    .heading p {
+      font-size: 12px;
+    }
   }
   @media (max-width: 667px) {
     .column,

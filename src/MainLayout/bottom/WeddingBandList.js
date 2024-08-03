@@ -39,40 +39,40 @@ export default function WeddingBandList() {
             <b>For Her</b>
             <div className="ring_space">
               <ul>
-                <li className="d-flex">
-                  {" "}
-                  <img src={NatureHer} alt="img" />
-                  <a href="naturaldiamond">Nature</a>
-                </li>
                 <li
                   className="d-flex"
-                  onClick={() => handleDiamondTypeClick(false)}
+                  onClick={() => handleDiamondTypeClick("Nature")}
                 >
-                  {" "}
-                  <img src={SolidHer} alt="img" />
-                 Solid
+                  <img src={NatureHer} alt="img" />
+                  Nature
                 </li>
                 <li
                   className="d-flex"
-                  onClick={() => handleDiamondTypeClick(true)}
+                  onClick={() => handleDiamondTypeClick("Solid")}
+                >
+                  <img src={SolidHer} alt="img" />
+                  Solid
+                </li>
+                <li
+                  className="d-flex"
+                  onClick={() => handleDiamondTypeClick("Pave")}
                 >
                   <img src={PaveHer} alt="img" />
-                 Pave
+                  Pave
                 </li>
                 <li
                   className="d-flex"
-                  onClick={() => handleDiamondTypeClick(false)}
+                  onClick={() => handleDiamondTypeClick("Cigar Band")}
                 >
-                  {" "}
                   <img src={CigarHer} alt="img" />
-                 Eternity
+                  Eternity
                 </li>
                 <li
                   className="d-flex"
-                  onClick={() => handleDiamondTypeClick(true)}
+                  onClick={() => handleDiamondTypeClick("Prong")}
                 >
                   <img src={ProngHer} alt="img" />
-                 Prong
+                  Prong
                 </li>
               </ul>
             </div>
@@ -81,18 +81,17 @@ export default function WeddingBandList() {
             <b>For Him</b>
             <div className="ring_space">
               <ul>
-                <li onClick={() => handleShapeClick("ROUND")}>
+                <li onClick={() => handleShapeClick("Classic")}>
                   <img src={ClassicHim} alt="img" />
                   <span>Classic</span>
                 </li>
-                <li onClick={() => handleShapeClick("EMERALD")}>
+                <li onClick={() => handleShapeClick("Diamond")}>
                   {" "}
                   <img src={DiamondHim} alt="img" />
                   <span>Diamond</span>
                 </li>
-                <li onClick={() => handleShapeClick("HEART")}>
+                <li onClick={() => handleShapeClick("Designer")}>
                   <img src={DesignerHim} alt="img" />
-
                   <span>Designer</span>
                 </li>
               </ul>
@@ -104,20 +103,14 @@ export default function WeddingBandList() {
               <ul>
                 <li style={{ display: "flex", alignItems: "center" }}>
                   <img src={gold1} alt="img" className="color_img" />
-                  <p style={{ margin: "0", padding: "0px 4px" }}>
-                    {" "}
-                    Yellow Gold
-                  </p>
+                  <p style={{ margin: "0", padding: "0px 4px" }}>Yellow Gold</p>
                 </li>
                 <li style={{ display: "flex", alignItems: "center" }}>
                   <img src={gold2} alt="img" className="color_img" />
-
                   <p style={{ margin: "0", padding: "0px 4px" }}> Rose Gold</p>
                 </li>
-
                 <li style={{ display: "flex", alignItems: "center" }}>
                   <img src={gold3} alt="img" className="color_img" />
-
                   <p style={{ margin: "0", padding: "0px 4px" }}> White Gold</p>
                 </li>
                 <li style={{ display: "flex", alignItems: "center" }}>

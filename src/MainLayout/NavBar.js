@@ -20,6 +20,7 @@ import DiamondList from "./bottom/DiamondList";
 import EducationList from "./bottom/EducationList";
 import GemstoneList from "./bottom/GemstoneList";
 import { EXCHANGE_URLS } from "../Components/URLS";
+import WeddingBandList from "./bottom/WeddingBandList";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -269,6 +270,23 @@ export default function NavBar() {
                   <AccordionDetails>
                     <Typography>
                       <EngageList />
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    <Typography>
+                      <div className="accor_heading">WEDDING BANDS</div>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <WeddingBandList />
                     </Typography>
                   </AccordionDetails>
                 </Accordion>

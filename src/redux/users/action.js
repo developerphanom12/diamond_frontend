@@ -1,39 +1,67 @@
 // Action Types
-export const SET_PRODUCT_IDS = "SET_PRODUCT_IDS";
-export const SET_DIAMOND_IDS = "SET_DIAMOND_IDS";
-export const SET_SELECTED_VARIANT_ID = "SET_SELECTED_VARIANT_ID";
-export const SET_DIAMOND_TYPE = "SET_DIAMOND_TYPE";
-export const SET_SELECTED_SHAPE_IMAGE = "SET_SELECTED_SHAPE_IMAGE";
-export const SET_SELECTED_RING_SVG = "SET_SELECTED_RING_SVG";
-export const SET_DIAMOND_BY_ID = "SET_DIAMOND_BY_ID";
-export const SET_SELECTED_SHAPE = "SET_SELECTED_SHAPE";
-export const SET_UNIQUE_DATA = "SET_UNIQUE_DATA";
-export const SET_UNIQUE_PRODUCT = "SET_UNIQUE_PRODUCT";
-export const SET_SELECTED_MATERIAL_IMAGE = "SET_SELECTED_MATERIAL_IMAGE";
-export const SET_SELECTED_RING_SHAPE = 'SET_SELECTED_RING_SHAPE';
-export const SET_SELECTED_SHAPE_IMAGE_GEM = 'SET_SELECTED_SHAPE_IMAGE_GEM';
-export const SET_UNIQUE_PRODUCT_GEM = 'SET_UNIQUE_PRODUCT_GEM';
 
-// Action creator
+import {
+  SET_DIAMOND_BY_ID,
+  SET_DIAMOND_IDS,
+  SET_DIAMOND_TYPE,
+  SET_FOR_HER_HIM,
+  SET_HER_HIM_PRODUCT_IDS,
+  SET_PRODUCT_IDS,
+  SET_SELECTED_HER_IMG_TITLE,
+  SET_SELECTED_HIM_IMG_TITLE,
+  SET_SELECTED_RING_SHAPE,
+  SET_SELECTED_RING_SVG,
+  SET_SELECTED_SHAPE,
+  SET_SELECTED_SHAPE_IMAGE,
+  SET_SELECTED_SHAPE_IMAGE_GEM,
+  SET_SELECTED_VARIANT_ID,
+  SET_UNIQUE_DATA,
+  SET_UNIQUE_PRODUCT,
+  SET_UNIQUE_PRODUCT_GEM,
+} from "./type";
+
+// Action creator setHerHimProductIds
+export const setHerHimProductIds = (herHimProductIds) => ({
+  type: SET_HER_HIM_PRODUCT_IDS,
+  payload: herHimProductIds,
+});
+export const setSelectedHerImgTitle = (selectedTitle, selectedImg) => ({
+  type: SET_SELECTED_HER_IMG_TITLE,
+  payload: {
+    selectedTitle,
+    selectedImg,
+  },
+});
+export const setSelectedHimImgTitle = (selectedTitle, selectedImg) => ({
+  type: SET_SELECTED_HIM_IMG_TITLE,
+  payload: {
+    selectedTitle,
+    selectedImg,
+  },
+});
 export const fetchPredefineData = (data) => ({
-  type: 'FETCH_PREDEFINE_DATA',
+  type: "FETCH_PREDEFINE_DATA",
   payload: data,
 });
 export const setSelectedRingShape = (shapeTitle) => ({
   type: SET_SELECTED_RING_SHAPE,
   payload: shapeTitle,
 });
+export const setSelectedRingSvg = (imageUrl) => ({
+  type: SET_SELECTED_RING_SVG,
+  payload: imageUrl,
+});
 export const setProductGemId = (productId) => ({
-  type: 'SET_PRODUCT_GEM_ID',
+  type: "SET_PRODUCT_GEM_ID",
   payload: productId,
 });
 export const setSelectedCollectionId = (id) => ({
-  type: 'SET_SELECTED_COLLECTION_ID',
+  type: "SET_SELECTED_COLLECTION_ID",
   payload: id,
 });
 
 export const setSelectedShapeGem = (names) => ({
-  type: 'SET_SELECTED_SHAPE_GEM',
+  type: "SET_SELECTED_SHAPE_GEM",
   payload: names,
 });
 export const setSelectedMaterialImage = (shape, imageUrl) => ({
@@ -64,10 +92,7 @@ export const setDiamondById = (diamondById) => ({
   type: SET_DIAMOND_BY_ID,
   payload: diamondById,
 });
-export const setSelectedRingSvg = (imageUrl) => ({
-  type: SET_SELECTED_RING_SVG,
-  payload: imageUrl,
-});
+
 export const setSelectedShapeImage = (imageUrl) => ({
   type: SET_SELECTED_SHAPE_IMAGE,
   payload: imageUrl,
@@ -80,8 +105,12 @@ export const setDiamondType = (diamondType) => ({
   type: SET_DIAMOND_TYPE,
   payload: diamondType,
 });
+export const setForHerHim = (forHerHim) => ({
+  type: SET_FOR_HER_HIM,
+  payload: forHerHim,
+});
 export const setCollectionIds = (collectionIds) => ({
-  type: 'SET_COLLECTION_IDS',
+  type: "SET_COLLECTION_IDS",
   payload: collectionIds,
 });
 export const setSelectedVariantId = (selectedVariantId) => ({
