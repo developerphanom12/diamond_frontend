@@ -427,7 +427,7 @@ export default function WeddingBands() {
                       <div className="btn_div">
                         <button
                           className="info_btn"
-                          onClick={() => handleNavigateDetail(product)}
+                          // onClick={() => handleNavigateDetail(product)}
                         >
                           More Info
                         </button>

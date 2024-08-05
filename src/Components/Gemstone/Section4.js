@@ -273,7 +273,7 @@ const Root = styled.section`
     .main_div {
       .subdiv {
         width: 44vw;
-        height: 30vh;
+        height: 218px;
         &.open {
           width: 100vw;
           height: 100vh;
@@ -283,7 +283,7 @@ const Root = styled.section`
           }
         }
         &:hover {
-          border: 1px solid transparent;
+          /* border: 1px solid transparent; */
         }
         img {
           height: 90%;
@@ -314,7 +314,7 @@ const Root = styled.section`
         }
         &:hover .hov_content {
           width: 44vw;
-          border: 1px solid transparent;
+          /* border: 1px solid transparent; */
           padding: 0px 10px 10px;
         }
         &.open .hov_content {

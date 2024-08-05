@@ -278,6 +278,8 @@ const Root = styled.section`
       img {
         width: 100%;
         height: 88%;
+        object-fit: cover;
+        aspect-ratio: 2 / 2;
       }
 
       &:hover {
@@ -341,9 +343,9 @@ const Root = styled.section`
     }
 
     .var {
-      display: flex;
-      flex: 1;
-      justify-content: center;
+      display:flex;
+      flex:1;
+      justify-content:center;
       gap: 30px;
 
       .var_types {
@@ -411,12 +413,12 @@ const Root = styled.section`
     .main_div {
       gap: 0px;
       justify-content: center;
-      .subdiv {
-        height: auto;
+      .subdiv{
+        height:auto;
       }
     }
   }
-  @media (max-width: 876px) {
+  /* @media (max-width: 876px) {
     padding: 0px;
     .main_div {
       .subdiv {
@@ -454,6 +456,98 @@ const Root = styled.section`
     .main_div .hov_content .heading {
       margin-top: 10px;
     }
+  } */
+
+
+  @media (max-width: 567px) {
+
+    .main_div {
+      .subdiv {
+        width:44vw;
+        height:200px;
+        img {
+          height:90%;
+          width:100%;
+        }
+        .heading .h5 {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .heading .p {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
+          flex: 1;
+        }
+        &:hover .hov_content {
+          width: 44vw;
+          padding: 0px 10px 10px;
+        }
+      }
+    }
+    .main_div .var {
+      gap: 2px;
+    }
+    .main_div .hov_content .heading {
+      margin-top: 10px;
+    }
+
+
+
+
+  }
+
+
+@media (min-width: 567px) and (max-width: 992px) {
+
+
+    .main_div {
+      .subdiv {
+        width: 44vw;
+        height:380px;
+        img {
+          height: 90%;
+          width: 100%;
+        }
+        .heading .h5 {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .heading .p {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
+          flex: 1;
+        }
+        &:hover .hov_content {
+          width: 44vw;
+          padding: 0px 10px 10px;
+        }
+      }
+    }
+
+    .main_div .var {
+      gap: 2px;
+    }
+
+    .main_div .hov_content .heading {
+      margin-top: 10px;
+    }
+
+
+
   }
 `;
 const CustomModalBody = styled(ModalBody)`

@@ -243,6 +243,7 @@ const Root = styled.section`
       position:relative;
       margin-bottom:20px;
       padding:15px;
+ 
       /* slider changes */
       .slick-track {
         /* height:220px; */
@@ -395,7 +396,7 @@ const Root = styled.section`
       margin-top: 0;
       .subdiv {
         width:45vw;
-        height:36vh;
+        height:218px;
         &:hover .hov_content{
           width:45vw;
           padding:0px 10px;
@@ -434,7 +435,7 @@ const Root = styled.section`
       gap: 15px;
       .subdiv {
         width: 45vw;
-        height: 36vh;
+        height: 410px;
         &:hover .hov_content {
           width: 45vw;
           padding: 0px 10px;

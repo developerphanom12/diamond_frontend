@@ -166,8 +166,8 @@ const Root = styled.section`
       position: relative;
       margin-bottom: 20px;
 
-       /* slider changes */
-       .slick-prev {
+      /* slider changes */
+      .slick-prev {
         left: -2px;
         z-index: 111;
       }
@@ -301,12 +301,80 @@ const Root = styled.section`
     }
   }
 
-  @media (max-width: 867px) {
+  /* @media (max-width: 867px) {
     padding: 0px 10px;
     .main_div {
       .subdiv {
         width: 45vw;
         height: 36vh;
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px;
+        }
+        .prd_name {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .prd_price {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .white_color,
+        .golden_color,
+        .red_color {
+          height: 10px;
+          width: 10px;
+        }
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
+        }
+      }
+    }
+  } */
+
+  @media (max-width: 567px) {
+    padding: 0px 10px;
+    .main_div {
+      .subdiv {
+        width: 45vw;
+        height:210px;
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px;
+        }
+        .prd_name {
+          font-size: 12px;
+          margin-bottom: 9px;
+        }
+        .prd_price {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .white_color,
+        .golden_color,
+        .red_color {
+          height: 10px;
+          width: 10px;
+        }
+        .btn_div .info_btn,
+        .btn_div .add_btn {
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 567px) and (max-width: 992px) {
+    padding: 0px 10px;
+    .main_div {
+      .subdiv {
+        width: 45vw;
+        height: 375px;
         &:hover .hov_content {
           width: 45vw;
           padding: 0px 10px;
