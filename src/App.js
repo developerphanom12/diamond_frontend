@@ -27,7 +27,6 @@ import CheckoutGem from "./Components/Gemstone/CheckoutGem/CheckoutGem";
 import AllOrders from "./Components/AllOrders/AllOrders";
 import Layout from "./MainLayout/Layout";
 import WeddingBands from "./Components/WeddingBands/WeddingBands";
-import ProductHerHimPage from "./Components/WeddingBands/ProductHerHimPage";
 import MoreForHimBand from "./Components/WeddingBands/MoreForHimBand";
 import MoreForHerBand from "./Components/WeddingBands/MoreForHerBand";
 // import HomePage from "./Components/threeSixty/HomePage";
@@ -63,7 +62,6 @@ function App() {
               />
               <Route path="/moreforher" element={<MoreForHerBand />} />
               <Route path="/moreforhim" element={<MoreForHimBand />} />
-              <Route path="/productherhim" element={<ProductHerHimPage />} />
               <Route path="/weddingbands" element={<WeddingBands />} />
               <Route path="/naturaldiamond" element={<NaturalDiamond />} />
               <Route path="/productpage" element={<ProductPage />} />

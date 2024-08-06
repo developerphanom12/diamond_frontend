@@ -47,8 +47,6 @@ const shapesList = [
   { name: "RADIANT", imgUrl: RADIANT },
 ];
 
-
-
 const colorOptions = ["D", "E", "F", "G", "H", "I", "J"];
 const clarityOptions = [
   "FL",
@@ -143,7 +141,7 @@ export default function Section2() {
       selectedSymmetry,
       caratRange,
       minCarat,
-      maxCarat
+      maxCarat,
     };
 
     diamondApi(params);
@@ -287,7 +285,7 @@ export default function Section2() {
           <button
             key={shape.name}
             className={`btn_shapes ${
-              selectedShapes.includes(shape.name) ?"selected" : ""
+              selectedShapes.includes(shape.name) ? "selected" : ""
             }`}
             onClick={() => handleShapeClick(shape.name, shape.imgUrl)}
           >
@@ -878,7 +876,7 @@ const Root = styled.section`
     }
 
     .advance_quality {
-       /* border-top:1px solid black;  */
+      /* border-top:1px solid black;  */
       margin-top: 30px;
 
       .css-1086bdv-MuiPaper-root-MuiAccordion-root {
@@ -914,7 +912,7 @@ const Root = styled.section`
               color: #000;
             }
             svg {
-            /* color:#e9e4e4;  */
+              /* color:#e9e4e4;  */
               height: 14px;
               margin-top: -9px;
               color: #d7d4d4;
