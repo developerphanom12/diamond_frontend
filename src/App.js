@@ -77,7 +77,6 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
               <Route path="/gemdetails" element={<GemDetails />} />
-              
             </>
           </Routes>
         </Layout>

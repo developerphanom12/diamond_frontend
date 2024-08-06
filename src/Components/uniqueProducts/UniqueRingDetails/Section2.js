@@ -450,6 +450,8 @@ export default function Section2() {
                             alt="Selected Shape"
                           />
                         )}
+
+                        
                         <div className="content_head">
                           <h4>{selectedShapes} </h4>
                           <p> {unique?.variants?.edges?.[0]?.node?.title}</p>

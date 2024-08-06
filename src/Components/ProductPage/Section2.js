@@ -80,7 +80,7 @@ export default function Section2() {
           setObject(response.data.data);
           console.log("respe", response.data.data);
           const selectedVariantId =
-            response.data.data?.variants?.edges[0]?.node?.id || "";
+          response.data.data?.variants?.edges[0]?.node?.id || "";
           setSelectedVariantId(selectedVariantId);
         }
       } catch (error) {
@@ -146,416 +146,413 @@ export default function Section2() {
   };
   return (
     <Root>
-    <div className="main_div">
-      <div className="image_div">
-        <Slider
-          ref={(slider) => {
-            sliderRef = slider;
-          }}
-          {...settings}
-        >
-          <div key={1} className="img_container">
-            {productIds?.images?.edges?.length > 0 && (
+      <div className="main_div">
+        <div className="image_div">
+          <Slider
+            ref={(slider) => {
+              sliderRef = slider;
+            }}
+            {...settings}
+          >
+            <div key={1} className="img_container">
+              {productIds?.images?.edges?.length > 0 && (
+                <img
+                  src={productIds.images.edges[0].node.originalSrc}
+                  alt={
+                    productIds.images.edges[0].node.altText || "Product Image"
+                  }
+                />
+              )}
+            </div>
+
+            <div key={2} className="img_container">
+              {diamond && diamond.diamond ? (
+                diamond.diamond.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamond.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
+                ) : (
+                  <img src={diamond.diamond.image} alt="img" />
+                )
+              ) : diamondById && diamondById.diamond ? (
+                diamondById.diamond.video ? (
+                  <VideoContainer>
+                    <VideoFrame
+                      src={diamondById.diamond.video}
+                      title="Diamond Video"
+                      allowFullScreen
+                    />
+                  </VideoContainer>
+                ) : (
+                  <img src={diamondById.diamond.image} alt="img" />
+                )
+              ) : null}
+            </div>
+          </Slider>
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              className="button"
+              onClick={() => handleButtonClick(1)}
+              style={{
+                borderColor: selectedButton === 1 ? "black" : "transparent",
+              }}
+            >
+              <img src={ringdiam} alt="img" style={{ width: "25px" }} />
+
+              <span>Setting</span>
+            </button>
+
+            <button
+              className="button"
+              onClick={() => handleButtonClick(2)}
+              style={{
+                borderColor: selectedButton === 2 ? "black" : "transparent",
+              }}
+            >
+              <img src={diam} alt="img" style={{ width: "20px" }} />
+              <span>Stone</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="des_div">
+          <div className="title">
+            <h2>
+              {productIds?.title} with a {diamond?.diamond?.certificate?.carats}
+              carat {diamond?.diamond?.certificate?.color}{" "}
+              {diamond?.diamond?.certificate?.clarity}{" "}
+              {diamond?.diamond?.certificate?.shape}{" "}
+              {diamondType === true ? "Lab Grown" : "Natural"} Diamond
+            </h2>
+          </div>
+
+          <div className="complete_info_container">
+            <button
+              className={selectedButton === 1 ? "selected" : ""}
+              style={{ position: "relative" }}
+              onClick={() => {
+                handleButtonClick(1);
+              }}
+            >
+              <div>
+                <img
+                  src={selectedRingSvg}
+                  alt="img"
+                  style={{ width: "50px", height: "50px" }}
+                />
+
+                <div className="prod_name">
+                  <h2>{productIds?.title}</h2>
+                  <p>14K White Gold</p>
+                </div>
+
+                <div className="prod_price">
+                  <h2>${productIds?.priceRange?.maxVariantPrice?.amount}</h2>
+                  <p
+                    onClick={() => {
+                      navigate("/engagementring");
+                    }}
+                  >
+                    Change
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            <button
+              className={selectedButton === 2 ? "selected" : ""}
+              style={{ position: "relative" }}
+              onClick={() => {
+                handleButtonClick(2);
+              }}
+            >
+              <div>
+                <img
+                  src={selectedShapeImage}
+                  alt="img"
+                  style={{ width: "40px", height: "40px" }}
+                />
+
+                <div className="prod_name">
+                  <h2> {diamond?.diamond?.certificate?.shape}</h2>
+                  <p>
+                    {diamond?.diamond ? (
+                      <>
+                        {diamond?.diamond?.certificate?.carats}ct{" "}
+                        {diamond?.diamond?.certificate?.color}{" "}
+                        {diamond?.diamond?.certificate?.clarity}{" "}
+                      </>
+                    ) : (
+                      <>
+                        {diamondById?.diamond?.certificate?.carats} ct,{" "}
+                        {diamondById?.diamond?.certificate?.cut} cut,{" "}
+                        {diamondById?.diamond?.certificate?.color},{" "}
+                        {diamondById?.diamond?.certificate?.shape}{" "}
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div className="prod_price">
+                  <h2>
+                    $
+                    {diamond && diamond.price ? (
+                      <>{diamond?.price} </>
+                    ) : (
+                      <>{diamondById.price}</>
+                    )}
+                  </h2>
+                  <p
+                    onClick={() => {
+                      navigate("/naturaldiamond");
+                    }}
+                  >
+                    Change
+                  </p>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div className="ring_size">
+            <select
+              value={selectedSize}
+              onChange={(e) => {
+                const selectedIndex = e.target.selectedIndex;
+                const selectedVariantId =
+                  object?.variants?.edges[selectedIndex]?.node?.id;
+                setSelectedSize(e.target.value);
+              }}
+            >
+              <option value="">Select Ring Size</option>
+              {object?.variants?.edges?.map((variant) => (
+                <option key={variant.node.id} value={variant.node.title}>
+                  {variant.node.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="total_price">
+            <h5>Total Price</h5>
+            <h2>${totalPrice.toFixed(2)}</h2>
+            <p>Ships in 2-3 weeks</p>
+          </div>
+
+          <div className="product_btn">
+            <button className="secure_btn" onClick={handleCheckout}>
+              {selectedSize ? "Secure Checkout" : "Select Ring Size"}
+            </button>
+            <button className="cart_btn" onClick={toggleDrawer}>
+              Add to Cart
+            </button>
+
+            <Drawer
+              open={isOpen}
+              onClose={toggleDrawer}
+              direction="right"
+              className="custom-drawer"
+              size="300px"
+
+            >
+              <div className="cart_heading">
+                <h2>My Shopping Bag</h2>
+              </div>
+
+              <div className="prod_main_div">
+                <div className="prod_div">
+                  <div className="prod">
+                    <div className="bg-img">
+                      <div className="dia_img">
+                        <img src={dia} alt="img" />
+                      </div>
+                    </div>
+
+                    <div className="prod_name">
+                      <h3>
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                      </h3>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={ring} alt="img" />
+                        <div className="content_head">
+                          <h4>The Ashley </h4>
+                          <p>14k White Gold </p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$700</h4>
+                      </div>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={diamondd} alt="img" />
+                        <div className="content_head">
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$713</h4>
+                      </div>
+                    </div>
+
+                    <div className="price_div">
+                      <p>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                      </p>
+                      <div className="delete_icon">
+                        <img src={deleteicon} alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="prod_div">
+                  <div className="prod">
+                    <div className="bg-img">
+                      <div className="dia_img">
+                        <img src={dia} alt="img" />
+                      </div>
+                    </div>
+
+                    <div className="prod_name">
+                      <h3>
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                      </h3>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={ring} alt="img"/>
+                        <div className="content_head">
+                          <h4>The Ashley</h4>
+                          <p>14k White Gold</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$700</h4>
+                      </div>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={diamondd} alt="img" />
+                        <div className="content_head">
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$713</h4>
+                      </div>
+                    </div>
+
+                    <div className="price_div">
+                      <p>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                      </p>
+                      <div className="delete_icon">
+                        <img src={deleteicon} alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="total_price_div">
+                <p>Total:</p>
+                <h4>$2,799</h4>
+              </div>
+
+              <div className="but_div">
+                <button>Checkout Now</button>
+              </div>
+            </Drawer>
+          </div>
+
+          <p className="note">
+            Pay in 12 interest-free installments of $95.83{" "}
+            <span>Learn more</span>
+          </p>
+
+          <div className="policy">
+            <div className="policy_type">
               <img
-                src={productIds.images.edges[0].node.originalSrc}
-                alt={
-                  productIds.images.edges[0].node.altText || "Product Image"
-                }
+                src={overn}
+                alt="img"
+                style={{ width: "35px", height: "35px" }}
               />
-            )}
-          </div>
+              <p>
+                Overnight <br />
+                Shipping
+              </p>
+            </div>
 
-          <div key={2} className="img_container">
-            {diamond && diamond.diamond ? (
-              diamond.diamond.video ? (
-                <VideoContainer>
-                  <VideoFrame
-                    src={diamond.diamond.video}
-                    title="Diamond Video"
-                    allowFullScreen
-                  />
-                </VideoContainer>
-              ) : (
-                <img src={diamond.diamond.image} alt="img" />
-              )
-            ) : diamondById && diamondById.diamond ? (
-              diamondById.diamond.video ? (
-                <VideoContainer>
-                  <VideoFrame
-                    src={diamondById.diamond.video}
-                    title="Diamond Video"
-                    allowFullScreen
-                  />
-                </VideoContainer>
-              ) : (
-                <img src={diamondById.diamond.image} alt="img" />
-              )
-            ) : null}
-          </div>
-        </Slider>
-        <div
-          style={{
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <button
-            className="button"
-            onClick={() => handleButtonClick(1)}
-            style={{
-              borderColor: selectedButton === 1 ? "black" : "transparent",
-            }}
-          >
-            <img src={ringdiam} alt="img" style={{ width: "25px" }} />
-
-            <span>Setting</span>
-          </button>
-
-          <button
-            className="button"
-            onClick={() => handleButtonClick(2)}
-            style={{
-              borderColor: selectedButton === 2 ? "black" : "transparent",
-            }}
-          >
-            <img src={diam} alt="img" style={{ width: "20px" }} />
-            <span>Stone</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="des_div">
-        <div className="title">
-          <h2>
-            {productIds?.title} with a {diamond?.diamond?.certificate?.carats}
-            carat {diamond?.diamond?.certificate?.color}{" "}
-            {diamond?.diamond?.certificate?.clarity}{" "}
-            {diamond?.diamond?.certificate?.shape}{" "}
-            {diamondType === true ? "Lab Grown" : "Natural"} Diamond
-          </h2>
-        </div>
-
-        <div className="complete_info_container">
-          <button
-            className={selectedButton === 1 ? "selected" : ""}
-            style={{ position: "relative" }}
-            onClick={() => {
-              handleButtonClick(1);
-            }}
-          >
-            <div>
+            <div className="policy_type">
               <img
-                src={selectedRingSvg}
+                src={badgedd}
                 alt="img"
                 style={{ width: "50px", height: "50px" }}
-                
               />
 
-              <div className="prod_name">
-                <h2>{productIds?.title}</h2>
-                <p>14K White Gold</p>
-              </div>
-
-              <div className="prod_price">
-                <h2>${productIds?.priceRange?.maxVariantPrice?.amount}</h2>
-                <p
-                  onClick={() => {
-                    navigate("/engagementring");
-                  }}
-                >
-                  Change
-                </p>
-              </div>
+              <p>
+                Lifetime <br></br>Warranty
+              </p>
             </div>
-          </button>
 
-          
-
-          <button
-            className={selectedButton === 2 ? "selected" : ""}
-            style={{ position: "relative" }}
-            onClick={() => {
-              handleButtonClick(2);
-            }}
-          >
-            <div>
+            <div className="policy_type">
               <img
-                src={selectedShapeImage}
+                src={monyy}
                 alt="img"
-                style={{ width: "40px", height: "40px" }}
+                style={{ width: "35px", height: "35px" }}
               />
 
-              <div className="prod_name">
-                <h2> {diamond?.diamond?.certificate?.shape}</h2>
-                <p>
-                  {diamond?.diamond ? (
-                    <>
-                      {diamond?.diamond?.certificate?.carats}ct{" "}
-                      {diamond?.diamond?.certificate?.color}{" "}
-                      {diamond?.diamond?.certificate?.clarity}{" "}
-                    </>
-                  ) : (
-                    <>
-                      {diamondById?.diamond?.certificate?.carats} ct,{" "}
-                      {diamondById?.diamond?.certificate?.cut} cut,{" "}
-                      {diamondById?.diamond?.certificate?.color},{" "}
-                      {diamondById?.diamond?.certificate?.shape}{" "}
-                    </>
-                  )}
-                </p>
-              </div>
-              <div className="prod_price">
-                <h2>
-                  $
-                  {diamond && diamond.price ? (
-                    <>{diamond?.price} </>
-                  ) : (
-                    <>{diamondById.price}</>
-                  )}
-                </h2>
-                <p
-                  onClick={() => {
-                    navigate("/naturaldiamond");
-                  }}
-                >
-                  Change
-                </p>
-              </div>
-            </div>
-          </button>
-        </div>
-        <div className="ring_size">
-          <select
-            value={selectedSize}
-            onChange={(e) => {
-              const selectedIndex = e.target.selectedIndex;
-              const selectedVariantId =
-                object?.variants?.edges[selectedIndex]?.node?.id;
-              setSelectedSize(e.target.value);
-            }}
-          >
-            <option value="">Select Ring Size</option>
-            {object?.variants?.edges?.map((variant) => (
-              <option key={variant.node.id} value={variant.node.title}>
-                {variant.node.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="total_price">
-          <h5>Total Price</h5>
-          <h2>${totalPrice.toFixed(2)}</h2>
-          <p>Ships in 2-3 weeks</p>
-        </div>
-
-        <div className="product_btn">
-          <button className="secure_btn" onClick={handleCheckout}>
-            {selectedSize ? "Secure Checkout" : "Select Ring Size"}
-          </button>
-          <button className="cart_btn" onClick={toggleDrawer}>
-            Add to Cart
-          </button>
-          <Drawer
-            open={isOpen}
-            onClose={toggleDrawer}
-            direction="right"
-            className="custom-drawer"
-            size="300px"
-          >
-            <div className="cart_heading">
-              <h2>My Shopping Bag</h2>
+              <p>
+                30 Days <br />
+                Free Return
+              </p>
             </div>
 
-            <div className="prod_main_div">
-              <div className="prod_div">
-                <div className="prod">
-                  <div className="bg-img">
-                    <div className="dia_img">
-                      <img src={dia} alt="img" />
-                    </div>
-                  </div>
+            <div className="policy_type">
+              <img
+                src={lifet}
+                alt="img"
+                style={{ width: "35px", height: "35px" }}
+              />
 
-                  <div className="prod_name">
-                    <h3>
-                      The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
-                    </h3>
-                  </div>
-
-                  <div className="prod_spec">
-                    <div className="icon_content">
-                      <img src={ring} alt="img" />
-                      <div className="content_head">
-                        <h4>The Ashley </h4>
-                        <p>14k White Gold </p>
-                      </div>
-                    </div>
-                    <div className="prod_price">
-                      <h4>$700</h4>
-                    </div>
-                  </div>
-
-                  <div className="prod_spec">
-                    <div className="icon_content">
-                      <img src={diamondd} alt="img" />
-                      <div className="content_head">
-                        <h4>Round </h4>
-                        <p>0.5 Carat J VS1</p>
-                      </div>
-                    </div>
-                    <div className="prod_price">
-                      <h4>$713</h4>
-                    </div>
-                  </div>
-
-                  <div className="price_div">
-                    <p>
-                      Total: <span style={{ color: "#000000" }}>$1,413</span>
-                    </p>
-                    <div className="delete_icon">
-                      <img src={deleteicon}  alt="img"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prod_div">
-                <div className="prod">
-                  <div className="bg-img">
-                    <div className="dia_img">
-                      <img src={dia} alt="img" />
-                    </div>
-                  </div>
-
-                  <div className="prod_name">
-                    <h3>
-                      The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
-                    </h3>
-                  </div>
-
-                  <div className="prod_spec">
-                    <div className="icon_content">
-                      <img src={ring} alt="img" />
-                      <div className="content_head">
-                        <h4>The Ashley </h4>
-                        <p>14k White Gold </p>
-                      </div>
-                    </div>
-                    <div className="prod_price">
-                      <h4>$700</h4>
-                    </div>
-                  </div>
-
-                  <div className="prod_spec">
-                    <div className="icon_content">
-                      <img src={diamondd} alt="img" />
-                      <div className="content_head">
-                        <h4>Round </h4>
-                        <p>0.5 Carat J VS1</p>
-                      </div>
-                    </div>
-                    <div className="prod_price">
-                      <h4>$713</h4>
-                    </div>
-                  </div>
-
-                  <div className="price_div">
-                    <p>
-                      Total: <span style={{ color: "#000000" }}>$1,413</span>
-                    </p>
-                    <div className="delete_icon">
-                      <img src={deleteicon}  alt="img"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <p>
+                Certificate
+                <br />& Appraisal
+              </p>
             </div>
-
-            <div className="total_price_div">
-              <p>Total:</p>
-              <h4>$2,799</h4>
-            </div>
-
-            <div className="but_div">
-              <button>Checkout Now</button>
-            </div>
-          </Drawer>
-        </div>
-
-        <p className="note">
-          Pay in 12 interest-free installments of $95.83{" "}
-          <span>Learn more</span>
-        </p>
-
-        <div className="policy">
-          <div className="policy_type">
-            <img
-              src={overn}
-              alt="img"
-              style={{ width: "35px", height: "35px" }}
-            />
-            <p>
-              Overnight <br />
-              Shipping
-            </p>
           </div>
 
-          <div className="policy_type">
-            <img
-              src={badgedd}
-              alt="img"
-              style={{width: "50px", height: "50px"}}
-            />
-
-            <p>
-              Lifetime <br></br>Warranty
-            </p>
+          <div>
+            <RingShipReturn />
           </div>
 
-          <div className="policy_type">
-            <img
-              src={monyy}
-              alt="img"
-              style={{ width: "35px", height: "35px" }}
-            />
-
+          <div className="appointment">
+            <h5>Virtual Appointment</h5>
             <p>
-              30 Days <br />
-              Free Return
+              <strong>See jewelry</strong> up close with a personal appointment.
+              Explore engagement rings, diamonds, and fine jewelry in person
+              through your device.
             </p>
           </div>
-
-          <div className="policy_type">
-            <img
-              src={lifet}
-              alt="img"
-              style={{ width: "35px", height: "35px" }}
-            />
-
-            <p>
-              Certificate
-              <br />& Appraisal
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <RingShipReturn />
-        </div>
-
-        <div className="appointment">
-          <h5>Virtual Appointment</h5>
-          <p>
-            <strong>See jewelry</strong> up close with a personal appointment.
-            Explore engagement rings, diamonds, and fine jewelry in person
-            through your device.
-          </p>
-        
         </div>
       </div>
-    </div>
-  </Root>
-
+    </Root>
   );
 }
 
@@ -635,7 +632,7 @@ const Root = styled.section`
         flex-direction: column;
         align-items: center;
         padding-top: 20px;
-        height:50vh;
+        height: 50vh;
         &.selected {
           border: 2px solid black;
           background-color: white;
@@ -761,10 +758,10 @@ const Root = styled.section`
         border: 1px solid transparent;
       }
       .cart_btn {
-        background-color:#fff;
-        color:rgba(0, 0, 0);
-        font-size:17px;
-        padding:16px 0;
+        background-color: #fff;
+        color: rgba(0, 0, 0);
+        font-size: 17px;
+        padding: 16px 0;
         font-weight: 600;
         border-radius: 50px;
         border: 1px solid rgba(0, 0, 0);
@@ -799,11 +796,11 @@ const Root = styled.section`
           height: 30px;
         }
         p {
-          font-size: 14px;
-          color: #333;
-          margin-top: 10px;
-          text-align: center;
-          line-height: 16px;
+          font-size:14px;
+          color:#333;
+          margin-top:10px;
+          text-align:center;
+          line-height:16px;
         }
       }
     }
@@ -813,7 +810,6 @@ const Root = styled.section`
       padding: 20px;
       border-radius: 20px;
       margin-top: 25px;
-   
 
       h5 {
         font-size: 1rem;
@@ -821,8 +817,8 @@ const Root = styled.section`
       }
 
       p {
-        font-size: 13px;
-        margin-bottom: 0;
+        font-size:13px;
+        margin-bottom:0;
       }
 
       /* button {
@@ -836,15 +832,13 @@ const Root = styled.section`
         padding: 0;
         color: #000000;
       } */
-
     }
   }
   img {
     transition: transform 1s ease-in-out;
   }
   img:hover {
-    transform: rotate3d(360deg);
-    
+    transform:rotate3d(360deg);
   }
   .slick-slide.slick-active.slick-current {
     > div {
@@ -855,6 +849,8 @@ const Root = styled.section`
   .custom-drawer {
     z-index: 11111111 !important;
   }
+
+  
 
   .cart_heading {
     padding: 16px;
@@ -867,6 +863,8 @@ const Root = styled.section`
       font-weight: 400;
     }
   }
+
+
 
   .prod_main_div {
     width: 100%;
@@ -1014,32 +1012,32 @@ const Root = styled.section`
 
     .main_div {
       flex-direction: column;
-      gap:20px;
+      gap: 20px;
     }
 
     .main_div .image_div {
-      width:100%;
-      height:355px;
+      width: 100%;
+      height: 355px;
     }
 
     .main_div .des_div {
       width: 100%;
-      padding-left:0;
+      padding-left: 0;
     }
 
-   .main_div .des_div .title h2 {
-    font-size: 18px;
-  
-}
+    .main_div .des_div .title h2 {
+      font-size: 18px;
+    }
 
-   .main_div .image_div .img_container {
-    height:unset;
-}
+    .main_div .image_div .img_container {
+      height: unset;
+    }
 
- .main_div .image_div .slick-list,  .main_div .image_div .slick-slider,  .main_div .image_div .slick-track {
-    height: 300px;
-}
-
+    .main_div .image_div .slick-list,
+    .main_div .image_div .slick-slider,
+    .main_div .image_div .slick-track{
+      height:300px;
+    }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
@@ -1054,7 +1052,6 @@ const Root = styled.section`
 
     .main_div .image_div .slick-slider,
     .gMiibD .main_div .image_div .slick-track {
-      
       iframe {
         width: 90vw;
         height: 40vh;
@@ -1077,6 +1074,4 @@ const Root = styled.section`
       }
     }
   }
-
-
 `;

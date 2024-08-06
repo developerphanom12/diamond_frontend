@@ -10,9 +10,16 @@ import nopro from "../../Images/product-not-found.jpg";
 import { NoProduct } from "../NoProduct";
 import Slider from "react-slick";
 import a from "../../Images/a.jpg";
+import dia from "../../Images/dia.webp";
+import ring from "../../Images/ringwithdiamond.png";
+import diamondd from "../../Images/round-removebg-preview.png";
+import deleteicon from "../../Images/delete.PNG";
+import ww from "../../Images/ww.webp";
+import Drawer from "react-modern-drawer";
 
 export default function Section4({ value }) {
   const [visibleProducts, setVisibleProducts] = useState(20);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -90,6 +97,10 @@ export default function Section4({ value }) {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 1);
   };
 
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
     <Root>
       {value && value.length > 0 ? (
@@ -122,13 +133,144 @@ export default function Section4({ value }) {
                   >
                     More Info
                   </button>
+
                   <button
                     className="add_btn"
                     onClick={() => handleAddSetting(i)}
                   >
                     Add To Cart
                   </button>
+                  <button onClick={toggleDrawer}>lorem</button>
+
+                 
                 </div>
+                <Drawer
+                    open={isOpen}
+                    onClose={toggleDrawer}
+                    direction="right"
+                    className="custom-drawer"
+                    size="300px"
+                  >
+                    <div className="cart_heading">
+                      <h2>My Shopping Bag</h2>
+                    </div>
+
+                    <div className="prod_main_div">
+                      <div className="prod_div">
+                        <div className="prod">
+                          <div className="bg-img">
+                            <div className="dia_img">
+                              <img src={dia} alt="img" />
+                            </div>
+                          </div>
+
+                          <div className="prod_name">
+                            <h3>
+                              The Ashley with a 0.5 Carat J VS1 Round Natural
+                              Diamond
+                            </h3>
+                          </div>
+
+                          <div className="prod_spec">
+                            <div className="icon_content">
+                              <img src={ring} alt="img" />
+                              <div className="content_head">
+                                <h4>The Ashley </h4>
+                                <p>14k White Gold </p>
+                              </div>
+                            </div>
+                            <div className="prod_price">
+                              <h4>$700</h4>
+                            </div>
+                          </div>
+
+                          <div className="prod_spec">
+                            <div className="icon_content">
+                              <img src={diamondd} alt="img" />
+                              <div className="content_head">
+                                <h4>Round </h4>
+                                <p>0.5 Carat J VS1</p>
+                              </div>
+                            </div>
+                            <div className="prod_price">
+                              <h4>$713</h4>
+                            </div>
+                          </div>
+
+                          <div className="price_div">
+                            <p>
+                              Total:{" "}
+                              <span style={{ color: "#000000" }}>$1,413</span>
+                            </p>
+                            <div className="delete_icon">
+                              <img src={deleteicon} alt="img" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="prod_div">
+                        <div className="prod">
+                          <div className="bg-img">
+                            <div className="dia_img">
+                              <img src={dia} alt="img" />
+                            </div>
+                          </div>
+
+                          <div className="prod_name">
+                            <h3>
+                              The Ashley with a 0.5 Carat J VS1 Round Natural
+                              Diamond
+                            </h3>
+                          </div>
+
+                          <div className="prod_spec">
+                            <div className="icon_content">
+                              <img src={ring} alt="img" />
+                              <div className="content_head">
+                                <h4>The Ashley</h4>
+                                <p>14k White Gold</p>
+                              </div>
+                            </div>
+                            <div className="prod_price">
+                              <h4>$700</h4>
+                            </div>
+                          </div>
+
+                          <div className="prod_spec">
+                            <div className="icon_content">
+                              <img src={diamondd} alt="img" />
+                              <div className="content_head">
+                                <h4>Round </h4>
+                                <p>0.5 Carat J VS1</p>
+                              </div>
+                            </div>
+                            <div className="prod_price">
+                              <h4>$713</h4>
+                            </div>
+                          </div>
+
+                          <div className="price_div">
+                            <p>
+                              Total:{" "}
+                              <span style={{ color: "#000000" }}>$1,413</span>
+                            </p>
+                            <div className="delete_icon">
+                              <img src={deleteicon} alt="img" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="total_price_div">
+                      <p>Total:</p>
+                      <h4>$2,799</h4>
+                    </div>
+
+                    <div className="but_div">
+                      <button>Checkout Now</button>
+                    </div>
+                  </Drawer>
               </div>
             </div>
           </div>
@@ -166,8 +308,8 @@ const Root = styled.section`
       position: relative;
       margin-bottom: 20px;
 
-        /* slider changes */
-        .slick-prev {
+      /* slider changes */
+      .slick-prev {
         left: -2px;
         z-index: 111;
       }
@@ -254,6 +396,7 @@ const Root = styled.section`
       }
     }
   }
+  
   .load_btn {
     display: flex;
     justify-content: center;
@@ -266,6 +409,171 @@ const Root = styled.section`
       font-weight: 500;
       padding: 10px 30px;
       border-radius: 50px;
+    }
+  }
+
+ 
+  /* .EZDrawer__container {
+    z-index: 11111111 !important;
+    overflow-y: unset!important;
+    height: 100%!important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    padding-bottom: 40px;
+  }  */
+
+
+  .bRtCQo .EZDrawer__container {
+    z-index: 11111111 !important;
+    overflow-y:unset!important;
+    height: 100vh!important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    padding-bottom: 40px;
+}
+
+  .cart_heading {
+    padding: 16px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 400;
+    }
+  }
+
+  .prod_main_div {
+    width: 100%;
+    height: 420px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none!important;
+    .prod_div {
+      padding: 10px 16px;
+      .prod {
+        padding: 12px;
+        background-color: #f7f7f7;
+        border-radius: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        .bg-img {
+          height: 180px;
+          background-image: url(${ww});
+          background-size: 100%;
+          background-repeat: no-repeat;
+          .dia_img {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            width: 100%;
+            justify-content: flex-end;
+
+            img {
+              width: 20%;
+              height: 20%;
+              object-fit: contain;
+            }
+          }
+        }
+        .prod_name {
+          h3 {
+            font-size: 15px;
+            color: #000000;
+            font-weight: 400;
+          }
+        }
+        .prod_spec {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #ededed;
+          .icon_content {
+            display: flex;
+            align-items: center;
+            img {
+              width: 40px;
+              height: 40px;
+              mix-blend-mode: multiply;
+            }
+            .content_head {
+              display: flex;
+              flex-direction: column;
+              h4 {
+                font-size: 14px;
+                color: #000000;
+                margin-bottom: 0;
+                font-weight: 500;
+              }
+              p {
+                font-size: 13px;
+                color: #808080;
+                margin-bottom: 0;
+              }
+            }
+          }
+          .prod_price {
+            h4 {
+              font-weight: 500;
+              font-size: 14px;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .price_div {
+          display: flex;
+          justify-content: space-between;
+          p {
+            font-size: 21px;
+            color: rgba(102, 102, 102);
+            font-weight: 500;
+          }
+
+          .delete_icon {
+            img {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .element-with-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .total_price_div {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 21px;
+      color: #666666;
+    }
+
+    h4 {
+      font-weight: 500;
+      font-size: 21px;
+      color: #000000;
+    }
+  }
+
+  .but_div {
+    padding: 16px;
+    button {
+      color: rgba(255, 255, 255);
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem 2rem;
+      background-color: #000000;
+      border: transparent;
+      border-radius: 30px;
+      width: 100%;
     }
   }
   @media (max-width: 567px) {
@@ -328,6 +636,12 @@ const Root = styled.section`
     }
     .main_div .hov_content .heading {
       margin-top: 10px;
+    }
+  }
+
+  @media (min-width: 567px) and (max-width: 992px) {
+    .prod_main_div {
+      height: 890px;
     }
   }
 `;
