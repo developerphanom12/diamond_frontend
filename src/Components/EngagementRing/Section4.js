@@ -120,7 +120,7 @@ export default function Section4({ products }) {
                             backgroundColor: "#ccc",
                           }}
                         >
-                          <NoProduct />
+                          <NoProduct/>
                         </div>
                       )}
                     </div>
@@ -128,11 +128,8 @@ export default function Section4({ products }) {
                     <div>
                       <img src={ww} alt="img"/>
                     </div>
-
                   </Slider>
-                  
                 </div>
-
                 <div className="hov_content">
                   <div className="d-flex   flex-column">
                     <div className="d-flex flex justify-content-between">

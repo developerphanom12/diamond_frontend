@@ -29,6 +29,8 @@ import Layout from "./MainLayout/Layout";
 import WeddingBands from "./Components/WeddingBands/WeddingBands";
 import MoreForHimBand from "./Components/WeddingBands/MoreForHimBand";
 import MoreForHerBand from "./Components/WeddingBands/MoreForHerBand";
+import { Eternity } from "./Components/Eternity/Eternity";
+import EternityDetails from "./Components/Eternity/EternityDetails";
 // import HomePage from "./Components/threeSixty/HomePage";
 // import Test from "./Components/Test/Test"
 
@@ -54,7 +56,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/password" element={<ForgetPassword />} />
               <Route path="/education" element={<Education />} />
-              <Route path="/engagementring" element={<EngagementRing />} />
+              <Route path="/engagementring" element={<EngagementRing />}/>
               <Route path="/uniquering" element={<UniqueRing />} />
               <Route
                 path="/uniqueringdetails"
@@ -75,6 +77,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/gemstone" element={<Gemstone />} />
               <Route path="/gemdetails" element={<GemDetails />} />
+              <Route path="/eternity" element={<Eternity/>}/>
+              <Route path="/EternityDetails" element={<EternityDetails/>}/>
+
+
             </>
           </Routes>
         </Layout>
