@@ -30,6 +30,11 @@ export default function WeddingBandList() {
     dispatch(setDiamondType(diamondType));
     navigate("/weddingbands");
   };
+  const handleDiamondEterClick = (diamondType) => {
+    dispatch(setDiamondType(diamondType));
+    navigate("/eternity");
+  };
+
 
   return (
     <Root>
@@ -57,14 +62,16 @@ export default function WeddingBandList() {
                   className="d-flex"
                   onClick={() => handleDiamondTypeClick("Pave")}
                 >
-                  <img src={PaveHer} alt="img" />
+                  <img src={PaveHer} alt="img"/>
                   Pave
                 </li>
                 <li
                   className="d-flex"
-                  onClick={() => handleDiamondTypeClick("Cigar Band")}
+                  // onClick={()=> {("/eternity")}}
+                  onClick={() => handleDiamondEterClick("Eternity")}
+                  
                 >
-                  <img src={CigarHer} alt="img" />
+                  <img src={CigarHer} alt="img"/>
                   Eternity
                 </li>
                 <li
@@ -125,7 +132,7 @@ export default function WeddingBandList() {
               src={backimg}
               alt="img"
               className="imgh"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height:"100%"}}
             />
           </div>
         </div>

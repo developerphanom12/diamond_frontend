@@ -38,13 +38,15 @@ import threezero from "../../Images/threezero.png";
 import threefive from "../../Images/threefive.png";
 import balance from "../../Images/balancer.png";
 import gems from "../../Images/gems.PNG";
-import sixmm from "../../Images/sixmm.png";
-
 import ringwithdiamond from "../../Images/ringwithdiamond.png";
-
 import ship from "../../Images/ship.png";
-
 import ret from "../../Images/ret.png";
+import Drawer from "react-modern-drawer";
+import dia from "../../Images/dia.webp";
+import ring from "../../Images/ringwithdiamond.png";
+import diamondd from "../../Images/round-removebg-preview.png";
+import deleteicon from "../../Images/delete.PNG";
+
 
 const materialList = [
   { value: "14ct White Gold", imgUrl: one_four_k_white_gold },
@@ -55,7 +57,6 @@ const materialList = [
   { value: "18ct Red", imgUrl: one_eight_k_red },
   { value: "Platinum", imgUrl: Platinum },
 ];
-
 
 const CaratList = [
   { value: "1.0", imgUrl: onezero },
@@ -327,111 +328,116 @@ export default function EternityDetails() {
           </div>
 
           <div className="product_btn">
-            <button className="btn">
-              {/* {color ? "Add to Cart" : "Select Ring Size"} */}
-              Select Ring Size
+            <button className="btn">Select Ring Size</button>
+            <button className="cart_btn" onClick={toggleDrawer}>
+              Add to Cart
             </button>
-            {/* <Drawer
+            <Drawer
               open={isOpen}
               onClose={toggleDrawer}
               direction="right"
               className="custom-drawer"
               size="300px"
+
             >
               <div className="cart_heading">
-                <h2>My Shopping Bag </h2>
+                <h2>My Shopping Bag</h2>
               </div>
 
               <div className="prod_main_div">
                 <div className="prod_div">
                   <div className="prod">
-                    <div
-                      className="bg-img"
-                      style={{
-                        height: "180px",
-                        backgroundImage: `url(${imageUrl})`,
-                      }}
-                    >
+                    <div className="bg-img">
                       <div className="dia_img">
-                        {selectedShapesImg ? (
-                          <img
-                            src={selectedShapesImg}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        ) : (
-                          <img
-                            src={imageUrl}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        )}
+                        <img src={dia} alt="img" />
                       </div>
                     </div>
 
                     <div className="prod_name">
                       <h3>
-                        {unique?.title} -
-                        {unique?.variants?.edges?.[0]?.node?.title}
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
                       </h3>
                     </div>
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        {selectedShapesImg ? (
-                          <img
-                            src={selectedShapesImg}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        ) : (
-                          <img
-                            src={imageUrl}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        )}
+                        <img src={ring} alt="img" />
                         <div className="content_head">
-                          <h4> {unique?.title} </h4>
-                          {color ? <p>{color}</p> : <p>Platinum</p>}
+                          <h4>The Ashley </h4>
+                          <p>14k White Gold </p>
                         </div>
                       </div>
                       <div className="prod_price">
-                        <h4>${preDefineData?.price}</h4>
+                        <h4>$700</h4>
                       </div>
                     </div>
 
                     <div className="prod_spec">
                       <div className="icon_content">
-                        {selectedShapesImg ? (
-                          <img
-                            src={selectedShapesImg}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        ) : (
-                          <img
-                            src={imageUrl}
-                            title="Selected Shape Image"
-                            alt="Selected Shape"
-                          />
-                        )}
+                        <img src={diamondd} alt="img" />
                         <div className="content_head">
-                          <h4>{selectedShapes} </h4>
-                          <p> {unique?.variants?.edges?.[0]?.node?.title}</p>
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
                         </div>
                       </div>
                       <div className="prod_price">
-                        <h4>${preDefineData?.price}</h4>
+                        <h4>$713</h4>
                       </div>
                     </div>
 
                     <div className="price_div">
                       <p>
-                        Total:{" "}
-                        <span style={{ color: "#000000" }}>
-                          <h4>${preDefineData?.price}</h4>
-                        </span>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
+                      </p>
+                      <div className="delete_icon">
+                        <img src={deleteicon} alt="img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="prod_div">
+                  <div className="prod">
+                    <div className="bg-img">
+                      <div className="dia_img">
+                        <img src={dia} alt="img" />
+                      </div>
+                    </div>
+
+                    <div className="prod_name">
+                      <h3>
+                        The Ashley with a 0.5 Carat J VS1 Round Natural Diamond
+                      </h3>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={ring} alt="img"/>
+                        <div className="content_head">
+                          <h4>The Ashley</h4>
+                          <p>14k White Gold</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$700</h4>
+                      </div>
+                    </div>
+
+                    <div className="prod_spec">
+                      <div className="icon_content">
+                        <img src={diamondd} alt="img" />
+                        <div className="content_head">
+                          <h4>Round </h4>
+                          <p>0.5 Carat J VS1</p>
+                        </div>
+                      </div>
+                      <div className="prod_price">
+                        <h4>$713</h4>
+                      </div>
+                    </div>
+
+                    <div className="price_div">
+                      <p>
+                        Total: <span style={{ color: "#000000" }}>$1,413</span>
                       </p>
                       <div className="delete_icon">
                         <img src={deleteicon} alt="img" />
@@ -443,15 +449,13 @@ export default function EternityDetails() {
 
               <div className="total_price_div">
                 <p>Total:</p>
-                <h4>${preDefineData?.price}</h4>
+                <h4>$2,799</h4>
               </div>
 
               <div className="but_div">
-                <button onClick={handleCheckout}>
-                  {fingerSize ? "Add to Cart" : "Select Ring Size"}
-                </button>
+                <button>Checkout Now</button>
               </div>
-            </Drawer> */}
+            </Drawer>
           </div>
 
           <div className="policy">
@@ -520,7 +524,9 @@ export default function EternityDetails() {
                   <div className="img_div" style={{ visibility: "hidden" }}>
                     <img src={circle} alt="img" />
                   </div>
-                  <p className="para">The setting’s average total carat weight</p>
+                  <p className="para">
+                    The setting’s average total carat weight
+                  </p>
                 </div>
               </div>
 
@@ -584,23 +590,23 @@ export default function EternityDetails() {
               <div className="subfirst_detail">
                 <div className="profile_div">
                   <div className="profile_cont">
-                    <img src={gems} alt="pinkimg"/>
+                    <img src={gems} alt="pinkimg" />
                     <p>Accent Gems</p>
                   </div>
                   <div className="d-flex gap-4">
                     <div className="d-flex flex-column">
-                         <h4>D-F</h4>
-                         <p className="para">Color</p>
+                      <h4>D-F</h4>
+                      <p className="para">Color</p>
                     </div>
 
                     <div className="d-flex flex-column">
-                         <h4>VVS</h4>
-                         <p className="para">Clarity</p>
+                      <h4>VVS</h4>
+                      <p className="para">Clarity</p>
                     </div>
-                    </div>
+                  </div>
 
                   <div className="img_div" style={{ visibility: "hidden" }}>
-                    <img src={circle} alt="img"/>
+                    <img src={circle} alt="img" />
                   </div>
                   <p className="para">Side stones average color & clarit</p>
                 </div>
@@ -616,7 +622,11 @@ export default function EternityDetails() {
                 id="panel1-header"
               >
                 <div className="heading">
-                  <img src={ringwithdiamond} alt="img" style={{ width: "25px" }} />
+                  <img
+                    src={ringwithdiamond}
+                    alt="img"
+                    style={{ width: "25px" }}
+                  />
 
                   <h5>Eternity Ring Details</h5>
                 </div>
@@ -633,8 +643,7 @@ export default function EternityDetails() {
                   </tr>
                   <tr>
                     <td>Width</td>
-                    <td>
-                    4.0mm</td>
+                    <td>4.0mm</td>
                   </tr>
                   <tr>
                     <td>Material</td>
@@ -666,7 +675,7 @@ export default function EternityDetails() {
                 id="panel1-header"
               >
                 <div className="heading">
-                  <img src={ship} alt="img"  />
+                  <img src={ship} alt="img" />
 
                   <h5>Shipping</h5>
                 </div>
@@ -914,10 +923,12 @@ const Root = styled.section`
       }
 
       .product_btn {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-top: 10px;
+        display:flex;
+        flex-direction:column;
+        
+        gap:20px;
+        margin-top:10px;
+
         .btn {
           background-color: rgba(0, 0, 0);
           color: white;
@@ -926,6 +937,16 @@ const Root = styled.section`
           font-weight: 600;
           border-radius: 50px;
           border: 1px solid transparent;
+        }
+
+        .cart_btn {
+          background-color: #fff;
+          color: rgba(0, 0, 0);
+          font-size: 17px;
+          padding: 16px 0;
+          font-weight: 600;
+          border-radius: 50px;
+          border: 1px solid rgba(0, 0, 0);
         }
       }
     }
@@ -943,8 +964,7 @@ const Root = styled.section`
 
       .subfirst_detail {
         display: flex;
-        gap:15px;
-       
+        gap: 15px;
 
         .profile_div {
           background: #fff;

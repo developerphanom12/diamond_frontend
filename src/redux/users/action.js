@@ -18,9 +18,15 @@ import {
   SET_UNIQUE_DATA,
   SET_UNIQUE_PRODUCT,
   SET_UNIQUE_PRODUCT_GEM,
+  SET_WEDDING_IDS,
+ 
 } from "./type";
 
 // Action creator setHerHimProductIds
+export const setWeddingIds = (ids) => ({
+  type: SET_WEDDING_IDS,
+  payload: ids
+});
 export const setHerHimProductIds = (herHimProductIds) => ({
   type: SET_HER_HIM_PRODUCT_IDS,
   payload: herHimProductIds,

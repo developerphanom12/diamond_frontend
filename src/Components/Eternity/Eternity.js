@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import bgg from "../../Images/etern.webp";
+import bgg from "../../Images/eternity.jpg";
 import { RxCross1 } from "react-icons/rx";
 import WhiteGold14 from "../../Images/fourone.png";
 import YellowGold14 from "../../Images/fourtwo.png";
@@ -25,7 +25,7 @@ import Drawer from "react-modern-drawer";
 import ww from "../../Images/a.jpg";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
-
+import { IoFilterOutline } from "react-icons/io5";
 
 const metals = [
   { id: 1, label: "White Gold", imgUrl: WhiteGold14 },
@@ -56,7 +56,6 @@ export const Eternity = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [modal, setModal] = useState(false);
-  
 
   var settings = {
     dots: false,
@@ -111,14 +110,25 @@ export const Eternity = () => {
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
-  
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
 
-//   const handleAddDiamondClick = (productIds) => {
-//     setSelectedProductId(productIds);
-//     setModal(true);
-//     dispatch(setProductIds(productIds));
-//   };
+  //   const handleAddDiamondClick = (productIds) => {
+  //     setSelectedProductId(productIds);
+  //     setModal(true);
+  //     dispatch(setProductIds(productIds));
+  //   };
 
   const drawerContent = (
     <>
@@ -133,6 +143,7 @@ export const Eternity = () => {
                     <h3>Select Metal</h3>
                     <IoIosArrowDown />
                   </div>
+
                   {show && (
                     <div className="select_metal">
                       <div className="first_row">
@@ -206,6 +217,7 @@ export const Eternity = () => {
                     </div>
                   )}
                 </div>
+
                 <select>
                   <option value="low-high">Pricing (low-to-high)</option>
                   <option value="high-low">Pricing (high-to-low)</option>
@@ -222,6 +234,9 @@ export const Eternity = () => {
   return (
     <Root>
       <div className="bg_img"></div>
+      <button className="drawer-toggle-button" onClick={toggleDrawer}>
+        <IoFilterOutline /> Filter
+      </button>
       <div
         className={`drawer-content ${
           isOpen && screenWidth <= 567 ? "open" : ""
@@ -274,16 +289,19 @@ export const Eternity = () => {
 
             <div className="btn_div">
               <button
-                className="info_btn" onClick={() =>{navigate("/eternitydetails");
-                }
-            }
-                
+                className="info_btn"
+                onClick={() => {
+                  navigate("/eternitydetails");
+                }}
               >
                 More Info
               </button>
 
               <button
                 className="add_btn"
+                onClick={() => {
+                  navigate("/eternitydetails");
+                }}
               >
                 Add to Cart
               </button>
@@ -304,38 +322,35 @@ export const Eternity = () => {
 };
 
 const Root = styled.section`
-
   .bg_img {
     background-image: url(${bgg});
-    background-size: 100% 100%;
-    object-fit: contain;
     height: 400px;
   }
 
   .main_div {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     position: relative;
     gap: 4px;
     padding: 0 20px;
     .subdiv {
-      width:24vw;
-      height:58vh; /* slider changes */
-      border:3px solid #f7f7f7;
-      border-radius:20px;
-      padding:5px;
-      overflow:hidden;
-      position:relative;
-      margin-bottom:20px;
-      padding:15px;
- 
+      width: 24vw;
+      height: 58vh; /* slider changes */
+      border: 3px solid #f7f7f7;
+      border-radius: 20px;
+      padding: 5px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+      padding: 15px;
+
       /* slider changes */
       .slick-track {
         /* height:220px; */
         /* height: 88%; */
       }
-       /* slider changes */
-       .slick-prev {
+      /* slider changes */
+      .slick-prev {
         left: -2px;
         z-index: 111;
       }
@@ -390,8 +405,8 @@ const Root = styled.section`
       }
 
       .prd_name {
-        font-size:14px;
-        margin-bottom:0;
+        font-size: 14px;
+        margin-bottom: 0;
       }
       .prd_price {
         font-size: 13px;
@@ -463,18 +478,73 @@ const Root = styled.section`
     }
   }
 
-  @media (max-width: 567px) {
-    padding: 0px 10px;
+  .drawer-content {
+    padding: 20px 0px;
+    width: 100%;
+  }
 
+  .drawer-toggle-button {
+    font-weight: 500;
+    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+  }
+
+  @media (min-width: 877px) {
+    .drawer-toggle-button {
+      display: none;
+    }
+    .drawer-content {
+      display: block;
+    }
+  }
+
+  .EZDrawer__container {
+    overflow-y: scroll !important;
+    height: 67vh !important;
+    border-top-right-radius: 25px !important;
+    border-top-left-radius: 25px !important;
+    padding-bottom: 40px;
+  }
+  @media (max-width: 567px) {
+    .bg_img {
+      background-image: url(${bgg});
+      height: 160px;
+      background-size: 100% 100%;
+    }
+
+    .drawer-toggle-button {
+      display: block;
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+    .drawer-content {
+      /* display: none; */
+      .ring_types {
+        justify-content: left;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 20px 10px 0px;
+        width: 100%;
+        button {
+          width: 85px;
+          border: 1px solid #d1d1d1;
+          background-color: rgba(247, 247, 247);
+          padding: 0px 3px;
+        }
+      }
+    }
     .main_div {
       gap: 15px;
       margin-top: 0;
       .subdiv {
-        width:45vw;
-        height:218px;
-        &:hover .hov_content{
-          width:45vw;
-          padding:0px 10px;
+        width: 45vw;
+        height: 218px;
+        &:hover .hov_content {
+          width: 45vw;
+          padding: 0px 10px;
         }
 
         .prd_name {
@@ -503,7 +573,12 @@ const Root = styled.section`
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-    padding: 0px 10px;
+   
+    .bg_img {
+      background-image:url(${bgg});
+      height:300px;
+      background-size:100% 100%;
+    }
 
     .main_div {
       padding: 0 20px;
@@ -531,10 +606,10 @@ const Root = styled.section`
         }
         .btn_div .info_btn,
         .btn_div .add_btn {
-          flex:1;
-          font-size:11px;
-          padding:10px 10px;
-          border-radius:15px;
+          flex: 1;
+          font-size: 11px;
+          padding: 10px 10px;
+          border-radius: 15px;
         }
       }
     }
@@ -543,8 +618,11 @@ const Root = styled.section`
       width: 100%;
       height: 92%;
     }
-  }
 
+    .drawer-toggle-button {
+      display: none;
+    }
+  }
 `;
 
 const StyledSection = styled.section`

@@ -136,141 +136,15 @@ export default function Section4({ value }) {
 
                   <button
                     className="add_btn"
-                    onClick={() => handleAddSetting(i)}
+                    onClick={() => handleUniqueRingDetail(i.id)}
                   >
                     Add To Cart
                   </button>
-                  <button onClick={toggleDrawer}>lorem</button>
+                  
 
                  
                 </div>
-                <Drawer
-                    open={isOpen}
-                    onClose={toggleDrawer}
-                    direction="right"
-                    className="custom-drawer"
-                    size="300px"
-                  >
-                    <div className="cart_heading">
-                      <h2>My Shopping Bag</h2>
-                    </div>
 
-                    <div className="prod_main_div">
-                      <div className="prod_div">
-                        <div className="prod">
-                          <div className="bg-img">
-                            <div className="dia_img">
-                              <img src={dia} alt="img" />
-                            </div>
-                          </div>
-
-                          <div className="prod_name">
-                            <h3>
-                              The Ashley with a 0.5 Carat J VS1 Round Natural
-                              Diamond
-                            </h3>
-                          </div>
-
-                          <div className="prod_spec">
-                            <div className="icon_content">
-                              <img src={ring} alt="img" />
-                              <div className="content_head">
-                                <h4>The Ashley </h4>
-                                <p>14k White Gold </p>
-                              </div>
-                            </div>
-                            <div className="prod_price">
-                              <h4>$700</h4>
-                            </div>
-                          </div>
-
-                          <div className="prod_spec">
-                            <div className="icon_content">
-                              <img src={diamondd} alt="img" />
-                              <div className="content_head">
-                                <h4>Round </h4>
-                                <p>0.5 Carat J VS1</p>
-                              </div>
-                            </div>
-                            <div className="prod_price">
-                              <h4>$713</h4>
-                            </div>
-                          </div>
-
-                          <div className="price_div">
-                            <p>
-                              Total:{" "}
-                              <span style={{ color: "#000000" }}>$1,413</span>
-                            </p>
-                            <div className="delete_icon">
-                              <img src={deleteicon} alt="img" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="prod_div">
-                        <div className="prod">
-                          <div className="bg-img">
-                            <div className="dia_img">
-                              <img src={dia} alt="img" />
-                            </div>
-                          </div>
-
-                          <div className="prod_name">
-                            <h3>
-                              The Ashley with a 0.5 Carat J VS1 Round Natural
-                              Diamond
-                            </h3>
-                          </div>
-
-                          <div className="prod_spec">
-                            <div className="icon_content">
-                              <img src={ring} alt="img" />
-                              <div className="content_head">
-                                <h4>The Ashley</h4>
-                                <p>14k White Gold</p>
-                              </div>
-                            </div>
-                            <div className="prod_price">
-                              <h4>$700</h4>
-                            </div>
-                          </div>
-
-                          <div className="prod_spec">
-                            <div className="icon_content">
-                              <img src={diamondd} alt="img" />
-                              <div className="content_head">
-                                <h4>Round </h4>
-                                <p>0.5 Carat J VS1</p>
-                              </div>
-                            </div>
-                            <div className="prod_price">
-                              <h4>$713</h4>
-                            </div>
-                          </div>
-
-                          <div className="price_div">
-                            <p>
-                              Total:{" "}
-                              <span style={{ color: "#000000" }}>$1,413</span>
-                            </p>
-                            <div className="delete_icon">
-                              <img src={deleteicon} alt="img" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="total_price_div">
-                      <p>Total:</p>
-                      <h4>$2,799</h4>
-                    </div>
-
-                    <div className="but_div">
-                      <button>Checkout Now</button>
-                    </div>
-                  </Drawer>
               </div>
             </div>
           </div>

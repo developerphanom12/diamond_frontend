@@ -503,24 +503,24 @@ export default function Section2() {
               <img
                 src={badgess}
                 alt="badgess_images"
-                style={{ width: "50px", height: "50px" }}
+                style={{ width:"50px", height: "50px" }}
               />
               <p>
-                Lifetime <br />
+                Lifetime <br/>
                 Warranty
               </p>
             </div>
 
             <div className="policy_type">
-              <img src={moneyinhand} alt="moneyinhand_images" />
+              <img src={moneyinhand} alt="moneyinhand_images"/>
               <p>
-                30 Days <br />
+                30 Days <br/>
                 Free Return
               </p>
             </div>
 
             <div className="policy_type">
-              <img src={certifiedd} alt="certifiedd_images" />
+              <img src={certifiedd} alt="certifiedd_images"/>
               <p>
                 Certificate
                 <br />& Appraisal
@@ -535,7 +535,7 @@ export default function Section2() {
               <div className="subfirst_detail">
                 <div className="profile_div">
                   <div className="profile_cont">
-                    <img src={wid} alt="pinkimg" />
+                    <img src={wid} alt="pinkimg"/>
                     <p>WIDTH</p>
                   </div>
 
@@ -654,10 +654,10 @@ export default function Section2() {
               <div className="sub_stone">
                 <div className="cont_ques">
                   <div className="icon_cont">
-                    <img src={cla} alt="img" />
+                    <img src={cla} alt="img"/>
                     <p>{unique?.metafields?.edges?.[3]?.node?.key}</p>
                   </div>
-                  <img src={que} alt="img" style={{ width: "16px" }} />
+                  <img src={que} alt="img" style={{ width: "16px" }}/>
                 </div>
 
                 <h4>{unique?.metafields?.edges?.[3]?.node?.value}</h4>
@@ -669,10 +669,10 @@ export default function Section2() {
               <div className="sub_stone">
                 <div className="cont_ques">
                   <div className="icon_cont">
-                    <img src={cla} alt="img" />
+                    <img src={cla} alt="img"/>
                     <p>{unique?.metafields?.edges?.[6]?.node?.key}</p>
                   </div>
-                  <img src={que} alt="img" style={{ width: "16px" }} />
+                  <img src={que} alt="img" style={{ width: "16px" }}/>
                 </div>
 
                 <h4>{unique?.metafields?.edges?.[6]?.node?.value}</h4>

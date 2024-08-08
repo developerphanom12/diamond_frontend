@@ -427,17 +427,21 @@ const Root = styled.section`
     padding: 20px 0px;
     width: 100%;
   }
+
+
   .drawer-toggle-button {
-    font-weight: 500;
-    padding: 5px 10px;
-    border: 1px solid #d1d1d1;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: transparent;
+    font-weight:500;
+    padding:5px 10px;
+    border:1px solid #d1d1d1;
+    border-radius:4px;
+    font-size:14px;
+    background-color:transparent;
   }
-  @media (min-width: 877px) {
+
+
+  @media (min-width: 877px){
     .drawer-toggle-button {
-      display: none;
+      display:none;
     }
     .drawer-content {
       display: block;

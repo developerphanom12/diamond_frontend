@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import {
-  setForHerHim,
   setHerHimProductIds,
   setSelectedHerImgTitle,
   setSelectedHimImgTitle,
+  setWeddingIds,
 } from "../../redux/users/action";
 import forHer from "../../Images/her.png";
 import forHim from "../../Images/him.png";
@@ -32,11 +32,11 @@ import { IoFilterOutline } from "react-icons/io5";
 import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
 import { NoProduct } from "../NoProduct";
-import { EXCHANGE_URLS } from "../URLS";
+import { EXCHANGE_URLS_WEDDING } from "../URLS";
 import axios from "axios";
 
 const ForHerList = [
-  { id: 1, title: "Nature", imgUrl: natureForHer },
+  { id: 1, title: "Nature", label: "nature", imgUrl: natureForHer },
   { id: 2, title: "Pave", imgUrl: paveForHer },
   { id: 3, title: "Prong", imgUrl: prongForHer },
   { id: 4, title: "Solid", imgUrl: solidForHer },
@@ -93,9 +93,11 @@ var settings = {
     },
   ],
 };
+
 export default function WeddingBands() {
   const [show, setShow] = useState(false);
   const [selectedButton, setSelectedButton] = useState(1);
+  const [selectedMetal, setSelectedMetal] = useState("");
   const [selectedDropButton, setSelectedDropButton] = useState(1);
   const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -103,6 +105,7 @@ export default function WeddingBands() {
   const [visibleProducts, setVisibleProducts] = useState(20);
   const [herHimBandProduct, setHerHimBandProduct] = useState();
   const [selectedHerHimProductId, setSelectedHerHimProductId] = useState(null);
+  const [allProductIds, setAllProductIds] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -125,6 +128,8 @@ export default function WeddingBands() {
   };
   const handleButtonDropClick = (buttonIndex) => {
     setSelectedDropButton(buttonIndex);
+    const selectedMetal = metals.find((metal) => metal.label === buttonIndex);
+    setSelectedMetal(selectedMetal); // Update selected metal
   };
   function toggleShowName() {
     setShow((prevState) => !prevState);
@@ -162,6 +167,77 @@ export default function WeddingBands() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleHerHimBandClick = (herHimProductIds) => {
+    setSelectedHerHimProductId(herHimProductIds);
+    dispatch(setHerHimProductIds(herHimProductIds));
+  };
+
+  const handleNavigateDetail = async () => {
+    try {
+      const response = await axios.get(
+        `${EXCHANGE_URLS_WEDDING}/weddingcollection`
+      );
+      if (response?.status === 200) {
+        const productData = response?.data?.data;
+        console.log("nikeee", productData);
+        setHerHimBandProduct(productData);
+        const weddingCollectionIds = productData.map((item) => item.id);
+        dispatch(setWeddingIds(weddingCollectionIds)); // Dispatch action to Redux
+        setAllProductIds(weddingCollectionIds);
+
+        // navigate("/ringdetails", { state: { products: productData } });
+      }
+    } catch (error) {
+      console.error("Error fetching", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchCollections = async (weddingCollectionIds) => {
+      try {
+        const tags = [];
+        if (isForHer) {
+          tags.push("forher");
+        } else {
+          tags.push("forhim");
+        }
+        const selectedItem = isForHer
+          ? ForHerList[selectedButton - 1]
+          : ForHimList[selectedButton - 1];
+        if (selectedItem) {
+          tags.push(selectedItem.label.toLowerCase());
+        }
+        const queryString = tags.map((tag) => `tags=${tag}`).join("&");
+        const collectionIds = weddingCollectionIds.join(","); // Assuming API expects comma-separated IDs
+        const response = await axios.get(
+          `${EXCHANGE_URLS_WEDDING}/weddingdata?collectionId=${collectionIds}&${queryString}`
+        );
+        if (response?.status === 200) {
+          const herHimBandProduct = response?.data?.products;
+          console.log("Fetched products", response);
+          setHerHimBandProduct(herHimBandProduct);
+        }
+      } catch (error) {
+        console.error("Error fetching diamond details:", error);
+      }
+    };
+    fetchCollections();
+    handleNavigateDetail();
+  }, [isForHer, selectedButton]);
+
+  const filteredProductIds = selectedMetal
+    ? herHimBandProduct
+        .filter((product) => product.metal === selectedMetal.label) // Adjust based on your data structure
+        .map((product) => product.id)
+    : [];
+
+  useEffect(() => {
+    if (herHimBandProduct) {
+      const productIds = herHimBandProduct.map((product) => product.id);
+      setAllProductIds(productIds);
+    }
+  }, [herHimBandProduct]);
 
   const drawerContent = (
     <>
@@ -257,50 +333,6 @@ export default function WeddingBands() {
       </>
     </>
   );
-
-  const handleHerHimBandClick = (herHimProductIds) => {
-    setSelectedHerHimProductId(herHimProductIds);
-    dispatch(setHerHimProductIds(herHimProductIds));
-  };
-
-  // const handleNavigateDetail = async (products) => {
-  //   const productId = products?.node?.id;
-  //   console.log("products", productId);
-  //   try {
-  //     const response = await axios.get(
-  //       `${EXCHANGE_URLS}/weddingdata?collectionId=432312975578&tags=forher,nature`
-  //     );
-  //     if (response?.status === 200) {
-  //       const productData = response?.data?.data;
-  //       console.log("nikeee", productData);
-  //       setHerHimBandProduct(productData);
-  //       // navigate("/ringdetails", { state: { products: productData } });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching diamond details:", error);
-  //   }
-  // };
-
-  useEffect(() => {
-    const fetchCollections = async () => {
-      try {
-        const response = await axios.get(
-          `${EXCHANGE_URLS}/weddingdata?collectionId=432312975578&tags=forher,nature`
-        );
-        if (response?.status === 200) {
-          const herHimBandProduct = response?.data?.products;
-          console.log("nikeee", herHimBandProduct);
-          setHerHimBandProduct(herHimBandProduct);
-          // navigate("/ringdetails", { state: { products: productData } });
-        }
-      } catch (error) {
-        console.error("Error fetching diamond details:", error);
-      }
-    };
-
-    fetchCollections();
-  }, []);
-
   return (
     <Root>
       <div className="container-fluid">
@@ -368,7 +400,20 @@ export default function WeddingBands() {
             )}
           </div>
         </div>
-        <div className="tags">{show && <h5> {selectedDropButton}</h5>}</div>
+        <div className="tags">
+          {show && (
+            <h5>
+              {" "}
+              {selectedDropButton}
+              {selectedMetal && (
+                <div>
+                  <h5>Selected Metal: {selectedMetal.label}</h5>
+                  <p>Product IDs: {filteredProductIds.join(", ")}</p>
+                </div>
+              )}
+            </h5>
+          )}
+        </div>
       </>
       <>
         <div className="main_div">

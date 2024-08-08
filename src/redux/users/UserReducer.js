@@ -17,6 +17,7 @@ import {
   SET_SELECTED_HIM_IMG_TITLE,
   SET_SELECTED_HER_IMG_TITLE,
   SET_HER_HIM_PRODUCT_IDS,
+  SET_WEDDING_IDS,
 } from "./type";
 
 const initialState = {
@@ -61,9 +62,15 @@ const initialState = {
     selectedTitle: "",
     selectedImg: "",
   },
+  weddingIds: []
 };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_WEDDING_IDS:
+      return {
+        ...state,
+        weddingIds: action.payload
+      };
     case SET_HER_HIM_PRODUCT_IDS:
       return {
         ...state,
