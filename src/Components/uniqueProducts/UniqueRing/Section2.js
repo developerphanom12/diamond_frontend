@@ -17,9 +17,19 @@ import PRINCESS from "../../../Images/Princess-removebg-preview.png";
 import RADIANT from "../../../Images/Radiant-removebg-preview.png";
 import CUSHION from "../../../Images/cushionremovebg.png";
 import ECUSHION from "../../../Images/ECusion-removebg-preview.png";
+import ASSCHER from "../../../Images/ECusion-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
+import WhiteGold14 from "../../../Images/fourone.png";
+import YellowGold14 from "../../../Images/fourtwo.png";
+import RoseGold14 from "../../../Images/fourthree.png";
+import WhiteGold18 from "../../../Images/eightone.png";
+import YellowGold18 from "../../../Images/eighttwo.png";
+import RoseGold18 from "../../../Images/eightthree.png";
+import Platinum from "../../../Images/pt.png";
 import { EXCHANGE_URLS } from "../../URLS";
 import { useLoading } from "../../LoadingContext";
+import { IoIosArrowDown } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 
 const shapesList = [
   { name: "ROUND", imgUrl: ROUND },
@@ -34,10 +44,33 @@ const shapesList = [
   { name: "E.CUSHION", imgUrl: ECUSHION },
 ];
 
+const shapes = [
+  { id: 1, type: "1" },
+  { id: 2, type: "1.5" },
+  { id: 3, type: "2" },
+  { id: 4, type: "2.5" },
+  { id: 5, type: "3" },
+];
+
+const metals = [
+  { id: 1, label: "White Gold", imgUrl: WhiteGold14 },
+  { id: 2, label: "Yellow Gold", imgUrl: YellowGold14 },
+  { id: 3, label: "Rose Gold", imgUrl: RoseGold14 },
+  { id: 4, label: "White Gold.", imgUrl: WhiteGold18 },
+  { id: 5, label: "Yellow Gold.", imgUrl: YellowGold18 },
+  { id: 6, label: "Rose Gold.", imgUrl: RoseGold18 },
+  { id: 7, label: "Platinum", imgUrl: Platinum },
+];
+
 export default function Section2() {
   const selectedShape = useSelector((state) => state.users.selectedShape);
   const [selectedShapes, setSelectedShapes] = useState(["ROUND"]); // Default to ROUND
   const [data, setData] = useState([]);
+  const [show, setShow] = useState(false);
+  const [shape, setShape] = useState(false);
+  const [selectedOption, setSelectedOption] = useState();
+  const [selectedDropButton, setSelectedDropButton] = useState();
+
   const { setLoading } = useLoading();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,8 +100,8 @@ export default function Section2() {
 
   const handleShapeClick = (shapeName) => {
     setSelectedShapes([shapeName]);
-    dispatch(setSelectedShape(shapeName)); 
-    navigate("/uniquering", { state: { selectedShape: shapeName } }); 
+    dispatch(setSelectedShape(shapeName));
+    navigate("/uniquering", { state: { selectedShape: shapeName } });
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -85,9 +118,25 @@ export default function Section2() {
     };
   }, []);
 
+  function toggleShowName() {
+    setShow((prevState) => !prevState);
+  }
+
+  const handleButtonDropClick = (buttonIndex) => {
+    setSelectedDropButton(buttonIndex);
+  };
+
+  const handleButtonOption = (buttonIndex) => {
+    setSelectedOption(buttonIndex);
+  };
+
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  function toggleShapeName() {
+    setShape((prevState) => !prevState);
+  }
 
   const drawerContent = (
     <>
@@ -107,6 +156,101 @@ export default function Section2() {
           </button>
         ))}
       </div>
+      <StyledSection>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="select_div">
+                <div className="select_opt">
+                  <div className="head_icon" onClick={toggleShowName}>
+                    <h3>Select Metal</h3>
+                    <IoIosArrowDown />
+                  </div>
+
+                  {show && (
+                    <div className="select_metal">
+                      <div className="first_row">
+                        <div className="d-flex align-items-center">
+                          <h5>Metal : {selectedDropButton}</h5>
+                        </div>
+                        <RxCross1
+                          className="icon"
+                          onClick={() => setShow(false)}
+                        />
+                      </div>
+
+                      <div className="btn_row">
+                        {metals.map((metal) => (
+                          <button
+                            key={metal.label}
+                            className={
+                              selectedDropButton === metal.label
+                                ? "selected"
+                                : ""
+                            }
+                            onClick={() => handleButtonDropClick(metal.label)}
+                          >
+                            <img
+                              style={{ width: "50px", height: "50px" }}
+                              src={metal.imgUrl}
+                              alt={metal.label}
+                            />
+                            <h5>{metal.label}</h5>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="head_icon" onClick={toggleShapeName}>
+                    <h3>Select Carat Weight</h3>
+                    <IoIosArrowDown />
+                  </div>
+
+                  {shape && (
+                    <div className="select_shape">
+                      <div className="first_row">
+                        <div className="d-flex align-items-center">
+                          <h5>Carat Weight : {selectedOption}</h5>
+                        </div>
+                        <RxCross1
+                          className="icon"
+                          onClick={() => setShape(false)}
+                        />
+                      </div>
+
+                      <div className="btn_row">
+                        {shapes.map((shape) => (
+                          <button
+                            key={shape.type}
+                            className={
+                              selectedOption === shape.type ? "selected" : ""
+                            }
+                            onClick={() => handleButtonOption(shape.type)}
+                          >
+                            {/* <img
+                              style={{ width: "50px", height: "50px",  }}
+                              src={shape.imgUrl}
+                              alt={shape.type}
+                            /> */}
+                            <h5>{shape.type}</h5>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <select>
+                  <option value="low-high">Pricing (low-to-high)</option>
+                  <option value="high-low">Pricing (high-to-low)</option>
+                  <option value="best-selling">Best Selling</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </StyledSection>
     </>
   );
 
@@ -229,7 +373,7 @@ const Root = styled.section`
   }
 
   .drawer-content {
-    padding:0px 20px 10px;
+    padding: 0px 20px 10px;
     width: 100%;
   }
   .drawer-toggle-button {
@@ -250,7 +394,7 @@ const Root = styled.section`
   }
   .EZDrawer__container {
     overflow-y: scroll !important;
-    height: 350px !important;
+    height: 450px !important;
     border-top-right-radius: 25px !important;
     border-top-left-radius: 25px !important;
     padding-bottom: 40px;
@@ -258,6 +402,7 @@ const Root = styled.section`
   @media (max-width: 567px) {
     .drawer-toggle-button {
       display: block;
+      margin-left: 20px;
     }
     .drawer-content {
       .ring_types {
@@ -267,13 +412,262 @@ const Root = styled.section`
         width: 100%;
 
         .btn_shapes {
-          width: 93px !important;
+          width: 85px !important;
           border: 1px solid #d1d1d1;
           background-color: rgba(247, 247, 247);
           padding: 12px 42px;
         }
       }
     }
-  }
+
+    .ring_types button img,
+    .ring_types button svg {
+      height: 40px;
+      width: 40px;
+    }
+
  
+  }
+`;
+
+const StyledSection = styled.section`
+  padding: 20px;
+  @media (max-width: 567px) {
+    padding: 0px;
+  }
+  .select_div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @media (max-width: 567px) {
+      margin-top: 10px;
+      gap: 30px;
+      justify-content: space-around;
+    }
+    .select_opt {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .head_icon {
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(247, 247, 247);
+        border-radius: 0.375rem;
+        padding: 10px 10px;
+        border: 1px solid transparent;
+        width: 190px;
+        position: relative;
+        h3 {
+          font-size: 14px;
+        }
+        @media (max-width: 567px) {
+     width:155px
+    }
+      }
+
+      .select_metal {
+        position: absolute;
+        left: 3%; /*tags*/
+        bottom: -20%;
+        border: 1px solid #fff;
+        box-shadow: 1px 3px 25px 1px #cbced0;
+        width: 32%;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 11111;
+
+        .first_row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          h5 {
+            font-size: 15px;
+            font-weight: 700;
+            padding-top: 8px;
+          }
+          span {
+            color: rgba(102, 102, 102);
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 5px;
+          }
+          .icon {
+            cursor: pointer;
+          }
+        }
+
+        .btn_row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 15px;
+          button {
+            border-radius: 10px;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid rgba(221, 211, 211);
+            width: 87px;
+            cursor: pointer;
+            &.selected {
+              border: 2px solid black;
+            }
+            &:hover {
+              background-color: rgba(245, 245, 245);
+            }
+            svg {
+              height: 50px;
+              cursor: pointer;
+            }
+
+            h5 {
+              color: rgb(46 44 44);
+              font-size: 11px;
+              margin: 0;
+            }
+            span {
+              font-size: 11px;
+            }
+          }
+        }
+        @media (max-width: 567px) {
+          left: 7%;
+          bottom: 15%;
+          border: 1px solid #fff;
+          width: 85%;
+          padding: 10px;
+          .btn_row button {
+            width: 84px;
+          }
+        }
+
+        /* @media (min-width: 567px) and (max-width: 1000px){
+          left: 7%;
+          bottom: 32%;
+          border: 1px solid #fff;
+          width: 51%;
+          padding: 10px;
+          .btn_row button {
+            width: 84px;
+          }
+        } */
+        @media (min-width: 567px) and (max-width: 1000px) {
+          position: absolute;
+          left: unset;
+          bottom: unset;
+          width: 55%;
+          z-index: 11111;
+          top: 58%;
+        }
+        /* @media (max-width: 1000px) {
+          width: 90%;
+          left: 3%;
+          bottom: 6%;
+        } */
+      }
+
+      .select_shape {
+        position: absolute;
+        left: 6%; /*tags*/
+        bottom: -15%;
+        border: 1px solid #fff;
+        box-shadow: 1px 3px 25px 1px #cbced0;
+        width: 32%;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 11111;
+
+        .first_row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          h5 {
+            font-size: 15px;
+            font-weight: 700;
+            padding-top: 8px;
+          }
+          span {
+            color: rgba(102, 102, 102);
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 5px;
+          }
+          .icon {
+            cursor: pointer;
+          }
+        }
+
+        .btn_row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 15px;
+          button {
+            border-radius: 10px;
+            padding: 25px;
+            background-color: #fff;
+            border: 1px solid rgba(221, 211, 211);
+            width: 87px;
+            cursor: pointer;
+            &.selected {
+              border: 2px solid black;
+            }
+            &:hover {
+              background-color: rgba(245, 245, 245);
+            }
+            svg {
+              height: 50px;
+              cursor: pointer;
+            }
+
+            h5 {
+              color: rgb(46 44 44);
+              font-size: 14px;
+              margin: 0;
+            }
+            span {
+              font-size: 11px;
+            }
+          }
+        }
+        @media (max-width: 567px) {
+          left: 7%;
+          bottom: 22%;
+          border: 1px solid #fff;
+          width: 85%;
+          padding: 10px;
+          .btn_row button{
+            width: 84px;
+          }
+
+          /* .select_div .select_opt .head_icon {
+            width: 160px;
+          } */
+        }
+
+        @media (min-width: 567px) and (max-width: 1000px) {
+          position: absolute;
+          left: unset;
+          bottom: unset;
+          width: 55%;
+          z-index: 11111;
+          top: 58%;
+        }
+      }
+    }
+
+    select {
+      background-color: rgba(247, 247, 247);
+      border-radius: 0.375rem;
+      font-size: 14px;
+      padding: 10px 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+  }
 `;

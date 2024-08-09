@@ -391,6 +391,7 @@ const Root = styled.section`
     .main_div {
       gap: 15px;
       margin-top: 0;
+      z-index: 1;
       .subdiv {
         width:45vw;
         height:218px;

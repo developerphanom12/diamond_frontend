@@ -71,9 +71,10 @@ export default function WeddingBandList() {
                   onClick={() => handleDiamondEterClick("Eternity")}
                   
                 >
-                  <img src={CigarHer} alt="img"/>
+                <img src={CigarHer} alt="img"/>
                   Eternity
                 </li>
+
                 <li
                   className="d-flex"
                   onClick={() => handleDiamondTypeClick("Prong")}

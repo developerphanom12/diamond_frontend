@@ -341,6 +341,7 @@ const Root = styled.section`
       .subdiv {
         width: 45vw;
         height:210px;
+        z-index: 1;
         &:hover .hov_content {
           width: 45vw;
           padding: 0px 10px;

@@ -51,8 +51,8 @@ const shapes = [
 export const Eternity = () => {
   const [show, setShow] = useState(false);
   const [shape, setShape] = useState(false);
-  const [selectedDropButton, setSelectedDropButton] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedDropButton, setSelectedDropButton] = useState();
+  const [selectedOption, setSelectedOption] = useState();
   const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [modal, setModal] = useState(false);
@@ -329,7 +329,7 @@ const Root = styled.section`
 
   .main_div {
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     position: relative;
     gap: 4px;
     padding: 0 20px;
@@ -539,6 +539,7 @@ const Root = styled.section`
     .main_div {
       gap: 15px;
       margin-top: 0;
+      z-index: 1;
       .subdiv {
         width: 45vw;
         height: 218px;
@@ -563,21 +564,20 @@ const Root = styled.section`
         }
         .btn_div .info_btn,
         .btn_div .add_btn {
-          flex: 1;
-          font-size: 11px;
-          padding: 3px 10px;
-          border-radius: 15px;
+          flex:1;
+          font-size:11px;
+          padding:3px 10px;
+          border-radius:15px;
         }
       }
     }
   }
 
   @media (min-width: 567px) and (max-width: 992px) {
-   
     .bg_img {
-      background-image:url(${bgg});
-      height:300px;
-      background-size:100% 100%;
+      background-image: url(${bgg});
+      height: 300px;
+      background-size: 100% 100%;
     }
 
     .main_div {
@@ -623,7 +623,9 @@ const Root = styled.section`
       display: none;
     }
   }
+
 `;
+
 
 const StyledSection = styled.section`
   padding: 20px;
@@ -637,6 +639,7 @@ const StyledSection = styled.section`
     @media (max-width: 567px) {
       margin-top: 10px;
       gap: 30px;
+      justify-content: space-around;
     }
     .select_opt {
       display: flex;
@@ -660,18 +663,17 @@ const StyledSection = styled.section`
         }
       }
 
-      .select_metal,
-      .select_shape {
+      .select_metal {
         position: absolute;
-        left: 15%;
-        bottom: -40%;
+        left: 3%; /*tags*/
+        bottom: -45%;
         border: 1px solid #fff;
         box-shadow: 1px 3px 25px 1px #cbced0;
-        width: 41%;
+        width: 32%;
         border-radius: 10px;
         background-color: #fff;
         padding: 20px;
-        z-index: 1;
+        z-index: 11111;
 
         .first_row {
           display: flex;
@@ -728,7 +730,7 @@ const StyledSection = styled.section`
         }
         @media (max-width: 567px) {
           left: 7%;
-          bottom: 2%;
+          bottom: 15%;
           border: 1px solid #fff;
           width: 85%;
           padding: 10px;
@@ -736,10 +738,115 @@ const StyledSection = styled.section`
             width: 84px;
           }
         }
-        @media (max-width: 1000px) {
+
+        /* @media (min-width: 567px) and (max-width: 1000px){
+          left: 7%;
+          bottom: 32%;
+          border: 1px solid #fff;
+          width: 51%;
+          padding: 10px;
+          .btn_row button {
+            width: 84px;
+          }
+        } */
+        @media (min-width: 567px) and (max-width: 1000px) {
+            position: absolute;
+            left: unset;
+            bottom: unset;
+            width: 55%;
+            z-index: 11111;
+            top: 50%; 
+        }
+        /* @media (max-width: 1000px) {
           width: 90%;
           left: 3%;
           bottom: 6%;
+        } */
+      }
+
+      .select_shape {
+        position: absolute;
+        left: 6%; /*tags*/
+        bottom: -58%;
+        border: 1px solid #fff;
+        box-shadow: 1px 3px 25px 1px #cbced0;
+        width: 32%;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 11111;
+
+        .first_row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          h5 {
+            font-size: 15px;
+            font-weight: 700;
+            padding-top: 8px;
+          }
+          span {
+            color: rgba(102, 102, 102);
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 5px;
+          }
+          .icon {
+            cursor: pointer;
+          }
+        }
+
+        .btn_row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 15px;
+          button {
+            border-radius: 10px;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid rgba(221, 211, 211);
+            width: 87px;
+            cursor: pointer;
+            &.selected {
+              border: 2px solid black;
+            }
+            &:hover {
+              background-color: rgba(245, 245, 245);
+            }
+            svg {
+              height: 50px;
+              cursor: pointer;
+            }
+
+            h5 {
+              color: rgb(46 44 44);
+              font-size: 11px;
+              margin: 0;
+            }
+            span {
+              font-size: 11px;
+            }
+          }
+        }
+        @media (max-width: 567px) {
+          left: 7%;
+          bottom: 0;
+          border: 1px solid #fff;
+          width: 85%;
+          padding: 10px;
+          .btn_row button {
+            width:84px;
+          }
+        }
+
+        @media  (min-width: 567px) and (max-width: 1000px) {
+            position: absolute;
+            left: unset;
+            bottom: unset;
+            width: 55%;
+            z-index: 11111;
+            top: 50%; 
         }
       }
     }

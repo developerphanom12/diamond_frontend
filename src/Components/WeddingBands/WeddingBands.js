@@ -98,7 +98,7 @@ export default function WeddingBands() {
   const [show, setShow] = useState(false);
   const [selectedButton, setSelectedButton] = useState(1);
   const [selectedMetal, setSelectedMetal] = useState("");
-  const [selectedDropButton, setSelectedDropButton] = useState(1);
+  const [selectedDropButton, setSelectedDropButton] = useState();
   const [isOpen, setIsOpen] = React.useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [isForHer, setIsForHer] = useState(true);
@@ -400,7 +400,7 @@ export default function WeddingBands() {
             )}
           </div>
         </div>
-        <div className="tags">
+        {/* <div className="tags">
           {show && (
             <h5>
               {" "}
@@ -413,7 +413,7 @@ export default function WeddingBands() {
               )}
             </h5>
           )}
-        </div>
+        </div> */}
       </>
       <>
         <div className="main_div">
@@ -749,33 +749,34 @@ const Root = styled.section`
     padding: 0px 10px;
 
     .main_div {
-      gap: 15px;
-      margin-top: 0;
-      .subdiv {
-        width: 45vw;
-        height: 36vh;
+      gap:15px;
+      margin-top:0;
+      z-index:1;
+      .subdiv{
+        width:45vw;
+        height:36vh;
         &:hover .hov_content {
-          width: 45vw;
-          padding: 0px 10px;
+          width:45vw;
+          padding:0px 10px;
         }
         .prd_name {
-          font-size: 12px;
-          margin-bottom: 9px;
+          font-size:12px;
+          margin-bottom:9px;
         }
         .prd_price {
-          font-size: 11px;
-          margin-bottom: 10px;
+          font-size:11px;
+          margin-bottom:10px;
         }
         .white_color,
         .golden_color,
         .red_color {
-          height: 10px;
-          width: 10px;
+          height:10px;
+          width:10px;
         }
         .btn_div .info_btn,
         .btn_div .add_btn {
-          flex: 1;
-          font-size: 11px;
+          flex:1;
+          font-size:11px;
           padding: 3px 10px;
           border-radius: 15px;
         }
@@ -901,9 +902,131 @@ const Root = styled.section`
   }
 `;
 
+// const StyledSection = styled.section`
+//   border-top: 1px solid lightgray;
+//   padding: 10px 20px;
+//   @media (max-width: 567px) {
+//     padding: 0px;
+//   }
+//   .select_div {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     margin-top: 10px;
+//     @media (max-width: 567px) {
+//       margin-top: 10px;
+//       gap: 30px;
+//     }
+//     .select_opt {
+//       display: flex;
+//       flex-wrap: wrap;
+//       gap: 20px;
+
+//       .head_icon {
+//         position: relative;
+//         cursor: pointer;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         background-color: rgba(247, 247, 247);
+//         border-radius: 0.375rem;
+//         padding: 10px 10px;
+//         border: 1px solid transparent;
+//         width: 150px;
+//         position: relative;
+//         h3 {
+//           font-size: 14px;
+//         }
+//       }
+
+//       .select_metal {
+//         position: absolute;
+//         left: 15%;
+//         bottom: -40%;
+//         border: 1px solid #fff;
+//         box-shadow: 1px 3px 25px 1px #cbced0;
+//         width: 41%;
+//         border-radius: 10px;
+//         background-color: #fff;
+//         padding: 20px;
+//         z-index: 1;
+
+//         .first_row {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           h5 {
+//             font-size: 15px;
+//             font-weight: 700;
+//             padding-top: 8px;
+//           }
+//           span {
+//             color: rgba(102, 102, 102);
+//             font-size: 15px;
+//             font-weight: 600;
+//             margin-left: 5px;
+//           }
+//           .icon {
+//             cursor: pointer;
+//           }
+//         }
+
+//         .btn_row {
+//           display: flex;
+//           flex-wrap: wrap;
+//           gap: 10px;
+//           margin-top: 15px;
+//           button {
+//             border-radius: 10px;
+//             padding: 8px;
+//             background-color: #fff;
+//             border: 1px solid rgba(221, 211, 211);
+//             width: 87px;
+//             cursor: pointer;
+//             &.selected {
+//               border: 2px solid black;
+//             }
+//             &:hover {
+//               background-color: rgba(245, 245, 245);
+//             }
+//             svg {
+//               height: 50px;
+//               cursor: pointer;
+//             }
+
+//             h5 {
+//               color: rgb(46 44 44);
+//               font-size: 11px;
+//               margin: 0;
+//             }
+//             span {
+//               font-size: 11px;
+//             }
+//           }
+//         }
+//         @media (max-width: 567px) {
+//           left: 7%;
+//           bottom: 2%;
+//           border: 1px solid #fff;
+//           width: 85%;
+//           padding: 10px;
+//           .btn_row button {
+//             width: 84px;
+//           }
+//         }
+//         @media (max-width: 1000px) {
+//           width: 90%;
+//           left: 3%;
+//           bottom: 6%;
+//         }
+//       }
+//     }
+//   }
+// `;
+
+
 const StyledSection = styled.section`
-  border-top: 1px solid lightgray;
-  padding: 10px 20px;
+  padding: 20px;
   @media (max-width: 567px) {
     padding: 0px;
   }
@@ -911,10 +1034,10 @@ const StyledSection = styled.section`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 10px;
     @media (max-width: 567px) {
       margin-top: 10px;
       gap: 30px;
+      justify-content: space-around;
     }
     .select_opt {
       display: flex;
@@ -940,15 +1063,15 @@ const StyledSection = styled.section`
 
       .select_metal {
         position: absolute;
-        left: 15%;
-        bottom: -40%;
+        left: 3%; /*tags*/
+        bottom: -32%;
         border: 1px solid #fff;
         box-shadow: 1px 3px 25px 1px #cbced0;
-        width: 41%;
+        width: 32%;
         border-radius: 10px;
         background-color: #fff;
         padding: 20px;
-        z-index: 1;
+        z-index: 11111;
 
         .first_row {
           display: flex;
@@ -1005,7 +1128,7 @@ const StyledSection = styled.section`
         }
         @media (max-width: 567px) {
           left: 7%;
-          bottom: 2%;
+          bottom: 15%;
           border: 1px solid #fff;
           width: 85%;
           padding: 10px;
@@ -1013,12 +1136,126 @@ const StyledSection = styled.section`
             width: 84px;
           }
         }
-        @media (max-width: 1000px) {
+
+        /* @media (min-width: 567px) and (max-width: 1000px){
+          left: 7%;
+          bottom: 32%;
+          border: 1px solid #fff;
+          width: 51%;
+          padding: 10px;
+          .btn_row button {
+            width: 84px;
+          }
+        } */
+        @media (min-width: 567px) and (max-width: 1000px){
+            position:absolute;
+            left:unset;
+            bottom: unset;
+            width: 55%;
+            z-index: 11111;
+            top: 54%; 
+        }
+        /* @media (max-width: 1000px) {
           width: 90%;
           left: 3%;
           bottom: 6%;
-        }
+        } */
       }
+
+      /* .select_shape{
+        position:absolute;
+        left:6%; 
+        bottom:-46%;
+        border: 1px solid #fff;
+        box-shadow: 1px 3px 25px 1px #cbced0;
+        width: 32%;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 11111;
+
+        .first_row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          h5 {
+            font-size: 15px;
+            font-weight: 700;
+            padding-top: 8px;
+          }
+          span {
+            color: rgba(102, 102, 102);
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 5px;
+          }
+          .icon {
+            cursor: pointer;
+          }
+        }
+
+        .btn_row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 15px;
+          button {
+            border-radius: 10px;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid rgba(221, 211, 211);
+            width: 87px;
+            cursor: pointer;
+            &.selected {
+              border: 2px solid black;
+            }
+            &:hover {
+              background-color: rgba(245, 245, 245);
+            }
+            svg {
+              height: 50px;
+              cursor: pointer;
+            }
+
+            h5 {
+              color: rgb(46 44 44);
+              font-size: 11px;
+              margin: 0;
+            }
+            span {
+              font-size: 11px;
+            }
+          }
+        }
+        @media (max-width: 567px) {
+          left: 7%;
+          bottom: 0;
+          border: 1px solid #fff;
+          width: 85%;
+          padding: 10px;
+          .btn_row button{
+            width:84px;
+          }
+        }
+
+        @media  (min-width: 567px) and (max-width: 1000px) {
+            position: absolute;
+            left: unset;
+            bottom: unset;
+            width: 55%;
+            z-index: 11111;
+            top: 58%; 
+        }
+      } */
+    }
+
+    select {
+      background-color: rgba(247, 247, 247);
+      border-radius: 0.375rem;
+      font-size: 14px;
+      padding: 10px 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
     }
   }
 `;
